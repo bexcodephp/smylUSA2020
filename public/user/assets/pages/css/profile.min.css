@@ -1,0 +1,327 @@
+.profile-sidebar {
+    float: left;
+    width: 300px;
+    margin-right: 20px
+  }
+  
+  .profile-content {
+    overflow: hidden
+  }
+  
+  .profile-sidebar-portlet {
+    padding: 30px 0 0!important
+  }
+  
+  .portlet h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  .profile-userpic img {
+	float: none;
+	margin: 0 auto;
+	border-radius: 100% !important;
+	object-fit: cover;
+	object-position: center;
+	width: 120px;
+	height: 120px;
+}
+  
+  .profile-usertitle {
+    text-align: center;
+    margin-top: 20px
+  }
+  
+  .profile-usertitle-name {
+    color: #5a7391;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 7px
+  }
+  
+  .profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 7px
+  }
+  
+  .profile-userbuttons {
+    text-align: center;
+    margin-top: 10px
+  }
+  
+  .profile-userbuttons .btn {
+    margin-right: 5px
+  }
+  
+  .profile-userbuttons .btn:last-child {
+    margin-right: 0
+  }
+  
+  .profile-userbuttons button {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px
+  }
+  
+  .profile-usermenu {
+    margin-top: 30px;
+    padding-bottom: 20px
+  }
+  
+  .profile-usermenu ul li {
+    border-bottom: 1px solid #f0f4f7
+  }
+  
+  .profile-usermenu ul li:last-child {
+    border-bottom: none
+  }
+  
+  .profile-usermenu ul li a {
+    color: #93a3b5;
+    font-size: 16px;
+    font-weight: 400
+  }
+  
+  .profile-usermenu ul li a i {
+    margin-right: 8px;
+    font-size: 16px
+  }
+  
+  .profile-usermenu ul li a:hover {
+    background-color: #fafcfd;
+    color: #5b9bd1
+  }
+  
+  .profile-usermenu ul li.active a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;
+    border-left: 2px solid #5b9bd1;
+    margin-left: -2px
+  }
+  
+  .profile-stat {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f4f7
+  }
+  
+  .profile-stat-title {
+    color: #7f90a4;
+    font-size: 25px;
+    text-align: center
+  }
+  
+  .profile-stat-text {
+    color: #5b9bd1;
+    font-size: 11px;
+    font-weight: 800;
+    text-align: center
+  }
+  
+  .profile-desc-title {
+    color: #7f90a4;
+    font-size: 17px;
+    font-weight: 600
+  }
+  
+  .profile-desc-text {
+    color: #7e8c9e;
+    font-size: 14px
+  }
+  
+  .profile-desc-link i {
+    width: 22px;
+    font-size: 19px;
+    color: #abb6c4;
+    margin-right: 5px
+  }
+  
+  .profile-desc-link a {
+    font-size: 14px;
+    font-weight: 600;
+    color: #5b9bd1
+  }
+  
+  @media (max-width: 991px) {
+    .profile-sidebar {
+      float: none;
+      width: 100%!important;
+      margin: 0
+    }
+    .profile-sidebar>.portlet {
+      margin-bottom: 20px
+    }
+    .profile-content {
+      overflow: visible
+    }
+  }
+  
+  
+  /* update change */
+  
+  .profile-content h4 {
+    background-color: #444d58;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+    padding: 10px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .form-inline .control-label,
+  .form-inline .form-group {
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  
+  .form-inline .form-group .control-label {
+    font-weight: bold;
+  }
+  
+  .form-inline .form-group .form-control {
+    margin-left: auto;
+  }
+  
+  .form-control[readonly],
+  fieldset[disabled] .form-control,
+  .form-control[disabled] {
+    border-color: #eef1f5;
+  }
+  
+  .input-group {
+    position: relative;
+  }
+  
+  .input-btn-append {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+  }
+  
+  .input-btn-append input {
+    border-bottom-right-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .show {
+    display: block;
+  }
+  
+  .btn-append {
+    background-color: transparent;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: 2;
+    padding: 0;
+    height: 32px;
+    width: 30px;
+    border-radius: 1px;
+  }
+  
+  .btn-append .fa-window-close {
+    font-weight: 500;
+  }
+  
+  .btn-submit-form {
+    text-align: right;
+  }
+  
+  .custom-file {
+    position: relative;
+    display: inline-block;
+    height: calc(1.5em + .75rem + 2px);
+    margin-bottom: 0;
+  }
+  
+  input[type="file" i] {
+    appearance: initial;
+    background-color: initial;
+    cursor: default;
+    align-items: baseline;
+    color: inherit;
+    text-align: start;
+    padding: initial;
+    border: initial;
+  }
+  
+  .custom-file-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+  }
+  
+  .custom-file-input:lang(en)~.custom-file-label::after {
+    content: "Browse";
+  }
+  
+  .custom-file-label::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: calc(1.5em + .75rem);
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    color: #495057;
+    content: "Browse";
+    background-color: #e9ecef;
+    border-left: inherit;
+    border-radius: 0 .25rem .25rem 0;
+  }
+  
+  .avtarpic .fileinput-new {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .fileinput-new img {
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+  
+  .fileinput-exists {
+    line-height: 17px !important;
+    margin-top: 4px;
+  }
+  .teeth-pics{
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-width: inherit;
+      padding-left: 15px;
+      padding-right: 15px;
+      max-height: 240px;
+  }
+  .teeth-pic {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+}
+.teeth-pic img{
+    object-fit: cover;
+    object-position: center;
+    height: 100px;
+    width: 100px;
+}
