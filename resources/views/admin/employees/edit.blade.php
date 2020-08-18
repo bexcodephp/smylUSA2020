@@ -8,10 +8,14 @@
             <form action="{{ route('admin.employees.update', $employee->id) }}" method="post" class="form">
                 <div class="box-body">
                     {{ csrf_field() }}
-                    <input type="hidden" name="_method" value="put">
+                    <input type="hidden" name="_method" value="put">                    
                     <div class="form-group">
-                        <label for="name">Name <span class="text-danger">*</span></label>
-                        <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{!! $employee->name ?: old('name')  !!}">
+                        <label for="fname">First Name <span class="text-danger">*</span></label>
+                        <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" value="{!! $employee->fname ?: old('fname')  !!}">
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name <span class="text-danger">*</span></label>
+                        <input type="text" name="lname" id="lname" placeholder="Last Name" class="form-control" value="{!! $employee->lname ?: old('lname')  !!}">
                     </div>
                     <div class="form-group">
                         <label for="email">Email <span class="text-danger">*</span></label>
@@ -25,24 +29,21 @@
                         <input type="text" name="phone" id="phone" placeholder="Phone" class="form-control" value="{!! $employee->phone ?: old('phone')  !!}">
                     </div>
                     <div class="form-group">
-                        <label for="location_associated">Location Associated<span class="text-danger">*</span></label>
-                        <input type="text" name="location_associated" id="location_associated" placeholder="Location Associated" class="form-control" value="{!! $employee->location_associated ?: old('location_associated')  !!}">
-                    </div>
-                    <div class="form-group">
-                        <label for="home_address">Home Address<span class="text-danger">*</span></label>
-                        <textarea  type="text" name="home_address" id="home_address" placeholder="Home Address" class="form-control" >{!! $employee->home_address ?: old('home_address')  !!}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password <span class="text-danger">*</span></label>
-                        <input type="password" name="password" id="password" placeholder="xxxxx" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="roles">Role </label>
-                        <select name="roles[]" id="roles" class="form-control select2" multiple="multiple">
-                            @foreach($roles as $role)
-                                <option @if(in_array($role->id, $selectedIds))selected="selected" @endif value="{{ $role->id }}">{{ $role->display_name }}</option>
+                        <label for="location_associated">Location Associated </label>
+                        <?php 
+                                $location_list =  json_decode($employee->location_associated); // selected location list by employeed print_r($location_list); 
+                                $select = '';                                
+                        ?>
+                        <select name="location_associated[]" id="location_associated" class="form-control select2" multiple="multiple">
+                            <option></option>
+                            @foreach($facilities as $location)
+                                <?php if(in_array($location->facility_id,$location_list)){ $select = 'selected'; } else{ $select = "";} ?>
+                                <option id="" value="{{ $location->facility_id }}" <?php echo $select;?>>{{ ucfirst($location->name) }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div id="add_new_location">
+                        
                     </div>
                     @include('admin.shared.status-select', ['status' => $employee->status])
                 </div>

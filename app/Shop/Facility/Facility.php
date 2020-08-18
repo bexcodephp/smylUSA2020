@@ -7,6 +7,7 @@ use App\Shop\States\State;
 use App\Shop\Facility\FacilityTimeslot;
 use App\Shop\Facility\FacilityTimespan;
 use Illuminate\Database\Eloquent\Model;
+use App\Shop\Employees\Employees;
 
 class Facility extends Model
 {
@@ -50,5 +51,9 @@ class Facility extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', 1);
+    }
+    public function employee()
+    {
+        return $this->hasMany(Employee::class, 'location_associated');
     }
 }

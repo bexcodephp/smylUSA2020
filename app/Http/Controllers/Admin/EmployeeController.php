@@ -52,10 +52,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $list = $this->employeeRepo->listEmployees('created_at', 'desc');
-
-        // dd($list);
-
+        $list = $this->employeeRepo->listEmployees('created_at', 'desc');       
         return view('admin.employees.list', [
             'employees' => $this->employeeRepo->paginateArrayResults($list->all())
         ]);
@@ -83,11 +80,13 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
-        $locations = $request->address;
-        $request->request->remove('address');
+        //dd($request->license_certificates);
         $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
-        $employee = $this->employeeRepo->createEmployee($request->all());        
+        $request->merge([
+            'location_associated' => json_encode($request->location_associated),
+        ]);
 
+        $employee = $this->employeeRepo->createEmployee($request->all());      
         if ($request->has('role')) {    
             // dd($request);        
             $employeeRepo = new EmployeeRepository($employee);
@@ -95,26 +94,7 @@ class EmployeeController extends Controller
         }
 
         $operator_id = $employee->id; // last inserted id
-
-        foreach($locations as $location){
-
-            $operator_locations = new OperatorLocation();
-
-            $operator_locations->operator_id= $operator_id;
-            $operator_locations->location = $location['location'];
-            $operator_locations->state = $location['state'];
-            $operator_locations->city = $location['city'];
-            $operator_locations->zipcode= $location['zipcode'];
-
-            $result = $operator_locations->save();
-
-        }  
-
         return redirect('admin/employees/operator');
-
-        // $role = $this->roleRepo->getUserBasedOnRole($request->role);
-        
-        // return view('admin.employees.show', compact('role'));
     }
 
     /**
@@ -125,11 +105,14 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($user_role)
-    {
-        //dd($user_role);
+    {                
         $role = $this->roleRepo->getUserBasedOnRole($user_role);
-        
-        return view('admin.employees.show', compact('role'));
+        $facilities = Facility::all();        
+        //dd($role->users);
+        //$employee = Employee::all();
+        //$facilities = Facility::whereIn('facility_id',$role)->get();  
+
+        return view('admin.employees.show', compact('role','facilities'));
     }
     
     public function dentist_orders($dentist)
@@ -144,8 +127,8 @@ class EmployeeController extends Controller
         ->get();
 
 //        return $voodoo;
-        $doctors=Employee::all();
-        $states= array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
+        $doctors = Employee::all();
+        $states = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
         return view('admin.orders.voodoo', compact('voodoo','states', 'dentist'));
 
@@ -165,14 +148,15 @@ class EmployeeController extends Controller
         $employee = $this->employeeRepo->findEmployeeById($id);
         $roles = $this->roleRepo->listRoles('created_at', 'desc');
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
-
+        $facilities = Facility::get(['facility_id','name']);
         return view(
             'admin.employees.edit',
             [
                 'employee' => $employee,
                 'roles' => $roles,
                 'isCurrentUser' => $isCurrentUser,
-                'selectedIds' => $employee->roles()->pluck('role_id')->all()
+                'selectedIds' => $employee->roles()->pluck('role_id')->all(),
+                'facilities'=> $facilities
             ]
         );
     }
@@ -187,6 +171,10 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
+        $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
+        $request->merge([
+            'location_associated' => json_encode($request->location_associated),
+        ]);
         $employee = $this->employeeRepo->findEmployeeById($id);
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
 
@@ -277,7 +265,6 @@ class EmployeeController extends Controller
     public function getLocation(Request $request){
         $fid = $request->id;
         $facilities = Facility::whereIn('facility_id',$fid)->get(); 
-        //dd($facilities);
         return response(json_encode($facilities));
     }
 }

@@ -10,7 +10,7 @@
             <form action="{{ route('admin.employees.store') }}" method="post" class="form">
                 <div class="box-body">
                     {{ csrf_field() }}
-                    <!-- <input type="hidden" name="role" id="role" value="5"> -->
+                    
                     <div class="form-group">
                         <label for="fname">First Name <span class="text-danger">*</span></label>
                         <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" value="{{ old('fname') }}">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="location_associated">Location Associated </label>
-                        <select name="location_associated" id="location_associated" class="form-control select2" multiple>
+                        <select name="location_associated[]" id="location_associated" class="form-control select2" multiple>
                             <option></option>
                             @foreach($facilities as $location)
                                 <option id="" value="{{ $location->facility_id }}">{{ ucfirst($location->name) }}</option>
@@ -41,6 +41,10 @@
                     </div>
                     <div id="add_new_location">
                         
+                    </div>
+                    <div class="form-group">
+                        <label for="license_certificates">License and Certificates</label>
+                        <input type="file" name="license_certificates" id="license_certificates" placeholder="license and certificates" class="form-control">
                     </div>
                     
                     @include('admin.shared.status-select', ['status' => 0])
@@ -62,12 +66,7 @@
     <!-- /.content -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
-$(document).ready(function() {  
- 
-    $(wrapper).on("click",".delete", function(e){
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
-
+$(document).ready(function() {
     $("#location_associated").change(function () {        
         var prevSelect = $("#MultiSelect_Preview").select2();
         prevSelect.val($(this).val()).trigger('change');
@@ -77,20 +76,20 @@ $(document).ready(function() {
 });
 </script>
 <script>
-        var obj;
-
          function getLocation(id) {
             $.post("{{route('admin.get_location')}}",
                 {_token :"<?php echo csrf_token() ?>",
                 id:id
             },function(data){
-                obj = Object();
+                var obj = Object();
                 obj = jQuery.parseJSON(data);
                 console.log(obj);
                 $("#add_new_location").html("");
                 for(var i=0;i<obj.length;i++)
                 {
-                    $("#add_new_location").append('<div class="form-row mb-2"> <div class="col ml-1 mr-2"> <p>Location: "'+obj[i]['address']+'"</p></div><div class="col mr-2"> <p>State: '+obj[i]['state']+'</p> </div><div class="col mr-2"> <p>City: '+obj[i]['city']+'</p> </div><div class="col mr-2"> <p>Zipcode: '+obj[i]['zipcode']+'</p> </div></div>');
+                    $("#add_new_location").append('<div class="form-row mb-2"> <div class="col ml-1 mr-2"> <p>Location:'+obj[i]['address']+'</p></div>'
+                    +'<div class="col mr-2"> <p>State: '+obj[i]['state']+'</p> </div><div class="col mr-2"> <p>City: '+obj[i]['city']+
+                    '</p> </div><div class="col mr-2"> <p>Zipcode: '+obj[i]['zipcode']+'</p> </div></div>');
                 }
             });
          }

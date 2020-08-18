@@ -28,10 +28,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $n = 0; //dd($facilities);?>
                     @foreach ($role->users as $employee)
+                    <?php 
+                    
+                        $n++; 
+                        //echo "<pre>";print_r($facilities[$n]);
+                        $locations = json_decode($employee->location_associated);
+                        //print_r($locations);
+
+                       
+
+                    ?>
+
                     <tr>
                         <td>{{ $employee->id }}</td>
-                        <td>{{ $employee->state }}</td>
+                        <td>{{ $employee->location_associated }}</td>
                         <td>{{ $employee->state }}</td>
                         <td>{{ $employee->state }}</td>
                         <td>{{ $employee->fname."  ".$employee->lname }}</td>

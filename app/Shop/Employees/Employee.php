@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Shop\Facility\Facility;
 
 class Employee extends Authenticatable
 {
@@ -26,7 +27,7 @@ class Employee extends Authenticatable
         'phone',
         'location_associated',
         'home_address',
-        //'operator_certificates',
+        'license_certificates',
         'password',
         'status',
         'state',
@@ -61,5 +62,16 @@ class Employee extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class, 'assigned_dentist');
+    }
+
+    // public function facilities()
+    // {
+    //     return $this->belongsTo(Facility::class);
+    // }
+    public static function getLocation($location_array){   
+        $location_array = json_decode($location_array);
+        $facilities = Facility::whereIn('facility_id',$location_array)->get(); 
+        //dd($facilities);
+        return $facilities;
     }
 }
