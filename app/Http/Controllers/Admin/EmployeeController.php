@@ -80,11 +80,19 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
-        //dd($request->license_certificates);
+        //dd($request->file('license_certificates')->getClientOriginalName());
         $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);
+               
+        $upload_path = "license_certificates";
+        $upload_file = $request->file('license_certificates');        
+        $upload_license_certificates = Utilities::saveFile($upload_file,$upload_path);
+
+       
+        
+       
 
         $employee = $this->employeeRepo->createEmployee($request->all());      
         if ($request->has('role')) {    
@@ -93,7 +101,11 @@ class EmployeeController extends Controller
             $employeeRepo->syncRoles([$request->role]);
         }
 
+        // upload file
+
         $operator_id = $employee->id; // last inserted id
+        
+
         return redirect('admin/employees/operator');
     }
 
@@ -209,8 +221,6 @@ class EmployeeController extends Controller
         $employee = $this->employeeRepo->findEmployeeById($id); 
         $employeeRepo = new EmployeeRepository($employee);
         $a=$employeeRepo->deleteEmployee();
-        //dd($a);
-
         return redirect()->route('admin.employees.show')->with('message', 'Delete successful');
     }
 

@@ -7,7 +7,7 @@
     <section class="content">
         @include('layouts.errors-and-messages')
         <div class="box">
-            <form action="{{ route('admin.employees.store') }}" method="post" class="form">
+            <form action="{{ route('admin.employees.store') }}" method="post" class="form" enctype="multipart/form-data"> 
                 <div class="box-body">
                     {{ csrf_field() }}
                     
@@ -39,8 +39,18 @@
                             @endforeach
                         </select>
                     </div>
-                    <div id="add_new_location">
-                        
+                    <div  id="add_new_location">
+                        <table class="table">
+                            <thead>
+                                <th>No.</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Zipcode</th>
+                            </thead>
+                            <tbody>                           
+                            </tbody>                            
+                        </table>
                     </div>
                     <div class="form-group">
                         <label for="license_certificates">License and Certificates</label>
@@ -84,12 +94,20 @@ $(document).ready(function() {
                 var obj = Object();
                 obj = jQuery.parseJSON(data);
                 console.log(obj);
-                $("#add_new_location").html("");
+                $("table tbody").html("");
                 for(var i=0;i<obj.length;i++)
                 {
-                    $("#add_new_location").append('<div class="form-row mb-2"> <div class="col ml-1 mr-2"> <p>Location:'+obj[i]['address']+'</p></div>'
-                    +'<div class="col mr-2"> <p>State: '+obj[i]['state']+'</p> </div><div class="col mr-2"> <p>City: '+obj[i]['city']+
-                    '</p> </div><div class="col mr-2"> <p>Zipcode: '+obj[i]['zipcode']+'</p> </div></div>');
+                    var no = i++;
+                    // $("#add_new_location").append('<div class="form-row mb-2"> <div class="col ml-1 mr-2"> <p>Address: '+obj[i]['address']+'</p></div>'
+                    // +'<div class="col mr-2"> <p>State: '+obj[i]['state']+'</p> </div><div class="col mr-2"> <p>City: '+obj[i]['city']+
+                    // '</p> </div><div class="col mr-2"> <p>Zipcode: '+obj[i]['zipcode']+'</p> </div></div>');
+
+                    $("table tbody").append('<tr>'+
+                    '<td>'+ no +'</td>'+
+                    '<td>'+obj[i]['address']+'</td>'+
+                    '<td>'+obj[i]['state']+'</td>'+
+                    '<td>'+obj[i]['city']+'</td>'+
+                    '<td>'+obj[i]['zipcode']+'</td></tr>>');
                 }
             });
          }

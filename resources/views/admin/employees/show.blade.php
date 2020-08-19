@@ -18,7 +18,6 @@
                     <tr>
                         <td class="col-md-1">ID</td>
                         <td class="col-md-1">Location</td>
-                        <td class="col-md-1">City</td>
                         <td class="col-md-1">State</td>
                         <td class="col-md-3">Name</td>
                         <td class="col-md-3">Email</td>
@@ -28,24 +27,50 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $n = 0; //dd($facilities);?>
+                    
                     @foreach ($role->users as $employee)
                     <?php 
-                    
-                        $n++; 
-                        //echo "<pre>";print_r($facilities[$n]);
-                        $locations = json_decode($employee->location_associated);
-                        //print_r($locations);
 
-                       
-
+                        $locationsArray = json_decode($employee->location_associated, true);
+                        //echo is_array($locationsArray);
+                        //print_r($employee->location_associated);
+                        
                     ?>
 
                     <tr>
                         <td>{{ $employee->id }}</td>
-                        <td>{{ $employee->location_associated }}</td>
-                        <td>{{ $employee->state }}</td>
-                        <td>{{ $employee->state }}</td>
+                        <td>
+                            <ul>
+                            @foreach ($facilities as $location) 
+                            <?php 
+                                if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
+                                    if(in_array($location->facility_id,$locationsArray)){
+                            ?>
+                                <li>{{ $location->address }}</li>
+                            <?php
+
+                                    }
+                                }
+                            ?>                                
+                            @endforeach
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                            @foreach ($facilities as $location) 
+                            <?php 
+                                if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
+                                    if(in_array($location->facility_id,$locationsArray)){
+                            ?>
+                                <li>{{ $location->state }}</li>
+                            <?php
+
+                                    }
+                                }
+                            ?>                                
+                            @endforeach
+                            </ul>
+                        </td>
                         <td>{{ $employee->fname."  ".$employee->lname }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td>                        
@@ -57,11 +82,11 @@
                                 <input type="hidden" name="_method" value="delete">
                                 <div class="btn-group">
                                     <a href="{{ route('admin.employees.edit', $employee->id) }}"
-                                       class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                                       class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit fa-lg"></i></a>
                                     <a href="{{ route('admin.employee.dentist_orders', $employee->id) }}"
-                                       class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Orders</a>
+                                       class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
                                     <button onclick="return confirm('Are you sure?')" type="submit"
-                                            class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Delete</button>
+                                            class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
                                 </div>
                             </form>
                         </td>
@@ -97,6 +122,7 @@
             }
         })
         })
+
         $('.activate').click(function (e) {
             e.preventDefault();
             var id=$(this).data('id');
