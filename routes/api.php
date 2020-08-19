@@ -12,6 +12,10 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('forgot_password', 'Auth\ForgetPasswordApiController@forgot_password');
 
 
+    Route::post('deleteoperator', 'EmployeeController@status');
+
+
+
     Route::group(['middleware' => 'jwt.auth'], function () {
 
         Route::post('reset_password', 'Auth\ForgetPasswordApiController@change_password');

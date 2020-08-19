@@ -12,11 +12,11 @@ class Utilities
     public static function saveFile($file, $filePath){
         if ($file) {
             $fileName = $file->getClientOriginalName();
-            $renamedfile = Utilities::renameFile($fileName);
+            $fileName = Utilities::renameFile($fileName);
             if($file){
-                $fileUpload = $file->storeAs($filePath,$renamedfile,'public');
+                $fileUpload = $file->storeAs($filePath,$fileName,'public');
             }
-            return $renamedfile;
+            return $fileUpload;
         }
     }
 

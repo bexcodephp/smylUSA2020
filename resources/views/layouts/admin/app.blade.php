@@ -8,6 +8,7 @@
     <title>{{ config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/admin.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert2.css') }}"/>
     @yield('css')
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('favicons/apple-icon-57x57.png')}}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('favicons/apple-icon-60x60.png')}}">
@@ -56,6 +57,7 @@
 
 <script src="{{ asset('js/admin.min.js') }}"></script>
 <script src="{{ asset('//cdn.ckeditor.com/4.8.0/standard/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/sweetalert2.all.js') }}"></script>
 <script src="{{ asset('js/scripts.js?v=0.2') }}"></script>
 @yield('js')
 </body>

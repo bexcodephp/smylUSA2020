@@ -85,7 +85,7 @@
                                        class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit fa-lg"></i></a>
                                     <a href="{{ route('admin.employee.dentist_orders', $employee->id) }}"
                                        class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
-                                    <button onclick="return confirm('Are you sure?')" type="submit"
+                                    <button onclick="deleteOperator('{{$employee->id}}')" type="button"
                                             class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
                                 </div>
                             </form>
@@ -105,6 +105,7 @@
 @endsection
 @section('js')
     <script>
+        var _opId = '';
         $('.deactivate').click(function (e) {
         e.preventDefault();
         var id=$(this).data('id');
@@ -139,6 +140,46 @@
                 }
             })
         })
+
+        function deleteOperator(opId){
+            _opId = opId;
+            const swalWithBootstrapButtons = swal.mixin({
+            confirmButtonClass: 'btn btn-info',
+            cancelButtonClass: 'btn btn-info',
+            buttonsStyling: true,
+        })
+    
+        swalWithBootstrapButtons({
+            title: '',
+            text: "Are you sure you want to Delete this operator?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.value) {
+                //alert("hi"); 
+                $.ajax({
+                    url:'/status',
+                    type:'post',
+                    data:{
+                        '_token':'{{csrf_token()}}',
+                        id:_opId,
+                        status:0
+                    },
+                    success:function (data) {
+                        //location.reload();
+                        console.log(data);
+                    }
+                })
+            }
+            else if(result.dismiss === swal.DismissReason.cancel)
+                {
+                    
+                }
+            })
+        }
 
     </script>
 @endsection
