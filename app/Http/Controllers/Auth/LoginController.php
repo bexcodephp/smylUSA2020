@@ -79,6 +79,7 @@ class LoginController extends Controller
 
         $details = $request->only('email', 'password');
         $details['status'] = 1;
+        
         if (auth()->attempt($details)) {
             return $this->sendLoginResponse($request);
         }
@@ -106,10 +107,14 @@ class LoginController extends Controller
 
         $details = $request->only('email', 'password');
         // $detais['status'] = 1;
+        //dd($details);
+        
+        //dd(auth()->guard('employee')->attempt($details));
 
-        if (auth()->guard('employee')->attempt($details)) {
+        if (auth()->guard('employee')->attempt($details) == false) {
 
             $user = auth()->guard('employee')->user();
+            dd($user);
 
             if($user->status == 0)
             {

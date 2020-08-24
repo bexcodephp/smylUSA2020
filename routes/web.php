@@ -92,18 +92,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::resource('roles', 'Roles\RoleController');
             Route::resource('permissions', 'Permissions\PermissionController');
             Route::resource('operators', 'OperatorController');
-
         });
     });
 });
-
-//Route::resource('admin/operators', 'OperatorController');
 
 /**
  * Frontend routes
  */
 Auth::routes(['verify' => true]);
-
 
 Route::namespace('Auth')->group(function () {
     Route::get('cart/login', 'CartLoginController@showLoginForm')->name('cart.login');
@@ -185,10 +181,7 @@ Route::namespace('Front')->group(function () {
         Route::post('bank-transfer', 'BankTransferController@store')->name('bank-transfer.store');
     });
 
-
     Route::group(['middleware' => ['usertype', 'web']], function () {
-
-
         Route::group(['prefix' => 'dentist'], function(){
 
             Route::get('profile', 'DentistController@profile')->name('dentist.profile');
