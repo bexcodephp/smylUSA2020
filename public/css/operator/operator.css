@@ -39,6 +39,106 @@
 .mb-2{
     margin-bottom: 15px;
 }
+.px-2{
+    padding: 0px 15px;
+}
 .float-right{
     float: right;
+}
+
+ul{
+    list-style: none;
+    padding-left: 0;
+}
+#tableLocation,tr,td,th{
+    border: 1px solid black;
+    padding: 10px;
+}
+.wrapper-title{
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.wrapper-title h2{
+    width:max-content;
+    margin: 0;
+}
+.wrapper-title button{
+    margin-left: auto;
+    max-width: 120px;    
+    text-transform: uppercase;
+}
+.btn-filter{
+    align-self: flex-end;
+}
+.licence-wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+
+}
+
+.licence-div{
+    position: relative;
+    width: max-content;
+    padding: 10px;
+    margin-right: 10px;  
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+}
+
+.licence-doc{
+    display: flex;
+    flex-direction: column;  
+    justify-content: center;
+}
+.licence-doc img{
+    width:50px;
+    height: 50px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 5px;
+    border: none;
+} 
+.licence-name{
+    max-width: 52px;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.licence-div .licence-del{
+    position: absolute;
+    top: 0;
+    right: 4px;
+    color: red;
+    font-size: 14px;
+}
+.hidden{
+    display:none;
+}
+.modal-docs-img{
+    max-width: 600px;
+    width:100%;
+    object-fit: contain;
+    object-position: center;
+}
+.modal-view-docs .modal-body{
+    max-height: 500px;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+}
+.modal-header .close{
+    position: absolute;
+    right:0px;
+    top: 0;
+    padding: 15px !important;
+}
+.modal-docs-pdf{
+    width: 100%;
 }

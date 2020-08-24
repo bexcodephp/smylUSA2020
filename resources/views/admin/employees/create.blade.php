@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
-@push('stylesheets')
+<!-- @push('stylesheets')
     <link rel="stylesheet" href="{{ asset('css/operator/operator.css') }}">
-@endpush
+@endpush -->
 @section('content')
     <!-- Main content -->
     <section class="content">
@@ -31,17 +31,29 @@
                         <input type="text" name="phone" id="phone" placeholder="Phone" class="form-control" value="{{ old('phone') }}">
                     </div>
                     <div class="form-group">
-                        <label for="location_associated">Location Associated </label>
+                        <label for="location_associated">Location Associated</label>
                         <select name="location_associated[]" id="location_associated" class="form-control select2" multiple>
-                            <option></option>
+                       
+                            <option value=""></option>
+                            
                             @foreach($facilities as $location)
-                                <option id="" value="{{ $location->facility_id }}">{{ ucfirst($location->name) }}</option>
+                            {{$select = ""}}
+                            @if(old("location_associated"))
+                            <?php 
+                                if (in_array($location->facility_id, old("location_associated"))) {
+                                    $select = 'selected';
+                                } else {
+                                    $select = "";
+                                }
+                            ?>
+                            @endif
+                                <option value="{{ $location->facility_id }}"  {{$select}}>{{ ucfirst($location->name) }}</option>                                
                             @endforeach
                         </select>
                     </div>
                     <div >
-                        <table class="table">
-                            <thead  > 
+                        <table id="tableLocation">
+                            <thead> 
                                 <th>No.</th>                               
                                 <th>Address</th>
                                 <th>City</th>
@@ -53,8 +65,8 @@
                         </table>
                     </div>
                     <div class="form-group">
-                        <label for="license_certificates">License and Certificates</label>
-                        <input type="file" name="license_certificates" id="license_certificates" placeholder="license and certificates" class="form-control">
+                        <label for="license_certificates">License and Certificates<span class="text-danger">*</span></label>
+                        <input type="file" name="license_certificates[]" id="license_certificates" placeholder="license and certificates" class="form-control" multiple >
                     </div>
                     
                     @include('admin.shared.status-select', ['status' => 0])
@@ -77,7 +89,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-    $("#location_associated").change(function () {        
+    $("#tableLocation").hide();
+    $("#location_associated").change(function () {   
+        $("#tableLocation").show();     
         var prevSelect = $("#MultiSelect_Preview").select2();
         prevSelect.val($(this).val()).trigger('change');
         var id=$(this).val();
@@ -101,12 +115,6 @@ $(document).ready(function() {
                 for(var i=0;i<obj.length;i++)
                 {
                     cntr++;
-                    //var no = i++;
-                    // $("#add_new_location").append('<div class="form-row mb-2"> <div class="col ml-1 mr-2"> <p>Address: '+obj[i]['address']+'</p></div>'
-                    // +'<div class="col mr-2"> <p>State: '+obj[i]['state']+'</p> </div><div class="col mr-2"> <p>City: '+obj[i]['city']+
-                    // '</p> </div><div class="col mr-2"> <p>Zipcode: '+obj[i]['zipcode']+'</p> </div></div>');
-
-                   
                     locationData+= '<tr><td>'+(i+1)+'</td>'+
                     '<td>'+obj[i]['address']+'</td>'+
                     '<td>'+obj[i]['state']+'</td>'+
@@ -118,5 +126,17 @@ $(document).ready(function() {
                 $("#add_new_location").html(locationData);
             });
          }
+
+    $('#table-location').DataTable({
+        'searching' : false,
+        'bSort' : false,
+        'columnDefs' : [
+            {
+                'orderable': false, 'targets' : -1
+            }
+        ],
+        'sorting' : []
+    });
+
 </script>
 @endsection

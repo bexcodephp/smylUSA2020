@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Shop\Employees\Employee;
 use App\Models\OrderTreatmentPlan;
@@ -16,9 +16,7 @@ use App\Shop\Roles\Repositories\RoleRepositoryInterface;
 use App\Mail\DentistAccountApproved as MailDentistAccountApproved;
 use App\Shop\Employees\Repositories\Interfaces\EmployeeRepositoryInterface;
 use App\Shop\Facility\Facility;
-use App\OperatorLocation;
-use App\Utilities;
-
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -81,17 +79,34 @@ class EmployeeController extends Controller
     public function store(CreateEmployeeRequest $request)
     {
         //dd($request->file('license_certificates')->getClientOriginalName());
+        //dd($request);
         $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);
-               
-        $upload_path = "license_certificates";
-        $upload_file = $request->file('license_certificates');        
-        $upload_license_certificates = Utilities::saveFile($upload_file,$upload_path);
-        dd($upload_license_certificates);
 
-        $employee = $this->employeeRepo->createEmployee($request->all());      
+        //dd($request);
+        $upload_path = "employee/operators/license_certificates";
+        $upload_files = $request->file('license_certificates');
+        //dd($upload_file);
+
+        $data = $request->input();
+        $fileName = []; 
+        if ($request->hasFile('license_certificates')) {
+            //dd($upload_file);
+            foreach($upload_files as $doc){
+                $data['saveDocs'] = $this->employeeRepo->saveEmployeeDocs($doc, $upload_path);
+                $data['filenames'][] = $data['saveDocs'];
+            }
+            $data['license_certificates'] = json_encode($data['filenames']);
+            //dd($data);
+        }
+        $employee = $this->employeeRepo->create($data);
+        
+        //$employee = $this->employeeRepo->createEmployee($request->all()); 
+
+        //dd($employee);
+
         if ($request->has('role')) {    
             // dd($request);        
             $employeeRepo = new EmployeeRepository($employee);
@@ -154,10 +169,11 @@ class EmployeeController extends Controller
      */
     public function edit(int $id)
     {
+        //dd(Auth::guard('employee')->user()->id);
         $employee = $this->employeeRepo->findEmployeeById($id);
         $roles = $this->roleRepo->listRoles('created_at', 'desc');
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
-        $facilities = Facility::get(['facility_id','name']);
+        $facilities = Facility::get(['facility_id','name','city','state','zipcode']);
         return view(
             'admin.employees.edit',
             [
@@ -180,26 +196,50 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
-        $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
+        $request->request->add(['role' => '5']); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);
+
         $employee = $this->employeeRepo->findEmployeeById($id);
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
 
         $empRepo = new EmployeeRepository($employee);
-        $empRepo->updateEmployee($request->except('_token', '_method', 'password'));
+        //$empRepo->updateEmployee($request->except('_token', '_method', 'password'));
+        $upload_path = "employee/operators/license_certificates";
+        $upload_files = $request->file('license_certificates');
+
+        //dd($upload_files);
+
+        $data = $request->input();
+        $fileName = []; 
+        if ($request->hasFile('license_certificates')) {
+            //dd($upload_file);
+            foreach($upload_files as $doc){
+                $data['saveDocs'] = $this->employeeRepo->saveEmployeeDocs($doc, $upload_path);
+                $data['filenames'][] = $data['saveDocs'];
+            }
+            $data['license_certificates'] = json_encode($data['filenames']);
+            //dd($data);
+        }
+
+        $empRepo->update($data);
 
         if ($request->has('password') && !empty($request->input('password'))) {
             $employee->password = Hash::make($request->input('password'));
             $employee->save();
         }
+        
+        //dd($isCurrentUser);
 
-        if ($request->has('roles') and !$isCurrentUser) {
+        // if ($request->has('roles') and !$isCurrentUser) {
+        if ($request->has('roles')) {
             $employee->roles()->sync($request->input('roles'));
-        } elseif (!$isCurrentUser) {
-            $employee->roles()->detach();
-        }
+        } 
+        
+        // elseif (!$isCurrentUser) {
+        //     $employee->roles()->detach();
+        // }
 
         return redirect()->route('admin.employees.edit', $id)
             ->with('message', 'Update successful');
@@ -215,9 +255,15 @@ class EmployeeController extends Controller
      */
     public function destroy(int $id)
     {
-        $employee = $this->employeeRepo->findEmployeeById($id); 
-        $employeeRepo = new EmployeeRepository($employee);
-        $a=$employeeRepo->deleteEmployee();
+        
+        $cart = DB::select(DB::raw("DELETE from employees WHERE id=$id"));
+
+        //return response(json_encode($responce));
+        // Employee::destroy($id);
+        // $employee = $this->employeeRepo->findEmployeeById($id); 
+        // $employeeRepo = new EmployeeRepository($employee);
+        // $a =$employeeRepo->deleteEmployee();
+        //dd($a);
         return redirect()->route('admin.employees.show')->with('message', 'Delete successful');
     }
 
@@ -252,6 +298,7 @@ class EmployeeController extends Controller
         return redirect()->route('admin.employee.profile', $id)
             ->with('message', 'Update successful');
     }
+
     public function status(Request $request){
        $employee=Employee::where('id',$request->id)->first();
 //       return $employee;
@@ -273,5 +320,18 @@ class EmployeeController extends Controller
         $fid = $request->id;
         $facilities = Facility::whereIn('facility_id',$fid)->get(); 
         return response(json_encode($facilities));
+    }
+
+    public function filter(Request $request){
+        //dd($request);
+        $role = $this->roleRepo->getUsersBasedRoleFilter("operator",$request->filter_name);
+
+        dd($role);
+
+        $facilities = Facility::all();
+        if($request->filter_location){
+            //echo $request->filter_location;exit;
+        }
+        return view('admin.employees.show', compact('role','facilities'));
     }
 }

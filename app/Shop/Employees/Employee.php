@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Shop\Employees;
-
+use Illuminate\Database\Eloquent\Model;
 use App\Appointment;
 use App\Shop\Orders\Order;
 use App\Shop\Employees\Employee;
@@ -64,14 +64,6 @@ class Employee extends Authenticatable
         return $this->hasMany(Order::class, 'assigned_dentist');
     }
 
-    // public function facilities()
-    // {
-    //     return $this->belongsTo(Facility::class);
-    // }
-    public static function getLocation($location_array){   
-        $location_array = json_decode($location_array);
-        $facilities = Facility::whereIn('facility_id',$location_array)->get(); 
-        //dd($facilities);
-        return $facilities;
-    }
+    
+
 }

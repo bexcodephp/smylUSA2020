@@ -9,10 +9,40 @@
     <div class="box">
         <div class="box-body">
             <!-- {{ $role }} -->
-            <h2>{{ ucfirst($role->name) }}</h2>
-            <h2 style="text-align: right;">
-            <a href="{{ route('admin.employees.create') }}">ADD</a>
-            </h2>
+            
+            <div class="wrapper-title">
+                <h2>{{ ucfirst($role->name) }}</h2>    
+                <button name="filter" data-toggle="collapse" data-target="#filter" class="btn btn-primary">Filter</button>
+            </div>
+            <form action="{{ route('admin.filter') }}" id="filter" class="collapse" method="post">
+                    {{ csrf_field() }}
+                <div class="form-row px-2">
+                    <div class="input-group col-auto mr-2">
+                        <label>Location :</label>
+                        <input type="text" name="filter_location" class="form-control">
+                    </div>
+                    <div class="input-group col-auto mr-2">
+                        <label>Name :</label>
+                        <input type="text" name="filter_name" class="form-control">
+                    </div>
+                    <div class="input-group col-auto mr-2">
+                        <label>Email :</label>
+                        <input type="email" name="filter_email" class="form-control">
+                    </div>
+                    <div class="input-group col-auto mr-2">
+                        <label>Status :</label>
+                        <input type="text" name="filter_status" class="form-control">
+                    </div>
+                    <div class="col btn-filter">
+                        <button type="submit" name="submit" class="btn btn-primary" >submit</button>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="box-tools pull-right mb-2">
+                <a href="{{ route('admin.employees.create') }}" class="btn btn-primary">Add New</a>
+            </div>
+            
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -39,14 +69,18 @@
 
                     <tr>
                         <td>{{ $employee->id }}</td>
-                        <td>
+                        <td class="facility_down">
                             <ul>
+                            @php
+                            $no = 0
+                            @endphp
                             @foreach ($facilities as $location) 
                             <?php 
                                 if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
                                     if(in_array($location->facility_id,$locationsArray)){
+                                        $no++;
                             ?>
-                                <li>{{ $location->address }}</li>
+                                <li>{{ $no.". ".$location->address }}</li>
                             <?php
 
                                     }
@@ -57,12 +91,16 @@
                         </td>
                         <td>
                             <ul>
+                            @php
+                            $no = 0
+                            @endphp
                             @foreach ($facilities as $location) 
                             <?php 
                                 if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
                                     if(in_array($location->facility_id,$locationsArray)){
+                                        $no++;
                             ?>
-                                <li>{{ $location->state }}</li>
+                                <li>{{ $no.". ".$location->state }}</li>
                             <?php
 
                                     }
@@ -88,6 +126,15 @@
                                     <button onclick="deleteOperator('{{$employee->id}}')" type="button"
                                             class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
                                 </div>
+                                <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="post" class="form-horizontal">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="delete">
+                                    <div class="btn-group">
+                                        <a href="{{ route('admin.employees.show', $employee->id) }}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i>Show</a>
+                                        <a href="{{ route('admin.employees.edit', $employee->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>Edit</a>
+                                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i>Delete</button>
+                                    </div>
+                                </form>
                             </form>
                         </td>
                     </tr>

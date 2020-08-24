@@ -4,6 +4,7 @@ namespace App\Shop\Employees\Repositories;
 
 use Jsdecena\Baserepo\BaseRepository;
 use App\Shop\Employees\Employee;
+use Illuminate\Http\UploadedFile;
 use App\Shop\Employees\Exceptions\EmployeeNotFoundException;
 use App\Shop\Employees\Repositories\Interfaces\EmployeeRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -48,6 +49,15 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
     {
         $data['password'] = Hash::make($data['password']);
         return $this->create($data);
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @return string
+     */
+    public function saveEmployeeDocs(UploadedFile $file, $directory) : string
+    {
+        return $file->store($directory, ['disk' => 'public']);
     }
 
     /**
@@ -130,4 +140,8 @@ class EmployeeRepository extends BaseRepository implements EmployeeRepositoryInt
     {
         return $this->delete();
     }
+
+
+
+    
 }
