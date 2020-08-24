@@ -108,11 +108,9 @@ class LoginController extends Controller
         $details = $request->only('email', 'password');
         // $detais['status'] = 1;
         //dd($details);
-        
         //dd(auth()->guard('employee')->attempt($details));
-
+        
         if (auth()->guard('employee')->attempt($details) == false) {
-
             $user = auth()->guard('employee')->user();
             dd($user);
 

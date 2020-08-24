@@ -16,7 +16,7 @@ class FacilityRepository extends BaseRepository implements FacilityRepositoryInt
         parent::__construct($facility);
         $this->model = $facility;
     }
-
+    
     public function listFacilities($columns = ['*'], string $orderBy = 'facility_id', string $sortBy = 'asc') :  Collection
     {
         return $this->all(['*'], $orderBy, $sortBy);

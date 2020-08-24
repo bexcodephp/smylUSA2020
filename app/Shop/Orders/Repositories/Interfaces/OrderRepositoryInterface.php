@@ -16,7 +16,7 @@ interface OrderRepositoryInterface extends BaseRepositoryInterface
     public function findOrderById(int $id) : Order;
 
     public function listOrders(string $order = 'id', string $sort = 'desc', array $columns = ['*']) : Collection;
-
+    
     public function findProducts(Order $order) : Collection;
 
     public function associateProduct(Product $product, int $quantity = 1, array $data = []);

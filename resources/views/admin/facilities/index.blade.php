@@ -29,6 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        
                         @foreach ($facilities as $facility)
                             <tr>
                             <td><a href="{{ route('admin.facilities.show', $facility) }}">{{ $facility->name }}</a></td>

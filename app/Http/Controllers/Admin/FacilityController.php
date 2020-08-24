@@ -12,6 +12,7 @@ use App\Shop\Facility\Requests\FacilityCreateRequest;
 use App\Shop\Facility\Requests\FacilityUpdateRequest;
 use App\Shop\Facility\Repositories\FacilityRepository;
 use App\Shop\Facility\Repositories\Interfaces\FacilityRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class FacilityController extends Controller
 {
@@ -32,6 +33,7 @@ class FacilityController extends Controller
 
     public function index()
     {
+        
         $facilities = $this->facilityRepo->listFacilities();
         return view('admin.facilities.index', compact('facilities'));
     }
@@ -43,7 +45,8 @@ class FacilityController extends Controller
      */
     public function create()
     {
-        return view('admin.facilities.create');
+        $states = DB::table('states')->get();
+        return view('admin.facilities.create',compact('states'));
     }
 
     /**
@@ -186,6 +189,11 @@ class FacilityController extends Controller
         }
 
         return $this->sendResponse(true, "Facility timespan updated");
+    }
 
+    public function getcity(Request $request)
+    {
+        $cities = DB::table('city_tbl')->where('state_id',$request->state_id)->get(); 
+        return response(json_encode($cities));
     }
 }

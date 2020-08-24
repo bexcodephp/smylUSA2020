@@ -26,7 +26,6 @@ class OperatorController extends Controller
      */
     public function create()
     {
-        echo "hi";exit;
         return view('admin.operators.create');
     }
 

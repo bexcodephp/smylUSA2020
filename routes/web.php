@@ -71,6 +71,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('facilities/{facility_id}/weekday/{weekday}', 'FacilityController@updateSpan')->name('facilities.updateSpan');
             Route::post('facilities/{facility_id}/weekday/{weekday}', 'FacilityController@updateFacilityTimespan')->name('facilities.updateFacilityTimespan');
             Route::post('facilities/updateTime/{facility_id}', 'FacilityController@updateTime')->name('facilities.updateTime');
+            Route::post('facilities/getcity', 'FacilityController@getcity');
+
             Route::resource('addresses', 'Addresses\AddressController');
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');
