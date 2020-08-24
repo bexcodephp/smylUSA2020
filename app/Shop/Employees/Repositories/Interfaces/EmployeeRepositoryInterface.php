@@ -5,12 +5,16 @@ namespace App\Shop\Employees\Repositories\Interfaces;
 use Jsdecena\Baserepo\BaseRepositoryInterface;
 use App\Shop\Employees\Employee;
 use Illuminate\Support\Collection;
+use Illuminate\Http\UploadedFile;
+
 
 interface EmployeeRepositoryInterface extends BaseRepositoryInterface
 {
     public function listEmployees(string $order = 'id', string $sort = 'desc'): Collection;
 
     public function createEmployee(array $params) : Employee;
+
+    public function saveEmployeeDocs(UploadedFile $file, $directory) : string;
 
     public function findEmployeeById(int $id) : Employee;
 
@@ -24,5 +28,5 @@ interface EmployeeRepositoryInterface extends BaseRepositoryInterface
 
     public function isAuthUser(Employee $employee): bool;
 
-    public function deleteEmployee() : bool;
+    public function deleteEmployee() : bool;    
 }

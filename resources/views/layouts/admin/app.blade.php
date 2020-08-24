@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/admin.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert2.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/operator/operator.css') }}">
     @yield('css')
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('favicons/apple-icon-57x57.png')}}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('favicons/apple-icon-60x60.png')}}">

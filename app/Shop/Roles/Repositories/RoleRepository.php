@@ -132,4 +132,10 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
     {
         return $this->model->with(['users'])->where('name', $role)->firstorfail();
     }
+
+    
+    public function getUsersBasedRoleFilter(string $role , $filter): Collection
+    {
+        return $this->model->with(['users'])->where('name', $filter)->firstorfail();
+    }
 }

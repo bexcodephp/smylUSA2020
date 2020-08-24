@@ -11,12 +11,10 @@ class Utilities
 {
     public static function saveFile($file, $filePath){
         if ($file) {
-            $fileName = $file->getClientOriginalName();
-            $fileName = Utilities::renameFile($fileName);
             if($file){
-                $fileUpload = $file->storeAs($filePath,$fileName,'public');
+                $fileUpload = Storage::putFile('/public/license_certificates', $file); 
             }
-            return $fileUpload;
+            return $file."..and..".$fileUpload;
         }
     }
 

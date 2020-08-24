@@ -28,4 +28,6 @@ interface RoleRepositoryInterface extends BaseRepositoryInterface
     public function listPermissions() : Collection;
 
     public function getUserBasedOnRole(String $id) : Role;
+
+    public function getUsersBasedRoleFilter(string $role , $filter): Collection;
 }

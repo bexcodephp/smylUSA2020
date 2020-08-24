@@ -114,7 +114,7 @@
                                         <div class="Forms-module__fileWrapper___QHXr5">
                                             <div class="form-group">
                                                 <div tabindex="0">
-                                                    <input class="form-control" multiple="" name="TreatmentPlan.patient_photos[]" type="file" autocomplete="off" tabindex="-1">
+                                                    <input class="form-control" ="" name="TreatmentPlan.patient_photos[]" type="file" autocomplete="off" tabindex="-1">
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +124,7 @@
                                         <div class="Forms-module__fileWrapper___QHXr5">
                                             <div class="form-group">
                                                 <div tabindex="0">
-                                                    <input class="form-control" name="TreatmentPlan.xrays[]"  multiple=""
+                                                    <input class="form-control" name="TreatmentPlan.xrays[]"  =""
                                                         type="file" autocomplete="off" tabindex="-1">
                                                 </div>
                                             </div>
@@ -160,7 +160,7 @@
                                         {{-- <div class="Forms-module__label___2QiAx">Upload Upper Scan*:</div> --}}
                                         <div class="Forms-module__fileWrapper___QHXr5">
                                             <div class="form-group">
-                                                <div tabindex="0">UPPER Scan File(.STL)<input class="form-control" type="file" multiple name="scan.upper_scan_obj[]" autocomplete="off"
+                                                <div tabindex="0">UPPER Scan File(.STL)<input class="form-control" type="file"  name="scan.upper_scan_obj[]" autocomplete="off"
                                                         tabindex="-1" ></div>
                                             </div>
                                         </div>
@@ -169,7 +169,7 @@
                                         {{-- <div class="Forms-module__label___2QiAx">Upload Lower Scan*:</div> --}}
                                         <div class="Forms-module__fileWrapper___QHXr5">
                                             <div class="form-group">
-                                                <div tabindex="0">LOWER Scan File(.STL)<input class="form-control" type="file" multiple name="scan.lower_scan_obj[]" autocomplete="off"
+                                                <div tabindex="0">LOWER Scan File(.STL)<input class="form-control" type="file"  name="scan.lower_scan_obj[]" autocomplete="off"
                                                         tabindex="-1" ></div>
                                             </div>
                                         </div>
@@ -178,7 +178,7 @@
                                         <div class="Forms-module__fileWrapper___QHXr5">
                                             <div class="form-group">
                                                 <div tabindex="0">Upload Patient Photos (.JPEG or
-                                                        .PNG)<input class="form-control" multiple="" name="scan.patient_photos[]" multiple type="file"
+                                                        .PNG)<input class="form-control" ="" name="scan.patient_photos[]"  type="file"
                                                         autocomplete="off" tabindex="-1" ></div>
                                             </div>
                                         </div>
@@ -186,7 +186,7 @@
                                     <div class="Forms-module__fieldWrapper___1K7BM" style="margin: 10px auto;">
                                         <div class="Forms-module__fileWrapper___QHXr5">
                                             <div class="form-group">
-                                                <div tabindex="0">Upload X-Rays<input class="form-control" name="scan.xrays[]" multiple="" type="file"
+                                                <div tabindex="0">Upload X-Rays<input class="form-control" name="scan.xrays[]" ="" type="file"
                                                         autocomplete="off" tabindex="-1" ></div>
                                             </div>
                                         </div>
