@@ -1,6 +1,19 @@
 @extends('layouts.admin.app')
 
 @section('content')
+<style>
+    #my-input-searchbox {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    font-size: 15px;
+    border-radius: 3px;
+    border: 0;
+    margin-top: 10px;
+    width: 270px;
+    height: 40px;
+    text-overflow: ellipsis;
+    padding: 0 1em;
+    }
+</style>
 <!-- Main content -->
 <section class="content">
     @include('layouts.errors-and-messages')
@@ -58,15 +71,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Latidue <span class="text-danger">*</span></label>
                                     <input type="text" readonly required name="latitude" id="latitude"
                                         placeholder="latitude" class="form-control" value="{{ $facility->latitude }}">
                                 </div>
-                            </div>
-
-                            <div class="col-sm-12">
+                            </div> -->
+                            
+                            <!-- <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Lontitude <span class="text-danger">*</span></label>
                                     <input type="text" readonly required name="longitude" id="longitude"
@@ -80,22 +93,47 @@
                                     <input type="text" required name="city" id="city"
                                         placeholder="city" class="form-control" value="{{ $facility->city }}">
                                 </div>
+                            </div> -->
+                            
+                            <input type="hidden" name="latitude" id="latitude" value="{{ $facility->longitude }}">
+                            <input type="hidden" name="longitude" id="longitude" value="{{ $facility->longitude }}">
+                            <input type="hidden" id="state_id" value="{{ $facility->state }}">
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <select id="state" name="state" class="form-control" value="{{ $facility->state }}">
+                                        <option value="">Select state</option>
+                                        @foreach ($states as $state)
+                                            <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">City <span class="text-danger">*</span></label>
+                                    <select id="city" name="city" name="city" class="form-control" value="{{ $facility->city }}">
+                                        <option value="">Select city</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-8">
+                    <input id="my-input-searchbox" type="text" placeholder="Search Location Here">
                         <div class="map" id="map" style="height: 355px;"></div>
                     </div>
                 </div>
-
+                
                 <div class="row">
-
-                    <div class="col-sm-3">
+                    <!-- <div class="col-sm-3">
                         <div class="form-group">
                             <label for="state">State</label>
                             <input type="text" name="state" id="state" class="form-control" value="{{ $facility->state }}">
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-sm-3">
                         <div class="form-group">
@@ -113,23 +151,13 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="status">Parking Available </label>
-                            <select name="parking_available" id="parking_available" class="form-control">
-                                <option value="1" @if($facility->parking_available == 1) selected @endif>Yes</option>
-                                <option value="0" @if($facility->parking_available == 0) selected @endif>No</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 <div class="btn-group">
                     <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </div>
         </form>
@@ -142,13 +170,56 @@
 
 
 @section('js')
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false&&libraries=geometry,places"></script>
+
 <script>
     var marker;
+
+    function GetCity()
+    {
+        var stateID = $('#state_id').val();
+        
+        if(stateID){
+            $.ajax({
+                url:'getcity',
+                type:'post',
+                data:{
+                    '_token':'{{csrf_token()}}',
+                    'state_id':stateID
+                },
+                success:function (data) {
+                    var obj = Object();
+
+                    obj = jQuery.parseJSON(data);
+
+                    $('#city').html("");
+
+                    for(var i=0;i<obj.length;i++)
+                    {
+                        $('#city').append('<option value="'+obj[i].city_id+'">'+obj[i].city_name+'</option>')
+                    }
+                }
+            })
+
+            // $.ajax({
+            //     type:'POST',
+            //     url:'/getcity',
+            //     data:'state_id='+stateID,
+            //     success:function(html){
+            //         $('#city').html(html);
+            //     }
+            // });
+        }else{
+            $('#city').html('<option value="">Select state first</option>'); 
+        }
+    }
+
+    GetCity();
+
     function initMap() {
 
             var lat = parseFloat(document.getElementById('latitude').value);
             var lng = parseFloat(document.getElementById('longitude').value);
-
 
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 12,
@@ -228,7 +299,77 @@
               }
             });
           }
+
+          function GetCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        
+        function showPosition(position) {
+            initAutocomplete(position.coords.latitude,position.coords.longitude);
+        }
+
+        function initAutocomplete(latitude,longitude) {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                lat: latitude,
+                lng: longitude
+                },
+                zoom: 6,
+                disableDefaultUI: false,
+                MyLocationEnabled: true,
+                setMyLocationButtonEnabled: true
+            });
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('my-input-searchbox');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+            var marker = new google.maps.Marker({
+                map: map
+            });
+
+            // Bias the SearchBox results towards current map's viewport.
+            autocomplete.bindTo('bounds', map);
+            // Set the data fields to return when the user selects a place.
+            autocomplete.setFields(
+                ['address_components', 'geometry', 'name']);
+
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            autocomplete.addListener('place_changed', function() {
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+                }
+                var bounds = new google.maps.LatLngBounds();
+                marker.setPosition(place.geometry.location);
+
+                var lat = place.geometry.location.lat();
+                $('#latitude').val(lat);
+                var lng = place.geometry.location.lng();
+                $('#longitude').val(lng);
+
+                if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+                } else {
+                bounds.extend(place.geometry.location);
+                }
+                map.fitBounds(bounds);
+            });
+
+            addYourLocationButton(map, marker);
+        }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+        GetCurrentLocation();
+        });
 </script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&callback=initMap"></script>
+<!-- <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&callback=initMap"></script> -->
 @endsection

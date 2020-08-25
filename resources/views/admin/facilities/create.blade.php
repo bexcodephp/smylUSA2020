@@ -79,6 +79,9 @@
                                         <input type="text" readonly required name="longitude" id="longitude" placeholder="longitude" class="form-control" value="{{ old('longitude') }}">
                                     </div>
                                 </div> -->
+                                
+                                <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude') }}">
+                                <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') }}">
 
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -114,8 +117,6 @@
                     </div>
                     
                     <div class="row">
-                        
-
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label for="image">Facility Image </label>
@@ -165,15 +166,13 @@
 libraries=geometry,places"></script> -->
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false&&libraries=geometry,places"></script>
-
+    
     <script>
         var marker;
-
         $(document).ready(function(){
             $('#state').on('change', function(){
                 var stateID = $(this).val();
                 if(stateID){
-
                     $.ajax({
                         url:'getcity',
                         type:'post',
@@ -202,7 +201,7 @@ libraries=geometry,places"></script> -->
                     //     success:function(html){
                     //         $('#city').html(html);
                     //     }
-                    // }); 
+                    // });
                 }else{
                     $('#city').html('<option value="">Select state first</option>'); 
                 }
@@ -215,7 +214,7 @@ libraries=geometry,places"></script> -->
                 }
             });
         });
-
+        
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 12,
@@ -238,6 +237,7 @@ libraries=geometry,places"></script> -->
             // });
 
         }
+
         function geocodeAddress(geocoder, resultsMap) {
             var address = document.getElementById('address').value;
             geocoder.geocode({'address': address}, function(results, status) {
@@ -260,58 +260,75 @@ libraries=geometry,places"></script> -->
             });
           }
 
-          function initAutocomplete() {
-		  map = new google.maps.Map(document.getElementById('map'), {
-		    center: {
-		      lat: 9.0820,
-		      lng: 8.6753
-		    },
-		    zoom: 6,
-		    disableDefaultUI: false,
-		    MyLocationEnabled: true,
-        	setMyLocationButtonEnabled: true
-		  });
+            function GetCurrentLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else { 
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+            }
 
-		  // Create the search box and link it to the UI element.
-		  var input = document.getElementById('my-input-searchbox');
-		  var autocomplete = new google.maps.places.Autocomplete(input);
-		  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
-		  var marker = new google.maps.Marker({
-		    map: map
-		  });
+            function showPosition(position) {
+                initAutocomplete(position.coords.latitude,position.coords.longitude);
+            }
 
-		  // Bias the SearchBox results towards current map's viewport.
-		  autocomplete.bindTo('bounds', map);
-		  // Set the data fields to return when the user selects a place.
-		  autocomplete.setFields(
-		    ['address_components', 'geometry', 'name']);
+            function initAutocomplete(latitude,longitude) {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {
+                    lat: latitude,
+                    lng: longitude
+                    },
+                    zoom: 6,
+                    disableDefaultUI: false,
+                    MyLocationEnabled: true,
+                    setMyLocationButtonEnabled: true
+                });
 
-		  // Listen for the event fired when the user selects a prediction and retrieve
-		  // more details for that place.
-		  autocomplete.addListener('place_changed', function() {
-		    var place = autocomplete.getPlace();
-		    if (!place.geometry) {
-		      console.log("Returned place contains no geometry");
-		      return;
-		    }
-		    var bounds = new google.maps.LatLngBounds();
-		    marker.setPosition(place.geometry.location);
+                // Create the search box and link it to the UI element.
+                var input = document.getElementById('my-input-searchbox');
+                var autocomplete = new google.maps.places.Autocomplete(input);
+                map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+                var marker = new google.maps.Marker({
+                    map: map
+                });
 
-		    if (place.geometry.viewport) {
-		      // Only geocodes have viewport.
-		      bounds.union(place.geometry.viewport);
-		    } else {
-		      bounds.extend(place.geometry.location);
-		    }
-		    map.fitBounds(bounds);
-		  });
+                // Bias the SearchBox results towards current map's viewport.
+                autocomplete.bindTo('bounds', map);
+                // Set the data fields to return when the user selects a place.
+                autocomplete.setFields(
+                    ['address_components', 'geometry', 'name']);
 
-		  addYourLocationButton(map, marker);
-		}
+                // Listen for the event fired when the user selects a prediction and retrieve
+                // more details for that place.
+                autocomplete.addListener('place_changed', function() {
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                    }
+                    var bounds = new google.maps.LatLngBounds();
+                    marker.setPosition(place.geometry.location);
 
-		document.addEventListener("DOMContentLoaded", function(event) {
-		  initAutocomplete();
-		});
+                    var lat = place.geometry.location.lat();
+                    $('#latitude').val(lat);
+                    var lng = place.geometry.location.lng();
+                    $('#longitude').val(lng);
+
+                    if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                    } else {
+                    bounds.extend(place.geometry.location);
+                    }
+                    map.fitBounds(bounds);
+                });
+
+                addYourLocationButton(map, marker);
+            }
+
+            document.addEventListener("DOMContentLoaded", function(event) {
+            GetCurrentLocation();
+            });
 
     </script>
     

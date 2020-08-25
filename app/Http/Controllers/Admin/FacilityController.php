@@ -57,6 +57,9 @@ class FacilityController extends Controller
      */
     public function store(FacilityCreateRequest $request)
     {
+        //dd($request);
+        //exit;
+
         $data = $request->input();
         if ($request->hasFile('image')) {
             $data['image'] = $this->facilityRepo->saveFacilityImage($request->file('image'));
@@ -82,7 +85,7 @@ class FacilityController extends Controller
         
         return view('admin.facilities.show', compact('facility', 'timeslots'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -91,9 +94,9 @@ class FacilityController extends Controller
      */
     public function edit($id)
     {
+        $states = DB::table('states')->get();
         $facility = $this->facilityRepo->find($id);
-
-        return view('admin.facilities.edit', compact('facility'));
+        return view('admin.facilities.edit', compact('facility','states'));
     }
 
     /**
