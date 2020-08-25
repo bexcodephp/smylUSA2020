@@ -59,12 +59,10 @@
                 <tbody>
                     
                     @foreach ($role->users as $employee)
-                    <?php 
+                    <?php
 
                         $locationsArray = json_decode($employee->location_associated, true);
-                        //echo is_array($locationsArray);
-                        //print_r($employee->location_associated);
-                        
+
                     ?>
 
                     <tr>
@@ -111,8 +109,16 @@
                         </td>
                         <td>{{ $employee->fname."  ".$employee->lname }}</td>
                         <td>{{ $employee->email }}</td>
-                        <td>{{ $employee->phone }}</td>                        
-                        <td>@include('layouts.status', ['status' => $employee->status])</td>
+                        <td>{{ $employee->phone }}</td> 
+                        <td onclick="showStatusDropDown('{{$employee->id}}');" id="op_status_{{$employee->id}}">{{ Config::get('constants.STATUS.'.$employee->status) }}</td> 
+                        <td style="width: 250px;" class="status-td hidden" id="op_status_dropdown_{{$employee->id}}" >
+                            <select name="status" id="status_{{$employee->id}}" class="form-control select2" onchange="selectStatus(this,'{{$employee->id}}')" >
+                                <option value="0" @if($employee->status == 0 || old('status') == 0) selected="selected" @endif>Inactive</option>
+                                <option value="1" @if($employee->status == 1 || old('status') == 1) selected="selected" @endif>Active</option>
+                                <option value="2" @if($employee->status == 2 || old('status') == 2) selected="selected" @endif>Pending</option>
+                            </select>
+                        </td>                     
+                        <!-- <td>@include('layouts.status', ['status' => $employee->status])</td> -->
                         <td style="width: 250px;">
                             <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="post"
                                   class="form-horizontal">
@@ -121,21 +127,12 @@
                                 <div class="btn-group">
                                     <a href="{{ route('admin.employees.edit', $employee->id) }}"
                                        class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit fa-lg"></i></a>
-                                    <a href="{{ route('admin.employee.dentist_orders', $employee->id) }}"
+                                    <a href="{{ route('admin.employee.profile', $employee->id) }}"
                                        class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
                                     <button onclick="deleteOperator('{{$employee->id}}')" type="button"
                                             class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
                                 </div>                                
-                            </form>
-                            <!-- <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="post" class="form-horizontal">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="_method" value="delete">
-                                    <div class="btn-group">
-                                        <a href="{{ route('admin.employees.show', $employee->id) }}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i>Show</a>
-                                        <a href="{{ route('admin.employees.edit', $employee->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>Edit</a>
-                                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i>Delete</button>
-                                    </div>
-                                </form> -->
+                            </form>                            
                         </td>
                     </tr>
                     @endforeach
@@ -152,42 +149,17 @@
 @endsection
 @section('js')
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
-    <script>
-        var _opId = '';
-        $('.deactivate').click(function (e) {
-        e.preventDefault();
-        var id=$(this).data('id');
-        
-        $.ajax({
-            url:'{{route('admin.status')}}',
-            type:'post',
-            data:{
-                '_token':'{{csrf_token()}}',
-                id:id,
-                status:0
-            },
-            success:function (data) {
-            location.reload();
-            }
-        })
-        })
 
-        $('.activate').click(function (e) {
-            e.preventDefault();
-            var id=$(this).data('id');
-            $.ajax({
-                url:'{{route('admin.status')}}',
-                type:'post',
-                data:{
-                    '_token':'{{csrf_token()}}',
-                    id:id,
-                    status:1
-                },
-                success:function (data) {
-                    location.reload();
-                }
-            })
-        })
+    <script>
+        $(document).ready(function() {
+            $(".aaaa").change({
+                //alert('hi');
+            });
+            var _opId = '';
+        });
+    </script>
+
+    <script>        
 
         function deleteOperator(opId){
             _opId = opId;
@@ -229,10 +201,33 @@
             }
             else if(result.dismiss === swal.DismissReason.cancel)
                 {
-                    alert("else...");
-                    
+                
                 }
             })
+        }
+
+        function showStatusDropDown(id){
+            //alert(id);
+            $('#op_status_dropdown_'+id).removeClass('hidden');
+            $('#op_status_'+id).addClass('hidden');
+        }
+
+        function selectStatus(status,id){
+            $.ajax({
+                    url:'status',
+                    type:'post',
+                    data:{
+                        '_token':'{{csrf_token()}}',
+                        id:id,
+                        status:status.value
+                    },
+                    success:function (data) {
+                        location.reload();
+                        // console.log(data);
+                        // $('#op_status_dropdown_'+id).addClass('hidden');
+                        // $('#op_status_'+id).removeClass('hidden');
+                    }
+                })
         }
 
     </script>

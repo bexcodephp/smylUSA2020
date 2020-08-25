@@ -4,52 +4,68 @@
     <!-- Main content -->
     <section class="content">
         @include('layouts.errors-and-messages')
-        <form action="{{ route('admin.employee.profile.update', $employee->id) }}" method="post" class="form">
-            <input type="hidden" name="_method" value="put">
-            {{ csrf_field() }}
-            <!-- Default box -->
-            <div class="box">
-                <div class="box-body">
-                    <table class="table table-striped table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">Name</td>
-                                <td class="col-md-4">Email</td>
-                                <td class="col-md-4">Password</td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <input name="name" type="text" class="form-control" value="{{ $employee->name }}">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input name="email" type="email" class="form-control" value="{{ $employee->email }}">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input name="password" type="password" class="form-control" value="" placeholder="xxxxxx">
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <div class="btn-group">
-                        <a href="{{ route('admin.dashboard') }}" class="btn btn-default btn-sm">Back</a>
-                        <button class="btn btn-success btn-sm" type="submit"> <i class="fa fa-save"></i> Save</button>
-                    </div>
-                </div>
-            </div>
-            <!-- /.box -->
-        </form>
+        <div>
+            <label>Name:</label>
+        </div>
+        {{$employee->fname." ".$employee->lname}}
+        <label>Email:</label>{{$employee->email}}
+        <label>Phone:</label>{{$employee->phone}}
+        <label>Location Associated:</label>{{$employee->location_associated}}
+        <?php $locationsArray = json_decode($employee->location_associated, true); ?>
+        @foreach ($facilities as $location) 
+                            <?php 
 
+                                if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
+                                    if(in_array($location->facility_id,$locationsArray)){
+                                        //$no++;
+                            ?>
+                                <li>{{ $location->address }}</li>
+                            <?php
+
+                                    }
+                                }
+                            ?>                                
+                            @endforeach
+        <label>License Certificates:</label>{{$employee->license_certificates}}
+        <div class="licence-wrapper">
+                        <?php
+                            
+                            $files =  $employee->license_certificates;
+                            $files = json_decode($files); 
+                            //dd($files);
+                            $licence = 1;
+                            foreach($files as $file){
+                                ?>
+                                <div class="licence-div" id="licence_div{{$licence}}">
+                                    <?php
+                                    $extension = pathinfo(storage_path('/employee/operators/license_certificates'.$file), PATHINFO_EXTENSION);
+                                    if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
+                                    //echo $file;
+                                    ?>
+                                    
+                                    <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
+                                        <img src="{{ asset('images/licence.png')}}" >
+                                        <span class="licence-name">{{ "licence".$licence++}}</span>
+                                    </a>
+                                    <!-- <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a> -->
+                            <?php
+                                    }else{
+                            ?>
+                                    <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
+                                        <img src="{{ asset('images/icon_pdf.png')}}">
+                                        <span class="licence-name">{{ "licence".$licence++}}</span>
+                                    </a>
+                                    <!-- <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a> -->
+                            <?php
+                                    }
+                                    ?>
+                                </div>
+                                <?php
+
+                            }
+                        ?>
+                    </div>
+        <label>Status:</label>{{$employee->status}}
     </section>
     <!-- /.content -->
 @endsection

@@ -86,7 +86,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('user-assessments', 'UserAssessmentController@index')->name('user_assessment');
 
             Route::resource('employees', 'EmployeeController');
-            
+            //Route::post('employees/operator', 'EmployeeController@show')->name('show');
             Route::post('employees/filter', 'EmployeeController@filter')->name('filter');
             Route::post('employees/delete/{id}', 'EmployeeController@destroy')->name('delete');
             Route::post('employees/status', 'EmployeeController@status')->name('status');
@@ -104,6 +104,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 /**
  * Frontend routes
  */
+
 Auth::routes(['verify' => true]);
 
 Route::namespace('Auth')->group(function () {

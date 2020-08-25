@@ -142,3 +142,11 @@ ul{
 .modal-docs-pdf{
     width: 100%;
 }
+.status-td select{
+    width: 100% !important;
+    max-width: 250px;
+}
+.status-td span{
+    width: 100% !important;
+    max-width: 250px;
+}
