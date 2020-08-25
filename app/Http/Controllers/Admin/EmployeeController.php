@@ -17,6 +17,7 @@ use App\Mail\DentistAccountApproved as MailDentistAccountApproved;
 use App\Shop\Employees\Repositories\Interfaces\EmployeeRepositoryInterface;
 use App\Shop\Facility\Facility;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -50,6 +51,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        
         $list = $this->employeeRepo->listEmployees('created_at', 'desc');       
         return view('admin.employees.list', [
             'employees' => $this->employeeRepo->paginateArrayResults($list->all())
@@ -62,7 +64,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {            
         $facilities = Facility::get(['facility_id','name']);
         $roles = $this->roleRepo->listRoles();
         return view('admin.employees.create', compact('roles','facilities')
@@ -78,6 +80,7 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
+        //dd($request);    
         //dd($request->file('license_certificates')->getClientOriginalName());
         //dd($request);
         $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
@@ -106,6 +109,7 @@ class EmployeeController extends Controller
         //$employee = $this->employeeRepo->createEmployee($request->all()); 
 
         //dd($employee);
+        
 
         if ($request->has('role')) {    
             // dd($request);        
@@ -115,7 +119,8 @@ class EmployeeController extends Controller
 
         // upload file
 
-        $operator_id = $employee->id; // last inserted id
+        $operator_id = "OPT".Carbon::now().$employee->id; // last inserted id
+        dd($operator_id);
         
 
         return redirect('admin/employees/operator');
@@ -138,6 +143,8 @@ class EmployeeController extends Controller
 
         return view('admin.employees.show', compact('role','facilities'));
     }
+
+    
     
     public function dentist_orders($dentist)
     {
@@ -255,16 +262,8 @@ class EmployeeController extends Controller
      */
     public function destroy(int $id)
     {
-        
-        $cart = DB::select(DB::raw("DELETE from employees WHERE id=$id"));
-
-        //return response(json_encode($responce));
-        // Employee::destroy($id);
-        // $employee = $this->employeeRepo->findEmployeeById($id); 
-        // $employeeRepo = new EmployeeRepository($employee);
-        // $a =$employeeRepo->deleteEmployee();
-        //dd($a);
-        return redirect()->route('admin.employees.show')->with('message', 'Delete successful');
+        //dd($id);
+        $delete = DB::select(DB::raw("DELETE from employees WHERE id=$id"));
     }
 
     /**
@@ -275,7 +274,9 @@ class EmployeeController extends Controller
     public function getProfile($id)
     {
         $employee = $this->employeeRepo->findEmployeeById($id);
-        return view('admin.employees.profile', ['employee' => $employee]);
+        $facilities = Facility::all();
+        return view('admin.employees.profile', ['employee' => $employee, 'facilities' => $facilities ]);
+        //return view('admin.employees.profile', ['employee' => $employee]);
     }
 
     /**
@@ -300,7 +301,7 @@ class EmployeeController extends Controller
     }
 
     public function status(Request $request){
-       $employee=Employee::where('id',$request->id)->first();
+       $employee = Employee::where('id',$request->id)->first();
 //       return $employee;
        if($employee){
            $employee->status=$request->status;
