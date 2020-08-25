@@ -8,7 +8,7 @@
     @if($role->users)
     <div class="box">
         <div class="box-body">
-            <!-- {{ $role }} -->
+            <!-- {{ $role->name }} -->
             
             <div class="wrapper-title">
                 <h2>{{ ucfirst($role->name) }}</h2>    
@@ -40,7 +40,7 @@
             </form>
             
             <div class="box-tools pull-right mb-2">
-                <a href="{{ route('admin.employees.create') }}" class="btn btn-primary">Add New</a>
+                <a href="{{ route('admin.employees.create') }}" class="btn btn-primary" role="{{$role->name}}">Add New</a>
             </div>
             
             <table class="table table-striped table-bordered">
@@ -125,8 +125,9 @@
                                        class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
                                     <button onclick="deleteOperator('{{$employee->id}}')" type="button"
                                             class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
-                                </div>
-                                <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="post" class="form-horizontal">
+                                </div>                                
+                            </form>
+                            <!-- <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="post" class="form-horizontal">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="delete">
                                     <div class="btn-group">
@@ -134,8 +135,7 @@
                                         <a href="{{ route('admin.employees.edit', $employee->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>Edit</a>
                                         <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i>Delete</button>
                                     </div>
-                                </form>
-                            </form>
+                                </form> -->
                         </td>
                     </tr>
                     @endforeach
@@ -151,6 +151,7 @@
 <!-- /.content -->
 @endsection
 @section('js')
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script>
         var _opId = '';
         $('.deactivate').click(function (e) {
@@ -206,23 +207,29 @@
             reverseButtons: false
         }).then((result) => {
             if (result.value) {
-                //alert("hi"); 
+                
+                var date = moment();
+                var newDate = date.format("YYYY-MM-DD hh:mm:ss");
+                console.log(newDate);
                 $.ajax({
-                    url:'/status',
+                    url:'delete/'+_opId,
                     type:'post',
+                    // type: 'DELETE',
                     data:{
                         '_token':'{{csrf_token()}}',
                         id:_opId,
-                        status:0
+                        status:0,
+                        deleted_at:newDate
                     },
                     success:function (data) {
-                        //location.reload();
-                        console.log(data);
+                        location.reload();
+                        // console.log(data);
                     }
                 })
             }
             else if(result.dismiss === swal.DismissReason.cancel)
                 {
+                    alert("else...");
                     
                 }
             })

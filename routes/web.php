@@ -88,6 +88,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::resource('employees', 'EmployeeController');
             
             Route::post('employees/filter', 'EmployeeController@filter')->name('filter');
+            Route::post('employees/delete/{id}', 'EmployeeController@destroy')->name('delete');
             Route::post('employees/status', 'EmployeeController@status')->name('status');
             Route::post('employees/get_location', 'EmployeeController@getLocation')->name('get_location');
             Route::get('employees/{id}/orders', 'EmployeeController@dentist_orders')->name('employee.dentist_orders');

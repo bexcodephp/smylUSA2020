@@ -62,7 +62,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {            
         $facilities = Facility::get(['facility_id','name']);
         $roles = $this->roleRepo->listRoles();
         return view('admin.employees.create', compact('roles','facilities')
@@ -78,6 +78,7 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
+        //dd($request);    
         //dd($request->file('license_certificates')->getClientOriginalName());
         //dd($request);
         $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
@@ -255,16 +256,7 @@ class EmployeeController extends Controller
      */
     public function destroy(int $id)
     {
-        
-        $cart = DB::select(DB::raw("DELETE from employees WHERE id=$id"));
-
-        //return response(json_encode($responce));
-        // Employee::destroy($id);
-        // $employee = $this->employeeRepo->findEmployeeById($id); 
-        // $employeeRepo = new EmployeeRepository($employee);
-        // $a =$employeeRepo->deleteEmployee();
-        //dd($a);
-        return redirect()->route('admin.employees.show')->with('message', 'Delete successful');
+        $delete = DB::select(DB::raw("DELETE from employees WHERE id=$id"));
     }
 
     /**
