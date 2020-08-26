@@ -153,6 +153,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- /.box-body -->
             <div class="box-footer">
                 <div class="btn-group">
@@ -163,7 +164,6 @@
         </form>
     </div>
     <!-- /.box -->
-
 </section>
 <!-- /.content -->
 @endsection
