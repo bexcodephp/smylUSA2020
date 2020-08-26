@@ -37,17 +37,15 @@ $(document).ready(function () {
 
     $('.table thead th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input class="form-control cls_search" type="text" placeholder="Search '+title+'" />' );
+        $(this).html( '<input class="cls_search" type="text" placeholder="Search '+title+'" />' );
     } );
 
     var table = $('.table').DataTable({
-        'searching' : false,
-        'bSort' : false,
         initComplete: function () {
             // Apply the search
             this.api().columns().every( function () {
                 var that = this;
- 
+                
                 $( '.cls_search', this.header() ).on( 'keyup change clear', function () {
                     if ( that.search() !== this.value ) {
                         that
