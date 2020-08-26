@@ -31,7 +31,6 @@
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Zipcode</th>
-                                <th>Parking</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -44,7 +43,6 @@
                             <td>{{ $facility->phone }}</td>
                             <td>{{ $facility->state . ", " . $facility->address }}</td>
                             <td>{{ $facility->zipcode }}</td>
-                            <td>{{ $facility->parking_available == 1 ? "Yes" : "No" }}</td>
                             <td>{{ $facility->is_active == 1 ? "Active" : "Inactive" }}</td>
                             <td>
                                 <form action="{{ route('admin.facilities.destroy', $facility) }}" method="post" class="form-horizontal">
