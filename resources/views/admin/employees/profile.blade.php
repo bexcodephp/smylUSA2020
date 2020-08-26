@@ -1,32 +1,60 @@
 @extends('layouts.admin.app')
-
+@push('stylesheets')
+    <link rel="stylesheet" href="{{ asset('css/operator/emp.css') }}">
+@endpush 
 @section('content')
     <!-- Main content -->
     <section class="content">
         @include('layouts.errors-and-messages')
-        <div>
-            <label>Name:</label>
+        <div class="row">
+            <div class="col mb-2">
+                <label>Name:</label>
+                <div class="lbl-input">{{$employee->fname." ".$employee->lname}}</div>
+            </div>
+            <div class="col mb-2">
+                <label>Email:</label>
+                <div class="lbl-input">{{$employee->email}}</div>
+            </div>
+            <div class="col mb-2">
+                <label>Phone:</label>
+                <div class="lbl-input">{{$employee->phone}}</div>
+            </div>
+            <div class="col mb-2">
+                <label>Location Associated:</label>
+                <div class="lbl-input">{{$employee->location_associated}}</div>
+            </div>
         </div>
-        {{$employee->fname." ".$employee->lname}}
-        <label>Email:</label>{{$employee->email}}
-        <label>Phone:</label>{{$employee->phone}}
-        <label>Location Associated:</label>{{$employee->location_associated}}
-        <?php $locationsArray = json_decode($employee->location_associated, true); ?>
-        @foreach ($facilities as $location) 
-                            <?php 
+        <div class="row">
+            <div class="col mb-2 address-tab">
+                <label>Address:</label>
+                <div class="lbl-input">
+                    <ol>
+                    <?php 
+                        $locationsArray = json_decode($employee->location_associated, true);
+                        
+                     ?>
+                    @foreach ($facilities as $location) 
+                        <?php 
+                            
+                            if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
+                                if(in_array($location->facility_id,$locationsArray)){
+                                    
+                        ?>
+                            <li>
+                                {{ $location->address }}, {{ $location->city }}, {{ $location->state }} - {{ $location->zipcode }}
+                            </li>
+                        <?php
 
-                                if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
-                                    if(in_array($location->facility_id,$locationsArray)){
-                                        //$no++;
-                            ?>
-                                <li>{{ $location->address }}</li>
-                            <?php
-
-                                    }
                                 }
-                            ?>                                
-                            @endforeach
-        <label>License Certificates:</label>{{$employee->license_certificates}}
+                            }
+                        ?>                                
+                    @endforeach
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <label>License Certificates:</label>
         <div class="licence-wrapper">
                         <?php
                             
@@ -65,7 +93,8 @@
                             }
                         ?>
                     </div>
-        <label>Status:</label>{{$employee->status}}
+        <label>Status:</label>
+        {{ Config::get('constants.STATUS.'.$employee->status) }}
     </section>
     <!-- /.content -->
 @endsection
