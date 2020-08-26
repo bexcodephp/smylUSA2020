@@ -1,6 +1,14 @@
 @extends('layouts.admin.app')
 
 @section('content')
+<!-- <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/> -->
+<style>
+    thead input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>
     <!-- Main content -->
     <section class="content">
     @include('layouts.errors-and-messages')
@@ -14,9 +22,9 @@
                     <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Add New</a>
                     </div>
                 </div>
-
+                
                 <div class="box-body">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered display">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -61,3 +69,25 @@
     </section>
     <!-- /.content -->
 @endsection
+
+@section('js')
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+
+<!-- <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" crossorigin="anonymous"></script> -->
+
+<script>
+    // $('.table').DataTable({
+    //     'info' : true,
+    //     'paging' : true,
+    //     'searching' : true,
+    //     'bSort' : false,
+    //     'columnDefs' : [
+    //         {
+    //             'orderable': false, 'targets' : -1
+    //         }
+    //     ],
+    //     'sorting' : []
+    // });
+
+    
+</script>

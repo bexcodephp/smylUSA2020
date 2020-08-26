@@ -11,16 +11,38 @@ $(document).ready(function () {
         placeholder: 'Select'
     });
     
-    $('.table').DataTable({
-        'info' : true,
-        'paging' : true,
-        'searching' : false,
-        'bSort' : false,
-        'columnDefs' : [
-            {
-                'orderable': false, 'targets' : -1
-            }
-        ],
-        'sorting' : []
-    });
+    // $('.table').DataTable({
+    //     'info' : true,
+    //     'paging' : true,
+    //     'searching' : false,
+    //     'bSort' : false,
+    //     'columnDefs' : [
+    //         {
+    //             'orderable': false, 'targets' : -1
+    //         }
+    //     ],
+    //     'sorting' : []
+    // });
+
+    // $('.table thead th').each( function () {
+    //     var title = $(this).text();
+    //     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    // } );
+
+    // var table = $('.table').DataTable({
+    //     initComplete: function () {
+    //         // Apply the search
+    //         this.api().columns().every( function () {
+    //             var that = this;
+ 
+    //             $( 'input', this.footer() ).on( 'keyup change clear', function () {
+    //                 if ( that.search() !== this.value ) {
+    //                     that
+    //                         .search( this.value )
+    //                         .draw();
+    //                 }
+    //             } );
+    //         } );
+    //     }
+    // });
 });
