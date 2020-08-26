@@ -175,11 +175,50 @@
 <script>
     var marker;
 
-    $(window).keydown(function(event){
-        if(event.keyCode == 13) {
-        event.preventDefault();
-        return false;
-        }
+    $(document).ready(function(){
+        $('#state').on('change', function(){
+            var stateID = $(this).val();
+            if(stateID){
+                $.ajax({
+                    url:'getcity',
+                    type:'post',
+                    data:{
+                        '_token':'{{csrf_token()}}',
+                        'state_id':stateID
+                    },
+                    success:function (data) {
+                        var obj = Object();
+
+                        obj = jQuery.parseJSON(data);
+
+                        $('#city').html("");
+
+                        for(var i=0;i<obj.length;i++)
+                        {
+                            $('#city').append('<option value="'+obj[i].city_id+'">'+obj[i].city_name+'</option>')
+                        }
+                    }
+                })
+
+                // $.ajax({
+                //     type:'POST',
+                //     url:'/getcity',
+                //     data:'state_id='+stateID,
+                //     success:function(html){
+                //         $('#city').html(html);
+                //     }
+                // });
+            }else{
+                $('#city').html('<option value="">Select state first</option>'); 
+            }
+        });
+
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+            }
+        });
     });
 
     function GetCity()
