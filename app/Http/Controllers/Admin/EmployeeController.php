@@ -117,12 +117,14 @@ class EmployeeController extends Controller
             $employeeRepo->syncRoles([$request->role]);
         }
 
-        // upload file
+        // update op_id
 
-        $operator_id = "OPT".Carbon::now().$employee->id; // last inserted id
-        dd($operator_id);
-        
-
+        $updateData = [];
+        $operator_id = "OP".Carbon::now()->format('YmdHs').$employee->id; // last inserted id
+        $recentOperator = $this->employeeRepo->findEmployeeById($employee->id); //dd($recentOperator);
+        $empRepo = new EmployeeRepository($recentOperator); //dd($empRepo);        
+        $updateData['op_id'] = $operator_id; //dd($updateData);
+        $result = $empRepo->update($updateData);  
         return redirect('admin/employees/operator');
     }
 
@@ -164,7 +166,7 @@ class EmployeeController extends Controller
         return view('admin.orders.voodoo', compact('voodoo','states', 'dentist'));
 
         //dd($dentist);
-        return view('admin.employees.index', compact('role'));
+        //return view('admin.employees.index', compact('role'));
     }
 
     /**
