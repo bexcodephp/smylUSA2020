@@ -95,7 +95,7 @@
                                 </div>
                             </div> -->
                             
-                            <input type="hidden" name="latitude" id="latitude" value="{{ $facility->longitude }}">
+                            <input type="hidden" name="latitude" id="latitude" value="{{ $facility->latitude }}">
                             <input type="hidden" name="longitude" id="longitude" value="{{ $facility->longitude }}">
                             <input type="hidden" id="state_id" value="{{ $facility->state }}">
 
@@ -175,6 +175,13 @@
 <script>
     var marker;
 
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+        event.preventDefault();
+        return false;
+        }
+    });
+
     function GetCity()
     {
         var stateID = $('#state_id').val();
@@ -215,38 +222,27 @@
     }
 
     GetCity();
+    initAutocomplete(parseFloat(document.getElementById('latitude').value),parseFloat(document.getElementById('longitude').value));
 
     function initMap() {
+        var lat = parseFloat(document.getElementById('latitude').value);
+        var lng = parseFloat(document.getElementById('longitude').value);
 
-            var lat = parseFloat(document.getElementById('latitude').value);
-            var lng = parseFloat(document.getElementById('longitude').value);
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: {lat: lat, lng: lng}
+        });
+        var geocoder = new google.maps.Geocoder();
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 12,
-              center: {lat: lat, lng: lng}
-            });
-            var geocoder = new google.maps.Geocoder();
+        marker = new google.maps.Marker({
+            map: map,
+            position: {lat: lat, lng: lng}
+        });
 
-            marker = new google.maps.Marker({
-                map: map,
-                position: {lat: lat, lng: lng}
-            });
-
-            $('#address').blur(function(){
-                geocodeAddress(geocoder, map);
-            });
-    
-            // document.getElementById('submit').addEventListener('click', function() {
-            //   geocodeAddress(geocoder, map);
-            // });
-    
-
-            // google.maps.event.addListener(map, 'click', function(event) {
-            //     var result = [event.latLng.lat(), event.latLng.lng()];
-            //     transition(result);
-            // });
-
-        }
+        $('#address').blur(function(){
+            geocodeAddress(geocoder, map);
+        });
+    }
 
         // var numDeltas = 100;
         // var delay = 10; //milliseconds
@@ -300,7 +296,7 @@
             });
           }
 
-          function GetCurrentLocation() {
+        function GetCurrentLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
             } else { 
@@ -322,6 +318,11 @@
                 disableDefaultUI: false,
                 MyLocationEnabled: true,
                 setMyLocationButtonEnabled: true
+            });
+
+            marker = new google.maps.Marker({
+                map: map,
+                position: {lat: latitude, lng: longitude}
             });
 
             // Create the search box and link it to the UI element.
@@ -363,12 +364,12 @@
                 map.fitBounds(bounds);
             });
 
-            addYourLocationButton(map, marker);
+            //addYourLocationButton(map, marker);
         }
 
-        document.addEventListener("DOMContentLoaded", function(event) {
-        GetCurrentLocation();
-        });
+        // document.addEventListener("DOMContentLoaded", function(event) {
+        //     GetCurrentLocation();
+        // });
 </script>
 <!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&callback=initMap"></script> -->
