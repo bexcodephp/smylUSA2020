@@ -41,6 +41,7 @@ $(document).ready(function () {
     } );
 
     var table = $('.table').DataTable({
+        'bSort' : false,
         initComplete: function () {
             // Apply the search
             this.api().columns().every( function () {

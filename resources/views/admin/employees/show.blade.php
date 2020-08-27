@@ -49,11 +49,11 @@
                         <td class="col-md-1">ID</td>
                         <td class="col-md-1">Location</td>
                         <td class="col-md-1">State</td>
-                        <td class="col-md-3">Name</td>
-                        <td class="col-md-3">Email</td>
-                        <td class="col-md-3">Phone</td>
+                        <td class="col-md-auto">Name</td>
+                        <td class="col-md-auto">Email</td>
+                        <td class="col-md-auto">Phone</td>
                         <td class="col-md-1">Status</td>
-                        <td class="col-md-4" style="width: 250px;">Actions</td>
+                        <td class="col-md-auto" style="width: 250px;">Actions</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,7 +111,7 @@
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td> 
                         <td onclick="showStatusDropDown('{{$employee->id}}');" id="op_status_{{$employee->id}}">{{ Config::get('constants.STATUS.'.$employee->status) }}</td> 
-                        <td style="width: 250px;" class="status-td hidden" id="op_status_dropdown_{{$employee->id}}" >
+                        <td class="status-td hidden" id="op_status_dropdown_{{$employee->id}}" >
                             <select name="status" id="status_{{$employee->id}}" class="form-control select2" onchange="selectStatus(this,'{{$employee->id}}')" >
                                 <option value="0" @if($employee->status == 0 || old('status') == 0) selected="selected" @endif>Inactive</option>
                                 <option value="1" @if($employee->status == 1 || old('status') == 1) selected="selected" @endif>Active</option>

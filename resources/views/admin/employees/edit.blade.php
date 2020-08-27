@@ -155,6 +155,12 @@ $(document).ready(function() {
         var id=$(this).val();
         getLocation(id);
     });
+    $("#license_certificates").change(function(){
+        var $fileUpload = $("input[type='file']");
+        if (parseInt($fileUpload.get(0).files.length) > 3){
+            alert("You are only allowed to upload a maximum of 3 files");
+        }
+    });
 });
 </script>
 <script>
@@ -205,9 +211,19 @@ $(document).ready(function() {
         }
 
         function deleteCertificate(fileName){
-            alert($(this).attr("id"));
-            alert(fileName);
-            $(this.id).hide();
+            
+            $.ajax({
+                    url:'deleteFile',
+                    type:'post',
+                    data:{
+                        '_token':'{{csrf_token()}}',
+                        id:id,
+                        status:status.value
+                    },
+                    success:function (data) {
+                        location.reload();
+                    }
+            })
         }
 </script>
 
