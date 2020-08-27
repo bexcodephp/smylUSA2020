@@ -165,8 +165,7 @@ class FacilityController extends Controller
 
     public function getAppointments()
     {
-        $appointments = Appointment::with(['dentist', 'customer', 'facility'])->get();
-
+        $appointments = Appointment::with(['dentist', 'customer', 'facility'])->orderBy('appointment_date', 'DESC')->get();
         return view('admin.facilities.appointments', compact('appointments'));
     }
 

@@ -44,7 +44,7 @@
                 <a href="{{ route('admin.employees.create') }}" class="btn btn-primary" role="{{$role->name}}">Add New</a>
             </div>
             
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered display">
                 <thead>
                     <tr>
                         <td class="col-md-auto">Operator ID</td>
@@ -58,12 +58,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
                     @foreach ($role->users as $employee)
                     <?php
-
                         $locationsArray = json_decode($employee->location_associated, true);
-
                     ?>
 
                     <tr>
@@ -108,6 +105,7 @@
                             @endforeach
                             </ul>
                         </td>
+                        
                         <td>{{ $employee->fname."  ".$employee->lname }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td> 
@@ -118,8 +116,8 @@
                                 <option value="1" @if($employee->status == 1 || old('status') == 1) selected="selected" @endif>Active</option>
                                 <option value="2" @if($employee->status == 2 || old('status') == 2) selected="selected" @endif>Pending</option>
                             </select>
-                        </td>                     
-                        <!-- <td>@include('layouts.status', ['status' => $employee->status])</td> -->
+                        </td>
+
                         <td style="width: 250px;">
                             <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="post"
                                   class="form-horizontal">
@@ -144,7 +142,6 @@
     </div>
     <!-- /.box -->
     @endif
-
 </section>
 <!-- /.content -->
 @endsection
@@ -157,7 +154,33 @@
                 //alert('hi');
             });
             var _opId = '';
+            
+            // $('.table thead th').each( function () {
+            //     var title = $(this).text();
+            //     $(this).html( '<input class="cls_search" type="text" placeholder="Search '+title+'" />' );
+            // } );
+            
+            // var table = $('.table').DataTable({
+            //     initComplete: function () {
+            //         // Apply the search
+            //         this.api().columns().every( function () {
+            //             var that = this;
+                        
+            //             $( '.cls_search', this.header() ).on( 'keyup change clear', function () {
+            //                 alert("fdf");
+
+            //                 if ( that.search() !== this.value ) {
+            //                     that
+            //                         .search( this.value )
+            //                         .draw();
+            //                 }
+            //             } );
+            //         } );
+            //     }
+            // });
         });
+
+        
     </script>
 
     <script>        

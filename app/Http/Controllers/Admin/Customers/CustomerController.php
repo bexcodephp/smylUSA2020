@@ -86,6 +86,7 @@ class CustomerController extends Controller
     public function show(int $id)
     {
         $customer = $this->customerRepo->findCustomerById($id);        
+        
         return view('admin.customers.show', [
             'customer' => $customer,
             'address' => $customer->addresses()->orderBy('id', 'DESC')->limit(1)->first()

@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             });
             Route::namespace('Customers')->group(function () {
                 Route::resource('customers', 'CustomerController');
-                Route::resource('customers.addresses', 'CustomerAddressController');
+            Route::resource('customers.addresses', 'CustomerAddressController');
             });
 
             Route::namespace('Categories')->group(function () {
