@@ -346,15 +346,11 @@ class EmployeeController extends Controller
         if (($key = array_search($request->fileName, $file_arr)) !== false) {
             unset($file_arr[$key]);
         }
-
-        //print_r($file_arr);
-
-        // foreach($file_arr as $file)
-        // {
-        //     array $file."\n\n";
-        // }
-
-        // return response(json_encode($employee));
+        $employee = $this->employeeRepo->findEmployeeById($request->id);
+        $empRepo = new EmployeeRepository($employee);
+        $data['license_certificates'] = json_encode($file_arr);
+        $result = $empRepo->update($data);        
+        return response($result);
     }
 
     public function jsonStringRemove(){

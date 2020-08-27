@@ -53,7 +53,7 @@
                                 <th>Zipcode</th>
                             </thead>
                             <tbody id="add_new_location">
-                                <?php $no=1; ?>
+                            <?php $no=1; ?>
                             @foreach($facilities as $location)
                             <?php if(in_array($location->facility_id,$location_list)){  ?>
                                     <tr>

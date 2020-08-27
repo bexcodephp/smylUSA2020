@@ -241,6 +241,190 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
+    <form method="POST" action="{{ route('admin.facilities.updateTime', $facility->facility_id) }}">
+        @csrf
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                Facility - Not Availability Time Slot
+            </h3>
+        </div>
+        <div class="box-body">
+            <table class="timeTable" style="width: 100%;">
+                <thead>
+                    <tr style="padding: 5px;">
+                        <th>Day</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr style="padding: 5px; border: 1px solid;">
+                        <td style="width: 30%">Monday</td> 
+                        <td>
+                            <div class="input-group">
+                            <input type="text" class="form-control timepicker" name="start[0]" value="{{ isset($timeslots[0]) ? $timeslots[0]['start_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="end[0]" value="{{ isset($timeslots[0]) ? $timeslots[0]['end_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td>                         
+                    </tr>
+
+                    <tr style="padding: 5px; border: 1px solid;">
+                        <td style="width: 30%">Tuesday</td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="start[1]" value="{{ isset($timeslots[1]) ? $timeslots[1]['start_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="end[1]" value="{{ isset($timeslots[1]) ? $timeslots[1]['end_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td>                         
+                    </tr>
+
+                    <tr style="padding: 5px; border: 1px solid;">
+                        <td style="width: 30%">Wednesday</td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="start[2]" value="{{ isset($timeslots[2]) ? $timeslots[2]['start_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="end[2]" value="{{ isset($timeslots[2]) ? $timeslots[2]['start_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        
+                    </tr>
+
+                    <tr style="padding: 5px; border: 1px solid;">
+                        <td style="width: 30%">Thursday</td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="start[3]" value="{{ isset($timeslots[3]) ? $timeslots[3]['start_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="end[3]" value="{{ isset($timeslots[3]) ? $timeslots[3]['end_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        
+                    </tr>
+
+                    <tr style="padding: 5px; border: 1px solid;">
+                        <td style="width: 30%">Friday</td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="start[4]" value="{{ isset($timeslots[4]) ? $timeslots[4]['start_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="end[4]" value="{{ isset($timeslots[4]) ? $timeslots[4]['end_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        
+                    </tr>
+
+                    <tr style="padding: 5px; border: 1px solid;">
+                        <td style="width: 30%">Saturday</td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="start[5]" value="{{ isset($timeslots[5]) ? $timeslots[5]['start_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="end[5]" value="{{ isset($timeslots[5]) ? $timeslots[5]['end_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        
+                    </tr>
+
+                    <tr style="padding: 5px; border: 1px solid;">
+                        <td style="width: 30%">Sunday</td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="start[6]" value="{{ isset($timeslots[6]) ? $timeslots[6]['start_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="end[6]" value="{{ isset($timeslots[6]) ? $timeslots[6]['end_time'] : "" }}">
+                            
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td>                         
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
         <!-- /.box-body -->
     </div>
     <!-- /.box -->
