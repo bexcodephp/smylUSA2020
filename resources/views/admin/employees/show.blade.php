@@ -10,7 +10,11 @@
         <div class="box-body">
             <!-- {{ $role->name }} -->
             
-            
+            <div class="wrapper-title">
+                <h2>{{ ucfirst($role->name) }}</h2>    
+                <!-- <button name="filter" data-toggle="collapse" data-target="#filter" class="btn btn-primary">Filter</button> -->
+            </div>
+
             <form action="{{ route('admin.filter') }}" id="filter" class="collapse" method="post">
                     {{ csrf_field() }}
                 <div class="form-row px-2">
@@ -43,14 +47,14 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <td class="col-md-1">ID</td>
-                        <td class="col-md-1">Location</td>
-                        <td class="col-md-1">State</td>
-                        <td class="col-md-3">Name</td>
-                        <td class="col-md-3">Email</td>
-                        <td class="col-md-3">Phone</td>
-                        <td class="col-md-1">Status</td>
-                        <td class="col-md-4" style="width: 250px;">Actions</td>
+                        <td class="col-md-auto">Operator ID</td>
+                        <td class="col-md-auto">Location</td>
+                        <td class="col-md-auto">State</td>
+                        <td class="col-md-auto">Name</td>
+                        <td class="col-md-auto">Email</td>
+                        <td class="col-md-auto">Phone</td>
+                        <td class="col-md-auto">Status</td>
+                        <td class="col-md-auto" style="width: 250px;">Actions</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,7 +67,7 @@
                     ?>
 
                     <tr>
-                        <td>{{ $employee->id }}</td>
+                        <td>{{ $employee->op_id }}</td>
                         <td class="facility_down">
                             <ul>
                             @php

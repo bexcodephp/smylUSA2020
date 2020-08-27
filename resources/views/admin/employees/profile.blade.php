@@ -21,7 +21,7 @@
             </div>
             <div class="col mb-2">
                 <label>Location Associated:</label>
-                <div class="lbl-input">{{$employee->location_associated}}</div>
+                <div class="lbl-input"></div>
             </div>
         </div>
         <div class="row">
