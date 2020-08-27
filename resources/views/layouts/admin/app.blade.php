@@ -8,7 +8,9 @@
     <title>{{ config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/admin.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert2.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/admin.min.css') }}">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="{{ asset('css/operator/operator.css') }}">
     @yield('css')
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('favicons/apple-icon-57x57.png')}}">
@@ -56,7 +58,12 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="{{ asset('js/admin.min.js') }}"></script>
+<!-- <script src="{{ asset('js/admin.min.js') }}"></script> -->
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="{{ asset('//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js') }}"></script>
+
 <script src="{{ asset('//cdn.ckeditor.com/4.8.0/standard/ckeditor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/sweetalert2.all.js') }}"></script>
 <script src="{{ asset('js/scripts.js?v=0.2') }}"></script>
