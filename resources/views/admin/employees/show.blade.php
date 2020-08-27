@@ -117,7 +117,7 @@
                                 <option value="2" @if($employee->status == 2 || old('status') == 2) selected="selected" @endif>Pending</option>
                             </select>
                         </td>
-
+                                
                         <td style="width: 250px;">
                             <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="post"
                                   class="form-horizontal">
