@@ -15,4 +15,6 @@ $(document).ready(function () {
                 .attr('data-zoom', $(this).attr('src') +'?w=1200');
         });
     }
+    
+    
 });

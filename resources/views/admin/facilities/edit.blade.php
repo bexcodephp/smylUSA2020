@@ -139,6 +139,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="image">Facility Image </label>
+                            <img src="/storage/app/public/{{ $facility->image }}" width="100"/>
                             <input type="file" name="image" id="image" class="form-control">
                         </div>
                     </div>
