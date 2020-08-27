@@ -10,10 +10,7 @@
         <div class="box-body">
             <!-- {{ $role->name }} -->
             
-            <div class="wrapper-title">
-                <h2>{{ ucfirst($role->name) }}</h2>    
-                <button name="filter" data-toggle="collapse" data-target="#filter" class="btn btn-primary">Filter</button>
-            </div>
+            
             <form action="{{ route('admin.filter') }}" id="filter" class="collapse" method="post">
                     {{ csrf_field() }}
                 <div class="form-row px-2">
