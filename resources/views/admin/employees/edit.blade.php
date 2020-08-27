@@ -91,7 +91,7 @@
                                         <img src="{{ asset('images/licence.png')}}" >
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}');" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }else{
                             ?>
@@ -99,7 +99,7 @@
                                         <img src="{{ asset('images/icon_pdf.png')}}">
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}');" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }
                                     ?>
@@ -195,19 +195,31 @@ $(document).ready(function() {
             if(type=='png' || type =='jpeg' || type == 'jpg'){
                 $("#doc_src").show();
                 $("#doc_src1").hide();
-                $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+                $('#doc_src').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
             }else{
                 $("#doc_src1").show();
                 $("#doc_src").hide();
-                $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+                $('#doc_src1').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
             }
            
         }
 
-        function deleteCertificate(fileName){
-            alert($(this).attr("id"));
-            alert(fileName);
-            $(this.id).hide();
+        function deleteCertificate(fileName,op_id){
+            alert(op_id);
+            $.ajax({
+                    url:'../delete_certificate',
+                    type:'post',
+                    // type: 'DELETE',
+                    data:{
+                        '_token':'{{csrf_token()}}',
+                        id:op_id,
+                        status:0
+                    },
+                    success:function (data) {
+                        location.reload();
+                        // console.log(data);
+                    }
+            });
         }
 </script>
 

@@ -337,4 +337,15 @@ class EmployeeController extends Controller
         }
         return view('admin.employees.show', compact('role','facilities'));
     }
+    
+    public function deleteCertificate(Request $request){
+        echo "hello";exit;
+        // $employee = $this->employeeRepo->findEmployeeById($id);
+        // return response(json_encode($employee));
+    }
+    public function jsonStringRemove(){
+        $strRemove = 'employee\/operators\/license_certificates\/kHLZQWCGBIKRcnxO5du9ZErtjoxUhGyRzvK4PvQm.png';
+        $json = ["employee\/operators\/license_certificates\/kHLZQWCGBIKRcnxO5du9ZErtjoxUhGyRzvK4PvQm.png","employee\/operators\/license_certificates\/4jX8RsO7zz9JFZToMBVrin1oGDHRXqf1a5mlZxMu.pdf","employee\/operators\/license_certificates\/bi3DoO3Be0j7nSHiBlSrezvuSz8eovV2UmWCL7Om.pdf","employee\/operators\/license_certificates\/QK7yQzyqy4kmGSj4XaeYysE66qZgaYNUDOe9Nz87.pdf"];
+        dd(json_decode($json));
+    }
 }
