@@ -50,7 +50,6 @@
                                 value="{{ $facility->phone }}">
                         </div>
                     </div>
-
                 </div>
 
                 <div class="row">
@@ -242,7 +241,7 @@
                     {
                         $('#city').append('<option value="'+obj[i].city_id+'">'+obj[i].city_name+'</option>')
                     }
-
+                    
                     $('#city').val($('#city_id').val());
                 }
             })
