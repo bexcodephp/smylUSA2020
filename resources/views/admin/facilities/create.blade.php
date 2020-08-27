@@ -107,7 +107,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                         <div class="col-sm-8">
@@ -165,7 +164,7 @@
 <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&callback=initMap&sensor=false&
 libraries=geometry,places"></script> -->
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false&&libraries=geometry,places"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false&&libraries=geometry,places"></script>
     
     <script>
         var marker;

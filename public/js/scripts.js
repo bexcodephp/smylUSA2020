@@ -39,7 +39,7 @@ $(document).ready(function () {
         var title = $(this).text();
         $(this).html( '<input class="cls_search" type="text" placeholder="Search '+title+'" />' );
     } );
-
+    
     var table = $('.table').DataTable({
         initComplete: function () {
             // Apply the search

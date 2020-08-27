@@ -3,17 +3,18 @@
 @section('content')
 <style>
     #my-input-searchbox {
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-    font-size: 15px;
-    border-radius: 3px;
-    border: 0;
-    margin-top: 10px;
-    width: 270px;
-    height: 40px;
-    text-overflow: ellipsis;
-    padding: 0 1em;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+        font-size: 15px;
+        border-radius: 3px;
+        border: 0;
+        margin-top: 10px;
+        width: 270px;
+        height: 40px;
+        text-overflow: ellipsis;
+        padding: 0 1em;
     }
 </style>
+
 <!-- Main content -->
 <section class="content">
     @include('layouts.errors-and-messages')
@@ -98,11 +99,12 @@
                             <input type="hidden" name="latitude" id="latitude" value="{{ $facility->latitude }}">
                             <input type="hidden" name="longitude" id="longitude" value="{{ $facility->longitude }}">
                             <input type="hidden" id="state_id" value="{{ $facility->state }}">
+                            <input type="hidden" id="city_id" value="{{ $facility->city }}">
 
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="state">State</label>
-                                    <select id="state" name="state" class="form-control" value="{{ $facility->state }}">
+                                    <select id="state" name="state" class="form-control">
                                         <option value="">Select state</option>
                                         @foreach ($states as $state)
                                             <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
@@ -114,7 +116,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">City <span class="text-danger">*</span></label>
-                                    <select id="city" name="city" name="city" class="form-control" value="{{ $facility->city }}">
+                                    <select id="city" name="city" name="city" class="form-control">
                                         <option value="">Select city</option>
                                     </select>
                                 </div>
@@ -170,17 +172,20 @@
 
 
 @section('js')
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false&&libraries=geometry,places"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false&&libraries=geometry,places"></script>
 
 <script>
     var marker;
 
     $(document).ready(function(){
+
+        $('#state').val($('#state_id').val());
+
         $('#state').on('change', function(){
             var stateID = $(this).val();
             if(stateID){
                 $.ajax({
-                    url:'getcity',
+                    url:'../getcity',
                     type:'post',
                     data:{
                         '_token':'{{csrf_token()}}',
@@ -199,15 +204,6 @@
                         }
                     }
                 })
-
-                // $.ajax({
-                //     type:'POST',
-                //     url:'/getcity',
-                //     data:'state_id='+stateID,
-                //     success:function(html){
-                //         $('#city').html(html);
-                //     }
-                // });
             }else{
                 $('#city').html('<option value="">Select state first</option>'); 
             }
@@ -219,6 +215,8 @@
             return false;
             }
         });
+
+
     });
 
     function GetCity()
@@ -227,7 +225,7 @@
         
         if(stateID){
             $.ajax({
-                url:'getcity',
+                url:'../getcity',
                 type:'post',
                 data:{
                     '_token':'{{csrf_token()}}',
@@ -244,23 +242,17 @@
                     {
                         $('#city').append('<option value="'+obj[i].city_id+'">'+obj[i].city_name+'</option>')
                     }
+
+                    $('#city').val($('#city_id').val());
                 }
             })
-
-            // $.ajax({
-            //     type:'POST',
-            //     url:'/getcity',
-            //     data:'state_id='+stateID,
-            //     success:function(html){
-            //         $('#city').html(html);
-            //     }
-            // });
         }else{
             $('#city').html('<option value="">Select state first</option>'); 
         }
     }
 
     GetCity();
+
     initAutocomplete(parseFloat(document.getElementById('latitude').value),parseFloat(document.getElementById('longitude').value));
 
     function initMap() {
