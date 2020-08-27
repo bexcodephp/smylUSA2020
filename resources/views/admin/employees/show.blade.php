@@ -18,7 +18,7 @@
                     {{ csrf_field() }}
                 <div class="form-row px-2">
                     <div class="input-group col-auto mr-2">
-                        <label>Location :</label>
+                        <label>Location:</label>
                         <input type="text" name="filter_location" class="form-control">
                     </div>
                     <div class="input-group col-auto mr-2">
