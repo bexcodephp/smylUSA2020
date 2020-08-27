@@ -31,9 +31,10 @@
                     <div class="form-group">
                         <label for="location_associated">Location Associated<span class="text-danger">*</span></label>
                         <?php 
-                                $location_list =  json_decode($employee->location_associated); // selected location list by employeed print_r($location_list); 
-                                $select = '';                                
+                            $location_list = json_decode($employee->location_associated);
+                            $select = '';
                         ?>
+
                         <select name="location_associated[]" id="location_associated" class="form-control select2" multiple="multiple">
                             <option></option>
                             @foreach($facilities as $location)
@@ -42,7 +43,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div >
+                    <div>
                         <table class="tableLocation">
                             <thead> 
                                 <th>No.</th>                               
@@ -201,25 +202,33 @@ $(document).ready(function() {
                 $("#doc_src").hide();
                 $('#doc_src1').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
             }
-           
         }
 
         function deleteCertificate(fileName,op_id){
             alert(op_id);
+            
             $.ajax({
                     url:'../delete_certificate',
-                    type:'post',
-                    // type: 'DELETE',
+                    type:'POST',
                     data:{
-                        '_token':'{{csrf_token()}}',
+                        _token:'{{csrf_token()}}',
                         id:op_id,
-                        status:0
+                        fileName:fileName
                     },
                     success:function (data) {
-                        location.reload();
+                        //location.reload();
                         // console.log(data);
                     }
             });
+
+            // $.post("../delete_certificate",
+            // {
+            //     '_token':'{{csrf_token()}}',
+            //     'id':op_id,
+            //     'status':0
+            // },function(data){
+                
+            // });
         }
 </script>
 

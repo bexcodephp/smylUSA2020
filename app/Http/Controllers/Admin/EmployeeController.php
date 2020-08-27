@@ -339,10 +339,24 @@ class EmployeeController extends Controller
     }
     
     public function deleteCertificate(Request $request){
-        echo "hello";exit;
-        // $employee = $this->employeeRepo->findEmployeeById($id);
+        $employee = Employee::where('id',$request->id)->pluck('license_certificates');// $this->employeeRepo->findEmployeeById($request->id);
+
+        $file_arr = json_decode($employee[0]);
+
+        if (($key = array_search($request->fileName, $file_arr)) !== false) {
+            unset($file_arr[$key]);
+        }
+
+        //print_r($file_arr);
+
+        // foreach($file_arr as $file)
+        // {
+        //     array $file."\n\n";
+        // }
+
         // return response(json_encode($employee));
     }
+
     public function jsonStringRemove(){
         $strRemove = 'employee\/operators\/license_certificates\/kHLZQWCGBIKRcnxO5du9ZErtjoxUhGyRzvK4PvQm.png';
         $json = ["employee\/operators\/license_certificates\/kHLZQWCGBIKRcnxO5du9ZErtjoxUhGyRzvK4PvQm.png","employee\/operators\/license_certificates\/4jX8RsO7zz9JFZToMBVrin1oGDHRXqf1a5mlZxMu.pdf","employee\/operators\/license_certificates\/bi3DoO3Be0j7nSHiBlSrezvuSz8eovV2UmWCL7Om.pdf","employee\/operators\/license_certificates\/QK7yQzyqy4kmGSj4XaeYysE66qZgaYNUDOe9Nz87.pdf"];
