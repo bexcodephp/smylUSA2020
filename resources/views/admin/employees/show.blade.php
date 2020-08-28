@@ -12,13 +12,14 @@
             
             <div class="wrapper-title">
                 <h2>{{ ucfirst($role->name) }}</h2>    
-                <button name="filter" data-toggle="collapse" data-target="#filter" class="btn btn-primary">Filter</button>
+                <!-- <button name="filter" data-toggle="collapse" data-target="#filter" class="btn btn-primary">Filter</button> -->
             </div>
+
             <form action="{{ route('admin.filter') }}" id="filter" class="collapse" method="post">
                     {{ csrf_field() }}
                 <div class="form-row px-2">
                     <div class="input-group col-auto mr-2">
-                        <label>Location :</label>
+                        <label>Location:</label>
                         <input type="text" name="filter_location" class="form-control">
                     </div>
                     <div class="input-group col-auto mr-2">
@@ -43,30 +44,27 @@
                 <a href="{{ route('admin.employees.create') }}" class="btn btn-primary" role="{{$role->name}}">Add New</a>
             </div>
             
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered display">
                 <thead>
                     <tr>
-                        <td class="col-md-1">ID</td>
-                        <td class="col-md-1">Location</td>
-                        <td class="col-md-1">State</td>
+                        <td class="col-md-auto">Operator ID</td>
+                        <td class="col-md-auto">Location</td>
+                        <td class="col-md-auto">State</td>
                         <td class="col-md-auto">Name</td>
                         <td class="col-md-auto">Email</td>
                         <td class="col-md-auto">Phone</td>
-                        <td class="col-md-1">Status</td>
+                        <td class="col-md-auto">Status</td>
                         <td class="col-md-auto" style="width: 250px;">Actions</td>
                     </tr>
                 </thead>
                 <tbody>
-                    
                     @foreach ($role->users as $employee)
                     <?php
-
                         $locationsArray = json_decode($employee->location_associated, true);
-
                     ?>
 
                     <tr>
-                        <td>{{ $employee->id }}</td>
+                        <td>{{ $employee->op_id }}</td>
                         <td class="facility_down">
                             <ul>
                             @php
@@ -107,6 +105,7 @@
                             @endforeach
                             </ul>
                         </td>
+                        
                         <td>{{ $employee->fname."  ".$employee->lname }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td> 
@@ -117,8 +116,8 @@
                                 <option value="1" @if($employee->status == 1 || old('status') == 1) selected="selected" @endif>Active</option>
                                 <option value="2" @if($employee->status == 2 || old('status') == 2) selected="selected" @endif>Pending</option>
                             </select>
-                        </td>                     
-                        <!-- <td>@include('layouts.status', ['status' => $employee->status])</td> -->
+                        </td>
+
                         <td style="width: 250px;">
                             <form action="{{ route('admin.employees.destroy', $employee->id) }}" method="post"
                                   class="form-horizontal">
@@ -143,7 +142,6 @@
     </div>
     <!-- /.box -->
     @endif
-
 </section>
 <!-- /.content -->
 @endsection
@@ -156,7 +154,33 @@
                 //alert('hi');
             });
             var _opId = '';
+            
+            // $('.table thead th').each( function () {
+            //     var title = $(this).text();
+            //     $(this).html( '<input class="cls_search" type="text" placeholder="Search '+title+'" />' );
+            // } );
+            
+            // var table = $('.table').DataTable({
+            //     initComplete: function () {
+            //         // Apply the search
+            //         this.api().columns().every( function () {
+            //             var that = this;
+                        
+            //             $( '.cls_search', this.header() ).on( 'keyup change clear', function () {
+            //                 alert("fdf");
+
+            //                 if ( that.search() !== this.value ) {
+            //                     that
+            //                         .search( this.value )
+            //                         .draw();
+            //                 }
+            //             } );
+            //         } );
+            //     }
+            // });
         });
+
+        
     </script>
 
     <script>        

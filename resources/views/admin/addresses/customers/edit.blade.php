@@ -32,7 +32,7 @@
                         </td>
                         <td>{{ $address->country->name }}</td>
                         <td>{{ $address->zip }}</td>
-                        <td>@include('layouts.status', ['status' => $address->status])</td>
+                        <td>{{ $address->status }}</td>
                     </tr>
                     </tbody>
                 </table>

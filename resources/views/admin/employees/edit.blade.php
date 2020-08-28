@@ -133,8 +133,7 @@
             <i class="fa fa-times" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="modal-body" id="docView">
-            
+      <div class="modal-body" id="docView">            
             <img id="doc_src" class="modal-docs-img">
             <embed id="doc_src1" class="embed-responsive-item modal-docs-pdf" >
       </div>

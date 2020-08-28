@@ -31,7 +31,6 @@
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Zipcode</th>
-                                <th>Parking</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -44,15 +43,14 @@
                             <td>{{ $facility->phone }}</td>
                             <td>{{ $facility->state . ", " . $facility->address }}</td>
                             <td>{{ $facility->zipcode }}</td>
-                            <td>{{ $facility->parking_available == 1 ? "Yes" : "No" }}</td>
                             <td>{{ $facility->is_active == 1 ? "Active" : "Inactive" }}</td>
                             <td>
                                 <form action="{{ route('admin.facilities.destroy', $facility) }}" method="post" class="form-horizontal">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="delete">
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.facilities.edit', $facility) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
-                                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Delete</button>
+                                        <a href="{{ route('admin.facilities.edit', $facility) }}" class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit"></i></a>
+                                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
                                     </div>
                                 </form>
                             </td>

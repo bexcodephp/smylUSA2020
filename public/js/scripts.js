@@ -7,9 +7,9 @@ $(document).ready(function () {
             $('#delivery_cost').fadeOut();
         }
     });
-    $('.select2').select2({
-        placeholder: 'Select'
-    });
+    // $('.select2').select2({
+    //     placeholder: 'Select'
+    // });
 
     // $('.table').DataTable({
     //     // 'searching' : false,
@@ -37,11 +37,13 @@ $(document).ready(function () {
 
     $('.table thead th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input class="cls_search" type="text" placeholder="Search '+title+'" />' );
+        $(this).html( '<input class="cls_search" type="text" placeholder="'+title+'" />' );
     } );
-
+    
     var table = $('.table').DataTable({
         'bSort' : false,
+        responsive: true,
+        'scrollX': true,
         initComplete: function () {
             // Apply the search
             this.api().columns().every( function () {
