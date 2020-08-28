@@ -28,7 +28,10 @@ class UpdateEmployeeRequest extends FormRequest
             'fname' => ['required'],
             'lname' => ['required'],
             'email' => ['required', 'email', Rule::unique('employees', 'email')->ignore($this->segment(3))],
-            //'license_certificates' => ['required','mimes:jpg,jpeg,pdf,png','max:5000'],
+            'phone' => ['required'],
+            'location_associated' => ['required'],
+            'license_certificates.*' => ['required','mimes:jpg,jpeg,pdf,png','max:5000'],    
+            'status' => ['required'],
         ];
     }
 }

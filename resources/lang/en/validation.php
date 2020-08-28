@@ -103,6 +103,16 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'lname' => [
+            'required' => 'Last name field is required',
+        ],
+        'fname' => [
+            'required' => 'First name field is required',
+        ],
+        'license_certificates' => [
+            'required' => 'License certificates field is required',
+            'mimes' => 'License certificates Only  .jpg, .jpeg, .pdf and .png file types are allowed',
+        ],
     ],
 
     /*
