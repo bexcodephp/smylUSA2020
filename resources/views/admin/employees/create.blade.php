@@ -33,7 +33,6 @@
                     <div class="form-group">
                         <label for="location_associated">Location Associated</label>
                         <select name="location_associated[]" id="location_associated" class="form-control select2" multiple>
-                       
                             <option value=""></option>
                             
                             @foreach($facilities as $location)

@@ -42,7 +42,6 @@
                             <td>{{ $address->alias }}</td>
                             <td>{{ $address->address_1 }}</td>
                             <td>{{ $address->country->name }}</td>
-                            <!-- @include('layouts.status', ['status' => $address->status]) -->
                             <td>{{ $address->status }}</td>
                             <td>
                                 <form action="{{ route('admin.addresses.destroy', $address->id) }}" method="post" class="form-horizontal">

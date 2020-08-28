@@ -274,4 +274,5 @@ class EmployeeController extends Controller
         $facilities = Facility::whereIn('facility_id',$fid)->get(); 
         return response(json_encode($facilities));
     }
+    
 }

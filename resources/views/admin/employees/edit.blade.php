@@ -31,9 +31,10 @@
                     <div class="form-group">
                         <label for="location_associated">Location Associated<span class="text-danger">*</span></label>
                         <?php 
-                                $location_list =  json_decode($employee->location_associated); // selected location list by employeed print_r($location_list); 
-                                $select = '';                                
+                            $location_list = json_decode($employee->location_associated);
+                            $select = '';
                         ?>
+
                         <select name="location_associated[]" id="location_associated" class="form-control select2" multiple="multiple">
                             <option></option>
                             @foreach($facilities as $location)
@@ -42,7 +43,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div >
+                    <div>
                         <table class="tableLocation">
                             <thead> 
                                 <th>No.</th>                               
@@ -52,7 +53,7 @@
                                 <th>Zipcode</th>
                             </thead>
                             <tbody id="add_new_location">
-                                <?php $no=1; ?>
+                            <?php $no=1; ?>
                             @foreach($facilities as $location)
                             <?php if(in_array($location->facility_id,$location_list)){  ?>
                                     <tr>
@@ -91,7 +92,7 @@
                                         <img src="{{ asset('images/licence.png')}}" >
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}');" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }else{
                             ?>
@@ -99,7 +100,7 @@
                                         <img src="{{ asset('images/icon_pdf.png')}}">
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}');" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }
                                     ?>
@@ -200,29 +201,39 @@ $(document).ready(function() {
             if(type=='png' || type =='jpeg' || type == 'jpg'){
                 $("#doc_src").show();
                 $("#doc_src1").hide();
-                $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+                $('#doc_src').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
             }else{
                 $("#doc_src1").show();
                 $("#doc_src").hide();
-                $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+                $('#doc_src1').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
             }
-           
         }
 
-        function deleteCertificate(fileName){
+        function deleteCertificate(fileName,op_id){
+            alert(op_id);
             
             $.ajax({
-                    url:'deleteFile',
-                    type:'post',
+                    url:'../delete_certificate',
+                    type:'POST',
                     data:{
-                        '_token':'{{csrf_token()}}',
-                        id:id,
-                        status:status.value
+                        _token:'{{csrf_token()}}',
+                        id:op_id,
+                        fileName:fileName
                     },
                     success:function (data) {
-                        location.reload();
+                        //location.reload();
+                        // console.log(data);
                     }
-            })
+            });
+
+            // $.post("../delete_certificate",
+            // {
+            //     '_token':'{{csrf_token()}}',
+            //     'id':op_id,
+            //     'status':0
+            // },function(data){
+                
+            // });
         }
 </script>
 
