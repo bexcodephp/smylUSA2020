@@ -78,8 +78,9 @@
                             $files =  $employee->license_certificates;
                             $files = json_decode($files); 
                             //dd($files);
-                            $licence = 1;
+                            $licence = 0;
                             foreach($files as $file){
+                                $licence++;
                                 ?>
                                 <div class="licence-div" id="licence_div{{$licence}}">
                                     <?php
@@ -90,17 +91,17 @@
                                     
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
                                         <img src="{{ asset('images/licence.png')}}" >
-                                        <span class="licence-name">{{ "licence".$licence++}}</span>
+                                        <span class="licence-name">{{ "licence".$licence}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}');" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}','{{ $licence }}');" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }else{
                             ?>
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
                                         <img src="{{ asset('images/icon_pdf.png')}}">
-                                        <span class="licence-name">{{ "licence".$licence++}}</span>
+                                        <span class="licence-name">{{ "licence".$licence}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}');" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}', '{{ $licence }}');" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }
                                     ?>
@@ -116,7 +117,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
-                        <a href="{{ route('admin.employees.index') }}" class="btn btn-default btn-sm">Back</a>
+                        <a href="{{ URL::previous() }}" class="btn btn-default btn-sm">Back</a>
                         <button type="submit" class="btn btn-primary btn-sm">Update</button>
                     </div>
                 </div>
@@ -209,9 +210,9 @@ $(document).ready(function() {
             }
         }
 
-        function deleteCertificate(fileName,op_id){
-            alert(op_id);
-            
+        function deleteCertificate(fileName,op_id,counter){
+            alert(counter);
+            var ctr = counter;
             $.ajax({
                     url:'../delete_certificate',
                     type:'POST',
@@ -221,8 +222,9 @@ $(document).ready(function() {
                         fileName:fileName
                     },
                     success:function (data) {
-                        //location.reload();
-                        // console.log(data);
+                        alert(data);
+                       alert(ctr);
+                       $("#licence_div"+ctr).remove();
                     }
             });
 

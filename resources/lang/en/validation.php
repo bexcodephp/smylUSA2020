@@ -103,6 +103,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'phone' => [
+            'numeric' => 'Phone field must be numeric only',
+            'size' => 'Phone field must be limit 11 digit',
+        ],
         'lname' => [
             'required' => 'Last name field is required',
         ],

@@ -27,7 +27,7 @@ class CreateEmployeeRequest extends FormRequest
             'fname' => ['required'],
             'lname' => ['required'],
             'email' => ['required', 'email', 'unique:employees'],
-            'phone' => ['required','regex:/(01)[0-9]{9}/','numeric','phone_number','size:11'],
+            'phone' => ['required','digits:10'],
             'location_associated' => ['required'],
             'license_certificates.*' => ['required','mimes:jpg,jpeg,pdf,png','max:5000'],    
             'status' => ['required'],
