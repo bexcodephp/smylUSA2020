@@ -1,5 +1,13 @@
 @extends('layouts.admin.app')
-
+@section('css')
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-timepicker.min.css') }}">
+    <style>
+        .timeTable td, .timeTable th {
+            padding: 10px;
+        }
+    </style>
+@endsection
 @section('content')
 <style>
     #my-input-searchbox {
@@ -143,7 +151,7 @@
                             <input type="file" name="image" id="image" class="form-control">
                         </div>
                     </div>
-
+                    
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="status">Status </label>
@@ -155,6 +163,107 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Start time slot-->
+            <h2>Hours of operation</h2>
+                <div class="box-body">
+                    <table class="timeTable" style="width: 100%;">
+                        <thead>
+                            <tr style="padding: 5px;">
+                                <th>Day</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Is Closed</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <?php //dd(config('constants.WEEKDAYS'));?>
+                        <tbody>
+                            @foreach(config('constants.WEEKDAYS') as $key =>$days)
+                            <tr style="padding: 5px; border: 1px solid;">
+                                <td style="width: 30%">{{ $days }}</td> 
+                                <td>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control timepicker" name="start[{{$key}}]" value="{{ isset($timeslots[$key]) ? $timeslots[$key]['start_time'] : '' }}">
+                                    
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control timepicker" name="end[{{$key}}]" value="{{ isset($timeslots[$key]) ? $timeslots[$key]['end_time'] : '' }}">
+                                    
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </td> 
+                                <td>
+                                    <input type="checkbox" name="closed[{{$key}}]" value="1" {{ (isset($timeslots[$key]) && $timeslots[$key]['is_closed'] == 1) ? "checked" : '' }} >
+                                </td> 
+                                <!-- <td>
+                                    <a href="{{ route('admin.facilities.updateSpan', [$facility->facility_id, 0]) }}" class="btn btn-info">Update Spans</a>
+                                </td>  -->
+                            </tr> 
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- End time slot-->
+
+            <!-- Start Non availability section -->
+            <h2>Non-availability Hours</h2> 
+                <div class="box-body">
+                    <table class="timeTable" style="width: 100%;">
+                        <thead>
+                            <tr style="padding: 5px;">                                
+                                <th>Date</th>
+                                <!-- <th>Day</th> -->
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <?php //dd(config('constants.WEEKDAYS'));?>
+                        <tbody>
+                            @foreach($nontimeslots as $key =>$days)
+                            <?php //dd($days['date']);?>
+                            <tr style="padding: 5px; border: 1px solid;">
+                                <td>
+                                <input type="date" name="date[{{$key}}]" class="form-control" value="{{$days['date']}}">
+                                </td> 
+                                <!-- <td style="width: 30%"></td>  -->
+                                <td>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control timepicker" name="start[{{$key}}]" value="{{ isset($days['start_time']) ? $days['start_time'] : '' }}">
+                                    
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control timepicker" name="end[{{$key}}]" value="{{ isset($days['end_time']) ? $days['end_time'] : '' }}">
+                                    
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </td>                                
+                                <!-- <td>
+                                    <a href="{{ route('admin.facilities.updateSpan', [$facility->facility_id, 0]) }}" class="btn btn-info">Update Spans</a>
+                                </td>  -->
+                            </tr> 
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+        
+        
+        <!-- End Non availability section   -->
 
             <!-- /.box-body -->
             <div class="box-footer">
@@ -402,6 +511,14 @@
         //     GetCurrentLocation();
         // });
 </script>
+
+<script src="{{ asset('js/bootstrap-timepicker.min.js') }}"></script>
+    <script>
+    //Timepicker
+    $('.timepicker').timepicker({
+        showInputs: false        
+    });
+    </script>
 <!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&callback=initMap"></script> -->
 @endsection

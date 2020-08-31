@@ -1,5 +1,16 @@
 @extends('layouts.admin.app')
 
+@section('css')
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-timepicker.min.css') }}">
+    <style>
+        .timeTable td, .timeTable th {
+            padding: 10px;
+        }
+    </style>
+@endsection
+
+
 @section('content')
     <style>
         #my-input-searchbox {
@@ -145,6 +156,53 @@
                         </div> -->
                     </div>
                 </div>
+                <!-- Start time slot-->
+                <h2>Hours of operation</h2>
+                <div class="box-body">
+                    <table class="timeTable" style="width: 100%;">
+                        <thead>
+                            <tr style="padding: 5px;">
+                                <th>Day</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Is Closed</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <?php ?>
+                        <tbody>
+                            @foreach(config('constants.WEEKDAYS') as $key =>$days)
+                            <tr style="padding: 5px; border: 1px solid;">
+                                <td style="width: 30%">{{ $days }}</td> 
+                                <td>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control timepicker start-time" name="start[{{$key}}]" value="{{ old('start[$key]') }}">                                    
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group mr-2">
+                                        <input type="text" class="form-control timepicker end-time" name="end[{{$key}}]" value="{{ old('end[$key]') }}">                                    
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                    </div>
+                                </td> 
+                                <td>
+                                    <input type="checkbox" name="closed[{{$key}}]" value="1" >
+                                </td> 
+                                <!-- <td>
+                                    <a class="btn btn-info">Update Spans</a>
+                                </td>  -->
+                            </tr> 
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- End time slot-->
+           
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
@@ -153,6 +211,8 @@
                     </div>
                 </div>
             </form>
+
+            
         </div>
         <!-- /.box -->
 
@@ -331,4 +391,16 @@ libraries=geometry,places"></script> -->
 
     </script>
     
+    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}"></script>
+    <script>
+    //Timepicker
+    $('.start-time').timepicker({
+        showInputs: false,
+        defaultTime: '09:00 AM'
+    });
+    $('.end-time').timepicker({
+        showInputs: false,
+        defaultTime: '5:00 PM'
+    });
+    </script>
 @endsection

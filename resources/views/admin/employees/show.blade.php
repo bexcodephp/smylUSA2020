@@ -50,6 +50,7 @@
                         <td class="col-md-auto">Operator ID</td>
                         <td class="col-md-auto">Location</td>
                         <td class="col-md-auto">State</td>
+                        <td class="col-md-auto">City</td>
                         <td class="col-md-auto">Name</td>
                         <td class="col-md-auto">Email</td>
                         <td class="col-md-auto">Phone</td>
@@ -97,6 +98,27 @@
                                         $no++;
                             ?>
                                 <li>{{ $no.". ".$location->state }}</li>
+                            <?php
+
+                                    }
+                                }
+                            ?>                                
+                            @endforeach
+                            </ul>
+                        </td>
+
+                        <td>
+                            <ul>
+                            @php
+                            $no = 0
+                            @endphp
+                            @foreach ($facilities as $location) 
+                            <?php 
+                                if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
+                                    if(in_array($location->facility_id,$locationsArray)){
+                                        $no++;
+                            ?>
+                                <li>{{ $no.". ".$location->city }}</li>
                             <?php
 
                                     }

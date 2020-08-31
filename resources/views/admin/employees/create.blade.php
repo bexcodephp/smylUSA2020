@@ -31,6 +31,10 @@
                         <input type="text" name="phone" id="phone" placeholder="Phone" class="form-control" value="{{ old('phone') }}">
                     </div>
                     <div class="form-group">
+                        <label for="phone">Home Address<span class="text-danger">*</span></label>
+                        <textarea name="home_address" id="home_address" placeholder="Home Address" class="form-control" value="">{{ old('home_address') }}</textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="location_associated">Location Associated</label>
                         <select name="location_associated[]" id="location_associated" class="form-control select2" multiple>
                             <option value=""></option>
@@ -66,8 +70,7 @@
                     <div class="form-group">
                         <label for="license_certificates">License and Certificates<span class="text-danger">*</span></label>
                         <input type="file" name="license_certificates[]" id="license_certificates" placeholder="license and certificates" class="form-control" multiple >
-                    </div>
-                    
+                    </div>                    
                     @include('admin.shared.status-select', ['status' => 0])
                 </div>
                 <!-- /.box-body -->
