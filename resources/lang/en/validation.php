@@ -104,16 +104,16 @@ return [
             'rule-name' => 'custom-message',
         ],
         'phone' => [            
-            'digits' => 'Phone field must be numric and 10 digit',
+            'required' => 'Phone field must be numeric and 10 digit.',
         ],
         'lname' => [
-            'required' => 'Last name field is required',
+            'required' => 'Last name field is required.',
         ],
         'fname' => [
-            'required' => 'First name field is required',
+            'required' => 'First name field is required.',
         ],
         'license_certificates' => [
-            'required' => 'License certificates field is required',
+            'required.*' => 'License certificates field is required',
             'mimes' => 'License certificates Only  .jpg, .jpeg, .pdf and .png file types are allowed',
         ],
     ],

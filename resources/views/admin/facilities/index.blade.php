@@ -39,7 +39,7 @@
                         
                         @foreach ($facilities as $facility)
                             <tr>
-                            <td><a href="{{ route('admin.facilities.show', $facility) }}">{{ $facility->name }}</a></td>
+                            <td>{{ $facility->name }}</td>
                             <td>{{ $facility->phone }}</td>
                             <td>{{ $facility->state . ", " . $facility->address }}</td>
                             <td>{{ $facility->city }}</td>
