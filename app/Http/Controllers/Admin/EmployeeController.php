@@ -350,7 +350,7 @@ class EmployeeController extends Controller
         $employee = $this->employeeRepo->findEmployeeById($request->id);
         $empRepo = new EmployeeRepository($employee);
         $data['license_certificates'] = json_encode($file_arr);
-        $result = $empRepo->update($data);
+        $result = $empRepo->update($data); 
         
         return json_encode($result);
     }
