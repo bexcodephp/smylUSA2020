@@ -338,6 +338,6 @@ class EmployeeController extends Controller
         }
         return view('admin.employees.show', compact('role','facilities'));
     }
-    
+
     
 }

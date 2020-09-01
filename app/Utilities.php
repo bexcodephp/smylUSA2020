@@ -6,6 +6,7 @@ use Faker\Provider\File;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Util\Filesystem;
 use Illuminate\Support\Carbon;
+use App\Shop\Employees\Employee;
 
 class Utilities
 {
@@ -41,5 +42,20 @@ class Utilities
         $extension = pathinfo($file, PATHINFO_EXTENSION);
         $renamedfile =  $nameonly.Carbon::now()->format('YmdHs').".".$extension;  // any random string
         return $renamedfile;
+    }
+
+    public static function jsonStringRemove($removestring,$id)
+    {
+        // dd($removestring);
+
+        $employee = Employee::where('id',$id)->pluck('license_certificates');// $this->employeeRepo->findEmployeeById($request->id);
+
+        $file_arr = json_decode($employee[0]);
+
+        if (($key = array_search($removestring, $file_arr)) !== false) {
+            unset($file_arr[$key]);
+        }
+
+        return $file_arr;
     }
 }

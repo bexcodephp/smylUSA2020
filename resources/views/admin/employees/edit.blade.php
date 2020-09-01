@@ -82,7 +82,7 @@
                             foreach($files as $file){
                                 $licence++;
                                 ?>
-                                <div class="licence-div" id="licence_div{{$licence}}">
+                                <div class="licence-div" id="licence_div_{{$cntr}}">
                                     <?php
                                     $extension = pathinfo(storage_path('/employee/operators/license_certificates'.$file), PATHINFO_EXTENSION);
                                     if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
@@ -210,9 +210,9 @@ $(document).ready(function() {
             }
         }
 
-        function deleteCertificate(fileName,op_id,counter){
-            alert(counter);
-            var ctr = counter;
+        function deleteCertificate(fileName,op_id,index){
+            var city = index;
+            
             $.ajax({
                     url:'../delete_certificate',
                     type:'POST',
@@ -222,20 +222,12 @@ $(document).ready(function() {
                         fileName:fileName
                     },
                     success:function (data) {
-                        alert(data);
-                       alert(ctr);
-                       $("#licence_div"+ctr).remove();
+                        if(data === "true")
+                        {
+                            $('#licence_div_'+city).remove();
+                        }
                     }
             });
-
-            // $.post("../delete_certificate",
-            // {
-            //     '_token':'{{csrf_token()}}',
-            //     'id':op_id,
-            //     'status':0
-            // },function(data){
-                
-            // });
         }
 </script>
 

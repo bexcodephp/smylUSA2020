@@ -34,7 +34,7 @@ $(document).ready(function () {
     //     ],
     //     'sorting' : []
     // });
-
+    
     $('.table thead th').each( function () {
         var title = $(this).text();
         $(this).html( '<input class="cls_search" type="text" placeholder="'+title+'" />' );
