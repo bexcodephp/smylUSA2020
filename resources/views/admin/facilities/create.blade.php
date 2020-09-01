@@ -96,7 +96,7 @@
 
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="state">State</label>
+                                        <label for="state">State<span class="text-danger">*</span></label>
                                         <!-- <input type="text" name="state" id="state" class="form-control" value="{{ old('state') }}"> -->
                                         <select id="state" name="state" name="state" class="form-control">
                                             <option value="">Select state</option>

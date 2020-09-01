@@ -110,7 +110,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="state">State</label>
+                                    <label for="state">State<span class="text-danger">*</span></label>
                                     <select id="state" name="state" class="form-control">
                                         <option value="">Select state</option>
                                         @foreach ($states as $state)
@@ -146,7 +146,7 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="image">Facility Image </label>
+                            <label for="image">Facility Image</label>
                             <img src="/storage/app/public/{{ $facility->image }}" width="100"/>
                             <input type="file" name="image" id="image" class="form-control">
                         </div>
@@ -212,9 +212,10 @@
                     </table>
                 </div>
                 <!-- End time slot-->
-
+            
             <!-- Start Non availability section -->
-            <h2>Non-availability Hours</h2> 
+            <h2>Non-availability Hours</h2>
+            <button type="button" name="add" id="addNaHours" class="btn btn-primary">ADD</button>
                 <div class="box-body">
                     <table class="timeTable" style="width: 100%;">
                         <thead>
@@ -223,7 +224,7 @@
                                 <!-- <th>Day</th> -->
                                 <th>Start Time</th>
                                 <th>End Time</th>
-                                <!-- <th>Action</th> -->
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <?php //dd(config('constants.WEEKDAYS'));?>
@@ -232,7 +233,7 @@
                             <?php //dd($days['date']);?>
                             <tr style="padding: 5px; border: 1px solid;">
                                 <td>
-                                <input type="date" name="date[{{$key}}]" class="form-control" value="{{$days['date']}}">
+                                <input type="date" name="date[{{$key}}]" class="form-control" value="{{$days['date']}}" id="dt_{{$key}}">
                                 </td> 
                                 <!-- <td style="width: 30%"></td>  -->
                                 <td>
@@ -253,9 +254,10 @@
                                         </div>
                                     </div>
                                 </td>                                
-                                <!-- <td>
-                                    <a href="{{ route('admin.facilities.updateSpan', [$facility->facility_id, 0]) }}" class="btn btn-info">Update Spans</a>
-                                </td>  -->
+                                <td>
+                                <button type="button" id="updateNaHours" class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit fa-lg"></i></button>
+                                    <button onclick="deleteNonAvailabilityHours('{{ $days["id"] }}');" type="button" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
+                                </td> 
                             </tr> 
                             @endforeach
                         </tbody>
@@ -275,7 +277,53 @@
         </form>
     </div>
     <!-- /.box -->
+    
 </section>
+
+<!-- Start modal  -->
+<div class="modal fade modal-upload-docs" id="modal_upload_docs" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase btn_blue" id="exampleModalLabel">Add Non-Availability Hours</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                    <form action="{{ route('admin.facilities.addNonAvailabilityTime', $facility->facility_id) }}" id="addNonAvailabilityTime" method="post">
+                        {{ csrf_field() }}
+                        <div class="form-row px-2">
+                            <div class="input-group col-auto mr-2">
+                                <label>Date:</label>
+                                <input type="date" name="date" class="form-control">
+                            </div>
+                            <div class="input-group col-auto mr-2">
+                                <label>From :</label>
+                                <input type="text" class="form-control timepicker" name="start_time">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                            </div>
+                            <div class="input-group col-auto mr-2">
+                                <label>To :</label>
+                                <input type="text"  class="form-control timepicker" name="end_time">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                            </div> 
+                            <div class="col btn-filter">
+                                <button type="submit" name="submit" class="btn btn-primary" id="saveNaHours">submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+           <!-- end modal  -->
 <!-- /.content -->
 @endsection
 
@@ -287,6 +335,35 @@
     var marker;
 
     $(document).ready(function(){
+
+        $('#addNaHours').on('click', function () {
+            $('#modal_upload_docs').modal('show');
+        });
+
+        $('#updateNaHours').on('click', function () {
+            $('#modal_upload_docs').modal('show');
+        });
+
+        $('#saveNaHours').on('click', function () {
+            alert("submit ahx");
+            $.ajax({
+                    url:'../getcity',
+                    type:'post',
+                    data:{
+                        '_token':'{{csrf_token()}}',
+                        //'state_id':stateID
+                    },
+                    success:function (data) {
+                        $('#modal_upload_docs').modal('hide');
+                    }
+            })
+
+            
+        });
+
+        $('#modal_upload_docs').on('hidden.bs.modal', function (e) {
+                // do something...
+        });
 
         $('#state').val($('#state_id').val());
 
@@ -384,132 +461,112 @@
         });
     }
 
-        // var numDeltas = 100;
-        // var delay = 10; //milliseconds
-        // var i = 0;
-        // var deltaLat;
-        // var deltaLng;
-
-        // function transition(result){
-        //     i = 0;
-        //     deltaLat = (result[0] - position[0])/numDeltas;
-        //     deltaLng = (result[1] - position[1])/numDeltas;
-        //     moveMarker();
-        // }
-
-        // function moveMarker(){
-        //     position[0] += deltaLat;
-        //     position[1] += deltaLng;
-        //     var latlng = new google.maps.LatLng(position[0], position[1]);
-        //     marker.setTitle("Latitude:"+position[0]+" | Longitude:"+position[1]);
-        //     marker.setPosition(latlng);
-        //     if(i!=numDeltas){
-        //     i++;
-        //     setTimeout(moveMarker, delay);
-        //     }
-        // }
-
-        //   $('#address').blur(function(){
-        //     geocodeAddress(geocoder, map);
-        //   });
-
-
-    
-          function geocodeAddress(geocoder, resultsMap) {
-            var address = document.getElementById('address').value;
-            geocoder.geocode({'address': address}, function(results, status) {
-              if (status === 'OK') {
-                if(marker && marker.setMap)
-                {
-                    marker.setMap(null);
-                }
-                resultsMap.setCenter(results[0].geometry.location);
-                marker = new google.maps.Marker({
-                  map: resultsMap,
-                  position: results[0].geometry.location
-                });
-                $('#latitude').val(results[0].geometry.location.lat());
-                $('#longitude').val(results[0].geometry.location.lng());
-              } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-              }
-            });
-          }
-
-        function GetCurrentLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
-                x.innerHTML = "Geolocation is not supported by this browser.";
+    function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+            if(marker && marker.setMap)
+            {
+                marker.setMap(null);
             }
-        }
-        
-        function showPosition(position) {
-            initAutocomplete(position.coords.latitude,position.coords.longitude);
-        }
-
-        function initAutocomplete(latitude,longitude) {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                lat: latitude,
-                lng: longitude
-                },
-                zoom: 6,
-                disableDefaultUI: false,
-                MyLocationEnabled: true,
-                setMyLocationButtonEnabled: true
-            });
-
+            resultsMap.setCenter(results[0].geometry.location);
             marker = new google.maps.Marker({
-                map: map,
-                position: {lat: latitude, lng: longitude}
+                map: resultsMap,
+                position: results[0].geometry.location
             });
+            $('#latitude').val(results[0].geometry.location.lat());
+            $('#longitude').val(results[0].geometry.location.lng());
+            } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
 
-            // Create the search box and link it to the UI element.
-            var input = document.getElementById('my-input-searchbox');
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
-            var marker = new google.maps.Marker({
-                map: map
-            });
-
-            // Bias the SearchBox results towards current map's viewport.
-            autocomplete.bindTo('bounds', map);
-            // Set the data fields to return when the user selects a place.
-            autocomplete.setFields(
-                ['address_components', 'geometry', 'name']);
-
-            // Listen for the event fired when the user selects a prediction and retrieve
-            // more details for that place.
-            autocomplete.addListener('place_changed', function() {
-                var place = autocomplete.getPlace();
-                if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-                }
-                var bounds = new google.maps.LatLngBounds();
-                marker.setPosition(place.geometry.location);
-
-                var lat = place.geometry.location.lat();
-                $('#latitude').val(lat);
-                var lng = place.geometry.location.lng();
-                $('#longitude').val(lng);
-
-                if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-                } else {
-                bounds.extend(place.geometry.location);
-                }
-                map.fitBounds(bounds);
-            });
-
-            //addYourLocationButton(map, marker);
+    function GetCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
         }
+    }
+        
+    function showPosition(position) {
+        initAutocomplete(position.coords.latitude,position.coords.longitude);
+    }
 
-        // document.addEventListener("DOMContentLoaded", function(event) {
-        //     GetCurrentLocation();
-        // });
+    function initAutocomplete(latitude,longitude) {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+            lat: latitude,
+            lng: longitude
+            },
+            zoom: 6,
+            disableDefaultUI: false,
+            MyLocationEnabled: true,
+            setMyLocationButtonEnabled: true
+        });
+
+        marker = new google.maps.Marker({
+            map: map,
+            position: {lat: latitude, lng: longitude}
+        });
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('my-input-searchbox');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+        var marker = new google.maps.Marker({
+            map: map
+        });
+
+        // Bias the SearchBox results towards current map's viewport.
+        autocomplete.bindTo('bounds', map);
+        // Set the data fields to return when the user selects a place.
+        autocomplete.setFields(
+            ['address_components', 'geometry', 'name']);
+
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+            console.log("Returned place contains no geometry");
+            return;
+            }
+            var bounds = new google.maps.LatLngBounds();
+            marker.setPosition(place.geometry.location);
+
+            var lat = place.geometry.location.lat();
+            $('#latitude').val(lat);
+            var lng = place.geometry.location.lng();
+            $('#longitude').val(lng);
+
+            if (place.geometry.viewport) {
+            // Only geocodes have viewport.
+            bounds.union(place.geometry.viewport);
+            } else {
+            bounds.extend(place.geometry.location);
+            }
+            map.fitBounds(bounds);
+        });
+
+        //addYourLocationButton(map, marker);
+    }
+
+    function deleteNonAvailabilityHours(id){
+        alert(id);
+        $.ajax({
+            url:'../deleteNaHours',
+            type:'delete',
+            data:{
+                '_token':'{{csrf_token()}}',
+                'id':id
+            },
+            success:function (data) {
+                alert('success');
+            }
+        })
+    }
 </script>
 
 <script src="{{ asset('js/bootstrap-timepicker.min.js') }}"></script>
