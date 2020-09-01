@@ -50,6 +50,7 @@
                         <td class="col-md-auto">Operator ID</td>
                         <td class="col-md-auto">Location</td>
                         <td class="col-md-auto">State</td>
+                        <td class="col-md-auto">City</td>
                         <td class="col-md-auto">Name</td>
                         <td class="col-md-auto">Email</td>
                         <td class="col-md-auto">Phone</td>
@@ -105,12 +106,33 @@
                             @endforeach
                             </ul>
                         </td>
+
+                        <td>
+                            <ul>
+                            @php
+                            $no = 0
+                            @endphp
+                            @foreach ($facilities as $location) 
+                            <?php 
+                                if ($locationsArray != 0 || $locationsArray != null || $locationsArray != '') {
+                                    if(in_array($location->facility_id,$locationsArray)){
+                                        $no++;
+                            ?>
+                                <li>{{ $no.". ".$location->city }}</li>
+                            <?php
+
+                                    }
+                                }
+                            ?>                                
+                            @endforeach
+                            </ul>
+                        </td>
                         
                         <td>{{ $employee->fname."  ".$employee->lname }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone }}</td> 
                         <td onclick="showStatusDropDown('{{$employee->id}}');" id="op_status_{{$employee->id}}">{{ Config::get('constants.STATUS.'.$employee->status) }}</td> 
-                        <td style="width: 250px;" class="status-td hidden" id="op_status_dropdown_{{$employee->id}}" >
+                        <td class="status-td hidden" id="op_status_dropdown_{{$employee->id}}" >
                             <select name="status" id="status_{{$employee->id}}" class="form-control select2" onchange="selectStatus(this,'{{$employee->id}}')" >
                                 <option value="0" @if($employee->status == 0 || old('status') == 0) selected="selected" @endif>Inactive</option>
                                 <option value="1" @if($employee->status == 1 || old('status') == 1) selected="selected" @endif>Active</option>

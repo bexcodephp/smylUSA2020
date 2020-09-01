@@ -27,9 +27,10 @@ class CreateEmployeeRequest extends FormRequest
             'fname' => ['required'],
             'lname' => ['required'],
             'email' => ['required', 'email', 'unique:employees'],
-            'phone' => ['required'],
+            'phone' => ['required','digits:10'],
+            'home_address' => ['required'],
             'location_associated' => ['required'],
-            'license_certificates' => ['required','mimes:jpg,jpeg,pdf,png','max:5000'],    
+            'license_certificates.*' => ['required','mimes:jpg,jpeg,pdf,png','max:5000'],    
             'status' => ['required'],
             //'password' => ['required', 'min:8'],
             //'role' => ['required']

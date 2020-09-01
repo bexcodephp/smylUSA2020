@@ -78,12 +78,9 @@
                             $files =  $employee->license_certificates;
                             $files = json_decode($files); 
                             //dd($files);
-                            $licence = 1;
-                            $cntr = 0;
-
+                            $licence = 0;
                             foreach($files as $file){
-                                $cntr++;
-
+                                $licence++;
                                 ?>
                                 <div class="licence-div" id="licence_div_{{$cntr}}">
                                     <?php
@@ -94,17 +91,17 @@
                                     
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
                                         <img src="{{ asset('images/licence.png')}}" >
-                                        <span class="licence-name">{{ "licence".$licence++}}</span>
+                                        <span class="licence-name">{{ "licence".$licence}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}',{{$cntr}});" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}','{{ $licence }}');" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }else{
                             ?>
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
                                         <img src="{{ asset('images/icon_pdf.png')}}">
-                                        <span class="licence-name">{{ "licence".$licence++}}</span>
+                                        <span class="licence-name">{{ "licence".$licence}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}');" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}', '{{ $licence }}');" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }
                                     ?>
@@ -120,7 +117,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
-                        <a href="{{ route('admin.employees.index') }}" class="btn btn-default btn-sm">Back</a>
+                        <a href="{{ URL::previous() }}" class="btn btn-default btn-sm">Back</a>
                         <button type="submit" class="btn btn-primary btn-sm">Update</button>
                     </div>
                 </div>
@@ -138,8 +135,7 @@
             <i class="fa fa-times" aria-hidden="true"></i>
         </button>
       </div>
-      <div class="modal-body" id="docView">
-            
+      <div class="modal-body" id="docView">            
             <img id="doc_src" class="modal-docs-img">
             <embed id="doc_src1" class="embed-responsive-item modal-docs-pdf" >
       </div>
@@ -159,6 +155,12 @@ $(document).ready(function() {
         prevSelect.val($(this).val()).trigger('change');
         var id=$(this).val();
         getLocation(id);
+    });
+    $("#license_certificates").change(function(){
+        var $fileUpload = $("input[type='file']");
+        if (parseInt($fileUpload.get(0).files.length) > 3){
+            alert("You are only allowed to upload a maximum of 3 files");
+        }
     });
 });
 </script>

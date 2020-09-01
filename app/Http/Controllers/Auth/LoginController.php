@@ -112,7 +112,7 @@ class LoginController extends Controller
         
         if (auth()->guard('employee')->attempt($details) == false) {
             $user = auth()->guard('employee')->user();
-            dd($user);
+           // dd($user);
 
             if($user->status == 0)
             {

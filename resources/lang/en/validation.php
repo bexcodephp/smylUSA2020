@@ -103,6 +103,19 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'phone' => [            
+            'digits' => 'Phone field must be numric and 10 digit',
+        ],
+        'lname' => [
+            'required' => 'Last name field is required',
+        ],
+        'fname' => [
+            'required' => 'First name field is required',
+        ],
+        'license_certificates' => [
+            'required' => 'License certificates field is required',
+            'mimes' => 'License certificates Only  .jpg, .jpeg, .pdf and .png file types are allowed',
+        ],
     ],
 
     /*

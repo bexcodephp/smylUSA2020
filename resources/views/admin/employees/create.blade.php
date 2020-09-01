@@ -31,6 +31,10 @@
                         <input type="text" name="phone" id="phone" placeholder="Phone" class="form-control" value="{{ old('phone') }}">
                     </div>
                     <div class="form-group">
+                        <label for="phone">Home Address<span class="text-danger">*</span></label>
+                        <textarea name="home_address" id="home_address" placeholder="Home Address" class="form-control" value="">{{ old('home_address') }}</textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="location_associated">Location Associated</label>
                         <select name="location_associated[]" id="location_associated" class="form-control select2" multiple>
                             <option value=""></option>
@@ -66,15 +70,14 @@
                     <div class="form-group">
                         <label for="license_certificates">License and Certificates<span class="text-danger">*</span></label>
                         <input type="file" name="license_certificates[]" id="license_certificates" placeholder="license and certificates" class="form-control" multiple >
-                    </div>
-                    
+                    </div>                    
                     @include('admin.shared.status-select', ['status' => 0])
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
                         <div class="btn-group">
-                            <a href="{{ route('admin.employees.index') }}" class="btn btn-default">Back</a>
+                            <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
                             <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </div>
@@ -95,6 +98,12 @@ $(document).ready(function() {
         prevSelect.val($(this).val()).trigger('change');
         var id=$(this).val();
         getLocation(id);
+    });
+    $("#license_certificates").change(function(){
+        var $fileUpload = $("input[type='file']");
+        if (parseInt($fileUpload.get(0).files.length) > 3){
+            alert("You are only allowed to upload a maximum of 3 files");
+        }
     });
 });
 </script>
@@ -138,4 +147,7 @@ $(document).ready(function() {
     });
 
 </script>
+
+
+
 @endsection
