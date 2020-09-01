@@ -100,9 +100,9 @@
                                         <!-- <input type="text" name="state" id="state" class="form-control" value="{{ old('state') }}"> -->
                                         <select id="state" name="state" name="state" class="form-control">
                                             <option value="">Select state</option>
-                                            @foreach ($states as $state)
+                                            <!-- @foreach ($states as $state)
                                                 <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
-                                            @endforeach
+                                            @endforeach -->
                                         </select>
                                     </div>
                                 </div>
@@ -211,11 +211,8 @@
                     </div>
                 </div>
             </form>
-
-            
         </div>
         <!-- /.box -->
-
     </section>
     <!-- /.content -->
 @endsection
