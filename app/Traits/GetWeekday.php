@@ -15,7 +15,6 @@ trait GetWeekday
 
     public static function weekday($day, $indexWise = false)
     {
-
         if($indexWise){
             switch ($day) {
                 case 0:

@@ -22,8 +22,6 @@ use Illuminate\Support\Facades\Route;
 //     $order = Order::where('reference', '8fa3b7fb-dd46-4ddb-bef0-c2a7e23c0d84')->first();
 //     return new FillMedicalHistoryForm($order, $order->customer);
 // });
-
-
 /**
  * Admin routes
  */
@@ -73,7 +71,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::post('facilities/updateTime/{facility_id}', 'FacilityController@updateTime')->name('facilities.updateTime');
             Route::post('facilities/addNonAvailabilityTime/{facility_id}', 'FacilityController@addNonAvailabilityTime')->name('facilities.addNonAvailabilityTime');
             Route::post('facilities/getcity', 'FacilityController@getcity');
-
+            
             Route::resource('addresses', 'Addresses\AddressController');
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');

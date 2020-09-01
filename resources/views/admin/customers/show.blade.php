@@ -3,7 +3,6 @@
 @section('content')
     <!-- Main content -->
     <section class="content">
-
         <!-- Default box -->
         <div class="box">
             <div class="box-body">
@@ -25,6 +24,7 @@
                     </tbody>
                 </table>
             </div>
+            
             <div class="box-body">
                 <h2>Addresses</h2>
                 <table class="table table-striped table-bordered">
@@ -36,7 +36,7 @@
                         <td class="col-md-2">Status</td>
                         <td class="col-md-4">Actions</td>
                     </tr>
-                    </tbody>
+                </tbody>
                     <tbody>
                         <tr>
                             <td>{{ $address->alias }}</td>

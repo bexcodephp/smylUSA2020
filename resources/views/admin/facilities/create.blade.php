@@ -100,9 +100,9 @@
                                         <!-- <input type="text" name="state" id="state" class="form-control" value="{{ old('state') }}"> -->
                                         <select id="state" name="state" name="state" class="form-control">
                                             <option value="">Select state</option>
-                                            @foreach ($states as $state)
+                                            <!-- @foreach ($states as $state)
                                                 <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
-                                            @endforeach
+                                            @endforeach -->
                                         </select>
                                     </div>
                                 </div>
@@ -156,6 +156,7 @@
                         </div> -->
                     </div>
                 </div>
+                
                 <!-- Start time slot-->
                 <h2>Hours of operation</h2>
                 <div class="box-body">
@@ -191,12 +192,12 @@
                                     </div>
                                 </td> 
                                 <td>
-                                    <input type="checkbox" name="closed[{{$key}}]" value="1" >
+                                    <input type="checkbox" name="closed[{{$key}}]" value="1">
                                 </td> 
                                 <!-- <td>
                                     <a class="btn btn-info">Update Spans</a>
                                 </td>  -->
-                            </tr> 
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -211,11 +212,8 @@
                     </div>
                 </div>
             </form>
-
-            
         </div>
         <!-- /.box -->
-
     </section>
     <!-- /.content -->
 @endsection
