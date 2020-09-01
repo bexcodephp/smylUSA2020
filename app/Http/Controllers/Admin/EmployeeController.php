@@ -341,16 +341,18 @@ class EmployeeController extends Controller
     public function deleteCertificate(Request $request){
         $employee = Employee::where('id',$request->id)->pluck('license_certificates');// $this->employeeRepo->findEmployeeById($request->id);
 
-        $file_arr = json_decode($employee[0]);
+        $file_arr = (array)json_decode($employee[0]);
 
         if (($key = array_search($request->fileName, $file_arr)) !== false) {
             unset($file_arr[$key]);
         }
+        
         $employee = $this->employeeRepo->findEmployeeById($request->id);
         $empRepo = new EmployeeRepository($employee);
         $data['license_certificates'] = json_encode($file_arr);
-        $result = $empRepo->update($data);        
-        return response($result);
+        $result = $empRepo->update($data);
+        
+        return json_encode($result);
     }
 
     public function jsonStringRemove(){

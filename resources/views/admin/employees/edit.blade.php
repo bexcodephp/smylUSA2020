@@ -79,9 +79,13 @@
                             $files = json_decode($files); 
                             //dd($files);
                             $licence = 1;
+                            $cntr = 0;
+
                             foreach($files as $file){
+                                $cntr++;
+
                                 ?>
-                                <div class="licence-div" id="licence_div{{$licence}}">
+                                <div class="licence-div" id="licence_div_{{$cntr}}">
                                     <?php
                                     $extension = pathinfo(storage_path('/employee/operators/license_certificates'.$file), PATHINFO_EXTENSION);
                                     if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
@@ -92,7 +96,7 @@
                                         <img src="{{ asset('images/licence.png')}}" >
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
-                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}');" class="licence-del"><i class="fa fa-times"></i></a>
+                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}',{{$cntr}});" class="licence-del"><i class="fa fa-times"></i></a>
                             <?php
                                     }else{
                             ?>
@@ -204,8 +208,8 @@ $(document).ready(function() {
             }
         }
 
-        function deleteCertificate(fileName,op_id){
-            alert(op_id);
+        function deleteCertificate(fileName,op_id,index){
+            var city = index;
             
             $.ajax({
                     url:'../delete_certificate',
@@ -216,19 +220,12 @@ $(document).ready(function() {
                         fileName:fileName
                     },
                     success:function (data) {
-                        //location.reload();
-                        // console.log(data);
+                        if(data === "true")
+                        {
+                            $('#licence_div_'+city).remove();
+                        }
                     }
             });
-
-            // $.post("../delete_certificate",
-            // {
-            //     '_token':'{{csrf_token()}}',
-            //     'id':op_id,
-            //     'status':0
-            // },function(data){
-                
-            // });
         }
 </script>
 

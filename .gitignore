@@ -26,3 +26,4 @@ storage/app/public/storage
 \.php_cs\.cache
 \*.zip
 /nbproject/private/
+*.zip

@@ -85,12 +85,12 @@ class EmployeeController extends Controller
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);
-               
+        
         $upload_path = "license_certificates";
         $upload_file = $request->file('license_certificates');        
         $upload_license_certificates = Utilities::saveFile($upload_file,$upload_path);
         dd($upload_license_certificates);
-
+        
         $employee = $this->employeeRepo->createEmployee($request->all());      
         if ($request->has('role')) {    
             // dd($request);        
