@@ -156,6 +156,7 @@
                         </div> -->
                     </div>
                 </div>
+                
                 <!-- Start time slot-->
                 <h2>Hours of operation</h2>
                 <div class="box-body">
@@ -191,12 +192,12 @@
                                     </div>
                                 </td> 
                                 <td>
-                                    <input type="checkbox" name="closed[{{$key}}]" value="1" >
+                                    <input type="checkbox" name="closed[{{$key}}]" value="1">
                                 </td> 
                                 <!-- <td>
                                     <a class="btn btn-info">Update Spans</a>
                                 </td>  -->
-                            </tr> 
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
