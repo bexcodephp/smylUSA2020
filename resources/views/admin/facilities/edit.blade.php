@@ -107,19 +107,28 @@
                             <input type="hidden" name="longitude" id="longitude" value="{{ $facility->longitude }}">
                             <input type="hidden" id="state_id" value="{{ $facility->state }}">
                             <input type="hidden" id="city_id" value="{{ $facility->city }}">
-
+                            
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="state">State<span class="text-danger">*</span></label>
                                     <select id="state" name="state" class="form-control">
                                         <option value="">Select state</option>
+                                        <?php 
+                                            $state_arr = array();
+                                        ?>
+
                                         @foreach ($states as $state)
-                                            <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
+                                            <?php 
+                                                $state_arr[$state->state_name] = $state->state_id;
+                                            ?>
+                                            <option id="opt_state_{{ $state->state_id }}" value="{{ $state->state_id }}">{{ $state->state_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             
+                            <input type="hidden" id="state_name" value="<?php echo $state_arr[$facility->state]; ?>">
+
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">City <span class="text-danger">*</span></label>
@@ -337,7 +346,6 @@
     var marker;
 
     $(document).ready(function(){
-
         $('#addNaHours').on('click', function () {
             $('#modal_upload_docs').modal('show');
         });        
@@ -345,11 +353,13 @@
         $('#modal_upload_docs').on('hidden.bs.modal', function (e) {
             // do something...
         });
-
-        $('#state').val($('#state_id').val());
+        
+        alert($('#state_id').val());
+        $('#state').val($('#state_name').val());
 
         $('#state').on('change', function(){
             var stateID = $(this).val();
+            
             if(stateID){
                 $.ajax({
                     url:'../getcity',
@@ -367,7 +377,7 @@
 
                         for(var i=0;i<obj.length;i++)
                         {
-                            $('#city').append('<option value="'+obj[i].city_id+'">'+obj[i].city_name+'</option>')
+                            $('#city').append('<option value="'+obj[i].city_name+'">'+obj[i].city_name+'</option>')
                         }
                     }
                 })
@@ -388,8 +398,10 @@
 
     function GetCity()
     {
-        var stateID = $('#state_id').val();
+        var stateID = $('#state_name').val();
         
+        alert(">>"+stateID);
+
         if(stateID){
             $.ajax({
                 url:'../getcity',
@@ -407,7 +419,7 @@
 
                     for(var i=0;i<obj.length;i++)
                     {
-                        $('#city').append('<option value="'+obj[i].city_id+'">'+obj[i].city_name+'</option>')
+                        $('#city').append('<option value="'+obj[i].city_name+'">'+obj[i].city_name+'</option>')
                     }
                     
                     $('#city').val($('#city_id').val());
