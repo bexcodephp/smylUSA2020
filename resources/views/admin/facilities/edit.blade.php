@@ -131,7 +131,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                    <input id="my-input-searchbox" type="text" placeholder="Search Location Here">
+                    <input id="my-input-searchbox" name="searchbox_location" type="text" placeholder="Search Location Here">
                         <div class="map" id="map" style="height: 355px;"></div>
                     </div>
                 </div>

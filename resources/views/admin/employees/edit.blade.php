@@ -75,7 +75,7 @@
                     <div class="licence-wrapper">
                         <?php
                             
-                            $files =  $employee->license_certificates;
+                            $files =  $employee->license_certificates; 
                             $files = json_decode($files); 
                             //dd($files);
                             $licence = 0;
@@ -214,7 +214,7 @@ $(document).ready(function() {
             var counter = index;
             //alert(op_id);
             $.ajax({
-                    url:'../delete_certificate',
+                    url:'../delete_certificate/'+op_id,
                     type:'POST',
                     data:{
                         _token:'{{csrf_token()}}',
