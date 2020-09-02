@@ -224,26 +224,20 @@ class FacilityController extends Controller
 
     public function updateNonAvailabilityTime(Request $request, $id)
     {
-        dd($request);
-        $result = FacilityNonAvailabilityTimeslot::where('id', $id)->update(['start_time' => $request->start_time]);
-
-        $data = $request->input();
-
-        $updateNaHours = new FacilityNonAvailabilityTimeslot();
-
-        $result = FacilityNonAvailabilityTimeslot::where('id', $id)->update(['start_time' => $request->start_time]);
-
-
-        return $this->sendResponse(true, "Facility Non Availability time has been updated");
+        $data = [
+                    'date' => $request->date,
+                    'start_time' => $request->start_time,
+                    'end_time' => $request->end_time
+                ];
+        $result = FacilityNonAvailabilityTimeslot::where('id', $id)->update($data);
+        return "true";
     }
 
     public function destroyNonAvailabilityTime(Request $request)
     {      
-        //dd($request->id);  
         $naTimeslot = FacilityNonAvailabilityTimeslot::where('id',$request->id);
         $naTimeslot->delete();
         return "true";
-
     }
 
 

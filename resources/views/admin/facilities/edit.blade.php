@@ -147,14 +147,16 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label for="image">Facility Image</label>
-                            <img src="/storage/app/public/{{ $facility->image }}" width="100"/>
+                            <?php //Storage::disk('public')->get('uploads/file.jpg'); ?>
+                            <img src="{{ url('storage/app/public/'.$facility->image) }}" width="100"/>     
+                            <img src="{{ Storage_path('app/public/'.$facility->image) }}" width="100"/>                            
                             <input type="file" name="image" id="image" class="form-control">
                         </div>
                     </div>
                     
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="status">Status </label>
+                            <label for="status">Status<span class="text-danger">*</span></label>
                             <select name="is_active" id="status" class="form-control">
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
@@ -165,7 +167,7 @@
             </div>
 
             <!-- Start time slot-->
-            <h2>Hours of operation</h2>
+            <h2>Hours of operation<span class="text-danger">*</span></h2>
                 <div class="box-body">
                     <table class="timeTable" style="width: 100%;">
                         <thead>
@@ -211,6 +213,15 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="btn-group">
+                    <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </form>
                 <!-- End time slot-->
             
             <!-- Start Non availability section -->
@@ -267,14 +278,7 @@
         
         <!-- End Non availability section   -->
 
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <div class="btn-group">
-                    <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-            </div>
-        </form>
+            
     </div>
     <!-- /.box -->
     
@@ -555,7 +559,7 @@
         var start_time = $("#start_time_"+index).val(); 
         var end_time = $("#end_time_"+index).val(); 
         $.ajax({
-            url:'../updateNaHours',
+            url:'../updateNaHours/'+id,
             type:'post',
             data:{
                 '_token':'{{csrf_token()}}',
