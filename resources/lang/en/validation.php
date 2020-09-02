@@ -113,8 +113,11 @@ return [
             'required' => 'First name field is required.',
         ],
         'license_certificates' => [
-            'required' => 'License certificates field is required',
-            'mimes' => 'License certificates Only  .jpg, .jpeg, .pdf and .png file types are allowed',
+            'required' => 'License certificates field is required.',
+            'max' => 'The license certificates may not be more than 3.',
+        ],
+        'license_certificates.*' => [ 
+            'mimes' => 'The license certificates must be a file of type: png, jpg, jpeg'           
         ],
     ],
 

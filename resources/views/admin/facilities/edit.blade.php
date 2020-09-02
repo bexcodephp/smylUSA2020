@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label for="name">Facility Phone <span class="text-danger">*</span></label>
                             <input type="text" name="phone" id="phone" placeholder="phone" class="form-control"
-                                value="{{ $facility->phone }}">
+                                value="{{ $facility->phone }}" onkeypress='return restrictAlphabets(event)'>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <label for="name">Zipcode <span class="text-danger">*</span></label>
                                     <input type="text" name="zipcode" id="zipcode" placeholder="zipcode"
-                                        class="form-control" value="{{ $facility->zipcode }}">
+                                        class="form-control" value="{{ $facility->zipcode }}" onkeypress='return restrictAlphabets(event)'>
                                 </div>
                             </div>
 
@@ -579,6 +579,14 @@
                 alert('success');
             }
         })
+    }
+
+    function restrictAlphabets(e) {
+        var x = e.which || e.keycode;
+        if ((x >= 48 && x <= 57))
+            return true;
+        else
+            return false;
     }
 </script>
 

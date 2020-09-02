@@ -30,9 +30,8 @@ class CreateEmployeeRequest extends FormRequest
             'phone' => ['required','digits:10'],
             'home_address' => ['required'],
             'location_associated' => ['required'],
-            'license_certificates' => ['required'],
-            'license_certificates.max' => 'Only 3 images are allowed',
-           // 'license_certificates.*' => ['mimes:jpg,jpeg,pdf,png','max:5000'],    
+            'license_certificates' => ['required','max:3'],
+            'license_certificates.*' => ['mimes:png,jpg,jpeg,pdf'],
             'status' => ['required'],
             //'password' => ['required', 'min:8'],
             //'role' => ['required']

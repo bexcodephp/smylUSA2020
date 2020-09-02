@@ -217,7 +217,7 @@ class EmployeeController extends Controller
         //$empRepo->updateEmployee($request->except('_token', '_method', 'password'));
         $upload_path = "employee/operators/license_certificates";
         $upload_files = $request->file('license_certificates');
-        $oldfiles = $employee->license_certificates;
+        //$oldfiles = $employee->license_certificates;
 
         //dd($oldfiles);
 
@@ -234,8 +234,8 @@ class EmployeeController extends Controller
             $data['license_certificates'] = json_encode($data['filenames']);
            
         }
-        $array_merge = array_merge($oldfiles,$data['license_certificates']);
-        dd($array_merge);
+        //$array_merge = array_merge($oldfiles,$data['license_certificates']);
+       // dd($array_merge);
         $empRepo->update($data);
 
         if ($request->has('password') && !empty($request->input('password'))) {
