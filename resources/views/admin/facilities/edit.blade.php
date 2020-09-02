@@ -347,18 +347,16 @@
         $('#saveNaHours').on('click', function () {
             alert("submit ahx");
             $.ajax({
-                    url:'../getcity',
-                    type:'post',
-                    data:{
-                        '_token':'{{csrf_token()}}',
-                        //'state_id':stateID
-                    },
-                    success:function (data) {
-                        $('#modal_upload_docs').modal('hide');
-                    }
+                url:'../getcity',
+                type:'post',
+                data:{
+                    '_token':'{{csrf_token()}}',
+                    //'state_id':stateID
+                },
+                success:function (data) {
+                    $('#modal_upload_docs').modal('hide');
+                }
             })
-
-            
         });
 
         $('#modal_upload_docs').on('hidden.bs.modal', function (e) {
