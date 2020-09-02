@@ -4,8 +4,9 @@ return [
     'STATUS' => [
                   '1' => "Active",
                   '0' => "In-Active",
-                  '2' => "Pending",
+                  '2' => "Pending",                  
                 ],
+                
         'WEEKDAYS' => [              
                 '0' => "Monday",
                 '1' => "Tuesday",
