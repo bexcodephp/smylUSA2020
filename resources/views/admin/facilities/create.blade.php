@@ -394,11 +394,15 @@ libraries=geometry,places"></script> -->
     //Timepicker
     $('.start-time').timepicker({
         showInputs: false,
-        defaultTime: '09:00 AM'
+        //defaultTime: '09:00 AM'
     });
     $('.end-time').timepicker({
         showInputs: false,
-        defaultTime: '5:00 PM'
+        //defaultTime: '5:00 PM'
     });
+
+    $('.start-time').val('');
+    $('.end-time').val('');
+
     </script>
 @endsection
