@@ -399,13 +399,18 @@ libraries=geometry,places"></script> -->
     //Timepicker
     $('.start-time').timepicker({
         showInputs: false,
-        defaultTime: '09:00 AM'
+        //defaultTime: '09:00 AM'
     });
     $('.end-time').timepicker({
         showInputs: false,
-        defaultTime: '5:00 PM'
+        //defaultTime: '5:00 PM'
     });
 
+<<<<<<< HEAD
+    $('.start-time').val('');
+    $('.end-time').val('');
+
+=======
     function restrictAlphabets(e) {
         var x = e.which || e.keycode;
         if ((x >= 48 && x <= 57))
@@ -413,5 +418,6 @@ libraries=geometry,places"></script> -->
         else
             return false;
     }
+>>>>>>> 06545b9852641e5367a7daaf886a70992f4bf3eb
     </script>
 @endsection
