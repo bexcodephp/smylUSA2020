@@ -129,14 +129,14 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="image">Facility Image </label>
+                                <label for="image">Facility Image</label>
                                 <input type="file" name="image" id="image" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label for="status">Status </label>
+                                <label for="status">Status<span class="text-danger">*</span> </label>
                                 <select name="is_active" id="status" class="form-control">
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
@@ -158,7 +158,7 @@
                 </div>
                 
                 <!-- Start time slot-->
-                <h2>Hours of operation</h2>
+                <h2>Hours of operation<span class="text-danger">*</span></h2>
                 <div class="box-body">
                     <table class="timeTable" style="width: 100%;">
                         <thead>
