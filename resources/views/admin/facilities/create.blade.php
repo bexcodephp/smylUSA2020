@@ -53,10 +53,9 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="name">Facility Phone <span class="text-danger">*</span></label>
-                                <input type="text" name="phone" id="phone" placeholder="phone" class="form-control" value="{{ old('phone') }}">
+                                <input type="text" name="phone" id="phone" placeholder="phone" class="form-control" value="{{ old('phone') }}" onkeypress='return restrictAlphabets(event)'>
                             </div>
                         </div>
-                        
                     </div>
                     
                     <div class="row">
@@ -73,7 +72,7 @@
                                     <div class="form-group">
                                         <label for="name">Zipcode <span class="text-danger">*</span></label>
                                         <input type="text" name="zipcode" id="zipcode" placeholder="zipcode" class="form-control"
-                                            value="{{ old('zipcode') }}">
+                                            value="{{ old('zipcode') }}" onkeypress='return restrictAlphabets(event)'>
                                     </div>
                                 </div>
 
@@ -98,12 +97,14 @@
                                     <div class="form-group">
                                         <label for="state">State<span class="text-danger">*</span></label>
                                         <!-- <input type="text" name="state" id="state" class="form-control" value="{{ old('state') }}"> -->
-                                        <select id="state" name="state" name="state" class="form-control">
+                                        <select id="state" class="form-control">
                                             <option value="">Select state</option>
                                             @foreach ($states as $state)
-                                                <option value="{{ $state->state_id }}">{{ $state->state_name }}</option>
+                                                <option id="opt_state_{{ $state->state_id }}" value="{{ $state->state_id }}">{{ $state->state_name }}</option>
                                             @endforeach
                                         </select>
+
+                                        <input type="hidden" id="state_name" name="state"/>
                                     </div>
                                 </div>
                                 
@@ -229,6 +230,10 @@ libraries=geometry,places"></script> -->
         $(document).ready(function(){
             $('#state').on('change', function(){
                 var stateID = $(this).val();
+
+                // alert($('#opt_state_'+stateID).html());
+                $('#state_name').val($('#opt_state_'+stateID).html());
+                
                 if(stateID){
                     $.ajax({
                         url:'getcity',
@@ -246,7 +251,7 @@ libraries=geometry,places"></script> -->
 
                             for(var i=0;i<obj.length;i++)
                             {
-                                $('#city').append('<option value="'+obj[i].city_id+'">'+obj[i].city_name+'</option>')
+                                $('#city').append('<option value="'+obj[i].city_name+'">'+obj[i].city_name+'</option>')
                             }
                         }
                     })
@@ -401,8 +406,18 @@ libraries=geometry,places"></script> -->
         //defaultTime: '5:00 PM'
     });
 
+<<<<<<< HEAD
     $('.start-time').val('');
     $('.end-time').val('');
 
+=======
+    function restrictAlphabets(e) {
+        var x = e.which || e.keycode;
+        if ((x >= 48 && x <= 57))
+            return true;
+        else
+            return false;
+    }
+>>>>>>> 06545b9852641e5367a7daaf886a70992f4bf3eb
     </script>
 @endsection
