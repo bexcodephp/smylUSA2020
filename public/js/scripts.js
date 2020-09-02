@@ -38,7 +38,7 @@ $(document).ready(function () {
     
     $('.table thead th').each( function () {
         var title = $(this).text();
-        if(title != "Phone" && title != "Actions" && title != "Address")
+        if(title != "Phone" && title != "Actions" && title != "Address" && title != "Report")
         {
             $(this).html( '<input class="cls_search" type="text" placeholder="'+title+'" />' );
         }
