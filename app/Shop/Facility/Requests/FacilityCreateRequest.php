@@ -30,8 +30,7 @@ class FacilityCreateRequest extends FormRequest
             'zipcode' => ['required'],            
             'city' => ['required'],
             'state' => ['required'],
-            'is_active' => ['required'],
-            'image' => 'nullable|mimes:png,jpg,jpeg',
+            'is_active' => ['required']
         ];
     }
 }

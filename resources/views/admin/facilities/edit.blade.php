@@ -154,7 +154,7 @@
                     
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="status">Status </label>
+                            <label for="status">Status<span class="text-danger">*</span></label>
                             <select name="is_active" id="status" class="form-control">
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
@@ -165,7 +165,7 @@
             </div>
 
             <!-- Start time slot-->
-            <h2>Hours of operation</h2>
+            <h2>Hours of operation<span class="text-danger">*</span></h2>
                 <div class="box-body">
                     <table class="timeTable" style="width: 100%;">
                         <thead>
@@ -211,6 +211,15 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="btn-group">
+                    <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </form>
                 <!-- End time slot-->
             
             <!-- Start Non availability section -->
@@ -267,14 +276,7 @@
         
         <!-- End Non availability section   -->
 
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <div class="btn-group">
-                    <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-            </div>
-        </form>
+            
     </div>
     <!-- /.box -->
     
@@ -555,7 +557,7 @@
         var start_time = $("#start_time_"+index).val(); 
         var end_time = $("#end_time_"+index).val(); 
         $.ajax({
-            url:'../updateNaHours',
+            url:'../updateNaHours/'+id,
             type:'post',
             data:{
                 '_token':'{{csrf_token()}}',

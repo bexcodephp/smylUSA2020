@@ -224,42 +224,20 @@ class FacilityController extends Controller
 
     public function updateNonAvailabilityTime(Request $request, $id)
     {
-        // $facility = $this->facilityRepo->find($id);
-
-        // FacilityNonAvailabilityTimeslot::where('facility_id', $id)->delete();
-
-        // foreach($request->start as $weekday => $value)
-        // {
-        //     $a = FacilityNonAvailabilityTimeslot::create([
-        //         'date' => $request->date,
-        //         'facility_id' => $id,
-        //         'weekday' => $weekday,
-        //         'start_time' => date('H:i', strtotime($value)),
-        //         'end_time' => date('H:i', strtotime($request->end[$weekday]))
-        //     ]);
-        // }
-
-        //dd($request->id);
-        $result = FacilityNonAvailabilityTimeslot::where('id', $id)->update(['start_time' => $request->start_time]);
+        $data = [
+                    'date' => $request->date,
+                    'start_time' => $request->start_time,
+                    'end_time' => $request->end_time
+                ];
+        $result = FacilityNonAvailabilityTimeslot::where('id', $id)->update($data);
         return "true";
-        
-        $data = $request->input();
-
-        $updateNaHours = new FacilityNonAvailabilityTimeslot();
-
-        $result = FacilityNonAvailabilityTimeslot::where('id', $id)->update(['start_time' => $request->start_time]);
-
-
-        return $this->sendResponse(true, "Facility Non Availability time has been updated");
     }
 
     public function destroyNonAvailabilityTime(Request $request)
     {      
-        //dd($request->id);  
         $naTimeslot = FacilityNonAvailabilityTimeslot::where('id',$request->id);
         $naTimeslot->delete();
         return "true";
-
     }
 
 

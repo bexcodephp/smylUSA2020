@@ -32,7 +32,6 @@ class FacilityUpdateRequest extends FormRequest
             'city' => ['required'],
             'state' => ['required'],
             'is_active' => ['required'],
-            'image' => ['mimes:png,jpg,jpeg'],
         ];
     }
 }
