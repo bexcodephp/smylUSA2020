@@ -231,14 +231,14 @@
                         <tbody>
                             @foreach($nontimeslots as $key =>$days)
                             <?php //dd($days['date']);?>
-                            <tr style="padding: 5px; border: 1px solid;">
+                            <tr style="padding: 5px; border: 1px solid;" id="tr_{{$days['id']}}">
                                 <td>
-                                <input type="date" name="date[{{$key}}]" class="form-control" value="{{$days['date']}}" id="dt_{{$key}}">
+                                <input type="date" name="date[{{$key}}]" class="form-control" value="{{$days['date']}}" id="date_{{$key}}">
                                 </td> 
                                 <!-- <td style="width: 30%"></td>  -->
                                 <td>
                                     <div class="input-group">
-                                    <input type="text" class="form-control timepicker" name="start[{{$key}}]" value="{{ isset($days['start_time']) ? $days['start_time'] : '' }}">
+                                    <input type="text" class="form-control timepicker" name="start[{{$key}}]" value="{{ isset($days['start_time']) ? $days['start_time'] : '' }}" id="start_time_{{$key}}">
                                     
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
@@ -247,7 +247,7 @@
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control timepicker" name="end[{{$key}}]" value="{{ isset($days['end_time']) ? $days['end_time'] : '' }}">
+                                        <input type="text" class="form-control timepicker" name="end[{{$key}}]" value="{{ isset($days['end_time']) ? $days['end_time'] : '' }}" id="end_time_{{$key}}">
                                     
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
@@ -255,7 +255,7 @@
                                     </div>
                                 </td>                                
                                 <td>
-                                <button type="button" id="updateNaHours" class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit fa-lg"></i></button>
+                                <button onclick="updateNonAvailabilityHours('{{ $days["id"] }}','{{ $key }}');" type="button" id="updateNaHours" class="btn mx-2 w-auto btn-edit">update</button>
                                     <button onclick="deleteNonAvailabilityHours('{{ $days["id"] }}');" type="button" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
                                 </td> 
                             </tr> 
@@ -338,26 +338,7 @@
 
         $('#addNaHours').on('click', function () {
             $('#modal_upload_docs').modal('show');
-        });
-
-        $('#updateNaHours').on('click', function () {
-            $('#modal_upload_docs').modal('show');
-        });
-
-        $('#saveNaHours').on('click', function () {
-            alert("submit ahx");
-            $.ajax({
-                url:'../getcity',
-                type:'post',
-                data:{
-                    '_token':'{{csrf_token()}}',
-                    //'state_id':stateID
-                },
-                success:function (data) {
-                    $('#modal_upload_docs').modal('hide');
-                }
-            })
-        });
+        });        
 
         $('#modal_upload_docs').on('hidden.bs.modal', function (e) {
                 // do something...
@@ -552,13 +533,36 @@
     }
 
     function deleteNonAvailabilityHours(id){
-        alert(id);
+        if (confirm('Are you want to delete?')) {            
+            $.ajax({
+                url:'../deleteNaHours/'+id,
+                type:'delete',
+                data:{
+                    '_token':'{{csrf_token()}}',
+                    'id':id
+                },
+                success:function (data) {
+                    $("#tr_"+id).hide();
+                }
+            });
+        }else{
+            return false;
+        }
+    }
+
+    function updateNonAvailabilityHours(id,index){
+        var date = $("#date_"+index).val(); 
+        var start_time = $("#start_time_"+index).val(); 
+        var end_time = $("#end_time_"+index).val(); 
         $.ajax({
-            url:'../deleteNaHours',
-            type:'delete',
+            url:'../updateNaHours',
+            type:'post',
             data:{
                 '_token':'{{csrf_token()}}',
-                'id':id
+                'id':id,
+                'date':date,
+                'start_time':start_time,
+                'end_time':end_time
             },
             success:function (data) {
                 alert('success');
