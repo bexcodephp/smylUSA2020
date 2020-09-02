@@ -38,7 +38,10 @@ $(document).ready(function () {
     
     $('.table thead th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input class="cls_search" type="text" placeholder="'+title+'" />' );
+        if(title != "Phone" && title != "Actions" && title != "Address")
+        {
+            $(this).html( '<input class="cls_search" type="text" placeholder="'+title+'" />' );
+        }
     } );
     
     var table = $('.table').DataTable({

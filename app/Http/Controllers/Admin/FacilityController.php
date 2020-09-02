@@ -34,7 +34,6 @@ class FacilityController extends Controller
 
     public function index()
     {
-        
         $facilities = $this->facilityRepo->listFacilities();
         return view('admin.facilities.index', compact('facilities'));
     }
@@ -58,20 +57,15 @@ class FacilityController extends Controller
      */
     public function store(FacilityCreateRequest $request)
     {
-        //dd($request);
-        //exit;
-
         $data = $request->input();
+        
         if ($request->hasFile('image')) {
             $data['image'] = $this->facilityRepo->saveFacilityImage($request->file('image'));
         }
         $instertFacility = $this->facilityRepo->create($data);
 
         $lastId = $instertFacility->facility_id; // last inserted id
-
-        //$updateTime = updateTime($request->input,$lastId);
         
-
         foreach($request->start as $weekday => $value)
         {
             $a = FacilityTimeslot::create([
