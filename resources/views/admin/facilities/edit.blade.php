@@ -354,7 +354,6 @@
             // do something...
         });
         
-        alert($('#state_id').val());
         $('#state').val($('#state_name').val());
 
         $('#state').on('change', function(){
@@ -400,8 +399,6 @@
     {
         var stateID = $('#state_name').val();
         
-        alert(">>"+stateID);
-
         if(stateID){
             $.ajax({
                 url:'../getcity',
