@@ -65,7 +65,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {            
-        $facilities = Facility::get(['facility_id','name']);
+        $facilities = Facility::where('is_active',1)->get(['facility_id','name']);
         $roles = $this->roleRepo->listRoles();
         return view('admin.employees.create', compact('roles','facilities')
     );
@@ -217,11 +217,7 @@ class EmployeeController extends Controller
         //$empRepo->updateEmployee($request->except('_token', '_method', 'password'));
         $upload_path = "employee/operators/license_certificates";
         $upload_files = $request->file('license_certificates');
-        //$oldfiles = $employee->license_certificates;
-
-        //dd($oldfiles);
-
-        //dd($upload_files);
+        $oldfiles = $employee->license_certificates; // existing files
 
         $data = $request->input();
         $fileName = []; 
@@ -234,8 +230,13 @@ class EmployeeController extends Controller
             $data['license_certificates'] = json_encode($data['filenames']);
            
         }
-        //$array_merge = array_merge($oldfiles,$data['license_certificates']);
-       // dd($array_merge);
+        
+        $array_merge = array_merge( json_decode($oldfiles), json_decode($data['license_certificates']));
+        //dd($array_merge);
+        $data['license_certificates'] = json_encode($array_merge);
+
+        //dd($data['license_certificates']);
+        
         $empRepo->update($data);
 
         if ($request->has('password') && !empty($request->input('password'))) {

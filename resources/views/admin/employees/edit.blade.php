@@ -29,6 +29,10 @@
                         <input type="text" name="phone" id="phone" placeholder="Phone" class="form-control" value="{!! $employee->phone ?: old('phone')  !!}">
                     </div>
                     <div class="form-group">
+                        <label for="phone">Home Address<span class="text-danger">*</span></label>
+                        <textarea name="home_address" id="home_address" placeholder="Home Address" class="form-control">{!! $employee->home_address ?: old('home_address')  !!}</textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="location_associated">Location Associated<span class="text-danger">*</span></label>
                         <?php 
                             $location_list = json_decode($employee->location_associated);
@@ -73,22 +77,20 @@
                         <input type="file" name="license_certificates[]" id="license_certificates" placeholder="license and certificates" class="form-control" multiple >
                     </div>
                     <div class="licence-wrapper">
-                        <?php
-                            
+                        <?php                            
                             $files =  $employee->license_certificates; 
                             $files = json_decode($files); 
                             //dd($files);
                             $licence = 0;
                             foreach($files as $file){
                                 $licence++;
-                                ?>
+                        ?>
                                 <div class="licence-div" id="licence_div_{{$licence}}">
-                                    <?php
+                                <?php
                                     $extension = pathinfo(storage_path('/employee/operators/license_certificates'.$file), PATHINFO_EXTENSION);
                                     if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
                                     //echo $file;
-                                    ?>
-                                    
+                                ?>                                    
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
                                         <img src="{{ asset('images/licence.png')}}" >
                                         <span class="licence-name">{{ "licence".$licence}}</span>
@@ -125,7 +127,7 @@
         </div>
         <!-- /.box -->
 
-        {{-- preview document modal --}}
+{{-- preview document modal --}}
 <div class="modal fade modal-view-docs" id="modal_view_docs" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -142,7 +144,7 @@
     </div>
   </div>
 </div>
-
+{{-- End preview document modal --}}
     </section>
     <!-- /.content -->
 
@@ -157,11 +159,13 @@ $(document).ready(function() {
         getLocation(id);
     });
     $("#license_certificates").change(function(){
-        var $fileUpload = $("input[type='file']");
-        if (parseInt($fileUpload.get(0).files.length) > 3){
-            alert("You are only allowed to upload a maximum of 3 files");
+        var licCount = $('.licence-div').length;
+        if (licCount===3){
+            alert("You need to delete existing files befor you upload. Your upload limit is 3.");
         }
     });
+
+    
 });
 </script>
 <script>

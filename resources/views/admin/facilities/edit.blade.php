@@ -38,7 +38,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="name">Facility Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" id="name" placeholder="Name" class="form-control"
+                            <input type="text" name="name" id="name" placeholder="Facility name" class="form-control"
                                 value="{{ $facility->name }}">
                         </div>
                     </div>

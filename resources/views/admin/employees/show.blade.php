@@ -77,7 +77,7 @@
                                     if(in_array($location->facility_id,$locationsArray)){
                                         $no++;
                             ?>
-                                <li>{{ $no.". ".$location->address }}</li>
+                                <li>{{ $no.". ".$location->name }}</li>
                             <?php
 
                                     }
