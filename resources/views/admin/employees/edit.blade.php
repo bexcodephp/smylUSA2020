@@ -212,8 +212,7 @@ $(document).ready(function() {
         }
 
         function deleteCertificate(fileName,op_id,index){
-            var counter = index;
-            //alert(op_id);
+            var counter = index;            
             $.ajax({
                     url:'../delete_certificate/'+op_id,
                     type:'POST',
