@@ -197,9 +197,6 @@ $(document).ready(function() {
          }
 
          function viewCertificates(doc_name,type) { 
-              
-           // console.log('1',doc_name,type);
-           
            
             $('#modal_view_docs').modal('show');
 
