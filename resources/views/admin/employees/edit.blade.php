@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label for="license_certificates">License and Certificates<span class="text-danger">*</span></label>
-                        <input type="file" name="license_certificates[]" id="license_certificates" placeholder="license and certificates" class="form-control" multiple >
+                        <input type="file" name="license_certificates[]" id="license_certificates" placeholder="license and certificates" class="form-control" multiple >                        
                     </div>
                     <div class="licence-wrapper">
                         <?php                            

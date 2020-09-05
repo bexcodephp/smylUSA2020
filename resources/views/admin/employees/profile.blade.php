@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             <div class="col mb-2 address-tab">
-                <label>Address:</label>
+                <label>Location:</label>
                 <div class="lbl-input">
                     <ol>
                     <?php 

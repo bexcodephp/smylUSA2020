@@ -205,6 +205,7 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
+        
         $request->request->add(['role' => '5']); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
@@ -215,28 +216,31 @@ class EmployeeController extends Controller
 
         $empRepo = new EmployeeRepository($employee);
         //$empRepo->updateEmployee($request->except('_token', '_method', 'password'));
-        $upload_path = "employee/operators/license_certificates";
-        $upload_files = $request->file('license_certificates');
-        $oldfiles = $employee->license_certificates; // existing files
+        
 
         $data = $request->input();
-        $fileName = []; 
+        $fileName = [];
+
         if ($request->hasFile('license_certificates')) {
-            //dd($upload_file);
+            
+
+            $upload_path = "employee/operators/license_certificates";
+            $upload_files = $request->file('license_certificates');
+            $oldfiles = $employee->license_certificates; // existing files
+
             foreach($upload_files as $doc){
                 $data['saveDocs'] = $this->employeeRepo->saveEmployeeDocs($doc, $upload_path);
                 $data['filenames'][] = $data['saveDocs'];
             }
             $data['license_certificates'] = json_encode($data['filenames']);
+
+            if(isset($data['license_certificates']) ){
+                $array_merge = array_merge(json_decode($oldfiles), json_decode($data['license_certificates']));
+                $data['license_certificates'] = json_encode($array_merge);
+            }            
            
         }
-        
-        $array_merge = array_merge( json_decode($oldfiles), json_decode($data['license_certificates']));
-        //dd($array_merge);
-        $data['license_certificates'] = json_encode($array_merge);
-
-        //dd($data['license_certificates']);
-        
+    
         $empRepo->update($data);
 
         if ($request->has('password') && !empty($request->input('password'))) {
