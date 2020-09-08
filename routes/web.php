@@ -107,8 +107,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
  */
 
 Auth::routes(['verify' => true]);
-
+//Route::get('login', 'LoginController@showLoginForm');
+Route::get('/login', function () {
+    return view('auth.login');
+});
 Route::namespace('Auth')->group(function () {
+    
     Route::get('cart/login', 'CartLoginController@showLoginForm')->name('cart.login');
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');

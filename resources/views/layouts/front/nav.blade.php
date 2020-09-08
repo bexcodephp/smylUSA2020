@@ -100,7 +100,7 @@
                                 <a class="nav-link" href="{{ url('/') }}">HOME</a>
                             </li>
                             <li class="nav-item @if (Request::is('aboutus'))  active  @endif">
-                                <a class="nav-link" href="{{ url('/aboutus') }}">ABOUT US</a>
+                                <a class="nav-link" href="{{ route('about') }}">ABOUT US</a>
                             </li>
                             <li class="nav-item @if (Request::is('works'))  active  @endif">
                                 <a class="nav-link" href="{{ url('/works') }}">HOW IT WORKS</a>

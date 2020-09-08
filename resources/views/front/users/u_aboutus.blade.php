@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.front.main')
 @push('stylesheets')
     <link rel="stylesheet" href="{{ asset('css/u_aboutus.css') }}"  type="text/css" >
 @endpush

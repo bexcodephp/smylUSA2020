@@ -58,12 +58,12 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::with(['categories', 'images', 'brand'])->Active()->Featured()->orderBy('order_no', 'ASC')->get();
-        return view('front.index', compact('products'));
+        return view('front.users.index', compact('products'));
     }
 
     public function about()
     {
-        return view('front.about');
+        return view('front.users.u_aboutus');
     }
 
     public function faq()
