@@ -159,9 +159,11 @@ $(document).ready(function() {
         getLocation(id);
     });
     $("#license_certificates").change(function(){
+        // alert("aaa");
         var licCount = $('.licence-div').length;
-        if (licCount===3){
+        if (licCount === 3){
             alert("You need to delete existing files befor you upload. Your upload limit is 3.");
+            $("#license_certificates").val('');
         }
     });
 
