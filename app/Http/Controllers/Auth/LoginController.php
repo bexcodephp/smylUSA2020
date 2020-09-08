@@ -178,4 +178,7 @@ class LoginController extends Controller
         // event(new AddNotification($user->id, 1, 'Login Successful'));
 
     }
+    public function patientLogin(){
+        return view('front.auth.login');
+    }
 }
