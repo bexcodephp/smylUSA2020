@@ -107,16 +107,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
  */
 
 Auth::routes(['verify' => true]);
-//Route::get('login', 'LoginController@showLoginForm');
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::namespace('Auth')->group(function () {
-    
+
+Route::namespace('Auth')->group(function () {    
     Route::get('cart/login', 'CartLoginController@showLoginForm')->name('cart.login');
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');
-    Route::get('/login', 'LoginController@patientLogin');
+
+    Route::get('/login', 'LoginController@patientLogin'); ///
+    Route::post('/login1', 'LoginController@login')->name("patientlogin");
     
     Route::group(['prefix' => 'pharmacist'], function(){
         Route::get('login', 'LoginController@pharmaLoginFormShow');
