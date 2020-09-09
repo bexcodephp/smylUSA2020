@@ -17,7 +17,11 @@
             </div>
             <div class="col mb-2">
                 <label>Phone:</label>
-                <div class="lbl-input">{{$employee->phone}}</div>
+                <?php
+                    $number = $employee->phone;
+                    $formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "+1 ($1) $2 $3", $number);
+                ?>
+                <div class="lbl-input">{{$formatted_number}}</div>
             </div>
             <div class="col mb-2">
                 <label>Home address</label>

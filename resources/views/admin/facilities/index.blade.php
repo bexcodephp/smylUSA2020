@@ -40,7 +40,11 @@
                         @foreach ($facilities as $facility)
                             <tr>
                             <td>{{ $facility->name }}</td>
-                            <td>{{ $facility->phone }}</td>
+                            <?php
+                                $number = $facility->phone;
+                                $formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "+1 ($1) $2 $3", $number);
+                            ?>
+                            <td>{{ $formatted_number }}</td>
                             <td>{{ $facility->state . ", " . $facility->address }}</td>
                             <td>{{ $facility->city }}</td>
                             <td>{{ $facility->is_active == 1 ? "Active" : "Inactive" }}</td>

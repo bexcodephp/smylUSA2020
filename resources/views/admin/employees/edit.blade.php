@@ -171,7 +171,11 @@ $(document).ready(function() {
         if (licCount === 3){
             alert("You need to delete existing files befor you upload. Your upload limit is 3.");
             $("#license_certificates").val('');
-        }
+        } else if(licCount != 3) {
+            alert(licCount);
+            alert("You are only allowed to upload a maximum of 3 files");
+            $("#license_certificates").val('');
+        } else{}
     });
 
     
