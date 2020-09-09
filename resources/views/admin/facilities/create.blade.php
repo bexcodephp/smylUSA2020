@@ -2,6 +2,8 @@
 
 @section('css')
     <!-- Bootstrap time Picker -->
+     <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-timepicker.min.css') }}">
     <style>
         .timeTable td, .timeTable th {
@@ -27,7 +29,7 @@
     </style>
     <!-- Main content -->
     <section class="content">
-        @include('layouts.errors-and-messages')
+        <!-- @include('layouts.errors-and-messages') -->
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">New Facility</h3>
@@ -37,23 +39,26 @@
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-4">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                 <label for="name">Facility Name <span class="text-danger">*</span></label>
                                 <input type="text" name="name" id="name" placeholder="Facility name" class="form-control" value="{{ old('name') }}">
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
                             </div>
                         </div>
 
                         <div class="col-sm-4">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label for="name">Facility Email <span class="text-danger">*</span></label>
                                 <input type="text" name="email" id="email" placeholder="email" class="form-control" value="{{ old('email') }}">
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
                         </div>
 
                         <div class="col-sm-4">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                                 <label for="name">Facility Phone <span class="text-danger">*</span></label>
                                 <input type="text" name="phone" id="phone" placeholder="phone" class="form-control" value="{{ old('phone') }}" onkeypress='return restrictAlphabets(event)'>
+                                <span class="text-danger">{{ $errors->first('phone') }}</span>
                             </div>
                         </div>
                     </div>
@@ -62,17 +67,19 @@
                         <div class="col-sm-4">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+                                    <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                                         <label for="name">Address <span class="text-danger">*</span></label>
                                         <input type="text" name="address" id="address" placeholder="address" class="form-control" value="{{ old('address') }}">
+                                        <span class="text-danger">{{ $errors->first('address') }}</span>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+                                    <div class="form-group {{ $errors->has('zipcode') ? 'has-error' : '' }}">
                                         <label for="name">Zipcode <span class="text-danger">*</span></label>
                                         <input type="text" name="zipcode" id="zipcode" placeholder="zipcode" class="form-control"
                                             value="{{ old('zipcode') }}" onkeypress='return restrictAlphabets(event)'>
+                                        <span class="text-danger">{{ $errors->first('zipcode') }}</span>
                                     </div>
                                 </div>
 
@@ -94,7 +101,7 @@
                                 <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') }}">
 
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+                                    <div class="form-group {{ $errors->has('state') ? 'has-error' : '' }}">
                                         <label for="state">State<span class="text-danger">*</span></label>
                                         <!-- <input type="text" name="state" id="state" class="form-control" value="{{ old('state') }}"> -->
                                         <select id="state" class="form-control">
@@ -103,13 +110,13 @@
                                                 <option id="opt_state_{{ $state->state_id }}" value="{{ $state->state_id }}">{{ $state->state_name }}</option>
                                             @endforeach
                                         </select>
-
+                                        <span class="text-danger">{{ $errors->first('state') }}</span>
                                         <input type="hidden" id="state_name" name="state"/>
                                     </div>
                                 </div>
                                 
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+                                    <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                                         <label for="name">City <span class="text-danger">*</span></label>
                                         <!-- <input type="text" required name="city" id="city" placeholder="city" class="form-control"
                                             value="{{ old('city') }}"> -->
@@ -117,6 +124,7 @@
                                         <select id="city" name="city" name="city" class="form-control">
                                             <option value="">Select city</option>
                                         </select>
+                                        <span class="text-danger">{{ $errors->first('city') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -129,19 +137,21 @@
                     
                     <div class="row">
                         <div class="col-sm-3">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                                 <label for="image">Facility Image</label>
                                 <input type="file" name="image" id="image" class="form-control">
+                                <span class="text-danger">{{ $errors->first('image') }}</span>
                             </div>
                         </div>
 
                         <div class="col-sm-3">
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
                                 <label for="status">Status<span class="text-danger">*</span> </label>
                                 <select name="is_active" id="status" class="form-control">
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
+                                <span class="text-danger">{{ $errors->first('status') }}</span>
                             </div>
                         </div>
 
@@ -176,9 +186,10 @@
                             @foreach(config('constants.WEEKDAYS') as $key =>$days)
                             <tr style="padding: 5px; border: 1px solid;">
                                 <td style="width: 30%">{{ $days }}</td> 
+                                <input type="" id="selectday" value="{{ $days }}" hidden>
                                 <td>
                                     <div class="input-group">
-                                    <input type="text" class="form-control timepicker start-time" name="start[{{$key}}]" value="{{ old('start[$key]') }}">                                    
+                                    <input type="text" class="form-control timepicker start-time" id="txtStartTime" name="start[{{$key}}]" value="{{ old('start[$key]') }}">                                    
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
                                         </div>
@@ -186,7 +197,7 @@
                                 </td>
                                 <td>
                                     <div class="input-group mr-2">
-                                        <input type="text" class="form-control timepicker end-time" name="end[{{$key}}]" value="{{ old('end[$key]') }}">                                    
+                                        <input type="text" class="form-control timepicker end-time" name="end[{{$key}}]" id="txtEndTime" value="{{ old('start[$key]') }}">                                    
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
                                         </div>
@@ -209,7 +220,7 @@
                 <div class="box-footer">
                     <div class="btn-group">
                         <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary" onclick="Compare()">Create</button>
                     </div>
                 </div>
             </form>
@@ -417,5 +428,31 @@ libraries=geometry,places"></script> -->
         else
             return false;
     }
+
+    // function Compare() {
+    //     var day = $("#selectday").val();
+    //     // alert(day);
+    //     var strStartTime = document.getElementById("txtStartTime").value;
+    //     var strEndTime = document.getElementById("txtEndTime").value;
+
+    //     if(strStartTime == ""){
+    //         alert("places select "+day+" Start Time");
+    //     }
+    //     alert(strStartTime);
+    //     // var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
+    //     if(strEndTime == ""){
+    //         alert("places select "+day+" End Time");
+    //     }
+    //     alert(strEndTime);
+    //     var endTime = new Date(startTime);
+    //     // endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
+        
+    //     if (strStartTime < strEndTime) {
+    //         alert("Start Time is less than end time");
+    //     } else {
+    //         alert("Start Time is greater than end time");
+    //     }
+    // }
+    
     </script>
 @endsection

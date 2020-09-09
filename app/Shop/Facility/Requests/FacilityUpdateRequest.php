@@ -26,12 +26,14 @@ class FacilityUpdateRequest extends FormRequest
         return [
             'name' => ['required'],
             'email' => ['required', 'email'],
-            'phone' => ['required'],
+            'phone' => ['required','digits:10'],
             'address' => ['required'],
             'zipcode' => ['required'],            
             'city' => ['required'],
             'state' => ['required'],
             'is_active' => ['required'],
+            // 'image' => ['required'],
+            'image.*' => ['mimes:png,jpg,jpeg,pdf'],
         ];
     }
 }
