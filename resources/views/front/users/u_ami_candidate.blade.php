@@ -1,7 +1,7 @@
-@extends('layouts.main')
+@extends('layouts.front.main')
 @push('stylesheets')
     <link rel="stylesheet" href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}"  type="text/css" >
-    <link rel="stylesheet" href="{{ asset('css/u_ami_candidate.css') }}"  type="text/css" >
+    <link rel="stylesheet" href="{{ asset('front/css/u_ami_candidate.css') }}"  type="text/css" >
 @endpush
 @section('content')
 <main class="u-ami-candidate">

@@ -78,7 +78,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../images/products/curve_product.png');
+  background-image: url('../../../images/products/curve_product.png');
   background-position: bottom;
   background-size: contain;
   background-repeat: no-repeat;
@@ -172,7 +172,7 @@
   content: '';
   bottom: -40px;
   left: -10px;
-  background-image: url('../images/icons/arrow_cross_bottom.png');
+  background-image: url('../../../images/icons/arrow_cross_bottom.png');
   max-height: 40px;
   max-width: 80px;
   width: 100%;

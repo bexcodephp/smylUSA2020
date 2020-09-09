@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/preloader.css') }}">
     {{-- responsive --}}
     <link rel="stylesheet" href="{{ asset('front/css/responsive.css') }}">
     @stack('stylesheets')
@@ -35,6 +36,9 @@
     <![endif]-->
 </head>
 <body>
+    {{-- preloader  --}}
+    @include('layouts.front.preloader')
+
     {{-- include navbar --}}
     @include('layouts.front.nav')
     {{--  main wrapper  --}}

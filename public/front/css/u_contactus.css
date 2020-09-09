@@ -42,7 +42,7 @@ main {
 }
 
 .contact-detail-right {
-  background-image: url('../images/products/bg_contactus_right.png');
+  background-image: url('../../../images/products/bg_contactus_right.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

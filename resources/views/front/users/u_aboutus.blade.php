@@ -1,6 +1,6 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('css/u_aboutus.css') }}"  type="text/css" >
+    <link rel="stylesheet" href="{{ asset('front/css/u_aboutus.css') }}"  type="text/css" >
 @endpush
 @section('content')
 <main class="u-aboutus">

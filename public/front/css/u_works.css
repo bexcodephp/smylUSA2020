@@ -32,7 +32,7 @@
   width: 40px;
   max-height: 60px;
   height: 100%;
-  background-image: url(../images/icons/title_top_element.png);
+  background-image: url(../../../images/icons/title_top_element.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -47,7 +47,7 @@
   width: 40px;
   max-height: 60px;
   height: 100%;
-  background-image: url('../images/icons/title_top_element.png');
+  background-image: url('../../../images/icons/title_top_element.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

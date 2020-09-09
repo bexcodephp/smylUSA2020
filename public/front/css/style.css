@@ -95,6 +95,10 @@ header {
   color: #ffffff;
 }
 
+.color-red {
+  color: red;
+}
+
 img {
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
@@ -180,11 +184,11 @@ img {
 }
 
 .title::after {
-  background-image: url('../images/icons/title_top_element.png');
+  background-image: url('../../../images/icons/title_top_element.png');
 }
 
 .titleinverse::after {
-  background-image: url('../images/icons/ready_set_smile_banner.png');
+  background-image: url('../../../images/icons/ready_set_smile_banner.png');
 }
 
 .subtitle {
@@ -258,27 +262,27 @@ footer h6 {
 }
 
 .footersocial a.btn.fb {
-  background-image: url('../images/icons/footer_facebook_normal.png');
+  background-image: url('../../../images/icons/footer_facebook_normal.png');
 }
 
 .footersocial a.btn.fb:hover {
-  background-image: url('../images/icons/footer_facebook_hover.png');
+  background-image: url('../../../images/icons/footer_facebook_hover.png');
 }
 
 .footersocial a.btn.twitter {
-  background-image: url('../images/icons/footer_tweeter_normal.png');
+  background-image: url('../../../images/icons/footer_tweeter_normal.png');
 }
 
 .footersocial a.btn.twitter:hover {
-  background-image: url('../images/icons/footer_tweeter_hover.png');
+  background-image: url('../../../images/icons/footer_tweeter_hover.png');
 }
 
 .footersocial a.btn.insta {
-  background-image: url('../images/icons/footer_insta_normal.png');
+  background-image: url('../../../images/icons/footer_insta_normal.png');
 }
 
 .footersocial a.btn.insta:hover {
-  background-image: url('../images/icons/footer_insta_hover.png');
+  background-image: url('../../../images/icons/footer_insta_hover.png');
 }
 
 .footersocial .list-group-item {
@@ -312,7 +316,7 @@ footer h6 {
   content: '';
   height: 20px;
   width: 20px;
-  background-image: url('../images/icons/footer_bullet_normal.png');
+  background-image: url('../../../images/icons/footer_bullet_normal.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -324,7 +328,7 @@ footer h6 {
 }
 
 .followus .list-group-item:hover::before {
-  background-image: url('../images/icons/footer_bullet_hover.png');
+  background-image: url('../../../images/icons/footer_bullet_hover.png');
 }
 
 .contactus .media small:nth-child(2) {
@@ -439,7 +443,7 @@ a.amiuser:focus {
   width: 100%;
   height: 100%;
   background-position: top 10px left 10px, top 10px right 10px, bottom 10px right 10px, bottom 10px left 10px;
-  background-image: url('../images/products/graydot.png'), url('../images/products/graydot.png'), url('../images/products/graydot.png'), url('../images/products/graydot.png');
+  background-image: url('../../../images/products/graydot.png'), url('../../../images/products/graydot.png'), url('../../../images/products/graydot.png'), url('../../../images/products/graydot.png');
   background-repeat: no-repeat;
   background-size: 27px;
   /* z-index: 1; */
@@ -449,7 +453,7 @@ a.amiuser:focus {
 /* bottom page smile background */
 
 .smile-bottom-bg {
-  background-image: url('../images/products/ready_set_smile_banner_home.png');
+  background-image: url('../../../images/products/ready_set_smile_banner_home.png');
   background-position: right center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -611,14 +615,14 @@ a.amiuser:focus {
   border: none !important;
   width: 20px;
   height: 14px;
-  background-image: url('../images/icons/drop_down_image.png');
+  background-image: url('../../../images/icons/drop_down_image.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .select-option .bootstrap-select.show .dropdown-toggle::after {
-  background-image: url('../images/icons/drop_up_image.png');
+  background-image: url('../../../images/icons/drop_up_image.png');
 }
 
 
@@ -764,7 +768,7 @@ a:hover {
   opacity: 1;
   width: 30px;
   height: 30px;
-  background-image: url('../images/icons/cross_blue.png');
+  background-image: url('../../../images/icons/cross_blue.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;

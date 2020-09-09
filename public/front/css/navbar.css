@@ -97,7 +97,7 @@ header {
 .nav-profile-icon .dropdown-menu:before {
   content: '';
   position: absolute;
-  background-image: url('../images/icons/arrow_user_menu.png');
+  background-image: url('../../../images/icons/arrow_user_menu.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -144,7 +144,7 @@ header {
 .icon_fb {
   width: 20px;
   height: 20px;
-  background-image: url("../images/icons/menubar_facebook_normal.png");
+  background-image: url("../../../images/icons/menubar_facebook_normal.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -156,7 +156,7 @@ header {
 .nav_social .nav-link:hover .icon_fb,
 .nav_social .nav-link:hover .icon_fb {
   transform: scale(1.3);
-  background-image: url("../images/icons/menubar_facebook_over.png");
+  background-image: url("../../../images/icons/menubar_facebook_over.png");
 }
 
 
@@ -165,7 +165,7 @@ header {
 .icon_tweet {
   width: 20px;
   height: 20px;
-  background-image: url("../images/icons/menubar_tweeter_normal.png");
+  background-image: url("../../../images/icons/menubar_tweeter_normal.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -177,7 +177,7 @@ header {
 .nav_social .nav-link:hover .icon_tweet,
 .nav_social .nav-link:hover .icon_tweet {
   transform: scale(1.3);
-  background-image: url("../images/icons/menubar_tweeter_over.png");
+  background-image: url("../../../images/icons/menubar_tweeter_over.png");
 }
 
 
@@ -186,7 +186,7 @@ header {
 .icon_insta {
   width: 20px;
   height: 20px;
-  background-image: url("../images/icons/menubar_insta_normal.png");
+  background-image: url("../../../images/icons/menubar_insta_normal.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -198,7 +198,7 @@ header {
 .nav_social .nav-link:hover .icon_insta,
 .nav_social .nav-link:hover .icon_insta {
   transform: scale(1.3);
-  background-image: url("../images/icons/menubar_insta_over.png");
+  background-image: url("../../../images/icons/menubar_insta_over.png");
 }
 
 
@@ -212,7 +212,7 @@ header {
 .icon_cart {
   width: 24px;
   height: 24px;
-  background-image: url("../images/icons/menu_bar_cart.png");
+  background-image: url("../../../images/icons/menu_bar_cart.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

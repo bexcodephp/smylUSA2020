@@ -78,11 +78,11 @@
 }
 
 .hiworks1 .hiworksimg {
-  background-image: url('../images/products/how_it_works_icon_1_normal.png');
+  background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
 }
 
 .hiworks2 .hiworksimg {
-  background-image: url('../images/products/how_it_works_icon_2_normal.png');
+  background-image: url('../../../images/products/how_it_works_icon_2_normal.png');
 }
 
 .hiwarrow {
@@ -90,14 +90,14 @@
   width: 100%;
   height: 100px;
   top: 30px;
-  background-image: url('../images/icons/how_it_works_arrow_normal.png');
+  background-image: url('../../../images/icons/how_it_works_arrow_normal.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .hiworks3 .hiworksimg {
-  background-image: url('../images/products/how_it_works_icon_3_normal.png');
+  background-image: url('../../../images/products/how_it_works_icon_3_normal.png');
 }
 
 
@@ -109,7 +109,7 @@
 }
 
 .hiworks2.hiworks2arrow {
-  background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+  background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
   -webkit-animation: changeBg2 10s infinite;
   animation: changeBg2 10s infinite;
   min-height: 80px;
@@ -135,181 +135,181 @@
 
 @-webkit-keyframes changeBg1 {
   0% {
-    background-image: url('../images/products/how_it_works_icon_1_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_hover.png');
   }
   25% {
-    background-image: url('../images/products/how_it_works_icon_1_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
   }
   50% {
-    background-image: url('../images/products/how_it_works_icon_1_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
   }
   75% {
-    background-image: url('../images/products/how_it_works_icon_1_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
   }
   100% {
-    background-image: url('../images/products/how_it_works_icon_1_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
   }
 }
 
 @keyframes changeBg1 {
   0% {
-    background-image: url('../images/products/how_it_works_icon_1_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_hover.png');
   }
   25% {
-    background-image: url('../images/products/how_it_works_icon_1_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
   }
   50% {
-    background-image: url('../images/products/how_it_works_icon_1_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
   }
   75% {
-    background-image: url('../images/products/how_it_works_icon_1_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
   }
   100% {
-    background-image: url('../images/products/how_it_works_icon_1_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_1_normal.png');
   }
 }
 
 @-webkit-keyframes changeBg2 {
   0% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
   }
   25% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_hover.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_hover.png');
   }
   50% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_hover.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_hover.png');
   }
   75% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
   }
   100% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
   }
 }
 
 @keyframes changeBg2 {
   0% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
   }
   25% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_hover.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_hover.png');
   }
   50% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_hover.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_hover.png');
   }
   75% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
   }
   100% {
-    background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
   }
 }
 
 @-webkit-keyframes changeBg3 {
   0% {
-    background-image: url('../images/products/how_it_works_icon_2_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_normal.png');
   }
   25% {
-    background-image: url('../images/products/how_it_works_icon_2_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_hover.png');
   }
   50% {
-    background-image: url('../images/products/how_it_works_icon_2_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_hover.png');
   }
   75% {
-    background-image: url('../images/products/how_it_works_icon_2_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_normal.png');
   }
   100% {
-    background-image: url('../images/products/how_it_works_icon_2_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_normal.png');
   }
 }
 
 @keyframes changeBg3 {
   0% {
-    background-image: url('../images/products/how_it_works_icon_2_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_normal.png');
   }
   25% {
-    background-image: url('../images/products/how_it_works_icon_2_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_hover.png');
   }
   50% {
-    background-image: url('../images/products/how_it_works_icon_2_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_hover.png');
   }
   75% {
-    background-image: url('../images/products/how_it_works_icon_2_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_normal.png');
   }
   100% {
-    background-image: url('../images/products/how_it_works_icon_2_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_2_normal.png');
   }
 }
 
 @-webkit-keyframes changeBg4 {
   0% {
-    background-image: url('../images/icons/how_it_works_arrow_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_normal.png');
   }
   25% {
-    background-image: url('../images/icons/how_it_works_arrow_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_normal.png');
   }
   50% {
-    background-image: url('../images/icons/how_it_works_arrow_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_normal.png');
   }
   75% {
-    background-image: url('../images/icons/how_it_works_arrow_hover.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_hover.png');
   }
   100% {
-    background-image: url('../images/icons/how_it_works_arrow_hover.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_hover.png');
   }
 }
 
 @keyframes changeBg4 {
   0% {
-    background-image: url('../images/icons/how_it_works_arrow_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_normal.png');
   }
   25% {
-    background-image: url('../images/icons/how_it_works_arrow_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_normal.png');
   }
   50% {
-    background-image: url('../images/icons/how_it_works_arrow_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_normal.png');
   }
   75% {
-    background-image: url('../images/icons/how_it_works_arrow_hover.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_hover.png');
   }
   100% {
-    background-image: url('../images/icons/how_it_works_arrow_hover.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_hover.png');
   }
 }
 
 @-webkit-keyframes changeBg5 {
   0% {
-    background-image: url('../images/products/how_it_works_icon_3_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_normal.png');
   }
   25% {
-    background-image: url('../images/products/how_it_works_icon_3_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_normal.png');
   }
   50% {
-    background-image: url('../images/products/how_it_works_icon_3_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_normal.png');
   }
   75% {
-    background-image: url('../images/products/how_it_works_icon_3_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_hover.png');
   }
   100% {
-    background-image: url('../images/products/how_it_works_icon_3_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_hover.png');
   }
 }
 
 @keyframes changeBg5 {
   0% {
-    background-image: url('../images/products/how_it_works_icon_3_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_normal.png');
   }
   25% {
-    background-image: url('../images/products/how_it_works_icon_3_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_normal.png');
   }
   50% {
-    background-image: url('../images/products/how_it_works_icon_3_normal.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_normal.png');
   }
   75% {
-    background-image: url('../images/products/how_it_works_icon_3_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_hover.png');
   }
   100% {
-    background-image: url('../images/products/how_it_works_icon_3_hover.png');
+    background-image: url('../../../images/products/how_it_works_icon_3_hover.png');
   }
 }
 
@@ -347,7 +347,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../images/products/curve_product.png');
+  background-image: url('../../../images/products/curve_product.png');
   background-position: bottom;
   background-size: contain;
   background-repeat: no-repeat;
@@ -444,40 +444,40 @@
     min-height: 80px;
     height: 100%;
     max-width: 180px;
-    background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+    background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
   }
   @-webkit-keyframes changeBg4 {
     0% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
     }
     25% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
     }
     50% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
     }
     75% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_hover.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_hover.png');
     }
     100% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_hover.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_hover.png');
     }
   }
   @keyframes changeBg4 {
     0% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
     }
     25% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
     }
     50% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_normal.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_normal.png');
     }
     75% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_hover.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_hover.png');
     }
     100% {
-      background-image: url('../images/icons/how_it_works_arrow_vertical_hover.png');
+      background-image: url('../../../images/icons/how_it_works_arrow_vertical_hover.png');
     }
   }
 }

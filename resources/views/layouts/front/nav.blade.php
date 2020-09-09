@@ -99,23 +99,23 @@
                             <li class="nav-item @if (Request::is('/'))  active  @endif">
                                 <a class="nav-link" href="{{ url('/') }}">HOME</a>
                             </li>
-                            <li class="nav-item @if (Request::is('aboutus'))  active  @endif">
+                            <li class="nav-item @if (Request::is('about'))  active  @endif">
                                 <a class="nav-link" href="{{ route('about') }}">ABOUT US</a>
                             </li>
-                            <li class="nav-item @if (Request::is('works'))  active  @endif">
-                                <a class="nav-link" href="{{ url('/works') }}">HOW IT WORKS</a>
+                            <li class="nav-item @if (Request::is('howitworks'))  active  @endif">
+                                <a class="nav-link" href="{{ route('howitworks') }}">HOW IT WORKS</a>
                             </li>
                             <li class="nav-item @if (Request::is('pricing'))  active  @endif">
-                                <a class="nav-link" href="{{ url('/pricing') }}">PRICING</a>
+                                <a class="nav-link" href="{{ route('pricing') }}">PRICING</a>
                             </li>
                             <li class="nav-item @if (Request::is('locations'))  active  @endif">
-                                <a class="nav-link" href="{{ url('/locations') }}">LOCATIONS</a>
+                                <a class="nav-link" href="{{ route('locations') }}">LOCATIONS</a>
                             </li>
                             <li class="nav-item @if (Request::is('products'))  active  @endif">
                                 <a class="nav-link" href="{{ url('/products') }}">PRODUCTS</a>
                             </li>
-                            <li class="nav-item @if (Request::is('contactus'))  active  @endif">
-                                <a class="nav-link" href="{{ url('/contactus') }}">CONTACT</a>
+                            <li class="nav-item @if (Request::is('contact'))  active  @endif">
+                                <a class="nav-link" href="{{ route('contact') }}">CONTACT</a>
                             </li>
                         </ul>
 

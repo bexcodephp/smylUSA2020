@@ -82,5 +82,5 @@
 <script src="{{ asset('plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
-<script src="{{ asset('js/scripts.js') }}"></script>
+<script src="{{ asset('front/js/scripts-front.js') }}"></script>
 {{-- @stack('scripts') --}}

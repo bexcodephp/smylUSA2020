@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.front.main')
 @push('stylesheets')
-<link rel="stylesheet" href="{{ asset('css/u_products_view.css') }}"  type="text/css" >
+<link rel="stylesheet" href="{{ asset('front/css/u_products_view.css') }}"  type="text/css" >
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 @endpush
