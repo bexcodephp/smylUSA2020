@@ -53,7 +53,7 @@
                                 <div class="media">
                                     <ul class="navbar-nav d-flex flex-lg-row flex-column nav-profile-caption align-self-center">
                                         <li class="nav-item nav-signin">
-                                            <a href="{{ url('/login') }}" class="nav-link">Sign In or Register</a>
+                                            <a href="{{ url('login') }}" class="nav-link">Sign In or Register</a>
                                         </li>
                                         {{--
                                         <li class="nav-item nav-or">
