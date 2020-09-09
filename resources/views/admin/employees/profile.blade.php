@@ -20,13 +20,13 @@
                 <div class="lbl-input">{{$employee->phone}}</div>
             </div>
             <div class="col mb-2">
-                <label>Location Associated:</label>
-                <div class="lbl-input"></div>
+                <label>Home address</label>
+                <div class="lbl-input">{{$employee->home_address}}</div>
             </div>
         </div>
         <div class="row">
             <div class="col mb-2 address-tab">
-                <label>Address:</label>
+                <label>Location:</label>
                 <div class="lbl-input">
                     <ol>
                     <?php 
@@ -96,5 +96,44 @@
         <label>Status:</label>
         {{ Config::get('constants.STATUS.'.$employee->status) }}
     </section>
+    {{-- preview document modal --}}
+<div class="modal fade modal-view-docs" id="modal_view_docs" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-uppercase btn_blue" id="exampleModalLabel">Document Preview</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="docView">            
+            <img id="doc_src" class="modal-docs-img">
+            <embed id="doc_src1" class="embed-responsive-item modal-docs-pdf" >
+      </div>
+    </div>
+  </div>
+</div>
+{{-- End preview document modal --}}
     <!-- /.content -->
+
+
+<script>
+
+    function viewCertificates(doc_name,type) { 
+
+        $('#modal_view_docs').modal('show');
+
+        if(type=='png' || type =='jpeg' || type == 'jpg'){
+            $("#doc_src").show();
+            $("#doc_src1").hide();
+            $('#doc_src').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
+        }else{
+            $("#doc_src1").show();
+            $("#doc_src").hide();
+            $('#doc_src1').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
+        }
+    }
+
+</script>
+
 @endsection

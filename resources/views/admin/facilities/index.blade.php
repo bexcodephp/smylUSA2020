@@ -32,7 +32,7 @@
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>Status</th>
-                                <th class="w-auto">Actions</th>
+                                <th class="com-md-auto" style="width: 250px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

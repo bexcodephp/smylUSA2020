@@ -103,21 +103,45 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'name' => [            
+            'required' => 'Facility name is required.',
+        ],
         'phone' => [            
-            'required' => 'Phone field must be numeric and 10 digit.',
+            'required' => 'Phone Number is required and must be a numeric and 10 digit.',
         ],
         'lname' => [
-            'required' => 'Last name field is required.',
+            'required' => 'Last name is required.',
         ],
         'fname' => [
-            'required' => 'First name field is required.',
+            'required' => 'First name is required.',
         ],
         'license_certificates' => [
-            'required' => 'License certificates field is required.',
+            'required' => 'License certificates are required.',
             'max' => 'The license certificates may not be more than 3.',
         ],
         'license_certificates.*' => [ 
             'mimes' => 'The license certificates must be a file of type: png, jpg, jpeg'           
+        ],
+        'address' => [
+            'required' => 'Address is required.',
+        ],
+        'state' => [
+            'required' => 'State is required.',
+        ],
+        'city' => [
+            'required' => 'City is required.',
+        ],
+        'email' => [
+            'required' => 'Email is required.',
+        ],
+        'home_address' => [
+            'required' => 'Home address is required.',
+        ],
+        'location_associated' => [
+            'required' => 'Location associated is required.',
+        ],
+        'zipcode' => [
+            'required' => 'Zipcode is required.',
         ],
     ],
 

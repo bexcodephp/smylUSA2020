@@ -206,14 +206,14 @@ class FacilityController extends Controller
         //return $this->sendResponse(true, "Facility time updated");
     }
 
-    public function addNonAvailabilityTime(Request $request, $id)
+    public function addNonAvailabilityTime(Request $request)
     {
         $weekday =  date('w', strtotime($request->date));
-        $facility = $this->facilityRepo->find($id);
+        $facility = $this->facilityRepo->find($request->id);
 
         $a = FacilityNonAvailabilityTimeslot::create([
             'date' => $request->date,
-            'facility_id' => $id,
+            'facility_id' => $request->id,
             'weekday' => $weekday,
             'start_time' => date('H:i', strtotime($request->start_time)),
             'end_time' => date('H:i', strtotime($request->end_time))               
