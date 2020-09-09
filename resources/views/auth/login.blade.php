@@ -33,11 +33,11 @@
                         {{ csrf_field() }}
                             <div class="col-12 form-group">
                                 <label>Email / User Name</label>
-                                <input type="text" class="form-control input-gray" id="name_email" placeholder="Name">
+                                <input type="text" class="form-control input-gray" name="email" placeholder="Name">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control input-gray" id="password" placeholder="Password">
+                                <input type="password" class="form-control input-gray" name="password" placeholder="Password">
                             </div>
                             <div class="col-12 mt-3 input-remember">
                                 <div class="custom-control custom-checkbox">
@@ -95,8 +95,45 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
+    function LoginP()
+    {   
+        alert("{{ route('patientlogin') }}");
+        
+        var formdata = new FormData($('#login_form')[0]);
+        formdata.append('_token','<?php echo csrf_token() ?>');
+
+            $.ajax({
+                url: "{{ route('patientlogin') }}",
+                type: "POST",
+                data: formdata,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    console.log(">>>>>>>"+data);
+
+                    var obj = Object();
+                    obj = jQuery.parseJSON(data);
+                    
+                    if(obj.status_code == 200)
+                    {
+                        //location.reload();
+                    }
+                    else
+                    {
+                        alert(obj.message);
+                    }
+                },
+                error: function() {
+                    
+                }
+            });
+       
+    }
+
     $(document).ready(function(){
 
+        
     });
   </script>
 @endpush

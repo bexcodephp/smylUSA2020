@@ -112,7 +112,9 @@ Route::namespace('Auth')->group(function () {
     Route::get('cart/login', 'CartLoginController@showLoginForm')->name('cart.login');
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');
-    Route::get('/login', 'LoginController@patientLogin');
+
+    Route::get('/login', 'LoginController@patientLogin'); ///
+    Route::post('/login1', 'LoginController@login')->name("patientlogin");
     
     Route::group(['prefix' => 'pharmacist'], function(){
         Route::get('login', 'LoginController@pharmaLoginFormShow');
