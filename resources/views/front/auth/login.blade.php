@@ -16,6 +16,7 @@
             </div>
         </div>
     </section>
+
     <section class="container">
         <div class="row">
             <div class="col-12 mt-3 mb-2">
@@ -28,7 +29,7 @@
                     <h4 class="sign-in-title">Already a Member?</h4>
                     <h4 class="color-blue">Sign in</h4>
                     <div class="signin-form mt-xxl-6">
-                        <form class="row">
+                        <form class="row" {{ url('/loginform') }}>
                             <div class="col-12 form-group">
                                 <label>Email / User Name</label>
                                 <input type="text" class="form-control input-gray" id="name_email" placeholder="Name">
@@ -47,7 +48,7 @@
                                 <a href="#" class="btn-link">Forgot Password?</a>
                             </div>
                             <div class="col-12 text-left btn-signin mt-xl-4 my-3">
-                                <a href="{{ url('/loginform') }}" class="btn btn-primary btn-lg text-center">Sign In</a>
+                                <a href="" class="btn btn-primary btn-lg text-center">Sign In</a>
                             </div>
                         </form>
                     </div>

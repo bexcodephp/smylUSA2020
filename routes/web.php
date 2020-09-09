@@ -108,6 +108,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
 Auth::routes(['verify' => true]);
 //Route::get('login', 'LoginController@showLoginForm');
+
 Route::get('/login', function () {
     return view('auth.login');
 });
