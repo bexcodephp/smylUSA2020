@@ -28,7 +28,7 @@
                     <h4 class="sign-in-title">Already a Member?</h4>
                     <h4 class="color-blue">Sign in</h4>
                     <div class="signin-form mt-xxl-6">
-                        <form class="row" role="form" method="POST" action="{{ url('login') }}">
+                        <form class="row" role="form" method="POST" action="{{ route('/login') }}">
                         {{ csrf_field() }}
                             <div class="col-12 form-group">
                                 <label>Email / User Name</label>
