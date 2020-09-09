@@ -26,7 +26,7 @@
         "paypal/rest-api-sdk-php": "*",
         "santigarcor/laratrust": "5.0.*",
         "shippo/shippo-php": "^1.4",
-        "tymon/jwt-auth": "1.0.0-beta.3"
+        "tymon/jwt-auth": "0.5.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
