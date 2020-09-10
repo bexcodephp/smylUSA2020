@@ -10,6 +10,8 @@
 
 .table thead {
   background-color: #4688ed;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .table thead td,
@@ -46,6 +48,14 @@
   text-align: center;
 }
 
+.shop-cart-table .product-remove .btn {
+  padding: 10px;
+}
+
+.shop-cart-table .product-remove .btn:focus {
+  box-shadow: none;
+}
+
 .shop-cart-table .product-quantity .input-number {
   max-width: 100px;
 }
@@ -68,4 +78,17 @@
 .shop-cart-table .product-quantity .minus:focus,
 .shop-cart-table .product-quantity .plus:focus {
   box-shadow: none;
+}
+
+.shop-cart-table .product-thumbnail img {
+  width: 70px;
+  height: 45px;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .amicandidate-form {
+    padding: 15px;
+  }
 }
