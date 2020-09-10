@@ -158,6 +158,7 @@
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
+
 $(document).ready(function() {
     $("#location_associated").change(function () {    
         var prevSelect = $("#MultiSelect_Preview").select2();
@@ -171,11 +172,10 @@ $(document).ready(function() {
         if (licCount === 3){
             alert("You need to delete existing files befor you upload. Your upload limit is 3.");
             $("#license_certificates").val('');
-        } else if(licCount != 3) {
-            alert(licCount);
+        } else if(licCount > 3) {
             alert("You are only allowed to upload a maximum of 3 files");
             $("#license_certificates").val('');
-        } else{}
+        } else {}
     });
 
     
@@ -244,7 +244,5 @@ $(document).ready(function() {
             });
         }
 </script>
-
-
 
 @endsection

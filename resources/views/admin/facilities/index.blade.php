@@ -54,7 +54,7 @@
                                     <input type="hidden" name="_method" value="delete">
                                     <div class="btn-group">
                                         <a href="{{ route('admin.facilities.edit', $facility) }}" class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit"></i></a>
-                                        <a class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
+                                        <a href="{{ route('admin.facilities.profile', $facility->facility_id) }}" class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
                                         <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
                                     </div>
                                 </form>

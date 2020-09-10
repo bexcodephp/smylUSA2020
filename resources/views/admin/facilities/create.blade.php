@@ -3,6 +3,8 @@
 @section('css')
     <!-- Bootstrap time Picker -->
      <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css" rel="stylesheet"/>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-timepicker.min.css') }}">
     <style>
@@ -139,7 +141,7 @@
                         <div class="col-sm-3">
                             <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                                 <label for="image">Facility Image</label>
-                                <input type="file" name="image" id="image" class="form-control">
+                                <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}">
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
                             </div>
                         </div>
@@ -182,27 +184,29 @@
                             </tr>
                         </thead>
                         <?php ?>
-                        <tbody>
+                        <tbody id="weekdays_body">
                             @foreach(config('constants.WEEKDAYS') as $key =>$days)
                             <tr style="padding: 5px; border: 1px solid;">
                                 <td style="width: 30%">{{ $days }}</td> 
                                 <input type="" id="selectday" value="{{ $days }}" hidden>
                                 <td>
-                                    <div class="input-group">
-                                    <input type="text" class="form-control timepicker start-time" id="txtStartTime" name="start[{{$key}}]" value="{{ old('start[$key]') }}">                                    
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
-                                    </div>
+                                    <div class='input-group date non-timepicker' id='starttime{{$key}}' data-id="{{$key}}">
+                                        <input type='text' class="form-control" id="start_time_{{$key}}" name="start[{{$key}}]" value="{{ old('start[$key]') }}" required/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                      </div>
                                 </td>
+
                                 <td>
-                                    <div class="input-group mr-2">
-                                        <input type="text" class="form-control timepicker end-time" name="end[{{$key}}]" id="txtEndTime" value="{{ old('start[$key]') }}">                                    
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
-                                    </div>
-                                </td> 
+                                    <div class='input-group date non-timepicker' id='endtime{{$key}}' data-id="{{$key}}">
+                                        <input type='text' class="form-control" id="end_time_{{$key}}" name="end[{{$key}}]" value="{{ old('start[$key]') }}" required/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
+                                      </div>
+                                </td>
+             
                                 <td>
                                     <input type="checkbox" name="closed[{{$key}}]" value="1">
                                 </td> 
@@ -220,7 +224,7 @@
                 <div class="box-footer">
                     <div class="btn-group">
                         <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
-                        <button type="submit" class="btn btn-primary" onclick="Compare()">Create</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </div>
                 </div>
             </form>
@@ -404,21 +408,23 @@ libraries=geometry,places"></script> -->
             });
 
     </script>
-    
-    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{asset('js/moment-with-locales.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
     <script>
     //Timepicker
-    $('.start-time').timepicker({
-        showInputs: false,
-        //defaultTime: '09:00 AM'
-    });
-    $('.end-time').timepicker({
-        showInputs: false,
-        //defaultTime: '5:00 PM'
-    });
+    // $('#starttime').timepicker({
+    //     showInputs: false,
+    //     //defaultTime: '09:00 AM'
+    // });
+    // $('#endtime').timepicker({
+    //     showInputs: false,
+    //     //defaultTime: '5:00 PM'
+    // });
     
-    $('.end-time').val('');
-    $('.start-time').val('');
+    // $('#endtime').val('');
+    // $('#starttime').val('');
+
+  
 
 
     function restrictAlphabets(e) {
@@ -429,30 +435,45 @@ libraries=geometry,places"></script> -->
             return false;
     }
 
-    // function Compare() {
-    //     var day = $("#selectday").val();
-    //     // alert(day);
-    //     var strStartTime = document.getElementById("txtStartTime").value;
-    //     var strEndTime = document.getElementById("txtEndTime").value;
 
-    //     if(strStartTime == ""){
-    //         alert("places select "+day+" Start Time");
-    //     }
-    //     alert(strStartTime);
-    //     // var startTime = new Date().setHours(GetHours(strStartTime), GetMinutes(strStartTime), 0);
-    //     if(strEndTime == ""){
-    //         alert("places select "+day+" End Time");
-    //     }
-    //     alert(strEndTime);
-    //     var endTime = new Date(startTime);
-    //     // endTime = endTime.setHours(GetHours(strEndTime), GetMinutes(strEndTime), 0);
-        
-    //     if (strStartTime < strEndTime) {
-    //         alert("Start Time is less than end time");
-    //     } else {
-    //         alert("Start Time is greater than end time");
-    //     }
-    // }
+function TimePickerCtrl(id) {
+  var startTime = $("#start_time_"+id).datetimepicker({
+    format: 'hh:mm a'
+  });
+  
+  var endTime = $(".non-timepicker input").datetimepicker({
+    format: 'hh:mm a',
+    minDate: startTime.data("DateTimePicker").date()
+  });
+  
+  function setMinDate() {
+    return endTime
+      .data("DateTimePicker").minDate(
+        startTime.data("DateTimePicker").date()
+      )
+    ;
+  }
+  
+  var bound = false;
+  function bindMinEndTimeToStartTime() {
+  
+    return bound || startTime.on('dp.change', setMinDate);
+  }
+  
+  endTime.on('dp.change', () => {
+    bindMinEndTimeToStartTime();
+    bound = true;
+    setMinDate();
+  });
+}
+
+$(document).ready(function(){
+    $('.non-timepicker').on('click', function(){        
+        var dt = $(this).attr("data-id")
+        TimePickerCtrl(dt);
+    });
+});
+
     
     </script>
 @endsection
