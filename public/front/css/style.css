@@ -615,7 +615,7 @@ a.amiuser:focus {
 .select-option .dropdown-toggle::after {
   content: '';
   border: none !important;
-  width: 20px;
+  width: 16px;
   height: 14px;
   background-image: url('../../../images/icons/drop_down_image.png');
   background-position: center;

@@ -1,7 +1,7 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('front/css/cart.css') }}"  type="text/css" >
     <link rel="stylesheet" href="{{ asset('front/css/table-responsive.css') }}"  type="text/css" >
+    <link rel="stylesheet" href="{{ asset('front/css/cart.css') }}"  type="text/css" >
 @endpush
 @section('content')
 <main class="u-ami-candidate">
