@@ -1,0 +1,210 @@
+.icon-cvv {
+  max-width: 90px;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.tablist {
+  border-bottom: none;
+}
+
+.tablist li a {
+  font-weight: bold;
+  color: #d4dbe2;
+  background-color: transparent;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.tablist li a .step-no {
+  border-radius: 100%;
+  background-color: #d4dbe2;
+  color: #ffffff;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.tablist li a.disabled.active,
+.tablist li a.active {
+  color: #2388ed !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.tablist li a.disabled {
+  background-color: #d4dbe2;
+  pointer-events: none;
+  color: #d4dbe2 !important;
+}
+
+.tablist li a.disabled.active .step-no,
+.tablist li a.active .step-no {
+  background-color: #2388ed;
+  color: #ffffff;
+}
+
+.tablist li a:hover {
+  color: #2388ed;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.tablist li a:hover .step-no {
+  background-color: #2388ed;
+  color: #ffffff;
+}
+
+
+/* card 2 */
+
+.card.card-2,
+.card-2 .card-body {
+  background-color: transparent;
+  border: 0px;
+}
+
+.card-2 .card-img-top {
+  max-width: 410px;
+  width: 100%;
+  height: 425px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+  border: 4px solid transparent;
+}
+
+.card-2 .card-body {
+  padding: 15px;
+  margin-top: 15px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  height: 130px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0px 0px 12px 2px rgb(35 136 237 / 0.2);
+}
+
+.card.card-2:hover .card-img-top {
+  border-color: rgb(35 136 237 / 0.6);
+}
+
+.card-2 .card-footer {
+  margin-top: 5px;
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  display: -ms-flexbox;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+.card-2 .card-footer .btn {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.modal .card-body {
+  height: auto !important;
+}
+
+.modal .card-2 .card-img-top {
+  height: auto;
+  border-color: rgb(35 136 237 / 0.6);
+}
+
+.modal textarea.form-control {
+  height: 110px !important;
+  border-radius: 12px;
+}
+
+.modal.pic-modal input[type="text"].form-control {
+  height: calc(1.5em + .75rem + 2px);
+  border: none;
+}
+
+
+/* responsive */
+
+@media only screen and (min-width: 1025px) {
+  .step-5 .card-2 .card-img-top {
+    max-width: 545px;
+    height: 445px;
+  }
+}
+
+@media only screen and (min-width: 1367px) {
+  .mh-caption p {
+    font-size: 22px;
+  }
+  .icon-cvv {
+    max-width: 122px;
+  }
+  .sub-title {
+    font-size: 35px;
+  }
+  .sub-title-1 {
+    font-size: 28px;
+  }
+  .card-2 .card-img-top {
+    height: 460px;
+  }
+  .card-2 .card-body {
+    height: 155px;
+  }
+  .card-2 .card-body p {
+    font-size: 18px;
+  }
+  .card-2 .card-footer .btn {
+    font-size: 25px;
+  }
+  .pic-modal .card-2 {
+    max-width: 410px;
+  }
+  .pic-modal .modal-dialog {
+    max-width: 600px;
+  }
+  .pic-modal .sub-title-1 {
+    font-size: 35px;
+  }
+  .step-5 .card-2 .card-img-top {
+    max-width: 555px;
+    height: 445px;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .pic-modal .modal-dialog {
+    max-width: 380px;
+  }
+  .modal .card-2 {
+    max-width: 350px;
+  }
+  .modal .card-2 .card-img-top {
+    max-width: 275px;
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .icon-cvv {
+    max-width: 70px;
+  }
+  .card-2 .card-body {
+    height: auto;
+    max-height: 110px;
+  }
+  .card-2 .card-img-top {
+    height: 300px;
+  }
+}

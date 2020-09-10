@@ -58,12 +58,12 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::with(['categories', 'images', 'brand'])->Active()->Featured()->orderBy('order_no', 'ASC')->get();
-        return view('front.index', compact('products'));
+        return view('front.users.index', compact('products'));
     }
 
     public function about()
     {
-        return view('front.about');
+        return view('front.users.u_aboutus');
     }
 
     public function faq()
@@ -95,7 +95,8 @@ class HomeController extends Controller
             }
         }
 
-        return view('front.locations', compact('states', 'facility', 'facility_timeslots', 'dates'));
+        // return view('front.locations', compact('states', 'facility', 'facility_timeslots', 'dates'));
+        return view('front.users.u_locations', compact('states', 'facility', 'facility_timeslots', 'dates'));
     }
 
     public function getLocations(Request $request)
@@ -264,14 +265,16 @@ class HomeController extends Controller
     public function howItWorks()
     {
 
-        return view('front.howitworks');
+        // return view('front.howitworks');
+        return view('front.users.u_works');
     }
 
     public function pricing()
     {
         $products = Product::Active()->orderBy('order_no', 'ASC')->get();
 
-        return view('front.pricing', compact('products'));
+        // return view('front.pricing', compact('products'));
+        return view('front.users.u_pricing', compact('products'));
     }
 
     public function verifyEmail($code)

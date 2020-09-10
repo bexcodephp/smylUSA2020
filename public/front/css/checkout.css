@@ -1,0 +1,101 @@
+.table {
+  margin-bottom: 0;
+}
+
+.table td,
+.table th {
+  padding: 10px 15px;
+  vertical-align: middle;
+}
+
+.table thead {
+  background-color: #4688ed;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.table thead td,
+.table thead th {
+  font-size: 18px;
+  color: #ffffff;
+  border-bottom: 2px solid #4B5261;
+}
+
+.table tfoot td,
+.table tfoot th {
+  padding-top: 15px;
+}
+
+.shop-cart-table-div {
+  border-radius: 6px;
+  padding: 15px 10px;
+  box-shadow: 0px 0px 10px #d1d1d1;
+}
+
+.shop-cart-table tr td {
+  vertical-align: middle;
+}
+
+.shop-cart-table .product-thumbnail {
+  width: 100px;
+}
+
+.shop-cart-table .product-thumbnail img {
+  max-width: 70px;
+  max-height: 45px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.shop-cart-table .product-remove {
+  width: 30px;
+  box-sizing: border-box;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+
+.shop-cart-table .product-remove .btn {
+  padding: 10px;
+}
+
+.shop-cart-table .product-remove .btn:focus {
+  box-shadow: none;
+}
+
+.shop-cart-table .product-quantity .input-number {
+  max-width: 100px;
+}
+
+.shop-cart-table .product-quantity .input-number input {
+  padding: 5px;
+  border-radius: 0;
+  height: 40px;
+}
+
+.shop-cart-table .product-quantity .input-number input:focus {
+  box-shadow: none;
+}
+
+.shop-cart-table .product-quantity .input-group .btn {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.shop-cart-table .product-quantity .minus:focus,
+.shop-cart-table .product-quantity .plus:focus {
+  box-shadow: none;
+}
+
+.shop-cart-table .product-thumbnail img {
+  width: 70px;
+  height: 45px;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .amicandidate-form {
+    padding: 15px;
+  }
+}
