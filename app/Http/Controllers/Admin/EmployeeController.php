@@ -17,7 +17,8 @@ use App\Mail\DentistAccountApproved as MailDentistAccountApproved;
 use App\Shop\Employees\Repositories\Interfaces\EmployeeRepositoryInterface;
 use App\Shop\Facility\Facility;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Carbon;
+//use Illuminate\Support\Carbon;
+Use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {

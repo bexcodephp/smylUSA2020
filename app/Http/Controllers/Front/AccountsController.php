@@ -75,7 +75,7 @@ class AccountsController extends Controller
 
         $products = Product::whereStatus(1)->orderBy('order_no', 'ASC')->get();
 
-        return view('front.user.accounts', [
+        return view('front.users.index', [
             'customer' => $customer,
             'orders' => $this->customerRepo->paginateArrayResults($orders->toArray(), 15),
             'addresses' => $addresses,
