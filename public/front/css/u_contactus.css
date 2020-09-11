@@ -1,0 +1,97 @@
+main {
+  position: relative;
+}
+
+.banner {
+  position: relative;
+  height: 100%;
+}
+
+.contact-wrapper {
+  width: 100%;
+  position: absolute;
+  top: 35%;
+  left: 0;
+  z-index: 1;
+}
+
+.contact-detail {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.contact-detail form .form-group {
+  max-width: 590px;
+}
+
+.contact-detail input.form-control,
+.contact-detail textarea.form-control {
+  background-color: #f5f5fd;
+  color: #4B5261;
+  border-color: #f5f5fd;
+}
+
+.contact-detail input.form-control::placeholder,
+.contact-detail textarea.form-control::placeholder {
+  color: #c7ced5;
+}
+
+.contact-detail-left {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.contact-detail-right {
+  background-image: url('../../../images/products/bg_contactus_right.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  min-height: 450px;
+}
+
+.contact-detail-right .media img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.contact-detail-right .media small {
+  font-size: 1.2rem;
+}
+
+.contact-detail-right .nav-item {
+  max-width: 225px;
+  width: 100%;
+}
+
+
+/* responsive */
+
+@media only screen and (min-width: 768px) {
+  main {
+    min-height: 160vh;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (min-width: 1367px) {
+  .contact-detail input.form-control {
+    height: calc(3.1em + .75rem + 2px);
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  main {
+    min-height: 100vh;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .contact-wrapper {
+    position: relative;
+    top: unset;
+    left: unset;
+  }
+}

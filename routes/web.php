@@ -109,10 +109,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
 Auth::routes(['verify' => true]);
 
-Route::namespace('Auth')->group(function () {
+Route::namespace('Auth')->group(function () {    
     Route::get('cart/login', 'CartLoginController@showLoginForm')->name('cart.login');
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');
+
+    Route::get('/login', 'LoginController@patientLogin'); ///
+    Route::post('/login1', 'LoginController@login')->name("patientlogin");
     
     Route::group(['prefix' => 'pharmacist'], function(){
         Route::get('login', 'LoginController@pharmaLoginFormShow');
@@ -147,7 +150,8 @@ Route::namespace('Front')->group(function () {
     Route::view('landing_page', 'front.landing-page2')->name('landing-page2');
     Route::view('assessment-form', 'front.form_assessment')->name('assessment_form');
     Route::view('video-page', 'front.video')->name('video');
-    Route::view('contact-us', 'front.contact')->name('contact');
+    // Route::view('contact-us', 'front.contact')->name('contact');
+    Route::view('contact-us', 'front.users.u_contactus')->name('contact');
     Route::get('team', 'HomeController@team')->name('team');
     Route::post('contact', 'HomeController@contactUs')->name('contactUs');
 
@@ -265,6 +269,14 @@ Route::namespace('Front')->group(function () {
     });
 
 
+    // Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
+});
+
+Route::get('/candidate', function () {
+    return view('front.users.u_ami_candidate');
+});
+Route::get('/products', function () {
+    return view('front.users.u_products');
 });

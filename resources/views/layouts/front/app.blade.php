@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>SmylUSA - Bring Your Smile On</title>
-
+    
     <meta property="og:title" content="SMYLUSA - Bring Your Smile On" />
     <meta property="og:type" content="health - smulusa" />
     <meta property="og:description" content="SMYLUSA - Bring Your Smile On" />

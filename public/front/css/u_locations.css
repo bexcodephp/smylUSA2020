@@ -1,0 +1,60 @@
+/* banner  */
+
+.bannerslider .item h1 {
+  color: #080909;
+}
+
+
+/* locations details address */
+
+.location-details {
+  display: none;
+  animation: ;
+}
+
+.location-details .subtitle {
+  font-size: x-large;
+  font-weight: bold;
+  margin-bottom: 0;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.location-content {
+  border: 1px solid #4688ed;
+  padding: 1rem;
+  border-radius: .3rem;
+  box-shadow: 0px 0px 10px 1px rgb(0 135 235 / 22%);
+}
+
+.location-content p {
+  margin-bottom: 0;
+}
+
+
+/* responsive */
+
+@media only screen and (min-width: 1367px) {
+  /* locations details address */
+  .location-details .subtitle {
+    font-size: xx-large;
+  }
+  .location-content p {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .location-details .subtitle {
+    font-size: larger;
+  }
+  .select-option .filter-option-inner-inner {
+    font-size: large;
+  }
+  .location-address h5 {
+    font-size: medium;
+  }
+  .location-content p {
+    font-size: small;
+  }
+}

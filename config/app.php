@@ -158,8 +158,8 @@ return [
         Jsdecena\MailChimp\MailChimpServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
         Jsdecena\Baserepo\BaseRepositoryProvider::class,
-        \Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        // Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...

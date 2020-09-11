@@ -1,0 +1,92 @@
+.sign-in-card {
+  background-color: #ffffff;
+  padding: 15px;
+}
+
+.forgot-pwd .btn-link {
+  width: max-content;
+  font-size: 22px;
+}
+
+.forgot-pwd .btn-link:hover {
+  text-decoration: none;
+}
+
+.register-card {
+  background-color: transparent;
+  padding: 0px 15px 15px 15px;
+  border-color: transparent;
+}
+
+
+/* responsive  */
+
+@media only screen and (min-width: 992px) {
+  .title {
+    padding-left: 30px;
+  }
+  .sign-in-left {
+    max-width: 560px;
+  }
+  .forgot-pwd {
+    margin-top: 40px;
+  }
+  .sign-in-title {
+    margin-top: 20px;
+  }
+  .signin-form {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (min-width: 1025) {
+  label {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 1367px) {
+  .sign-in-card {
+    padding: 30px;
+  }
+  .forgot-pwd {
+    margin-top: 86px !important;
+  }
+  .forgot-pwd .btn-link {
+    font-size: 30px;
+  }
+  .sign-in-title {
+    margin-top: 40px;
+  }
+  .signin-form {
+    margin-top: 86px;
+  }
+  label {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  .btn-signin .btn,
+  .btn-register .btn {
+    font-size: 25px;
+    padding: .75rem 1.75rem;
+  }
+  .input-remember .custom-control-label {
+    line-height: 42px;
+    padding-left: 30px;
+  }
+  .input-remember .custom-control-label::before,
+  .input-remember .custom-control-label::after {
+    width: 37px;
+    height: 37px;
+  }
+}
+
+@media only screen and (max-width:1024px) {
+  .forgot-pwd {
+    margin-top: 10px
+  }
+  .forgot-pwd .btn-link {
+    font-size: 20px;
+  }
+}
