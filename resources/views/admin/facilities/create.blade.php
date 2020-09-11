@@ -11,6 +11,14 @@
         .timeTable td, .timeTable th {
             padding: 10px;
         }
+        .start-time-error{
+            display: none;
+            color:red;        
+        }
+        .end-time-error{
+            display: none;
+            color:red;
+        }
     </style>
 @endsection
 
@@ -45,7 +53,7 @@
                                 <label for="name">Facility Name <span class="text-danger">*</span></label>
                                 <input type="text" name="name" id="name" placeholder="Facility name" class="form-control" value="{{ old('name') }}">
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
-                            </div>
+                            </div>  
                         </div>
 
                         <div class="col-sm-4">
@@ -191,19 +199,21 @@
                                 <input type="" id="selectday" value="{{ $days }}" hidden>
                                 <td>
                                     <div class='input-group date non-timepicker' id='starttime{{$key}}' data-id="{{$key}}">
-                                        <input type='text' class="form-control" id="start_time_{{$key}}" name="start[{{$key}}]" value="{{ old('start[$key]') }}" required/>
+                                        <input type='text' class="form-control start" id="start_time_{{$key}}" name="start[{{$key}}]" value="{{ old('start[$key]') }}"  required/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
+                                        <span class="start-time-error">{{ $days }} Start time is required</span> 
                                       </div>
                                 </td>
 
                                 <td>
                                     <div class='input-group date non-timepicker' id='endtime{{$key}}' data-id="{{$key}}">
-                                        <input type='text' class="form-control" id="end_time_{{$key}}" name="end[{{$key}}]" value="{{ old('start[$key]') }}" required/>
+                                        <input type='text' class="form-control end" id="end_time_{{$key}}" name="end[{{$key}}]" value="{{ old('start[$key]') }}" required />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-time"></span>
                                         </span>
+                                        <span class="end-time-error">{{ $days }} End time is required</span>
                                       </div>
                                 </td>
              
@@ -224,7 +234,7 @@
                 <div class="box-footer">
                     <div class="btn-group">
                         <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" id="submit" class="btn btn-primary">Create</button>
                     </div>
                 </div>
             </form>
@@ -441,7 +451,7 @@ function TimePickerCtrl(id) {
     format: 'hh:mm a'
   });
   
-  var endTime = $(".non-timepicker input").datetimepicker({
+  var endTime = $(".non-timepicker").datetimepicker({
     format: 'hh:mm a',
     minDate: startTime.data("DateTimePicker").date()
   });
@@ -470,9 +480,28 @@ function TimePickerCtrl(id) {
 $(document).ready(function(){
     $('.non-timepicker').on('click', function(){        
         var dt = $(this).attr("data-id")
+        // alert(dt);
         TimePickerCtrl(dt);
     });
 });
+
+ // $("#submit").on('click', function(){     
+ //    // alert("qqq");
+ //    var dt = $(this).attr("data-id");
+ //    console.log(dt);
+ //    // alert(dt);
+ //    var fieldname = $("#start_time_"+dt);
+ //    console.log(fieldname);
+ //    // alert(fieldname);
+ //    if(fieldname == ""){
+ //        $(".start-time-error").show();     
+ //    } 
+   
+ //   // if(){
+ //   //      $(".end-time-error").show();     
+ //   //  }
+
+ // });
 
     
     </script>
