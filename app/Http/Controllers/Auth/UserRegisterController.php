@@ -78,6 +78,8 @@ class UserRegisterController extends Controller
 
     public function register(Request $request)
     {        
+        //dd($register);
+
         $validator = Validator::make($request->input(), [
             'email' => 'required|email|unique:employees,email',
             'name' => 'required',

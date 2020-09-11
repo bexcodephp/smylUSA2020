@@ -48,7 +48,7 @@
                             </li>
                         </ul>
                         {{--  sign in  --}}
-                        <ul class="navbar-nav nav-sign-in-reg nav-sub-right align-self-center">
+                        <ul class="navbar-nav nav-sign-in-reg nav-sub-right align-self-center <?php  if (Auth::check()) { echo "hidden";}?>">
                             <li class="nav-item">
                                 <div class="media">
                                     <ul class="navbar-nav d-flex flex-lg-row flex-column nav-profile-caption align-self-center">
@@ -68,12 +68,12 @@
                             </li>
                         </ul>
                         {{--  profile icon  --}}
-                        <ul class="navbar-nav nav-profile nav-sub-right align-self-center hidden">
+                        <ul class="navbar-nav nav-profile nav-sub-right align-self-center <?php  if (!Auth::check()) { echo "hidden";}?>">
                             <li class="nav-item">
                                 <div class="media">
                                     <ul class="navbar-nav d-flex flex-column nav-profile-caption align-self-center">
                                         <li class="nav-item nav-user-name">
-                                            <a class="nav-link" href="#">User Name</a>
+                                            <a class="nav-link" href="#"><?php echo Auth::user()->name;?></a>
                                         </li>
                                         <li class="nav-item nav-sign-out">
                                             <a class="nav-link" href="#">Sign Out</a>

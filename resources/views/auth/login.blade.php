@@ -63,10 +63,12 @@
                     <h4 class="sign-in-title">New User</h4>
                     <h4 class="color-blue">Don't Have an account? Register Now!</h4>
                     <div class="mt-xxl-6">
+                    <?php //echo Auth::user();?>
                         @include('layouts.errors-and-messages')
                     </div>
                     <div class="register-form mt-3">
                         <form id="shopLoginRegister" class="row" method="POST" role="form" action="{{ route('register') }}">
+                        {{ csrf_field() }}
                             <div class="col-md-6 form-group">
                                 <label>First Name</label>
                                 <input type="text" name="first_name" class="form-control input-white" id="f_name" placeholder="First Name">

@@ -64,7 +64,7 @@ class RegisterController extends Controller
      */
     public function register(RegisterCustomerRequest $request)
     {        
-        dd($request);
+        //dd($request);
         $customer = $this->create($request->except('_method', '_token'));
         
         Mail::to($customer)->send(new UserRegistration($customer));
