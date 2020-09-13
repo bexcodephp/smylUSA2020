@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>First Name</label>
-                                <input type="text" class="form-control input-white" id="fname" placeholder="First Name">
+                                <input type="text" class="form-control input-white" id="fname" placeholder="First Name" value="{{ old('first_name')}}">
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Last Name</label>
@@ -110,7 +110,7 @@
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 1</label>
-                                <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address">
+                                <input type="text" name="first_name" class="form-control input-white" id="address_1" placeholder="Type Your Address">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 2</label>

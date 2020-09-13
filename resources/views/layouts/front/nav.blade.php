@@ -73,10 +73,10 @@
                                 <div class="media">
                                     <ul class="navbar-nav d-flex flex-column nav-profile-caption align-self-center">
                                         <li class="nav-item nav-user-name">
-                                            <a class="nav-link" href="#"><?php echo Auth::user()->name;?></a>
+                                            <a class="nav-link" href="#"><?php if (Auth::check()) {echo Auth::user()->name;}?></a>
                                         </li>
                                         <li class="nav-item nav-sign-out">
-                                            <a class="nav-link" href="#">Sign Out</a>
+                                            <a class="nav-link" href="{{ route('logout') }}">Sign Out</a>
                                         </li>
                                     </ul>
                                     <div class="btn-group nav-profile-icon">
@@ -142,7 +142,7 @@
                         <ul class="navbar-nav nav_cart align-items-center order-lg-3">
                             <li class="nav-item">
                                 <a class="nav-link icon_cart" href="#">
-                                    <span class="badge badge-pill">5&#43;</span>
+                                    <span class="badge badge-pill"></span>
                                 </a>
                             </li>
                         </ul>

@@ -29,7 +29,7 @@
                     <h4 class="sign-in-title">Already a Member?</h4>
                     <h4 class="color-blue">Sign in</h4>
                     <div class="mt-xxl-6">
-                        @include('layouts.errors-and-messages')
+                        @include('layouts.errors-and-messages')                        
                     </div>
                     <div class="signin-form mt-xxl-6">
                         <form  id="shopLoginSignIn" class="row" role="form" method="POST" action="{{ url('login') }}">
@@ -63,31 +63,31 @@
                     <h4 class="sign-in-title">New User</h4>
                     <h4 class="color-blue">Don't Have an account? Register Now!</h4>
                     <div class="mt-xxl-6">
-                    <?php //echo Auth::user();?>
-                        @include('layouts.errors-and-messages')
+                    <!-- @include('layouts.errors-and-messages') -->
                     </div>
                     <div class="register-form mt-3">
                         <form id="shopLoginRegister" class="row" method="POST" role="form" action="{{ route('register') }}">
                         {{ csrf_field() }}
                             <div class="col-md-6 form-group">
                                 <label>First Name</label>
-                                <input type="text" name="first_name" class="form-control input-white" id="f_name" placeholder="First Name">
+                                <input type="text" name="first_name" class="form-control input-white" id="f_name" placeholder="First Name" required>
+                                {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Last Name</label>
-                                <input type="text" name="last_name" class="form-control input-white" id="l_name" placeholder="Last Name">
+                                <input type="text" name="last_name" class="form-control input-white" id="l_name" placeholder="Last Name" required>
                             </div>
                             <div class="col-12 form-group">
                                 <label>Email Address</label>
-                                <input type="email" name="email" class="form-control input-white" id="email" placeholder="Email Address">
+                                <input type="email" name="email" class="form-control input-white" id="email" placeholder="Email Address" required>
                             </div>
                             <div class="col-12 form-group hidden">
                                 <label>Password</label>
-                                <input type="password" name="password" class="form-control input-white" id="r_password" placeholder="Password">
+                                <input type="password" name="password" class="form-control input-white" id="r_password" placeholder="Password" required>
                             </div>
                             <div class="col-12 form-group">
                                 <label>Phone Number</label>
-                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number">
+                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" required>
                             </div>
                             <div class="col-12 text-left btn-register mt-xl-3 my-3">                                
                                 <button type="submit" class="btn btn-primary btn-lg text-center">REGISTER NOW</button>
