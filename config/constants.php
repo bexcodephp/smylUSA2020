@@ -17,4 +17,6 @@ return [
                 '6' => "Sunday",
               ],
 
+        'admin_role' => '5',
+
     ];
