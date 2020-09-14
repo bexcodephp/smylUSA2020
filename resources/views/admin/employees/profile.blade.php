@@ -76,7 +76,8 @@
                                     ?>
                                     
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
-                                        <img src="{{ asset('images/licence.png')}}" >
+                                        <!-- <img src="{{ asset('images/licence.png')}}" > -->
+                                        <img src="{{ url('storage/'.$file) }}" width="100">
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
                                     <!-- <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a> -->
@@ -84,7 +85,8 @@
                                     }else{
                             ?>
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
-                                        <img src="{{ asset('images/icon_pdf.png')}}">
+                                        <!-- <img src="{{ asset('images/icon_pdf.png')}}"> -->
+                                        <img src="{{ url('storage/'.$file) }}" width="100">
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
                                     <!-- <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a> -->
@@ -130,11 +132,11 @@
         if(type=='png' || type =='jpeg' || type == 'jpg'){
             $("#doc_src").show();
             $("#doc_src1").hide();
-            $('#doc_src').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
+            $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
         }else{
             $("#doc_src1").show();
             $("#doc_src").hide();
-            $('#doc_src1').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
+            $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
         }
     }
 
