@@ -67,8 +67,8 @@ class RegisterController extends Controller
         //dd($request);
         $customer = $this->create($request->except('_method', '_token'));
         
-       // Mail::to($customer)->send(new UserRegistration($customer));
-       // Mail::to($customer)->send(new AfterRegistration($customer));
+        Mail::to($customer)->send(new UserRegistration($customer));
+        Mail::to($customer)->send(new AfterRegistration($customer));
 
         event(new AddNotification($customer->id, 1, 'Account Registration'));
         

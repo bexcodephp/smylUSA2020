@@ -33,7 +33,7 @@
                                 NOTE: 
                                 Add Hiiden class for hide old password  
                             --}}
-                            <div class="col-12 form-group ">
+                            <div class="col-12 form-group hidden">
                                 <label>Old Password</label>
                                 <input type="password" class="form-control input-gray" id="password" placeholder="Old Password">
                             </div>
