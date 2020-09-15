@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'rizwansaleem70@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'php13@bexcodeservices.com'),
         'name' => env('MAIL_FROM_NAME', env('APP_NAME')),
     ],
 
@@ -119,5 +119,14 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer'       => false,
+            'verify_peer_name'  => false,
+        ],
+    ],
+
 
 ];

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Shop\Employees\Employee;
