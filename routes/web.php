@@ -274,10 +274,3 @@ Route::namespace('Front')->group(function () {
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
-
-// Route::get('/candidate', function () {
-//     return view('front.users.u_ami_candidate');
-// });
-// Route::get('/products', function () {
-//     return view('front.users.u_products');
-// });

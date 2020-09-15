@@ -1,7 +1,7 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('front/css/cart.css') }}"  type="text/css" >
     <link rel="stylesheet" href="{{ asset('front/css/table-responsive.css') }}"  type="text/css" >
+    <link rel="stylesheet" href="{{ asset('front/css/cart.css') }}"  type="text/css" >
 @endpush
 @section('content')
 <main class="u-ami-candidate">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </section>
-    <section class="container">
+    <section class="container py-xxl-6 py-5">
       {{-- @if(count($cartItems) == 0) --}}
       <div class="row hidden" id="empty-cart">
         <div class="col-12">
@@ -130,7 +130,7 @@
                       <span class="cart-total-label text-bold">Shipping</span>
                     </td>
                     <td>
-                      <span class="cart-total-value">${{ $total > 0 ? $shippingFee  : 0}}</span>
+                      <span class="cart-total-value">$ {{ $total > 0 ? $shippingFee  : 0}}</span>
                     </td>
                   </tr>
                   <tr class="border-bottom-0">
