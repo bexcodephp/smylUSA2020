@@ -81,10 +81,13 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
-        //dd($request);    
+        $role = Config::get('constants.operator');
+        // dd($var);
+        // exit();
+        // dd($request);    
         //dd($request->file('license_certificates')->getClientOriginalName());
         //dd($request);
-        $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
+        $request->request->add(['role' => $role, 'password'=>Hash::make('12345678')]); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);

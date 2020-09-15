@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Carbon;
 Use Carbon\Carbon;
 
+use Config;
+
 class EmployeeController extends Controller
 {
     /**
@@ -81,10 +83,8 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
-        //dd($request);    
-        //dd($request->file('license_certificates')->getClientOriginalName());
-        //dd($request);
-        $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
+        $role = Config::get('constants.operator');
+        $request->request->add(['role' => $role, 'password'=>Hash::make('12345678')]); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);
