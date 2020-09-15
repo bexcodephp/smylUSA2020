@@ -52,24 +52,25 @@
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
                             </div>
+                            <?php //print_r($userdata->first_name);?>
                             <div class="col-sm-6 form-group">
-                                <label>First Name</label>
-                                <input type="text" class="form-control input-white" id="fname" placeholder="First Name" value="{{ old('first_name')}}">
+                                <label>First Name<span class="text-danger">*</span></label>
+                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $userdata->first_name }}">
                             </div>
                             <div class="col-sm-6 form-group">
-                                <label>Last Name</label>
-                                <input type="text" class="form-control input-white" id="lname" placeholder="Last Name">
+                                <label>Last <span class="text-danger">*</span></label>
+                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $userdata->last_name }}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
-                                <label>Moblie Number</label>
-                                <input type="text" class="form-control input-white" id="phone" placeholder="Phone Number">
+                                <label>Moblie Number<span class="text-danger">*</span></label>
+                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" value="{{ $userdata->phone }}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
-                                <label>Date of Birth</label>
+                                <label>Date of Birth<span class="text-danger">*</span></label>
                                 <input type="date" class="form-control input-white" id="dob">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
-                                <label>Patient ID</label>
+                                <label>Patient ID<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control input-white" id="patient_id" placeholder="000000">
                             </div>
                         </div>
@@ -79,23 +80,23 @@
                                 <h4 class="sub-title color-blue text-bold">Billing Information</h4>
                             </div>
                             <div class="col-12 form-group">
-                                <label>Address 1</label>
+                                <label>Address 1<<span class="text-danger">*</span>/label>
                                 <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address">
                             </div>
                             <div class="col-12 form-group">
-                                <label>Address 2</label>
+                                <label>Address 2<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control input-white" id="address_2" placeholder="Type Your Address">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
-                                <label>City</label>
+                                <label>City<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control input-white" id="city" placeholder="Your City Name">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
-                                <label>State</label>
+                                <label>State<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control input-white" id="state" placeholder="Your State Name">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
-                                <label>Zip Code</label>
+                                <label>Zip Code<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control input-white" id="zipcode" placeholder="000000">
                             </div>
                         </div>
@@ -130,8 +131,7 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-12 text-right">
-                                <button type="button" class="btn btn-primary skip-tab">Skip</button>
+                            <div class="col-12 text-right">                               
                                 <button type="button" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
@@ -357,11 +357,11 @@
                             <div class="col-12 mb-3">
                                 <div class="row">
                                     <div class="col-auto align-self-center">
-                                        <h6 class="sub-title-1 color-gray text-bold">Upload Your STL Files</h6>
+                                        <h6 class="sub-title-1 color-gray text-bold">Your STL Files</h6>
                                     </div>
-                                    <div class="col-sm col-auto align-self-center text-right">
+                                    <!-- <div class="col-sm col-auto align-self-center text-right">
                                         <button type="button" class="btn btn-primary"  onclick="btnUploadStl()">Upload New</button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-12">
@@ -372,10 +372,10 @@
                                             <div class="card-body">
                                                 <p class="card-text">Image Description will be here Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et tur. Excepteur sint</p>
                                             </div>
-                                            <div class="card-footer p-0 justify-content-center">
+                                            <!-- <div class="card-footer p-0 justify-content-center">
                                                 <button type="button" class="btn btn-link btn-edit" onclick="btnEditLtsPic()">Edit</button>
                                                 <button type="button" class="btn btn-link btn-delete">Delete</button>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="col mb-4">
@@ -384,10 +384,6 @@
                                             <div class="card-body">
                                                 <p class="card-text">Image not have Description</p>
                                             </div>
-                                            <div class="card-footer p-0 justify-content-center">
-                                                <button type="button" class="btn btn-link btn-edit">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col mb-4">
@@ -395,11 +391,7 @@
                                             <img class="card-img-top" src="{{ asset('images/products/stl_3.png') }}" />
                                             <div class="card-body">
                                                 <p class="card-text">Image not have Description</p>
-                                            </div>
-                                            <div class="card-footer p-0 justify-content-center">
-                                                <button type="button" class="btn btn-link btn-edit">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
-                                            </div>
+                                            </div>                                            
                                         </div>
                                     </div>
                                     <div class="col mb-4">
@@ -407,11 +399,7 @@
                                             <img class="card-img-top" src="{{ asset('images/products/stl_4.png') }}" />
                                             <div class="card-body">
                                                 <p class="card-text">Image not have Description</p>
-                                            </div>
-                                            <div class="card-footer p-0 justify-content-center">
-                                                <button type="button" class="btn btn-link btn-edit">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
-                                            </div>
+                                            </div>                                            
                                         </div>
                                     </div>
                                 </div>
