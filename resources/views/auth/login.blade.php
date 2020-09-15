@@ -77,11 +77,12 @@
                             {{ csrf_field() }}
                             <div class="col-md-6 form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                                 <label>First Name</label>
-                                <input type="text" name="first_name" class="form-control input-white" id="f_name" placeholder="First Name">
+                                <input type="text" name="first_name" class="form-control input-white" id="f_name" placeholder="First Name" required>
+                                {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
                             </div>
                             <div class="col-md-6 form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                                 <label>Last Name</label>
-                                <input type="text" name="last_name" class="form-control input-white" id="l_name" placeholder="Last Name">
+                                <input type="text" name="last_name" class="form-control input-white" id="l_name" placeholder="Last Name" required>
                             </div>
                             <div class="col-12 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label>Email Address</label>
@@ -89,7 +90,7 @@
                             </div>
                             <div class="col-12 form-group hidden {{ $errors->has('password') ? 'has-error' : '' }}">
                                 <label>Password</label>
-                                <input type="password" name="password" class="form-control input-white" id="r_password" placeholder="Password">
+                                <input type="password" name="password" class="form-control input-white" id="r_password" placeholder="Password" required>
                             </div>
                             <div class="col-12 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                                 <label>Phone Number</label>
@@ -120,8 +121,7 @@
                 contentType: false,
                 cache: false,
                 processData: false,
-                success: function(data) {
-                    // console.log(">>>>>>>"+data);
+                success: function(data) {                   
                     var obj = Object();
                     obj = jQuery.parseJSON(data);
                     

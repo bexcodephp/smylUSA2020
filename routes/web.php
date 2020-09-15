@@ -161,7 +161,9 @@ Route::namespace('Front')->group(function () {
 
 
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
+    Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
+    
 
     Route::post('booking', 'HomeController@bookAppointment')->name('bookAppointment');
     Route::post('getLocations', 'HomeController@getLocations')->name('getLocations');
@@ -273,10 +275,3 @@ Route::namespace('Front')->group(function () {
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
-
-// Route::get('/candidate', function () {
-//     return view('front.users.u_ami_candidate');
-// });
-// Route::get('/products', function () {
-//     return view('front.users.u_products');
-// });
