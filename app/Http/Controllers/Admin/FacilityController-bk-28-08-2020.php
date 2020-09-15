@@ -205,7 +205,7 @@ class FacilityController extends Controller
         return $a;
         //return $this->sendResponse(true, "Facility time updated");
     }
-
+    
     public function addNonAvailabilityTime(Request $request)
     {
         $weekday =  date('w', strtotime($request->date));
