@@ -32,7 +32,8 @@ class UpdateEmployeeRequest extends FormRequest
             'home_address' => ['required'],
             'location_associated' => ['required'],
             //'license_certificates' => ['required','max:3'],
-            'license_certificates.*' => ['mimes:png,jpg,jpeg,pdf'],
+            'license_certificates' => request()->has('license_certificates') ? ['required','max:3'] : '',
+            // 'license_certificates.*' => ['mimes:png,jpg,jpeg,pdf'],
             'status' => ['required'],
         ];
     }

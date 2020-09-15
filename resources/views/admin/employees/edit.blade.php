@@ -43,7 +43,7 @@
                             $location_list = json_decode($employee->location_associated);
                             $select = '';
                         ?>
-
+                        
                         <select name="location_associated[]" id="location_associated" class="form-control select2" multiple="multiple">
                             <option></option>
                             @foreach($facilities as $location)
@@ -87,8 +87,8 @@
                         <?php                            
                             $files =  $employee->license_certificates; 
                             $files = json_decode($files); 
-                            //dd($files);
                             $licence = 0;
+
                             foreach($files as $file){
                                 $licence++;
                         ?>
@@ -167,8 +167,8 @@ $(document).ready(function() {
         var id=$(this).val();
         getLocation(id);
     });
+    
     $("#license_certificates").change(function(){
-        // alert("aaa");
         var licCount = $('.licence-div').length;
         if (licCount === 3){
             alert("You need to delete existing files befor you upload. Your upload limit is 3.");
