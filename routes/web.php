@@ -73,7 +73,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::post('facilities/updateNaHours/{id}', 'FacilityController@updateNonAvailabilityTime');
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
-            
+        Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
+        
             Route::resource('addresses', 'Addresses\AddressController');
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');
@@ -160,7 +161,9 @@ Route::namespace('Front')->group(function () {
 
 
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
+    Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
+    
 
     Route::post('booking', 'HomeController@bookAppointment')->name('bookAppointment');
     Route::post('getLocations', 'HomeController@getLocations')->name('getLocations');
@@ -271,16 +274,4 @@ Route::namespace('Front')->group(function () {
     // Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
-});
-
-// update
-
-Route::get('/candidate', function () {
-    return view('front.users.u_ami_candidate');
-});
-Route::get('/products', function () {
-    return view('front.users.u_products');
-});
-Route::get('/checkout', function () {
-    return view('front.checkout2-update');
 });

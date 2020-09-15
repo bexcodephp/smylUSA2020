@@ -58,7 +58,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="{{ asset('js/admin.min.js') }}"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 
 <script src="{{ asset('//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js') }}"></script>
@@ -66,6 +65,8 @@
 <script src="{{ asset('//cdn.ckeditor.com/4.8.0/standard/ckeditor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/sweetalert2.all.js') }}"></script>
 <script src="{{ asset('js/scripts.js?v=0.2') }}"></script>
+<script src="{{ asset('js/admin.min.js') }}"></script>
+<script src="{{ asset('js/operator/operator.js') }}"></script>
 @yield('js')
 </body>
 </html>

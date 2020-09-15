@@ -130,7 +130,11 @@
                         
                         <td>{{ $employee->fname."  ".$employee->lname }}</td>
                         <td>{{ $employee->email }}</td>
-                        <td>{{ $employee->phone }}</td> 
+                        <?php
+                            $number = $employee->phone;
+                            $formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "+1 ($1) $2 $3", $number);
+                        ?>
+                        <td>{{ $formatted_number }}</td> 
                         <td onclick="showStatusDropDown('{{$employee->id}}');" id="op_status_{{$employee->id}}">{{ Config::get('constants.STATUS.'.$employee->status) }}</td> 
                         <td class="status-td hidden" id="op_status_dropdown_{{$employee->id}}" >
                             <select name="status" id="status_{{$employee->id}}" class="form-control select2" onchange="selectStatus(this,'{{$employee->id}}')" >

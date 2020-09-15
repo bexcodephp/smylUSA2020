@@ -128,7 +128,8 @@ Your account has been successfully registered and we will keep you updated about
 								<table align="center" border="0" cellpadding="0" cellspacing="0" style="border-radius: 2px;" bgcolor="#26c6da">
 									<tr>
 										<td align="center" height="44" style="font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; line-height: 24px; padding-left: 53px; padding-right: 53px;">
-											<a href="{{ route('verifyEmail', $user->email_verification_code) }}" style="text-decoration: none; color: #ffffff;">
+											<!-- verifyemail -->
+											<a href="{{ route('generatePassword', $user->email_verification_code) }}" style="text-decoration: none; color: #ffffff;">
 												CONFIRM YOUR EMAIL ADDRESS
 											</a>
 										</td>
