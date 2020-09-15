@@ -22,12 +22,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($operators as $customer)
+                        @foreach ($customers as $customer)
                             <tr>
                                 <td>{{ $customer['id'] }}</td>
                                 <td>{{ $customer['name'] }}</td>
                                 <td>{{ $customer['email'] }}</td>
-                                <td>@include('layouts.status', ['status' => $customer['status']])</td>
+                                <td>{{-- @include('layouts.status', ['status' => ])--}} {{ $customer['status'] }}</td>
                                 <td>
                                     <form action="{{ route('admin.customers.destroy', $customer['id']) }}" method="post" class="form-horizontal">
                                         {{ csrf_field() }}
