@@ -51,8 +51,8 @@
                             </div>
                             <div class="col-12 mt-3 input-remember">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input">
-                                    <label class="custom-control-label" for="rememberme">Remember Me</label>
+                                    <input type="checkbox" class="custom-control-input" id="shopLoginSignInRemember">
+                                    <label class="custom-control-label" for="shopLoginSignInRemember">Remember Me</label>
                                 </div>
                             </div>
                             <div class="col-12 text-left forgot-pwd">

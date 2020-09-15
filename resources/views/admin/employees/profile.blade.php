@@ -121,25 +121,18 @@
 </div>
 {{-- End preview document modal --}}
     <!-- /.content -->
-
-
-<script>
-
-    function viewCertificates(doc_name,type) { 
-
-        $('#modal_view_docs').modal('show');
-
-        if(type=='png' || type =='jpeg' || type == 'jpg'){
-            $("#doc_src").show();
-            $("#doc_src1").hide();
-            $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
-        }else{
-            $("#doc_src1").show();
-            $("#doc_src").hide();
-            $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+    <script type="text/javascript">
+        function viewCertificates(doc_name,type) { 
+            $('#modal_view_docs').modal('show');
+            if(type=='png' || type =='jpeg' || type == 'jpg'){
+                $("#doc_src").show();
+                $("#doc_src1").hide();
+                $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+            }else{
+                $("#doc_src1").show();
+                $("#doc_src").hide();
+                $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+            }
         }
-    }
-
-</script>
-
+    </script>
 @endsection
