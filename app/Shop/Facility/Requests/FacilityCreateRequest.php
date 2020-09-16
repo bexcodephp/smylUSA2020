@@ -25,12 +25,14 @@ class FacilityCreateRequest extends FormRequest
         return [
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:facilities'],
-            'phone' => ['required'],
+            'phone' => ['required','digits:10','unique:facilities'],
             'address' => ['required'],
             'zipcode' => ['required'],            
             'city' => ['required'],
             'state' => ['required'],
-            'is_active' => ['required']
+            'is_active' => ['required'],
+            'image' => ['required'],
+            'image.*' => ['mimes:png,jpg,jpeg,pdf'],
         ];
     }
 }

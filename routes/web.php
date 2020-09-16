@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::post('facilities/updateNaHours/{id}', 'FacilityController@updateNonAvailabilityTime');
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
+            Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
 
             Route::resource('addresses', 'Addresses\AddressController');
             Route::resource('countries', 'Countries\CountryController');
@@ -160,7 +161,9 @@ Route::namespace('Front')->group(function () {
 
 
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
+    Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
+
 
     Route::post('booking', 'HomeController@bookAppointment')->name('bookAppointment');
     Route::post('getLocations', 'HomeController@getLocations')->name('getLocations');

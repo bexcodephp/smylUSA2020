@@ -286,7 +286,13 @@ class HomeController extends Controller
         Mail::to($customer)->send(new EmailVerification($customer));
 
         return redirect('login')->with(['message' => "Email verified. Login Now", 'status' => '1']);
+        
 
+    }
+
+    public function generate_password($code)
+    {        
+        return view('front.auth.resetpassword');
     }
 
     public function voodooResponse(Request $request)

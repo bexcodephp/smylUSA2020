@@ -25,7 +25,7 @@
 
 <!-- Main content -->
 <section class="content">
-    @include('layouts.errors-and-messages')
+    <!-- @include('layouts.errors-and-messages') -->
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Edit Facility</h3>
@@ -36,26 +36,26 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-sm-4">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                             <label for="name">Facility Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" id="name" placeholder="Facility name" class="form-control"
-                                value="{{ $facility->name }}">
+                            <input type="text" name="name" id="name" placeholder="Facility name" class="form-control" value="{{ $facility->name }}">
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
                         </div>
                     </div>
 
                     <div class="col-sm-4">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                             <label for="name">Facility Email <span class="text-danger">*</span></label>
-                            <input type="text" name="email" id="email" placeholder="email" class="form-control"
-                                value="{{ $facility->email }}">
+                            <input type="text" name="email" id="email" placeholder="email" class="form-control" value="{{ $facility->email }}">
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>
                     </div>
 
                     <div class="col-sm-4">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                             <label for="name">Facility Phone <span class="text-danger">*</span></label>
-                            <input type="text" name="phone" id="phone" placeholder="phone" class="form-control"
-                                value="{{ $facility->phone }}" onkeypress='return restrictAlphabets(event)'>
+                            <input type="text" name="phone" id="phone" placeholder="phone" class="form-control" value="{{ $facility->phone }}" onkeypress='return restrictAlphabets(event)'>
+                            <span class="text-danger">{{ $errors->first('phone') }}</span>
                         </div>
                     </div>
                 </div>
@@ -64,18 +64,18 @@
                     <div class="col-sm-4">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                                     <label for="name">Address <span class="text-danger">*</span></label>
-                                    <input type="text" name="address" id="address" placeholder="address"
-                                        class="form-control" value="{{ $facility->address }}">
+                                    <input type="text" name="address" id="address" placeholder="address" class="form-control" value="{{ $facility->address }}">
+                                     <span class="text-danger">{{ $errors->first('address') }}</span>
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('zipcode') ? 'has-error' : '' }}">
                                     <label for="name">Zipcode <span class="text-danger">*</span></label>
-                                    <input type="text" name="zipcode" id="zipcode" placeholder="zipcode"
-                                        class="form-control" value="{{ $facility->zipcode }}" onkeypress='return restrictAlphabets(event)'>
+                                    <input type="text" name="zipcode" id="zipcode" placeholder="zipcode" class="form-control" value="{{ $facility->zipcode }}" onkeypress='return restrictAlphabets(event)'>
+                                    <span class="text-danger">{{ $errors->first('zipcode') }}</span>
                                 </div>
                             </div>
 
@@ -109,7 +109,7 @@
                             <input type="hidden" id="city_id" value="{{ $facility->city }}">
                             
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('state') ? 'has-error' : '' }}">
                                     <label for="state">State<span class="text-danger">*</span></label>
                                     <select id="state" name="state" class="form-control">
                                         <option value="">Select state</option>
@@ -124,17 +124,19 @@
                                             <option id="opt_state_{{ $state->state_id }}" value="{{ $state->state_id }}">{{ $state->state_name }}</option>
                                         @endforeach
                                     </select>
+                                    <span class="text-danger">{{ $errors->first('state') }}</span>
                                 </div>
                             </div>
                             
                             <input type="hidden" id="state_name" value="<?php echo $state_arr[$facility->state]; ?>">
 
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                                     <label for="name">City <span class="text-danger">*</span></label>
                                     <select id="city" name="city" name="city" class="form-control">
                                         <option value="">Select city</option>
                                     </select>
+                                    <span class="text-danger">{{ $errors->first('city') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -154,20 +156,22 @@
                     </div> -->
 
                     <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                             <label for="image">Facility Image</label>
                             <img src="{{ url('storage/'.$facility->image) }}" width="100"/>
                             <input type="file" name="image" id="image" class="form-control">
+                            <span class="text-danger">{{ $errors->first('image') }}</span>
                         </div>
                     </div>
                     
                     <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
                             <label for="status">Status<span class="text-danger">*</span></label>
                             <select name="is_active" id="status" class="form-control">
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
                             </select>
+                            <span class="text-danger">{{ $errors->first('status') }}</span>
                         </div>
                     </div>
                 </div>
