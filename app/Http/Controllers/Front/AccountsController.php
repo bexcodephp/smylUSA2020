@@ -54,6 +54,7 @@ class AccountsController extends Controller
 
     public function index()
     {
+        return view('front.patient.loginform');
         $customer = $this->customerRepo->findCustomerById(auth()->user()->id);
 
         $customerRepo = new CustomerRepository($customer);
@@ -98,8 +99,10 @@ class AccountsController extends Controller
             $order = null;
         }
         $customer = auth()->user();
+        
+        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer'));
 
-        return view('front.medical_form', compact('order', 'address', 'history', 'customer'));
+        //return view('front.medical_form', compact('order', 'address', 'history', 'customer'));
     }
 
     public function submitMedicalForm(Request $request)

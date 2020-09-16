@@ -5,6 +5,7 @@
 @section('content')
 <main class="patient-login-first">
     {{--  slider  --}}
+    <?php //dd($customer);?>
     <section class="banner">
         <div class="hero-img">
             <div class="item" style="background-image:url('{{ asset('images/products/ourvalues.png') }}') ">
@@ -46,24 +47,24 @@
             <div class="col-12">
                 <div class="tab-content" id="form-tabContent">
                     {{--  step 1  --}}
-                    <form class="tab-pane fade show active py-3 step-1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
+                    <form  action="{{ route('submitMedicalForm', $order ? $order->reference : null) }}" class="tab-pane fade show active py-3 step-1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
                         {{--  personel Information  --}}
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
                             </div>
-                            <?php //print_r($userdata->first_name);?>
+                           
                             <div class="col-sm-6 form-group">
                                 <label>First Name<span class="text-danger">*</span></label>
-                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $userdata->first_name }}">
+                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $customer->first_name }}">
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Last <span class="text-danger">*</span></label>
-                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $userdata->last_name }}">
+                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $customer->last_name }}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Moblie Number<span class="text-danger">*</span></label>
-                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" value="{{ $userdata->phone }}">
+                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" value="{{ $customer->phone }}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Date of Birth<span class="text-danger">*</span></label>
@@ -80,7 +81,7 @@
                                 <h4 class="sub-title color-blue text-bold">Billing Information</h4>
                             </div>
                             <div class="col-12 form-group">
-                                <label>Address 1<<span class="text-danger">*</span>/label>
+                                <label>Address 1<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address">
                             </div>
                             <div class="col-12 form-group">
