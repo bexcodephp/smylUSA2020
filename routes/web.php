@@ -32,7 +32,7 @@ Route::namespace('Admin')->group(function () {
     Route::get('admin/logout', 'LoginController@logout')->name('admin.logout');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.' ], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.'], function () {
     Route::namespace('Admin')->group(function () {
         Route::group(['middleware' => ['role:admin|superadmin, guard:employee']], function () {
             Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             });
             Route::namespace('Customers')->group(function () {
                 Route::resource('customers', 'CustomerController');
-            Route::resource('customers.addresses', 'CustomerAddressController');
+                Route::resource('customers.addresses', 'CustomerAddressController');
             });
 
             Route::namespace('Categories')->group(function () {
@@ -73,7 +73,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::post('facilities/updateNaHours/{id}', 'FacilityController@updateNonAvailabilityTime');
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
-            
+
             Route::resource('addresses', 'Addresses\AddressController');
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');
@@ -108,27 +108,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
 Auth::routes(['verify' => true]);
 
-Route::namespace('Auth')->group(function () {    
+Route::namespace('Auth')->group(function () {
     Route::get('cart/login', 'CartLoginController@showLoginForm')->name('cart.login');
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');
 
     Route::get('/login', 'LoginController@patientLogin'); ///
     Route::post('/login1', 'LoginController@login')->name("patientlogin");
-    
-    Route::group(['prefix' => 'pharmacist'], function(){
+
+    Route::group(['prefix' => 'pharmacist'], function () {
         Route::get('login', 'LoginController@pharmaLoginFormShow');
         Route::post('login', 'LoginController@userLogin')->name('pharma_login');
         Route::post('register', 'UserRegisterController@register')->name('pharma_register');
     });
 
-    Route::group(['prefix' => 'dentist'], function(){
+    Route::group(['prefix' => 'dentist'], function () {
         Route::get('login', 'LoginController@dentistLoginFormShow');
         Route::post('login', 'LoginController@userLogin')->name('dentist_login');
         Route::post('register', 'UserRegisterController@register')->name('dentist_register');
     });
 
-    Route::group(['prefix' => 'vendor'], function(){
+    Route::group(['prefix' => 'vendor'], function () {
         Route::get('login', 'LoginController@vendorLoginFormShow');
         Route::post('login', 'LoginController@userLogin')->name('vendor_login');
         Route::post('register', 'UserRegisterController@register')->name('vendor_register');
@@ -193,7 +193,7 @@ Route::namespace('Front')->group(function () {
     });
 
     Route::group(['middleware' => ['usertype', 'web']], function () {
-        Route::group(['prefix' => 'dentist'], function(){
+        Route::group(['prefix' => 'dentist'], function () {
 
             Route::get('profile', 'DentistController@profile')->name('dentist.profile');
             Route::get('new-case', 'DentistController@newCase')->name('dentist.new-case');
@@ -237,7 +237,6 @@ Route::namespace('Front')->group(function () {
             Route::post('profile/personal-info', 'VendorController@updatePersonalInfo')->name('vendor.personal_info');
             Route::post('profile/employee/update-avatar', 'VendorController@updateAvatar')->name('vendor.updateAvatar');
             Route::post('profile/update-password', 'VendorController@updatePassword')->name('vendor.updatePassword');
-
         });
 
 
@@ -271,16 +270,4 @@ Route::namespace('Front')->group(function () {
     // Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
-});
-
-// update
-
-Route::get('/candidate', function () {
-    return view('front.users.u_ami_candidate');
-});
-Route::get('/products', function () {
-    return view('front.users.u_products');
-});
-Route::get('/checkout', function () {
-    return view('front.checkout2-update');
 });
