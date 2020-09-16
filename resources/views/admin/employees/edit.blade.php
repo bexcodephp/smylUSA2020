@@ -123,7 +123,7 @@
                     </div>
                     @include('admin.shared.status-select', ['status' => $employee->status])
                 </div>
-                        
+                
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
