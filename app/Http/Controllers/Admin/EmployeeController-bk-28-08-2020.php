@@ -66,12 +66,12 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {  
-        $back_url = redirect()->back()->getTargetUrl();
+        $role_type = $request->type;
         $facilities = Facility::where('is_active',1)->get(['facility_id','name']);
         $roles = $this->roleRepo->listRoles();
-        return view('admin.employees.create', compact('roles','facilities','back_url'));
+        return view('admin.employees.create', compact('roles','facilities','role_type'));
     }
 
     /**
@@ -84,6 +84,7 @@ class EmployeeController extends Controller
     public function store(CreateEmployeeRequest $request)
     {
         $role_type = $request->role_type;
+        // print_r($role_type);exit();
         if($role_type == "dentist"){
             $role = Config::get('constants.dentist');    
         } else if($role_type == "operator"){

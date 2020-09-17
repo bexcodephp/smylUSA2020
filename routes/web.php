@@ -69,7 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('facilities/{facility_id}/weekday/{weekday}', 'FacilityController@updateSpan')->name('facilities.updateSpan');
             Route::post('facilities/{facility_id}/weekday/{weekday}', 'FacilityController@updateFacilityTimespan')->name('facilities.updateFacilityTimespan');
             Route::post('facilities/updateTime/{facility_id}', 'FacilityController@updateTime')->name('facilities.updateTime');
-            Route::post('facilities/addNonAvailabilityTime', 'FacilityController@addNonAvailabilityTime')->name('addNonAvailabilityTime');
+           Route::post('facilities/addNonAvailabilityTime', 'FacilityController@addNonAvailabilityTime')->name('facilities.addNonAvailabilityTime');
             Route::post('facilities/updateNaHours/{id}', 'FacilityController@updateNonAvailabilityTime');
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
@@ -89,7 +89,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
             Route::resource('employees', 'EmployeeController');
             Route::post('employees/delete_certificate/{id}', 'EmployeeController@deleteCertificate');
-            Route::post('employees/filter', 'EmployeeController@filter')->name('filter');
+            Route::get('employees/create/{type}', 'EmployeeController@create')->name('add');
             Route::post('employees/delete/{id}', 'EmployeeController@destroy')->name('delete');
             Route::post('employees/status', 'EmployeeController@status')->name('status');
             Route::post('employees/get_location', 'EmployeeController@getLocation')->name('get_location');

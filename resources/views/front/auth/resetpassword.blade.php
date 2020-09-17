@@ -1,6 +1,6 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}"  type="text/css" >
+    <link rel="stylesheet" href="{{ asset('front/css/login.css') }}"  type="text/css" >
 @endpush
 @section('content')
 <main class="resetpassword">
@@ -46,7 +46,8 @@
                                 <input type="password" class="form-control input-gray" id="password" placeholder="Confirm New Password">
                             </div>
                             <div class="col-12 text-left btn-signin mt-xl-4 my-3">
-                                <a href="{{ url('/loginform') }}" class="btn btn-primary btn-lg text-center">Sign In</a>
+                               <!--  <a href="{{ url('/loginform') }}" class="btn btn-primary btn-lg text-center">Sign In</a> -->
+                                <button type="submit" class="btn btn-primary btn-lg text-center">Sign In</button>
                             </div>
                         </form>
                     </div>
