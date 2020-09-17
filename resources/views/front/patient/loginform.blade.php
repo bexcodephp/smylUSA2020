@@ -5,6 +5,7 @@
 @section('content')
 <main class="patient-login-first">
     {{--  slider  --}}
+    <?php //dd($customer);?>
     <section class="banner">
         <div class="hero-img">
             <div class="item" style="background-image:url('{{ asset('images/products/ourvalues.png') }}') ">
@@ -45,94 +46,110 @@
             </div>
             <div class="col-12">
                 <div class="tab-content" id="form-tabContent">
+                <?php //dd($address);?>
                     {{--  step 1  --}}
-                    <form class="tab-pane fade show active py-3 step-1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
+                    <form  action="{{ route('submitMedicalForm', $order ? $order->reference : null) }}" method="post" class="tab-pane fade show active py-3 step-1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
+                    @csrf
                         {{--  personel Information  --}}
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
                             </div>
-                            <?php //print_r($userdata->first_name);?>
+                           
                             <div class="col-sm-6 form-group">
                                 <label>First Name<span class="text-danger">*</span></label>
-                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $userdata->first_name }}">
+                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $customer->first_name }}">
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Last <span class="text-danger">*</span></label>
-                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $userdata->last_name }}">
+                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $customer->last_name }}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Moblie Number<span class="text-danger">*</span></label>
-                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" value="{{ $userdata->phone }}">
+                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" value="{{ $customer->phone }}">
                             </div>
+                            <?php 
+                                $createDate = new DateTime($customer->dob);
+
+                                $dob = $createDate->format('d-m-Y');
+                                //var_dump($dob); // string(10) "2012-09-09"
+                            ?>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Date of Birth<span class="text-danger">*</span></label>
-                                <input type="date" class="form-control input-white" id="dob">
+                                <input type="date" name="dob" class="form-control input-white" id="dob" value="{{ $dob }}" >
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Patient ID<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="patient_id" placeholder="000000">
+                                <input type="text" name="patient_id" value="{{ $customer->patient_id }}" class="form-control input-white" id="patient_id" placeholder="000000" readonly>
                             </div>
                         </div>
-                        {{--  Billing Information  --}}
+                        {{--  Billing Information  --}}                        
                         <div class="row mt-3">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Billing Information</h4>
                             </div>
                             <div class="col-12 form-group">
-                                <label>Address 1<<span class="text-danger">*</span>/label>
-                                <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address">
+                                <label>Address 1<span class="text-danger">*</span></label>
+                                <input type="text" name="address_1" class="form-control input-white" id="address_1" placeholder="Type Your Address">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 2<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="address_2" placeholder="Type Your Address">
+                                <input type="text" name="address_2" class="form-control input-white" id="address_2" placeholder="Type Your Address">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>City<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="city" placeholder="Your City Name">
+                                <input type="text" name="city" class="form-control input-white" id="city" placeholder="Your City Name">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>State<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="state" placeholder="Your State Name">
+                                <input type="text" name="state" class="form-control input-white" id="state" placeholder="Your State Name">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Zip Code<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="zipcode" placeholder="000000">
+                                <input type="text" name="zipcode" class="form-control input-white" id="zipcode" placeholder="000000">
                             </div>
                         </div>
                         {{--  Billing Information  --}}
+                        <?php  
+                                $sameAsChecked='';
+                                $readOnlyField="";
+                                if($address->same_as_shipping == 1){
+                                    $sameAsChecked='checked';                            
+                                }
+                                //print_r($address->billing_address);
+                        ?>
                         <div class="row mt-3">
                             <div class="col-12 mb-2 form-inline">
                                 <h4 class="sub-title color-blue text-bold mb-2">Shipping Information</h4>
-                                <div class="custom-control custom-checkbox ml-sm-4 ">
-                                    <input type="checkbox" class="custom-control-input" id="rememberme">
+                                <div class="custom-control custom-checkbox ml-sm-4 ">                                
+                                    <input type="checkbox" name="same_as_shipping" id="sameAsBilling" value="1" {{$sameAsChecked}} > 
                                     <label class="custom-control-label color-blue text-bold" for="rememberme"><u>Same As Billing Information</u></label>
                                 </div>
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 1</label>
-                                <input type="text" name="first_name" class="form-control input-white" id="address_1" placeholder="Type Your Address">
+                                <input type="text" name="address_1" class="form-control input-white readyonly" id="address_1" placeholder="Type Your Address" value="{{ $address->billing_address}}" {{$readOnlyField}}>
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 2</label>
-                                <input type="text" class="form-control input-white" id="address_2" placeholder="Type Your Address">
+                                <input type="text" name="address_2" class="form-control input-white readyonly" id="address_2" placeholder="Type Your Address" value="{{ $address->billing_address}}" {{$readOnlyField}} >
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>City</label>
-                                <input type="text" class="form-control input-white" id="city" placeholder="Your City Name">
+                                <input type="text" name="city" class="form-control input-white readyonly" id="city" placeholder="Your City Name" value="{{ $address->billing_city}}" {{$readOnlyField}}>
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>State</label>
-                                <input type="text" class="form-control input-white" id="state" placeholder="Your State Name">
+                                <input type="text" name="state" class="form-control input-white readyonly" id="state" placeholder="Your State Name" value="{{ $address->billing_state}}" {{$readOnlyField}}>
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Zip Code</label>
-                                <input type="text" class="form-control input-white" id="zipcode" placeholder="000000">
+                                <input type="text" name="zipcode" class="form-control input-white readyonly" id="zipcode" placeholder="000000" value="{{ $address->billing_zip}}" {{$readOnlyField}}>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-12 text-right">                               
-                                <button type="button" class="btn btn-primary next-tab">Next</button>
+                                <button type="submit" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
                     </form>
@@ -641,6 +658,7 @@
 </div>
 @endsection
 @push('scripts')
+<script type="text/javascript" src="{{ asset('js/patient/medicalform.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         // jQuery('body').on('click','.next-tab', function(){
