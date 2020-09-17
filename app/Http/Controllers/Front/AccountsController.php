@@ -99,27 +99,31 @@ class AccountsController extends Controller
             $order = null;
         }
         $customer = auth()->user();
-        
+
         return view('front.patient.loginform', compact('order', 'address', 'history', 'customer'));
 
         //return view('front.medical_form', compact('order', 'address', 'history', 'customer'));
     }
 
     public function submitMedicalForm(Request $request)
-    {
-        
+    {        
+        //dd($request);
         try {
+            //dd($request);
             DB::beginTransaction();
             $customer = auth()->user();
             if(PatientMedicalHistory::where('patient_id', $customer->id)->count() > 0)
             {
+                //dd($request);
                 return redirect()->back()->with(['error' => 'You\'ve already submitted the form.']);
             }
-                
+            
             $input = $request->input();
-            $input['patient_id'] = $customer->id;
+            //$input['patient_id'] = $customer->id;
+            $state_code = ""; // need to add state code e.g. FL
+            $input['patient_id'] = "ST".date('y-m-d').$state_code.$customer->id;
             PatientMedicalHistory::create($input);
-
+           
             
             $customer->update([
                 'dob' => date('Y-m-d', strtotime($request->dob)),
