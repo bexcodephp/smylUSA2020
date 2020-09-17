@@ -1,6 +1,6 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}"  type="text/css" >
+    <link rel="stylesheet" href="{{ asset('front/css/login.css') }}"  type="text/css" >
 @endpush
 @section('content')
 <main class="resetpassword">
@@ -28,7 +28,8 @@
                 <div class="card sign-in-card">
                     <h4 class="color-blue">Sign in Password</h4>
                     <div class="signin-form mt-xxl-6">
-                        <form class="row" action="">
+                        <form class="row" action="{{ route('password.reset', $code) }}" role="form" method="post">
+                        {{ csrf_field() }}
                             {{--  
                                 NOTE: 
                                 Add Hiiden class for hide old password  
@@ -46,7 +47,7 @@
                                 <input type="password" class="form-control input-gray" id="password" placeholder="Confirm New Password">
                             </div>
                             <div class="col-12 text-left btn-signin mt-xl-4 my-3">
-                                <a href="{{ url('/loginform') }}" class="btn btn-primary btn-lg text-center">Sign In</a>
+                                <input type="submit" class="btn btn-primary btn-lg text-center">
                             </div>
                         </form>
                     </div>

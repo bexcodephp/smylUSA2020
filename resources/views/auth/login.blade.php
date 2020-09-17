@@ -1,6 +1,6 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}"  type="text/css" >
+    <link rel="stylesheet" href="{{ asset('front/css/login.css') }}"  type="text/css" >
 @endpush
 @section('content')
 <style type="text/css">
@@ -110,8 +110,7 @@
 @push('scripts')
 <script type="text/javascript">
     function LoginP()
-    {   
-        alert("{{ route('patientlogin') }}");
+    {           
         var formdata = new FormData($('#login_form')[0]);
         formdata.append('_token','<?php echo csrf_token() ?>');
             $.ajax({

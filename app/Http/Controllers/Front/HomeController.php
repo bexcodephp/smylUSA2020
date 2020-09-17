@@ -292,7 +292,7 @@ class HomeController extends Controller
 
     public function generate_password($code)
     {        
-        return view('front.auth.resetpassword');
+        return view('front.auth.resetpassword',compact('code'));
     }
 
     public function voodooResponse(Request $request)

@@ -97,8 +97,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('employees/{id}/profile', 'EmployeeController@getProfile')->name('employee.profile');
             Route::put('employees/{id}/profile', 'EmployeeController@updateProfile')->name('employee.profile.update');
             Route::resource('roles', 'Roles\RoleController');
-            Route::resource('permissions', 'Permissions\PermissionController');
-            Route::resource('operators', 'OperatorController');
+            
         });
     });
 });
@@ -114,7 +113,6 @@ Route::namespace('Auth')->group(function () {
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');
 
-    Route::get('/login', 'LoginController@patientLogin'); ///
     Route::post('/login1', 'LoginController@login')->name("patientlogin");
     
     Route::group(['prefix' => 'pharmacist'], function(){
