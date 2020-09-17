@@ -10,7 +10,7 @@
             <div class="box">
                 <div class="box-body">
                     <h2>Customers</h2>
-                    @include('layouts.search', ['route' => route('admin.operators.index')])
+                    {{-- @include('layouts.search', ['route' => route('admin.operators.index')]) --}}
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -22,12 +22,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($operators as $customer)
+                        @foreach ($customers as $customer)
                             <tr>
                                 <td>{{ $customer['id'] }}</td>
                                 <td>{{ $customer['name'] }}</td>
                                 <td>{{ $customer['email'] }}</td>
-                                <td>@include('layouts.status', ['status' => $customer['status']])</td>
+                                <td>{{-- @include('layouts.status', ['status' => ])--}} 
+                                @if($customer['status'] == 1)
+                                    <span style="display: none; visibility: hidden">1</span>
+                                    <button type="button" class="btn btn-link mx-2 w-auto btn-true text-green deactivate" data-id="{{$customer['status']}}"><i class="fa fa-check fa-lg"></i></button>
+                                    @else
+                                    <span style="display: none; visibility: hidden">0</span>
+                                    <button type="button" class="btn btn-link mx-2 w-auto btn-false text-red activate " data-id="{{$customer['status']}}"><i class="fa fa-times fa-lg"></i></button>
+                                @endif
+                                </td>
                                 <td>
                                     <form action="{{ route('admin.customers.destroy', $customer['id']) }}" method="post" class="form-horizontal">
                                         {{ csrf_field() }}
@@ -43,7 +51,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{ $customers->links() }}
+                    {{-- $customers->links() --}}
                 </div>
                 <!-- /.box-body -->
             </div>

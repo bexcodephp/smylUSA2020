@@ -18,7 +18,14 @@ class CreateProductRequest extends BaseFormRequest
             'name' => ['required', 'unique:products'],
             'quantity' => ['required', 'numeric'],
             'price' => ['required'],
-            'cover' => ['required', 'file', 'image:png,jpeg,jpg,gif']
+            // 'cover' => ['required', 'file', 'image:png,jpeg,jpg,gif']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Product name is required'
         ];
     }
 }

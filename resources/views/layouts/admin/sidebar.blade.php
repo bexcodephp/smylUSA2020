@@ -102,6 +102,18 @@
                     </li>
                 </ul>
             </li>
+            <li class="treeview @if(request()->segment(2) == 'customers' || request()->segment(2) == 'addresses') active @endif">
+                <a href="#">
+                    <i class="fa fa-user"></i> <span>Resources</span>
+                    <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/admin/resources"><i class="fa fa-circle-o"></i> All resources</a></li>
+                    <li><a href="/admin/resources/create"><i class="fa fa-plus"></i> Create resource</a></li>
+                </ul>
+            </li>
             <li class="header">ORDERS</li>
             <li class="treeview @if(request()->segment(2) == 'orders') active @endif">
                 <a href="#">

@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             });
             Route::namespace('Customers')->group(function () {
                 Route::resource('customers', 'CustomerController');
-            Route::resource('customers.addresses', 'CustomerAddressController');
+                Route::resource('customers.addresses', 'CustomerAddressController');
             });
 
             Route::namespace('Categories')->group(function () {
@@ -75,6 +75,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::post('facilities/getcity', 'FacilityController@getcity');
             
             Route::resource('addresses', 'Addresses\AddressController');
+            
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');
             Route::resource('countries.provinces.cities', 'Cities\CityController');
@@ -267,3 +268,11 @@ Route::namespace('Front')->group(function () {
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
+Route::get('admin/resources', 'ResourceController@index');
+Route::get('admin/resources/create', function () {
+    return view("admin.resource.create");
+});
+Route::post('admin/resources/create', 'ResourceController@create');
+Route::get('admin/resources/edit/{id}','ResourceController@getResource');
+Route::post('admin/resources/edit/{id}','ResourceController@updateResource');
+Route::get('admin/resources/delete/{id}','ResourceController@destroyResource');

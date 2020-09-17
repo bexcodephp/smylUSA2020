@@ -303,7 +303,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                    <form action="{{ route('admin.facilities.addNonAvailabilityTime', $facility->facility_id) }}" id="addNonAvailabilityTime" method="post">
+                    <form action="{{ url('admin.facilities.addNonAvailabilityTime', $facility->facility_id) }}" id="addNonAvailabilityTime" method="post">
                         {{ csrf_field() }}
                         <div class="form-row px-2">
                             <div class="input-group col-auto mr-2">
