@@ -28,7 +28,7 @@
                 <div class="card sign-in-card">
                     <h4 class="color-blue">Sign in Password</h4>
                     <div class="signin-form mt-xxl-6">
-                        <form class="row" action="">
+                        <form method="POST" action="{{ route('password.confirm') }}">
                             {{--  
                                 NOTE: 
                                 Add Hiiden class for hide old password  
