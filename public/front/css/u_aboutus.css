@@ -1,0 +1,119 @@
+.mission img {
+  width: 100%;
+  max-width: 500px;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center;
+  object-position: center;
+}
+
+.ourvision {
+  background-image: url('../../../images/products/ourvision.png');
+}
+
+.ourvision-card {
+  padding: 1rem 2rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0px 0px 12px 6px rgb(182 182 182 / 31%);
+  min-height: 220px;
+  background-image: url('../../../images/products/aboutus_glass_1.png');
+}
+
+.ourvvalues {
+  background-image: url('../../../images/products/ourvalues.png');
+}
+
+.ourvalue-card {
+  padding: 1rem 2rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0px 0px 12px 6px rgb(182 182 182 / 31%);
+  min-height: 220px;
+  /* background-image: url('../../../images/products/aboutus_glass_2.png'); */
+}
+
+.ourvalue-card::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../images/products/aboutus_glass_2.png');
+  background-position: center;
+  position: absolute;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  opacity: .8;
+  /* z-index: 0; */
+  border-radius: 10px;
+}
+
+.glass-content {
+  z-index: 1;
+}
+
+
+/* dr nish */
+
+.drnish {
+  background-color: #ffffff;
+}
+
+.drnishimg {
+  width: 100%;
+  max-width: 400px;
+  -o-object-fit: contain;
+  object-fit: contain;
+  -o-object-position: center;
+  object-position: center;
+}
+
+@media only screen and (min-width: 1367px) {
+  .ourvision {
+    background-position: left center;
+  }
+  .ourvision-card,
+  .ourvalue-card {
+    min-height: 300px;
+  }
+  .mission img {
+    max-width: 100%;
+  }
+  /* dr nish */
+  .drnishimg {
+    max-width: 500px;
+  }
+}
+
+@media only screen and (max-width: 991px) {}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+  /* dr nish */
+  .drnishimg {
+    max-width: 300px;
+  }
+  .ourvvalues .container .row {
+    height: 100%;
+  }
+  .ourvision .container .row {
+    height: 100%;
+  }
+  .ourvision-card {
+    min-height: 175px;
+    background: rgb(207 207 207 / 85%);
+  }
+  .ourvalue-card {
+    min-height: 175px;
+    background: rgb(230 216 207 / 85%);
+  }
+  .galss-dots::after {
+    background-size: 16px;
+  }
+}

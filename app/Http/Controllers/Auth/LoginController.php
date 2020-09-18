@@ -31,7 +31,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/accounts';
+    //protected $redirectTo = '/accounts';
+    protected $redirectTo = '/medical_form';
 
     /**
      * Create a new controller instance.
@@ -67,10 +68,7 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         $this->validateLogin($request);
-
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
+        
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
@@ -79,7 +77,7 @@ class LoginController extends Controller
 
         $details = $request->only('email', 'password');
         $details['status'] = 1;
-        
+
         if (auth()->attempt($details)) {
             return $this->sendLoginResponse($request);
         }
@@ -87,6 +85,7 @@ class LoginController extends Controller
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
+
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
@@ -177,5 +176,8 @@ class LoginController extends Controller
 
         // event(new AddNotification($user->id, 1, 'Login Successful'));
 
+    }
+    public function patientLogin(){
+        return view('auth.login');
     }
 }

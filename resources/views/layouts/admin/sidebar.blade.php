@@ -1,4 +1,4 @@
-<!-- =============================================== -->
+=============================================== -->
 
 <!-- Left side column. contains the sidebar -->
 <aside class="main-sidebar">
@@ -15,20 +15,62 @@
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu" data-widget="tree">
             <li class="header">HOME</li>
-            <li><a href="{{ route('admin.dashboard') }}"> <i class="fa fa-home"></i> Home</a></li>
+            <li>
+              <a href="{{ route('admin.dashboard') }}">
+                <i class="fa fa-home"></i> <span>Home</span>
+                <span class="pull-right-container">
+                </span>
+              </a>
+            </li>
+            <!-- <li><a href="{{ route('admin.dashboard') }}"> <i class="fa fa-home"></i> Home</a></li> -->
             <li class="header">User Managements</li>
-            <li><a href="{{ route('admin.employees.show', 'operator') }}"><i class="fa fa-circle-o"></i> All Operator</a></li>
-            <li><a href="{{ route('admin.employees.show', 'dentist') }}"><i class="fa fa-circle-o"></i> All Dentists</a></li>
+            <li>
+              <a href="{{ route('admin.employees.show', 'operator') }}">
+                <i class="fa fa-circle-o"></i> <span>All Operator</span>
+                <span class="pull-right-container">
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('admin.employees.show', 'dentist') }}">
+                <i class="fa fa-circle-o"></i> <span>All Dentists</span>
+                <span class="pull-right-container">
+                </span>
+              </a>
+            </li>
+            <!-- <li><a href="{{ route('admin.employees.show', 'operator') }}"><i class="fa fa-circle-o"></i> All Operator</a></li>
+            <li><a href="{{ route('admin.employees.show', 'dentist') }}"><i class="fa fa-circle-o"></i> All Dentists</a></li> -->
             {{-- <li><a href="{{ route('admin.employees.show', 'vendor') }}"><i class="fa fa-circle-o"></i> All Vendors</a></li> --}}
             
             <li class="header">Leads</li>
-            <li><a href="{{ route('admin.user_assessment') }}"><i class="fa fa-circle-o"></i> User Assessments</a></li>
+            <li>
+              <a href="{{ route('admin.user_assessment') }}">
+                <i class="fa fa-circle-o"></i> <span>User Assessments</span>
+                <span class="pull-right-container">
+                </span>
+              </a>
+            </li>
+            <!-- <li><a href="{{ route('admin.user_assessment') }}"><i class="fa fa-circle-o"></i> User Assessments</a></li> -->
             
             <li class="header">Facilities</li>
-            <li><a href="{{ route('admin.facilities.index') }}"><i class="fa fa-circle-o"></i> All Facilities</a></li>
-            <li><a href="{{ route('admin.facilities.appointments') }}"><i class="fa fa-circle-o"></i> Appointments</a></li>
+            <li>
+              <a href="{{ route('admin.facilities.index') }}">
+                <i class="fa fa-circle-o"></i> <span>All Facilities</span>
+                <span class="pull-right-container">
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('admin.facilities.appointments') }}">
+                <i class="fa fa-circle-o"></i> <span>Appointments</span>
+                <span class="pull-right-container">
+                </span>
+              </a>
+            </li>
+           <!--  <li><a href="{{ route('admin.facilities.index') }}"><i class="fa fa-circle-o"></i> All Facilities</a></li>
+            <li><a href="{{ route('admin.facilities.appointments') }}"><i class="fa fa-circle-o"></i> Appointments</a></li> -->
 
             <li class="header">SELL</li>
             <li class="treeview @if(request()->segment(2) == 'products' || request()->segment(2) == 'attributes' || request()->segment(2) == 'brands') active @endif">
@@ -194,4 +236,4 @@
     <!-- /.sidebar -->
 </aside>
 
-<!-- =============================================== -->
+<!-- ===============================================

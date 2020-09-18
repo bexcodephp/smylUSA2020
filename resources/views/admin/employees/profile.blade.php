@@ -17,7 +17,11 @@
             </div>
             <div class="col mb-2">
                 <label>Phone:</label>
-                <div class="lbl-input">{{$employee->phone}}</div>
+                <?php
+                    $number = $employee->phone;
+                    $formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "+1 ($1) $2 $3", $number);
+                ?>
+                <div class="lbl-input">{{$formatted_number}}</div>
             </div>
             <div class="col mb-2">
                 <label>Home address</label>
@@ -72,7 +76,8 @@
                                     ?>
                                     
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
-                                        <img src="{{ asset('images/licence.png')}}" >
+                                        <!-- <img src="{{ asset('images/licence.png')}}" > -->
+                                        <img src="{{ url('storage/'.$file) }}" width="100">
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
                                     <!-- <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a> -->
@@ -80,7 +85,8 @@
                                     }else{
                             ?>
                                     <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
-                                        <img src="{{ asset('images/icon_pdf.png')}}">
+                                        <!-- <img src="{{ asset('images/icon_pdf.png')}}"> -->
+                                        <img src="{{ url('storage/'.$file) }}" width="100">
                                         <span class="licence-name">{{ "licence".$licence++}}</span>
                                     </a>
                                     <!-- <a onclick="deleteCertificate('{{ $file }}')" class="licence-del"><i class="fa fa-times"></i></a> -->
@@ -115,25 +121,18 @@
 </div>
 {{-- End preview document modal --}}
     <!-- /.content -->
-
-
-<script>
-
-    function viewCertificates(doc_name,type) { 
-
-        $('#modal_view_docs').modal('show');
-
-        if(type=='png' || type =='jpeg' || type == 'jpg'){
-            $("#doc_src").show();
-            $("#doc_src1").hide();
-            $('#doc_src').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
-        }else{
-            $("#doc_src1").show();
-            $("#doc_src").hide();
-            $('#doc_src1').attr('src', window.location.origin+'/storage/app/public/'+doc_name);
+    <script type="text/javascript">
+        function viewCertificates(doc_name,type) { 
+            $('#modal_view_docs').modal('show');
+            if(type=='png' || type =='jpeg' || type == 'jpg'){
+                $("#doc_src").show();
+                $("#doc_src1").hide();
+                $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+            }else{
+                $("#doc_src1").show();
+                $("#doc_src").hide();
+                $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+            }
         }
-    }
-
-</script>
-
+    </script>
 @endsection

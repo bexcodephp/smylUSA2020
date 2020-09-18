@@ -53,7 +53,7 @@ class RegisterController extends Controller
      * @return Customer
      */
     protected function create(array $data)
-    {
+    {        
         return $this->customerRepo->createCustomer($data);
     }
 
@@ -62,14 +62,16 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function register(RegisterCustomerRequest $request)
-    {
+    {  
         $customer = $this->create($request->except('_method', '_token'));
-        
+        $userId = $customer->id;
+        $userdata = Customer::find($userId);
+        //dd($userdata);
         Mail::to($customer)->send(new UserRegistration($customer));
         Mail::to($customer)->send(new AfterRegistration($customer));
 
         event(new AddNotification($customer->id, 1, 'Account Registration'));
-        
-        return redirect()->route('login')->with(['message' => 'Verify your email address to continue', 'status' => 0]);
+        return view('front.auth.thankyou');
+        //return view('front.patient.loginform',compact('userdata'))->with(['message' => 'Verify your email address to continue', 'status' => 0]);
     }
 }

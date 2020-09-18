@@ -69,11 +69,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('facilities/{facility_id}/weekday/{weekday}', 'FacilityController@updateSpan')->name('facilities.updateSpan');
             Route::post('facilities/{facility_id}/weekday/{weekday}', 'FacilityController@updateFacilityTimespan')->name('facilities.updateFacilityTimespan');
             Route::post('facilities/updateTime/{facility_id}', 'FacilityController@updateTime')->name('facilities.updateTime');
-            Route::post('facilities/addNonAvailabilityTime', 'FacilityController@addNonAvailabilityTime')->name('addNonAvailabilityTime');
+            Route::post('facilities/addNonAvailabilityTime', 'FacilityController@addNonAvailabilityTime')->name('facilities.addNonAvailabilityTime');
             Route::post('facilities/updateNaHours/{id}', 'FacilityController@updateNonAvailabilityTime');
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
-            
+            Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
+        
             Route::resource('addresses', 'Addresses\AddressController');
             
             Route::resource('countries', 'Countries\CountryController');
@@ -97,8 +98,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('employees/{id}/profile', 'EmployeeController@getProfile')->name('employee.profile');
             Route::put('employees/{id}/profile', 'EmployeeController@updateProfile')->name('employee.profile.update');
             Route::resource('roles', 'Roles\RoleController');
-            Route::resource('permissions', 'Permissions\PermissionController');
-            Route::resource('operators', 'OperatorController');
+            
         });
     });
 });
@@ -109,10 +109,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
 Auth::routes(['verify' => true]);
 
-Route::namespace('Auth')->group(function () {
+Route::namespace('Auth')->group(function () {    
     Route::get('cart/login', 'CartLoginController@showLoginForm')->name('cart.login');
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');
+
+    Route::post('/login1', 'LoginController@login')->name("patientlogin");
     
     Route::group(['prefix' => 'pharmacist'], function(){
         Route::get('login', 'LoginController@pharmaLoginFormShow');
@@ -147,7 +149,8 @@ Route::namespace('Front')->group(function () {
     Route::view('landing_page', 'front.landing-page2')->name('landing-page2');
     Route::view('assessment-form', 'front.form_assessment')->name('assessment_form');
     Route::view('video-page', 'front.video')->name('video');
-    Route::view('contact-us', 'front.contact')->name('contact');
+    // Route::view('contact-us', 'front.contact')->name('contact');
+    Route::view('contact-us', 'front.users.u_contactus')->name('contact');
     Route::get('team', 'HomeController@team')->name('team');
     Route::post('contact', 'HomeController@contactUs')->name('contactUs');
 
@@ -157,7 +160,9 @@ Route::namespace('Front')->group(function () {
 
 
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
+    Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
+    
 
     Route::post('booking', 'HomeController@bookAppointment')->name('bookAppointment');
     Route::post('getLocations', 'HomeController@getLocations')->name('getLocations');
@@ -265,6 +270,7 @@ Route::namespace('Front')->group(function () {
     });
 
 
+    // Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });

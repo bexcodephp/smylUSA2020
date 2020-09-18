@@ -40,7 +40,11 @@
                         @foreach ($facilities as $facility)
                             <tr>
                             <td>{{ $facility->name }}</td>
-                            <td>{{ $facility->phone }}</td>
+                            <?php
+                                $number = $facility->phone;
+                                $formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "+1 ($1) $2 $3", $number);
+                            ?>
+                            <td>{{ $formatted_number }}</td>
                             <td>{{ $facility->state . ", " . $facility->address }}</td>
                             <td>{{ $facility->city }}</td>
                             <td>{{ $facility->is_active == 1 ? "Active" : "Inactive" }}</td>
@@ -50,7 +54,7 @@
                                     <input type="hidden" name="_method" value="delete">
                                     <div class="btn-group">
                                         <a href="{{ route('admin.facilities.edit', $facility) }}" class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit"></i></a>
-                                        <a class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
+                                        <a href="{{ route('admin.facilities.profile', $facility) }}" class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
                                         <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
                                     </div>
                                 </form>

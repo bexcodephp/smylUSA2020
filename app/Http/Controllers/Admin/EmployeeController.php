@@ -17,7 +17,8 @@ use App\Mail\DentistAccountApproved as MailDentistAccountApproved;
 use App\Shop\Employees\Repositories\Interfaces\EmployeeRepositoryInterface;
 use App\Shop\Facility\Facility;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Carbon;
+//use Illuminate\Support\Carbon;
+Use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -80,10 +81,13 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
-        //dd($request);    
+        $role = Config::get('constants.operator');
+        // dd($var);
+        // exit();
+        // dd($request);    
         //dd($request->file('license_certificates')->getClientOriginalName());
         //dd($request);
-        $request->request->add(['role' => '5', 'password'=>Hash::make('12345678')]); 
+        $request->request->add(['role' => $role, 'password'=>Hash::make('12345678')]); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);

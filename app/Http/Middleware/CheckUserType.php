@@ -19,6 +19,7 @@ class CheckUserType
         $prefix = $request->route()->getPrefix();
         if(auth()->guard('employee')->check() && $prefix)
         {
+            
             $user = auth()->guard('employee')->user();
             $prefix =  str_replace('/','',$prefix);
 
@@ -35,10 +36,12 @@ class CheckUserType
         }else{
             if(auth()->check())
             {
+                
                 return $next($request);
             }
             return redirect('/');
         }
 
     }
+    
 }
