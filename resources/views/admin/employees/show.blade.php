@@ -41,7 +41,7 @@
             </form>
             
             <div class="box-tools pull-right mb-2">
-                <a href="{{ route('admin.employees.create') }}" class="btn btn-primary" role="{{$role->name}}">Add New</a>
+                <a href="{{ route('admin.employees.create', ['type'=>$role->name]) }}" class="btn btn-primary" role="{{$role->name}}">Add New</a>
             </div>
             
             <table class="table table-striped table-bordered display">

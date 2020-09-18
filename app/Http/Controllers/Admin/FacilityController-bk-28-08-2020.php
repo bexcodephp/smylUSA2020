@@ -281,7 +281,7 @@ class FacilityController extends Controller
 
     public function getProfile($id)
     {
-        // echo "hi";exit;
+        //echo "hi";exit;
         $facility = $this->facilityRepo->find($id);
         $facilities_all = Facility::all();
         return view('admin.facilities.profile', ['facility' => $facility, 'facilities_all' => $facilities_all]);

@@ -90,7 +90,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
             Route::resource('employees', 'EmployeeController');
             Route::post('employees/delete_certificate/{id}', 'EmployeeController@deleteCertificate');
-            Route::post('employees/filter', 'EmployeeController@filter')->name('filter');
+            Route::get('employees/create/{type}', 'EmployeeController@create')->name('add');
             Route::post('employees/delete/{id}', 'EmployeeController@destroy')->name('delete');
             Route::post('employees/status', 'EmployeeController@status')->name('status');
             Route::post('employees/get_location', 'EmployeeController@getLocation')->name('get_location');
