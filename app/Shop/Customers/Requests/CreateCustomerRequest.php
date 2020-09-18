@@ -19,4 +19,11 @@ class CreateCustomerRequest extends BaseFormRequest
             'password' => ['required', 'min:8']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Customer name is required'
+        ];
+    }
 }
