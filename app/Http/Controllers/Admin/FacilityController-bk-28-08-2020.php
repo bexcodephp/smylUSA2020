@@ -15,7 +15,6 @@ use App\Shop\Facility\Repositories\Interfaces\FacilityRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use App\Shop\Facility\Facility;
 
-
 class FacilityController extends Controller
 {
     private $facilityRepo;
