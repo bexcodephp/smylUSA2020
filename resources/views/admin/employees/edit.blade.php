@@ -2,13 +2,20 @@
 
 @section('content')
     <!-- Main content -->
+    <?php 
+        $url = $back_url;
+        $uri_parts = explode('/', $url);
+        $request_url = end($uri_parts);
+        // print_r($request_url);
+    ?>
     <section class="content">
         <!-- @include('layouts.errors-and-messages') -->
         <div class="box">
             <form action="{{ route('admin.employees.update', $employee->id) }}" method="post" class="form" enctype="multipart/form-data">
                 <div class="box-body">
                     {{ csrf_field() }}
-                    <input type="hidden" name="_method" value="put">                    
+                    <input type="hidden" name="_method" value="put"> 
+                    <input id="role" name="role_type" type="hidden" value="{{$request_url}}"> 
                     <div class="form-group {{ $errors->has('fname') ? 'has-error' : '' }}">
                         <label for="fname">First Name <span class="text-danger">*</span></label>
                         <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" value="{!! $employee->fname ?: old('fname')  !!}">

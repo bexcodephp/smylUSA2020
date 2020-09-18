@@ -29,4 +29,10 @@ class UpdateCustomerRequest extends FormRequest
             'email' => ['required', 'email', Rule::unique('customers')->ignore($this->segment(3))]
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Customer name is required'
+        ];
+    }
 }

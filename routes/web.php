@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             });
             Route::namespace('Customers')->group(function () {
                 Route::resource('customers', 'CustomerController');
-            Route::resource('customers.addresses', 'CustomerAddressController');
+                Route::resource('customers.addresses', 'CustomerAddressController');
             });
 
             Route::namespace('Categories')->group(function () {
@@ -76,6 +76,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
         
             Route::resource('addresses', 'Addresses\AddressController');
+            
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');
             Route::resource('countries.provinces.cities', 'Cities\CityController');
@@ -89,7 +90,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
             Route::resource('employees', 'EmployeeController');
             Route::post('employees/delete_certificate/{id}', 'EmployeeController@deleteCertificate');
-            Route::post('employees/filter', 'EmployeeController@filter')->name('filter');
+            Route::get('employees/create/{type}', 'EmployeeController@create')->name('add');
             Route::post('employees/delete/{id}', 'EmployeeController@destroy')->name('delete');
             Route::post('employees/status', 'EmployeeController@status')->name('status');
             Route::post('employees/get_location', 'EmployeeController@getLocation')->name('get_location');
