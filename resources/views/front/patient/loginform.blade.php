@@ -53,25 +53,28 @@
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
                             </div>
                             <?php //print_r($userdata->first_name);?>
-                            <div class="col-sm-6 form-group">
+                            <div class="col-sm-6 form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                                 <label>First Name<span class="text-danger">*</span></label>
-                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $userdata->first_name }}">
+                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $customer->first_name }}">
+                                <span class="text-danger">{{ $errors->first('first_name') }}</span>
                             </div>
-                            <div class="col-sm-6 form-group">
+                            <div class="col-sm-6 form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                                 <label>Last <span class="text-danger">*</span></label>
-                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $userdata->last_name }}">
+                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $customer->last_name }}">
+                                <span class="text-danger">{{ $errors->first('last_name') }}</span>
                             </div>
-                            <div class="col-lg-4 col-sm-6 form-group">
+                            <div class="col-lg-4 col-sm-6 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                                 <label>Moblie Number<span class="text-danger">*</span></label>
-                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" value="{{ $userdata->phone }}">
+                                <input type="text" name="phone" id="phone" placeholder="Phone Number"  value="{{ $customer->phone }}" class="form-control" />
+                                <span class="text-danger">{{ $errors->first('phone') }}</span>
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Date of Birth<span class="text-danger">*</span></label>
-                                <input type="date" class="form-control input-white" id="dob">
+                                 <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled />
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Patient ID<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="patient_id" placeholder="000000">
+                                <input type="text" class="form-control input-white" id="patient_id" placeholder="000000" value="{{ $customer->patient_id }}" disabled>
                             </div>
                         </div>
                         {{--  Billing Information  --}}
@@ -79,25 +82,35 @@
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Billing Information</h4>
                             </div>
-                            <div class="col-12 form-group">
-                                <label>Address 1<<span class="text-danger">*</span>/label>
-                                <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address">
+                            <div class="col-12 form-group {{ $errors->has('address_1') ? 'has-error' : '' }}">
+                                <label>Address 1<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
+                                <span class="text-danger">{{ $errors->first('address_1') }}</span>
                             </div>
-                            <div class="col-12 form-group">
+                            <div class="col-12 form-group {{ $errors->has('address_2') ? 'has-error' : '' }}">
                                 <label>Address 2<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="address_2" placeholder="Type Your Address">
+                                <input type="text" class="form-control input-white" id="address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
+                                <span class="text-danger">{{ $errors->first('address_2') }}</span>
                             </div>
-                            <div class="col-lg-4 col-sm-6 form-group">
+                            <div class="col-lg-4 col-sm-6 form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                                 <label>City<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="city" placeholder="Your City Name">
+                                <input type="text" class="form-control input-white" id="city" placeholder="Your City Name" value="{{ $address ? $address->city : null}}">
+                                <span class="text-danger">{{ $errors->first('city') }}</span>
                             </div>
-                            <div class="col-lg-4 col-sm-6 form-group">
+                            <div class="col-lg-4 col-sm-6 form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                                 <label>State<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="state" placeholder="Your State Name">
+                                <select name="state_code" id="state" required class="form-control">
+                                    <option selected value="">Select State</option>
+                                    @foreach($statesList as $key => $state)
+                                    <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
+                                    @endforeach
+                                    <span class="text-danger">{{ $errors->first('state') }}</span>
+                                </select>
                             </div>
-                            <div class="col-lg-4 col-sm-6 form-group">
+                            <div class="col-lg-4 col-sm-6 form-group {{ $errors->has('zipcode') ? 'has-error' : '' }}">
                                 <label>Zip Code<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="zipcode" placeholder="000000">
+                                <input type="text" class="form-control input-white" id="zipcode" placeholder="000000" value="{{ $address ? $address->zip : null }}">
+                                <span class="text-danger">{{ $errors->first('zipcode') }}</span>
                             </div>
                         </div>
                         {{--  Billing Information  --}}
