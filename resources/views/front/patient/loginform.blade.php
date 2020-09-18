@@ -121,23 +121,28 @@
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 1</label>
-                                <input type="text" name="first_name" class="form-control input-white" id="address_1" placeholder="Type Your Address">
+                                <input type="text" name="shipping_address_1" class="form-control input-white shipping_address_1" id="shipping_address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 2</label>
-                                <input type="text" class="form-control input-white" id="address_2" placeholder="Type Your Address">
+                                <input type="text" id="shipping_address_2" class="form-control input-white shipping_address_2" name="shipping_address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>City</label>
-                                <input type="text" class="form-control input-white" id="city" placeholder="Your City Name">
+                                <input type="text" class="form-control input-white shipping_city" id="shipping_city" name="shipping_city" placeholder="Your City Name" value="{{ $address ? $address->city : null}}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>State</label>
-                                <input type="text" class="form-control input-white" id="state" placeholder="Your State Name">
+                                <select name="shipping_state" id="shipping_state" class="form-control" name="state">
+                                    <option selected value="">Select State</option>
+                                    @foreach($statesList as $key => $state)
+                                    <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Zip Code</label>
-                                <input type="text" class="form-control input-white" id="zipcode" placeholder="000000">
+                                <input type="text" class="form-control input-white shipping_zipcode" name="shipping_zipcode" id="shipping_zipcode" placeholder="000000" value="{{ $address ? $address->zip : null }}">
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -262,7 +267,7 @@
                                             </div>
                                             <div class="card-footer p-0">
                                                 <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic('{{ $image->image }}')">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
+                                                <a href="{{ route('user.removeTeethImage', $image->customer_image_id) }}" class="btn btn-link btn-delete">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -272,7 +277,7 @@
                         </div>
 
                         {{-- bite pictures --}}
-                        <div class="row mt-0 bite-pictures">
+                       <!--  <div class="row mt-0 bite-pictures">
                             <div class="col-12 align-self-center mb-3">
                                 <h4 class="sub-title color-blue text-bold">Bite Pictures</h4>
                             </div>
@@ -326,7 +331,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row">
                             {{--  <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
@@ -554,14 +559,15 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <form class="row justify-content-center">
+                <form class="row justify-content-center" action="{{ route('user.updateTeethImages') }}" method="POST" role="form" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-12 align-self-center mb-3 text-center">
-                        <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_smile">Add New Smile Picture</h4>
-                        <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_bite">Add New Bite Picture</h4>
+                        <h4 class="sub-title-1 color-blue text-bold" id="title_add_smile">Add New Smile Picture</h4>
+                        <h4 class="sub-title-1 color-blue text-bold" id="title_edit_smile">Edit New Smile Picture</h4>
+                        <!-- <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_bite">Add New Bite Picture</h4> -->
                     </div>
                     <div class="col-12 mb-4">
                         <div class="card h-100 card-2 mx-auto">
-                            <!-- <img class="card-img-top mx-auto" src="{{ asset('images/products/steps_image_5.png') }}" /> -->
                             <img class="card-img-top mx-auto" id="doc_src" />
                             <div class="card-body p-0">
                                 <textarea class="form-control" name="" id="" rows="3"></textarea>
@@ -575,14 +581,14 @@
                             </div>
                             <div class="col-auto">
                                 <div class="custom-file browse-file-btn">
-                                    <input type="file" class="custom-file-input" id="input_upload_pictures">
+                                    <input type="file" class="custom-file-input" name="images[]" multiple id="teethpic"> 
                                     <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="button" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button>
+                        <button type="submit" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button>
                     </div>
                 </form>
             </div>
@@ -674,7 +680,10 @@
         $('#upload_new_pic_modal').modal('show');
         $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
             $('#title_add_smile').show();
+            $('#title_edit_smile').hide();
             $('#title_add_bite').hide();
+            // $('#doc_src').attr();
+            $('#doc_src').hide();
         });
     }
     // EDIT smile pic modal
@@ -682,30 +691,12 @@
         $('#title_add_bite').hide();
         $('#upload_new_pic_modal').modal('show');
         $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
-            if(doc_name == ""){
-                $("#doc_src").show();
-                $("#doc_src1").hide();
-                $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
-            }else{
-                $("#doc_src1").show();
-                $("#doc_src").hide();
-                $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
-            }
-            $('#title_add_smile').show();
+            $('#title_edit_smile').show();
+            $('#title_add_smile').hide();
             $('#title_add_bite').hide();
+            $("#doc_src").show();
+            $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
         });
-
-         // $('#upload_new_pic_modal').modal('show');
-
-            // if(type=='png' || type =='jpeg' || type == 'jpg'){
-            //     $("#doc_src").show();
-            //     $("#doc_src1").hide();
-            //     $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
-            // }else{
-            //     $("#doc_src1").show();
-            //     $("#doc_src").hide();
-            //     $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
-            // }
     }
     // Upload new Bite pic modal
     function btnUploadBitePic(){
@@ -749,6 +740,11 @@
             city : "required",
             state : "required",
             zipcode : "required",
+            shipping_address_1: "required",
+            shipping_address_2 : "required",
+            shipping_city : "required",
+            shipping_state : "required",
+            shipping_zipcode : "required",
         },
         messages: {
             firstname: {
@@ -763,19 +759,34 @@
                 maxlength: "Phone number field accept only 10 digits",
             },
             address_1: {
-                required: "Please enter your address",
+                required: "Please enter your billing address",
             },
             address_2: {
-                required: "Please enter your address",
+                required: "Please enter your billing address",
             },
             city: {
-                required: "Please enter city name",
+                required: "Please enter your billing city",
             }, 
             state: {
-                required: "Please select your state",
+                required: "Please select your billing state",
             },
             zipcode: {
-                required: "Please enter your zip code",
+                required: "Please enter your billing zip code",
+            },
+            shipping_address_1: {
+                required: "Please enter your shipping address",
+            },
+            shipping_address_2: {
+                required: "Please enter your shipping address",
+            },
+            shipping_city: {
+                required: "Please enter shipping city",
+            }, 
+            shipping_state: {
+                required: "Please select your shipping state",
+            },
+            shipping_zipcode: {
+                required: "Please enter your shipping zip code",
             },   
         },
   });
