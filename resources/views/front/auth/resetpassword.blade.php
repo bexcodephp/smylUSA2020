@@ -28,7 +28,8 @@
                 <div class="card sign-in-card">
                     <h4 class="color-blue">Sign in Password</h4>
                     <div class="signin-form mt-xxl-6">
-                        <form method="POST" action="{{ route('password.confirm') }}">
+                        <form class="row" action="{{ route('password.reset', $code) }}" role="form" method="post">
+                        {{ csrf_field() }}
                             {{--  
                                 NOTE: 
                                 Add Hiiden class for hide old password  

@@ -110,8 +110,7 @@
 @push('scripts')
 <script type="text/javascript">
     function LoginP()
-    {   
-        alert("{{ route('patientlogin') }}");
+    {           
         var formdata = new FormData($('#login_form')[0]);
         formdata.append('_token','<?php echo csrf_token() ?>');
             $.ajax({
