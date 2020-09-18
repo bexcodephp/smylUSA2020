@@ -47,7 +47,8 @@
                                 <input type="password" class="form-control input-gray" id="password" placeholder="Confirm New Password">
                             </div>
                             <div class="col-12 text-left btn-signin mt-xl-4 my-3">
-                                <input type="submit" class="btn btn-primary btn-lg text-center">
+                               <!--  <a href="{{ url('/loginform') }}" class="btn btn-primary btn-lg text-center">Sign In</a> -->
+                                <button type="submit" class="btn btn-primary btn-lg text-center">Sign In</button>
                             </div>
                         </form>
                     </div>
