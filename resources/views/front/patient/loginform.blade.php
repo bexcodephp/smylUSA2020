@@ -385,7 +385,7 @@
                                 <div class="row row-cols-1 row-cols-md-2">
                                     <div class="col mb-4">
                                         <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/stl_1.png') }}" />
+                                            <img class="card-img-top" src="{{ asset('images/products/stl_1.png') }}" onclick="btnEditLtsPic()"/>
                                             <div class="card-body">
                                                 <p class="card-text">Image Description will be here Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et tur. Excepteur sint</p>
                                             </div>
