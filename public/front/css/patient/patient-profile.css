@@ -1,0 +1,37 @@
+.accordion .card {
+    border: none;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px !important;
+    -o-box-shadow: 0 0 12px 6px rgba(209, 209, 209, 0.53) !important;
+    -ms-box-shadow: 0 0 12px 6px rgba(209, 209, 209, 0.53) !important;
+    box-shadow: 0 0 12px 6px rgba(209, 209, 209, 0.53) !important;
+    background-color: #fcfcfc;
+}
+
+.accordion .card .card-header {
+    background-color: #fcfcfc;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 0px;
+}
+
+.accordion .card .card-header button.btn.btn-collapse i:before {
+    /* content: "\F068"; */
+    content: "\f107"
+}
+
+.accordion .card .card-header button.btn.btn-collapse:hover {
+    text-decoration: none;
+}
+
+.accordion .card .card-header button.btn.collapsed.btn-collapse i:before {
+    /* content: "\F067"; */
+    content: "\f106";
+}
+
+.accordion .card .card-body {
+    padding-left: 0;
+    padding-right: 0;
+}

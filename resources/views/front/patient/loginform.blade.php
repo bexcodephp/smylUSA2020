@@ -50,9 +50,9 @@
             </div>
             <div class="col-12">
                 <div class="tab-content" id="form-tabContent">
-                    {{--  step 1  --}}
-                    <form class="tab-pane fade show active py-3 step-1" name="step_1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
-                        {{--  personel Information  --}}
+                    {{-- step 1  --}}
+                    <form class="tab-pane fade show active py-3 step-1" name="step_1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
+                        {{-- personel Information  --}}
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
@@ -69,11 +69,11 @@
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Moblie Number<span class="text-danger">*</span></label>
-                                <input type="text" name="phone" id="phone" placeholder="Phone Number"  value="{{ $customer->phone }}" class="form-control" />
+                                <input type="text" name="phone" id="phone" placeholder="Phone Number" value="{{ $customer->phone }}" class="form-control" />
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Date of Birth<span class="text-danger">*</span></label>
-                                 <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled />
+                                <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled />
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Patient ID<span class="text-danger">*</span></label>
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-12 text-right">                               
+                            <div class="col-12 text-right">
                                 <button type="submit" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
@@ -267,7 +267,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -631,7 +631,7 @@
 </div>
 @endsection
 @push('scripts')
-`<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="{{asset('js/patient/medicalform.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -666,8 +666,6 @@
         $('#btn_card_detail_add').on('click', function() {
             $('#card_detail_add_modal').modal('show')
         });
-
-
     });
     // UPLOAD new smile pic modal
     function btnUploadNewPic() {
@@ -679,34 +677,34 @@
         });
     }
     // EDIT smile pic modal
-    function btnEditSmilePic(doc_name){
+    function btnEditSmilePic(doc_name) {
         $('#title_add_bite').hide();
         $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
-            if(doc_name == ""){
+        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
+            if (doc_name == "") {
                 $("#doc_src").show();
                 $("#doc_src1").hide();
-                $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
-            }else{
+                $('#doc_src').attr('src', window.location.origin + '/storage/' + doc_name);
+            } else {
                 $("#doc_src1").show();
                 $("#doc_src").hide();
-                $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+                $('#doc_src1').attr('src', window.location.origin + '/storage/' + doc_name);
             }
             $('#title_add_smile').show();
             $('#title_add_bite').hide();
         });
 
-         // $('#upload_new_pic_modal').modal('show');
+        // $('#upload_new_pic_modal').modal('show');
 
-            // if(type=='png' || type =='jpeg' || type == 'jpg'){
-            //     $("#doc_src").show();
-            //     $("#doc_src1").hide();
-            //     $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
-            // }else{
-            //     $("#doc_src1").show();
-            //     $("#doc_src").hide();
-            //     $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
-            // }
+        // if(type=='png' || type =='jpeg' || type == 'jpg'){
+        //     $("#doc_src").show();
+        //     $("#doc_src1").hide();
+        //     $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+        // }else{
+        //     $("#doc_src1").show();
+        //     $("#doc_src").hide();
+        //     $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+        // }
     }
     // Upload new Bite pic modal
     function btnUploadBitePic() {
@@ -739,25 +737,25 @@
         // Specify validation rules
         rules: {
             firstname: "required",
-            lastname: "required",    
+            lastname: "required",
             phone: {
                 required: true,
                 digits: true,
                 maxlength: 10,
             },
-            address_1:"required",
+            address_1: "required",
             address_2: "required",
-            city : "required",
-            state : "required",
-            zipcode : "required",
+            city: "required",
+            state: "required",
+            zipcode: "required",
         },
         messages: {
             firstname: {
                 required: "Please enter first name",
-            },      
+            },
             lastname: {
                 required: "Please enter last name",
-            },     
+            },
             phone: {
                 required: "Please enter phone number",
                 digits: "Please enter valid phone number",
@@ -771,14 +769,14 @@
             },
             city: {
                 required: "Please enter city name",
-            }, 
+            },
             state: {
                 required: "Please select your state",
             },
             zipcode: {
                 required: "Please enter your zip code",
-            },   
+            },
         },
-  });
-  </script>
+    });
+</script>
 @endpush

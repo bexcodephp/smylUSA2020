@@ -13,8 +13,8 @@
     <li class="list-group-item @if (Request::is('pDashboard'))active @endif">
       <a class="" href="{{ url('pDashboard') }}">Dashboard</a>
     </li>
-    <li class="list-group-item @if (Request::is('pProfile'))active @endif">
-      <a class="" href="{{ url('pProfile') }}">My Profile</a>
+    <li class="list-group-item @if (Request::is('patient-profile'))active @endif">
+      <a class="" href="{{ url('patient-profile') }}">My Profile</a>
     </li>
     <li class="list-group-item @if (Request::is('pPictures'))active @endif">
       <a class="" href="{{ url('pPictures') }}">My Pictures</a>
