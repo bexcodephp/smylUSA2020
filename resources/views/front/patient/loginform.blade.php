@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>State<span class="text-danger">*</span></label>
-                                <select name="state_code" id="state" class="form-control" name="state">
+                                <select name="state" id="state" class="form-control" name="state">
                                     <option selected value="">Select State</option>
                                     @foreach($statesList as $key => $state)
                                     <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
