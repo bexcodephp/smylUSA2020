@@ -651,6 +651,20 @@ a.amiuser:focus {
     background-image: url('../../../images/icons/drop_up_image.png');
 }
 
+.select-option.input-gray .bootstrap-select>.dropdown-toggle {
+    background-color: #f5f5fd;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.select-option.input-gray .btn:focus,
+.select-option.input-gray .btn.active,
+.select-option.input-gray .btn:active,
+.select-option.input-gray .btn:hover {
+    box-shadow: none;
+    border-color: #2388ed;
+}
+
 
 /* add .select-center for image option and radio button */
 

@@ -18,8 +18,7 @@
 }
 
 .accordion .card .card-header button.btn.btn-collapse i:before {
-    /* content: "\F068"; */
-    content: "\f107"
+    content: "\f106";
 }
 
 .accordion .card .card-header button.btn.btn-collapse:hover {
@@ -27,11 +26,152 @@
 }
 
 .accordion .card .card-header button.btn.collapsed.btn-collapse i:before {
-    /* content: "\F067"; */
-    content: "\f106";
+    content: "\f107";
 }
 
 .accordion .card .card-body {
     padding-left: 0;
     padding-right: 0;
+}
+
+.icon-cvv {
+    max-width: 90px;
+    width: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+
+/* card 2 */
+
+.card.card-2,
+.card-2 .card-body {
+    background-color: transparent;
+    border: 0px;
+}
+
+.card-2 .card-img-top {
+    max-width: 410px;
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 12px;
+    border: 4px solid transparent;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-2 .card-body {
+    padding: 15px;
+    margin-top: 15px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    height: 130px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0px 0px 12px 2px rgb(35 136 237 / 0.2);
+}
+
+.card.card-2:hover .card-img-top {
+    border-color: rgb(35 136 237 / 0.6);
+}
+
+.card-2 .card-footer {
+    margin-top: 5px;
+    border: 0;
+    background-color: transparent;
+    display: flex;
+    display: -ms-flexbox;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+
+.card-2 .card-footer .btn {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.modal .card-body {
+    height: auto !important;
+}
+
+.modal .card-2 .card-img-top {
+    height: auto;
+    border-color: rgb(35 136 237 / 0.6);
+}
+
+.modal textarea.form-control {
+    height: 110px !important;
+    border-radius: 12px;
+}
+
+
+/* .modal.pic-modal input[type="text"].form-control {
+    height: calc(1.5em + 0.75rem + 2px);
+    border: none;
+} */
+
+
+/* medical history form */
+
+.card-doc {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.card-doc:hover .card-img-top {
+    border-color: transparent;
+}
+
+@media only screen and (min-width: 992px) {
+    .card-2 .card-img-top,
+    .med-history-form .card-2 .card-img-top {
+        height: 220px;
+    }
+}
+
+@media only screen and (min-width: 992px) {}
+
+@media only screen and (min-width: 1367px) {
+    .card-2 .card-img-top,
+    .med-history-form .card-2 .card-img-top {
+        height: 425px;
+    }
+    .browse-file-btn .custom-file-label {
+        min-height: unset;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .card-2 .card-img-top {
+        height: 200px;
+    }
+    .profile-picture .browse-file-btn {
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .patient-profile h3.card-title {
+        font-size: 1.5rem;
+    }
+    .patient-profile h2.card-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+    .btn-collapse {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
 }
