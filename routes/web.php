@@ -272,14 +272,6 @@ Route::namespace('Front')->group(function () {
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
-Route::get('admin/resources', 'ResourceController@index');
-Route::get('admin/resources/create', function () {
-    return view("admin.resource.create");
-});
-Route::post('admin/resources/create', 'ResourceController@create');
-Route::get('admin/resources/edit/{id}', 'ResourceController@getResource');
-Route::post('admin/resources/edit/{id}', 'ResourceController@updateResource');
-Route::get('admin/resources/delete/{id}', 'ResourceController@destroyResource');
 
 Route::get('/candidate', function () {
     return view('front.users.u_ami_candidate');
@@ -296,6 +288,7 @@ Route::get('/checkout', function () {
 Route::get('/pDashboard', function () {
     return view('front.dashboard.patientDashboard');
 });
+
 Route::get('/patient-profile', function () {
     return view('front.dashboard.patientProfile');
 });

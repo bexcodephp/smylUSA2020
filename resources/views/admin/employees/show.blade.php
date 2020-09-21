@@ -14,32 +14,7 @@
                 <h2>{{ ucfirst($role->name) }}</h2>    
                 <!-- <button name="filter" data-toggle="collapse" data-target="#filter" class="btn btn-primary">Filter</button> -->
             </div>
-
-            <form action="{{ route('admin.filter') }}" id="filter" class="collapse" method="post">
-                    {{ csrf_field() }}
-                <div class="form-row px-2">
-                    <div class="input-group col-auto mr-2">
-                        <label>Location:</label>
-                        <input type="text" name="filter_location" class="form-control">
-                    </div>
-                    <div class="input-group col-auto mr-2">
-                        <label>Name :</label>
-                        <input type="text" name="filter_name" class="form-control">
-                    </div>
-                    <div class="input-group col-auto mr-2">
-                        <label>Email :</label>
-                        <input type="email" name="filter_email" class="form-control">
-                    </div>
-                    <div class="input-group col-auto mr-2">
-                        <label>Status :</label>
-                        <input type="text" name="filter_status" class="form-control">
-                    </div>
-                    <div class="col btn-filter">
-                        <button type="submit" name="submit" class="btn btn-primary" >submit</button>
-                    </div>
-                </div>
-            </form>
-            
+                        
             <div class="box-tools pull-right mb-2">
                 <a href="{{ route('admin.employees.create', ['type'=>$role->name]) }}" class="btn btn-primary" role="{{$role->name}}">Add New</a>
             </div>
