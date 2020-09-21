@@ -50,7 +50,7 @@
                                                 @foreach($images as $image)
                                                     <div class="col-md-3">
                                                         <div class="row">
-                                                            <img src="{{ asset("storage/$image->src") }}" alt="" class="img-responsive img-thumbnail"> <br /> <br>
+                                                            <img src="{{ url('storage/'.$image->src) }}" alt="" class="img-responsive img-thumbnail"> <br /> <br>
                                                             <a onclick="return confirm('Are you sure?')" href="{{ route('admin.product.remove.thumb', ['src' => $image->src]) }}" class="btn btn-danger btn-sm btn-block">Remove?</a><br />
                                                         </div>
                                                     </div>
@@ -80,7 +80,7 @@
                                                 @if(!$productAttributes->isEmpty())<span class="text-danger">Note: Quantity is disabled. Total quantity is calculated by the sum of all the combinations.</span> @endif
                                             </div>
                                             <div class="form-group">
-                                                <label for="price">Price</label>
+                                                <label for="price">Price<span class="text-danger">*</span></label>
                                                 @if($productAttributes->isEmpty())
                                                     <div class="input-group">
                                                         <span class="input-group-addon">{{ config('cart.currency_symbol') }}</span>
@@ -95,13 +95,13 @@
                                                 @endif
                                                 @if(!$productAttributes->isEmpty())<span class="text-danger">Note: Price is disabled. Price is derived based on the combination.</span> @endif
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="sale_price">Sale Price</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">{{ config('cart.currency_symbol') }}</span>
                                                     <input type="text" name="sale_price" id="sale_price" placeholder="Sale Price" class="form-control" value="{{ $product->sale_price }}">
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             {{-- @if(!$brands->isEmpty())
                                                 <div class="form-group">
                                                     <label for="brand_id">Brand </label>
