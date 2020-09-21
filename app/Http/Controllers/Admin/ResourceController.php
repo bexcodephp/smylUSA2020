@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Table_resources;
+use DB;
 
 class ResourceController extends Controller
 {
@@ -13,7 +16,8 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        return "test";
+        $resources = Table_resources::all();
+        return view("admin.resource.list",['resources'=>$resources]);
     }
 
     /**
@@ -21,22 +25,47 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validatedData = $request->validate(
+            [
+            'title' => 'required',
+            'description' => 'required',
+            'uploadedfile' => 'required|mimes:flv,mp4,avi,wmv,3gp,mov,mkv,vob'
+            ],
+            [
+                'title.required' => 'Please enter video title.',
+                'uploadedfile.required' => 'Please select video to upload.',
+                'description.required' => 'Please enter description.',
+                'uploadedfile.mimes' => 'Video format not supported.'
+            ]
+        );   
+
+        $data = new Table_resources();
+        $data->title = $request->title;
+        $data->description = $request->description;
+
+        if($file = $request->hasFile('uploadedfile')) {
+                    
+            $file = $request->file('uploadedfile') ;              
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/storage/resource' ;
+            $file->move($destinationPath,$fileName);
+            $data->url = $fileName;
+        }
+
+        if($data->save()){
+            return redirect()->back()->with('message', 'Resource successfully added.');
+        } else {
+            return redirect()->back()->withErrors(['Operation failed.Please try again.']);
+        }
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function getResource(Request $request){
+        $resource = Table_resources::all()->where("id","=",$request->id)->first();
+        return view("admin.resource.edit",["resource" => $resource]);
     }
-
     /**
      * Display the specified resource.
      *
@@ -66,9 +95,55 @@ class ResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateResource(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate(
+            [
+            'title' => 'required',
+            'description' => 'required',
+            'uploadedfile' => 'mimes:flv,mp4,avi,wmv,3gp,mov,mkv,vob'
+            ],
+            [
+                'title.required' => 'Please enter video title.',
+                'description.required' => 'Please enter description.',
+                'uploadedfile.mimes' => 'Video format not supported.'
+            ]
+        );
+
+        if($file = $request->hasFile('uploadedfile')) {
+                    
+            $file = $request->file('uploadedfile') ;              
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/storage/resource' ;
+            $file->move($destinationPath,$fileName);
+            $resourceUpdate = DB::table('table_resources')->where([
+                ['id','=',$id],
+                ])->update(array(
+                'title' => $request->title,
+                'description' => $request->description,
+                'url' => $fileName
+            ));
+            if($resourceUpdate) {
+                return redirect()->back()->with('message', 'Resource successfully updated.');
+            } else {
+                return redirect()->back()->withErrors(['Nothing changed. Please try again.']);
+            }
+        
+        } else {
+            $resourceUpdate = DB::table('table_resources')->where([
+                ['id','=',$id],
+                ])->update(array(
+                'title' => $request->title,
+                'description' => $request->description 
+            ));
+            if($resourceUpdate) {
+                return redirect()->back()->with('message', 'Resource successfully updated.');
+            } else {
+                return redirect()->back()->withErrors(['Nothing changed. Please try again.']);
+            }
+
+        }
+
     }
 
     /**
@@ -77,8 +152,13 @@ class ResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyResource($id)
     {
-        //
+        $res=Table_resources::where('id',$id)->delete();
+        if($res) {
+            return redirect()->back()->with('message', 'Resource successfully Deleted.');
+        } else {
+            return redirect()->back()->withErrors(['Something went wrong. Please try again.']);
+        }
     }
 }

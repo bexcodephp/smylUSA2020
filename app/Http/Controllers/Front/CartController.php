@@ -94,7 +94,6 @@ class CartController extends Controller
         }else{
             $product->price = $product->price;
         }
-        
         $options = [];
 
 

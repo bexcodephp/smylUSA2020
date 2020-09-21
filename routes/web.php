@@ -98,6 +98,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('employees/{id}/profile', 'EmployeeController@getProfile')->name('employee.profile');
             Route::put('employees/{id}/profile', 'EmployeeController@updateProfile')->name('employee.profile.update');
             Route::resource('roles', 'Roles\RoleController');
+
+            Route::get('resources', 'ResourceController@index');
+            Route::get('resources/create', function () {
+                return view("admin/resource.create");
+            });
+            Route::post('resources/create', 'ResourceController@create');
+            Route::get('resources/edit/{id}','ResourceController@getResource');
+            Route::post('resources/edit/{id}','ResourceController@updateResource');
+            Route::get('resources/delete/{id}','ResourceController@destroyResource');
             
         });
     });
@@ -274,11 +283,20 @@ Route::namespace('Front')->group(function () {
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
-Route::get('admin/resources', 'ResourceController@index');
-Route::get('admin/resources/create', function () {
-    return view("admin.resource.create");
-});
-Route::post('admin/resources/create', 'ResourceController@create');
-Route::get('admin/resources/edit/{id}','ResourceController@getResource');
-Route::post('admin/resources/edit/{id}','ResourceController@updateResource');
-Route::get('admin/resources/delete/{id}','ResourceController@destroyResource');
+
+
+// Route::get('/candidate', function () {
+//     return view('front.users.u_ami_candidate');
+// });
+// Route::get('/products', function () {
+//     return view('front.users.u_products');
+// });
+// Route::get('/productsview', function () {
+//     return view('front.users.u_products_view');
+// });
+// Route::get('/checkout', function () {
+//     return view('front.checkout2-update');
+// });
+// Route::get('/pDashboard', function () {
+//     return view('front.dashboard.patientDashboard');
+// });
