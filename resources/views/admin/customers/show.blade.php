@@ -39,11 +39,12 @@
                 </tbody>
                     <tbody>
                         <tr>
-                            <td>{{ $address->alias }}</td>
-                            <td>{{ $address->address_1 }}</td>
-                            <td>{{ $address->country->name }}</td>
-                            <td>{{ $address->status }}</td>
+                            <td>@if(isset($address)){{ $address->alias }}@endif</td>
+                            <td>@if(isset($address)){{ $address->address_1 }}@endif</td>
+                            <td>@if(isset($address)){{ $address->country->name }}@endif</td>
+                            <td>@if(isset($address)){{ $address->status }}@endif</td>
                             <td>
+                            @if(isset($address))
                                 <form action="{{ route('admin.addresses.destroy', $address->id) }}" method="post" class="form-horizontal">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="delete">
@@ -53,6 +54,7 @@
                                         <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Delete</button>
                                     </div>
                                 </form>
+                                @endif
                             </td>
                         </tr>
                     </tbody>

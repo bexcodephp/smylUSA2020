@@ -10,7 +10,8 @@ class CustomerImage extends Model
     protected $primaryKey = "customer_image_id";
     protected $fillable = [
         'customer_id',
-        'image'
+        'image',
+        'description'
     ];
 
     public function customer()

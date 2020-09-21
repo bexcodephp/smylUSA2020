@@ -8,6 +8,10 @@ $(document).ready(function () {
         }
     });
     
+    $(".videomodal").on('hidden.bs.modal', function (e) {
+        var memory = $(this).html();
+        $(this).html(memory);
+    });
     // $('.select2').select2({
     //     placeholder: 'Select'
     // });
@@ -47,7 +51,7 @@ $(document).ready(function () {
     var table = $('.table').DataTable({
         'bSort' : false,
         responsive: true,
-        'scrollX': true,
+        // 'scrollX': true,
         initComplete: function () {
             // Apply the search
             this.api().columns().every( function () {

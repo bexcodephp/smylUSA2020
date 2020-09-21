@@ -196,7 +196,7 @@ class EmployeeController extends Controller
         $employee = $this->employeeRepo->findEmployeeById($id);
         $roles = $this->roleRepo->listRoles('created_at', 'desc');
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
-        $facilities = Facility::get(['facility_id','name','city','state','zipcode']);
+        $facilities = Facility::where('is_active',1)->get(['facility_id','name','city','state','zipcode']);
         return view(
             'admin.employees.edit',
             [
