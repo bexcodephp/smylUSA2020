@@ -111,7 +111,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group {{ $errors->has('state') ? 'has-error' : '' }}">
                                     <label for="state">State<span class="text-danger">*</span></label>
-                                    <select id="state" name="state" class="form-control">
+                                    <select id="state" class="form-control">
                                         <option value="">Select state</option>
                                         <?php 
                                             $state_arr = array();
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                             
-                            <input type="hidden" id="state_name" value="<?php echo $state_arr[$facility->state]; ?>">
+                            <input type="hidden" id="state_name" name="state" value="<?php echo $state_arr[$facility->state]; ?>">
 
                             <div class="col-sm-12">
                                 <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
@@ -307,7 +307,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                    <form action="{{ url('admin.facilities.addNonAvailabilityTime', $facility->facility_id) }}" id="addNonAvailabilityTime" method="post">
+                    <form action="{{ route('admin.facilities.addNonAvailabilityTime', $facility->facility_id) }}" id="addNonAvailabilityTime" method="post">
                         {{ csrf_field() }}
                         <div class="form-row px-2">
                             <div class="input-group col-auto mr-2">
@@ -329,6 +329,7 @@
                                     </div>
                             </div> 
                             <div class="col btn-filter">
+                                <input type="hidden" name="facilityID" value="{{$facility->facility_id}}">
                                 <button type="submit" name="submit" class="btn btn-primary" id="saveNaHours">submit</button>
                             </div>
                         </div>
@@ -362,7 +363,7 @@
 
         $('#state').on('change', function(){
             var stateID = $(this).val();
-            
+            $('#state_name').val($('#opt_state_'+stateID).text());
             if(stateID){
                 $.ajax({
                     url:'../getcity',

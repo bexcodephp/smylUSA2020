@@ -137,6 +137,7 @@ class FacilityController extends Controller
      */
     public function update(FacilityUpdateRequest $request, $id)
     {
+        
         $data = $request->input();
         if ($request->hasFile('image')) {
             $data['image'] = $this->facilityRepo->saveFacilityImage($request->file('image'));
@@ -208,12 +209,13 @@ class FacilityController extends Controller
 
     public function addNonAvailabilityTime(Request $request)
     {
+
         $weekday =  date('w', strtotime($request->date));
         $facility = $this->facilityRepo->find($request->id);
 
         $a = FacilityNonAvailabilityTimeslot::create([
             'date' => $request->date,
-            'facility_id' => $request->id,
+            'facility_id' => $request->facilityID,
             'weekday' => $weekday,
             'start_time' => date('H:i', strtotime($request->start_time)),
             'end_time' => date('H:i', strtotime($request->end_time))               
