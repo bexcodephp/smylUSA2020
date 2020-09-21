@@ -30,7 +30,7 @@
                         <form class="row" role="form" method="post">
                             <div class="col-12 form-group">
                                 <label>Email Id</label>
-                                <input type="email" class="form-control input-gray" id="" placeholder="Old Password">
+                                <input type="email" name = "forgot_email" class="form-control input-gray" id="forgot_email" placeholder="email">
                             </div>
                             <div class="col-12 text-left btn-signin mt-xl-4 my-3">
                                <!--  <a href="{{ url('/loginform') }}" class="btn btn-primary btn-lg text-center">Sign In</a> -->
