@@ -62,7 +62,7 @@
                             <img src="{{ asset('images/icons/location_icon_top_of_the_website.png') }}" class="float-left mr-2" />
                             <div class="d-flex flex-column">
                                 <small class="clr_blue">Location</small>
-                                <small>8761 N 56th<br/>St #290757 Tampa,<br/>33617</small>
+                                <small>8761 N 56th<br />St #290757 Tampa,<br />33617</small>
                             </div>
                         </div>
                     </li>
@@ -77,10 +77,11 @@
     </div>
 </footer>
 {{-- scripts --}}
-{{-- <script src="/js/app.js"></script> --}}
+
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap-4.5.0/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('plugins/jQuery-slimScroll-1.3.8/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('front/js/scripts-front.js') }}"></script>
 {{-- @stack('scripts') --}}

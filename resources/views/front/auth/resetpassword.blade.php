@@ -1,10 +1,10 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}"  type="text/css" >
+<link rel="stylesheet" href="{{ asset('front/css/login.css') }}" type="text/css">
 @endpush
 @section('content')
 <main class="resetpassword">
-    {{--  slider  --}}
+    {{-- slider  --}}
     <section class="banner">
         <div class="hero-img">
             <div class="item" style="background-image:url('{{ asset('images/products/banner_location.jpg') }}') ">
@@ -29,7 +29,7 @@
                     <h4 class="color-blue">Sign in Password</h4>
                     <div class="signin-form mt-xxl-6">
                         <form class="row" action="">
-                            {{--  
+                            {{--
                                 NOTE: 
                                 Add Hiiden class for hide old password  
                             --}}
@@ -58,8 +58,8 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
 
     });
-  </script>
+</script>
 @endpush

@@ -1,10 +1,10 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}"  type="text/css" >
+<link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}" type="text/css">
 @endpush
 @section('content')
 <main class="patient-login-first">
-    {{--  slider  --}}
+    {{-- slider  --}}
     <section class="banner">
         <div class="hero-img">
             <div class="item" style="background-image:url('{{ asset('images/products/ourvalues.png') }}') ">
@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col-12 mb-xxl-5 mb-md-3 mb-3">
-                {{--  links for tab content panel  --}}
+                {{-- links for tab content panel  --}}
                 <ul class="nav nav-tabs tablist" id="myTabs" role="tablist">
                     <li role="presentation" class="">
                         <a href="#step_1" class="nav-link active" aria-controls="step_1" role="tab" data-toggle="tab">Step <div class="step-no">1</div></a>
@@ -39,20 +39,21 @@
                         <a href="#step_4" class="nav-link" aria-controls="step_4" role="tab" data-toggle="tab">Step <div class="step-no">4</div></a>
                     </li>
                     <li role="presentation">
-                        <a href="#step_5"class="nav-link" aria-controls="step_5" role="tab" data-toggle="tab">Step <div class="step-no">5</div></a>
+                        <a href="#step_5" class="nav-link" aria-controls="step_5" role="tab" data-toggle="tab">Step <div class="step-no">5</div></a>
                     </li>
                 </ul>
             </div>
             <div class="col-12">
                 <div class="tab-content" id="form-tabContent">
-                    {{--  step 1  --}}
-                    <form class="tab-pane fade show active py-3 step-1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
-                        {{--  personel Information  --}}
+                    {{-- step 1  --}}
+                    <form class="tab-pane fade show active py-3 step-1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
+                        {{-- personel Information  --}}
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
                             </div>
-                            <?php //print_r($userdata->first_name);?>
+                            <?php //print_r($userdata->first_name);
+                            ?>
                             <div class="col-sm-6 form-group">
                                 <label>First Name<span class="text-danger">*</span></label>
                                 <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $userdata->first_name }}">
@@ -74,14 +75,14 @@
                                 <input type="text" class="form-control input-white" id="patient_id" placeholder="000000">
                             </div>
                         </div>
-                        {{--  Billing Information  --}}
+                        {{-- Billing Information  --}}
                         <div class="row mt-3">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Billing Information</h4>
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 1<<span class="text-danger">*</span>/label>
-                                <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address">
+                                        <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 2<span class="text-danger">*</span></label>
@@ -100,7 +101,7 @@
                                 <input type="text" class="form-control input-white" id="zipcode" placeholder="000000">
                             </div>
                         </div>
-                        {{--  Billing Information  --}}
+                        {{-- Billing Information  --}}
                         <div class="row mt-3">
                             <div class="col-12 mb-2 form-inline">
                                 <h4 class="sub-title color-blue text-bold mb-2">Shipping Information</h4>
@@ -131,12 +132,12 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-12 text-right">                               
+                            <div class="col-12 text-right">
                                 <button type="button" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
                     </form>
-                    {{--  step 2  --}}
+                    {{-- step 2  --}}
                     <form class="tab-pane fade py-3 step-2" id="step_2" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
@@ -147,7 +148,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-md-6 mh-caption" >
+                                    <div class="col-md-6 mh-caption">
                                         <p>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blodd cancers):</p>
                                     </div>
                                     <div class="col-md-6 select-facility select-option mb-3">
@@ -158,18 +159,18 @@
                                         {{-- add "multiple" attribute for multi-selection --}}
                                         <select id="" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
                                             <option value="ri">Option 1</option>
-                                            <option value="wv" >Option 2</option>
+                                            <option value="wv">Option 2</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 mh-caption" >
+                                    <div class="col-md-6 mh-caption">
                                         <p>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blodd cancers):</p>
                                     </div>
                                     <div class="col-md-6 select-facility select-option mb-3">
                                         <select id="" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
                                             <option value="ri">Option 1</option>
-                                            <option value="wv" >Option 2</option>
+                                            <option value="wv">Option 2</option>
                                         </select>
                                     </div>
                                 </div>
@@ -182,7 +183,7 @@
                             </div>
                         </div>
                     </form>
-                    {{--  step 3  --}}
+                    {{-- step 3  --}}
                     <form class="tab-pane fade py-3 step-3" id="step_3" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
@@ -218,14 +219,14 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            {{--  <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
+                            {{-- <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
                             <div class="col-12 text-right">
                                 <button type="button" class="btn btn-primary skip-tab">Skip</button>
                                 <button type="button" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
                     </form>
-                    {{--  step 4  --}}
+                    {{-- step 4  --}}
                     <form class="tab-pane fade py-3 step-4" id="step_4" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="row mt-0 pictures">
                             <div class="col-12 align-self-center mb-3">
@@ -237,7 +238,7 @@
                                         <h6 class="sub-title-1 color-gray text-bold">Upload Your Smile Pictures</h6>
                                     </div>
                                     <div class="col-sm col-auto align-self-center text-right">
-                                        <button type="button" class="btn btn-primary"  onclick="btnUploadNewPic()">Upload New</button>
+                                        <button type="button" class="btn btn-primary" onclick="btnUploadNewPic()">Upload New</button>
                                     </div>
                                 </div>
                             </div>
@@ -294,7 +295,7 @@
                                         <h6 class="sub-title-1 color-gray text-bold">Upload Your Bite Pictures</h6>
                                     </div>
                                     <div class="col-sm col-auto align-self-center text-right">
-                                        <button type="button" class="btn btn-primary"  onclick="btnUploadBitePic()">Upload New</button>
+                                        <button type="button" class="btn btn-primary" onclick="btnUploadBitePic()">Upload New</button>
                                     </div>
                                 </div>
                             </div>
@@ -341,14 +342,14 @@
                         </div>
 
                         <div class="row">
-                            {{--  <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
+                            {{-- <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
                             <div class="col-12 text-right">
                                 <button type="button" class="btn btn-primary skip-tab">Skip</button>
                                 <button type="button" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
                     </form>
-                    {{--  step 5  --}}
+                    {{-- step 5  --}}
                     <form class="tab-pane fade py-3 step-5" id="step_5" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="row mt-0 pictures">
                             <div class="col-12 align-self-center mb-3">
@@ -391,7 +392,7 @@
                                             <img class="card-img-top" src="{{ asset('images/products/stl_3.png') }}" />
                                             <div class="card-body">
                                                 <p class="card-text">Image not have Description</p>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col mb-4">
@@ -399,7 +400,7 @@
                                             <img class="card-img-top" src="{{ asset('images/products/stl_4.png') }}" />
                                             <div class="card-body">
                                                 <p class="card-text">Image not have Description</p>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -407,7 +408,7 @@
                         </div>
 
                         <div class="row">
-                            {{--  <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
+                            <!-- <button type="button" class="btn btn-primary prev-tab">Prev</button>  -->
                             <div class="col-12 text-right">
                                 <button type="button" class="btn btn-primary next-finish">Finish</button>
                             </div>
@@ -418,7 +419,7 @@
         </div>
     </section>
 </main>
-{{--  password change modal  --}}
+{{-- password change modal  --}}
 <div class="modal fade change-pwd-modal" id="change_pwd_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -448,7 +449,7 @@
         </div>
     </div>
 </div>
-{{--  Change Card Details modal  --}}
+{{-- Change Card Details modal  --}}
 <div class="modal fade card-detail-change-modal" id="card_detail_change_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -504,7 +505,7 @@
         </div>
     </div>
 </div>
-{{--  Add Card Details modal  --}}
+{{-- Add Card Details modal  --}}
 <div class="modal fade card-detail-add-modal" id="card_detail_add_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -560,7 +561,7 @@
         </div>
     </div>
 </div>
-{{--  ADD/EDIT New SMILE/BITE picture modal  --}}
+{{-- ADD/EDIT New SMILE/BITE picture modal  --}}
 <div class="modal fade upload-new-pic-modal pic-modal" id="upload_new_pic_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -600,7 +601,7 @@
         </div>
     </div>
 </div>
-{{--  Upload New STL File picture modal  --}}
+{{-- Upload New STL File picture modal  --}}
 <div class="modal fade upload-new-stl-pic-modal pic-modal" id="upload_new_stl_pic_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -642,7 +643,7 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
         // jQuery('body').on('click','.next-tab', function(){
         //     var next = jQuery('.nav-tabs > .active').next('li');
         //     if(next.length){
@@ -663,63 +664,63 @@
 
         $('.selectpicker').selectpicker();
         // change password modal
-        $('#change_pwd').on('click', function () {
+        $('#change_pwd').on('click', function() {
             $('#change_pwd_modal').modal('show')
         });
         // change btn_card_detail_change modal
-        $('#btn_card_detail_change').on('click', function () {
+        $('#btn_card_detail_change').on('click', function() {
             $('#card_detail_change_modal').modal('show')
         });
         // ADD card detail  modal
-        $('#btn_card_detail_add').on('click', function () {
+        $('#btn_card_detail_add').on('click', function() {
             $('#card_detail_add_modal').modal('show')
         });
 
 
     });
     // UPLOAD new smile pic modal
-    function btnUploadNewPic(){
+    function btnUploadNewPic() {
         $('#title_add_bite').hide();
         $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
+        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
             $('#title_add_smile').show();
             $('#title_add_bite').hide();
         });
     }
     // EDIT smile pic modal
-    function btnEditSmilePic(){
+    function btnEditSmilePic() {
         $('#title_add_bite').hide();
         $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
+        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
             $('#title_add_smile').show();
             $('#title_add_bite').hide();
         });
     }
     // Upload new Bite pic modal
-    function btnUploadBitePic(){
+    function btnUploadBitePic() {
         $('#title_add_smile').hide();
         $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
+        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
             $('#title_add_bite').show();
             $('#title_add_smile').hide();
         });
     }
     // EDIT Bite pic modal
-    function btnEditBitePic(){
+    function btnEditBitePic() {
         $('#title_add_smile').hide();
         $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
+        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
             $('#title_add_bite').show();
             $('#title_add_smile').hide();
         });
     }
-     // Upload new STL pic modal
-    function btnUploadStl(){
+    // Upload new STL pic modal
+    function btnUploadStl() {
         $('#upload_new_stl_pic_modal').modal('show');
     }
     // EDIT STL pic modal
-    function btnEditLtsPic(){
+    function btnEditLtsPic() {
         $('#upload_new_stl_pic_modal').modal('show');
     }
-  </script>
+</script>
 @endpush
