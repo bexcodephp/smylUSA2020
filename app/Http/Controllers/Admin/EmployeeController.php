@@ -83,15 +83,6 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
-<<<<<<< HEAD
-        $role = Config::get('constants.operator');
-        
-        // dd($var);
-        // exit();
-        // dd($request);
-        //dd($request->file('license_certificates')->getClientOriginalName());
-        //dd($request);
-=======
         $role_type = $request->role_type;
         // print_r($role_type);exit();
         if($role_type == "dentist"){
@@ -100,7 +91,6 @@ class EmployeeController extends Controller
             $role = Config::get('constants.operator');
         } else{}
         // dd($role);
->>>>>>> ebe7eb4412a93d37735a4daa68577ff3da4c4687
         $request->request->add(['role' => $role, 'password'=>Hash::make('12345678')]); 
         
         $request->merge([
