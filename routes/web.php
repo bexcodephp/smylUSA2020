@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             });
             Route::namespace('Customers')->group(function () {
                 Route::resource('customers', 'CustomerController');
-            Route::resource('customers.addresses', 'CustomerAddressController');
+                Route::resource('customers.addresses', 'CustomerAddressController');
             });
 
             Route::namespace('Categories')->group(function () {
@@ -76,6 +76,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
             
             Route::resource('addresses', 'Addresses\AddressController');
+            
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');
             Route::resource('countries.provinces.cities', 'Cities\CityController');
@@ -89,7 +90,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
             Route::resource('employees', 'EmployeeController');
             Route::post('employees/delete_certificate/{id}', 'EmployeeController@deleteCertificate');
-            Route::post('employees/filter', 'EmployeeController@filter')->name('filter');
+            Route::get('employees/create/{type}', 'EmployeeController@create')->name('add');
             Route::post('employees/delete/{id}', 'EmployeeController@destroy')->name('delete');
             Route::post('employees/status', 'EmployeeController@status')->name('status');
             Route::post('employees/get_location', 'EmployeeController@getLocation')->name('get_location');
@@ -272,4 +273,20 @@ Route::namespace('Front')->group(function () {
     // Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
+});
+
+Route::get('/candidate', function () {
+    return view('front.users.u_ami_candidate');
+});
+Route::get('/products', function () {
+    return view('front.users.u_products');
+});
+Route::get('/productsview', function () {
+    return view('front.users.u_products_view');
+});
+Route::get('/checkout', function () {
+    return view('front.checkout2-update');
+});
+Route::get('/pDashboard', function () {
+    return view('front.dashboard.patientDashboard');
 });

@@ -148,7 +148,7 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                                <label for="image">Facility Image</label>
+                                <label for="image">Facility Image <span class="text-danger">*</span></label>
                                 <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}">
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
                             </div>

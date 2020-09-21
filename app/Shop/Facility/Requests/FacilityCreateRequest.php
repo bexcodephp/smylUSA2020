@@ -31,8 +31,7 @@ class FacilityCreateRequest extends FormRequest
             'city' => ['required'],
             'state' => ['required'],
             'is_active' => ['required'],
-            'image' => ['required'],
-            'image.*' => ['mimes:png,jpg,jpeg,pdf'],
+            'image' => ['required','mimes:png,jpg,jpeg,pdf']
         ];
     }
 }

@@ -48,7 +48,6 @@ trait AddressTransformable
         $customer = $customerRepo->findCustomerById($address->customer_id);
         $obj->customer = $customer->name;
         $obj->status = $address->status;
-
         return $obj;
     }
 }

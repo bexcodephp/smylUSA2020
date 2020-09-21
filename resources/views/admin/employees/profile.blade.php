@@ -4,6 +4,9 @@
 @endpush 
 @section('content')
     <!-- Main content -->
+<ol class="breadcrumb">
+   <a href="{{ URL::previous() }}" class="btn btn-default btn-sm">Back</a>
+</ol>
     <section class="content">
         @include('layouts.errors-and-messages')
         <div class="row">

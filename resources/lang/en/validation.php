@@ -120,7 +120,7 @@ return [
             'max' => 'The license certificates may not be more than 3.',
         ],
         'license_certificates.*' => [ 
-            'mimes' => 'The license certificates must be a file of type: png, jpg, jpeg'           
+            'mimes' => 'The license certificates must be a file of type: png, jpg, jpeg, pdf'           
         ],
         'address' => [
             'required' => 'Address is required.',

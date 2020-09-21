@@ -20,11 +20,12 @@
         "kalnoy/nestedset": "^4.3",
         "laravel/cashier": "~7.0",
         "laravel/framework": "5.7.*",
+        "moontoast/math": "^1.2",
         "nicolaslopezj/searchable": "^1.10",
         "paypal/rest-api-sdk-php": "*",
         "santigarcor/laratrust": "5.0.*",
         "shippo/shippo-php": "^1.4",
-        "tymon/jwt-auth": "~1.0.0-rc.4.1" 
+        "tymon/jwt-auth": "~1.0.0-rc.4.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

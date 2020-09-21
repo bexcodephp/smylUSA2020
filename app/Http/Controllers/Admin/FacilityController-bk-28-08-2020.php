@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Appointment;
-use App\Shop\Facility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Shop\Facility\FacilityTimeslot;
@@ -14,6 +13,7 @@ use App\Shop\Facility\Requests\FacilityUpdateRequest;
 use App\Shop\Facility\Repositories\FacilityRepository;
 use App\Shop\Facility\Repositories\Interfaces\FacilityRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use App\Shop\Facility\Facility;
 
 class FacilityController extends Controller
 {
@@ -137,6 +137,7 @@ class FacilityController extends Controller
      */
     public function update(FacilityUpdateRequest $request, $id)
     {
+        
         $data = $request->input();
         if ($request->hasFile('image')) {
             $data['image'] = $this->facilityRepo->saveFacilityImage($request->file('image'));
@@ -208,12 +209,13 @@ class FacilityController extends Controller
     
     public function addNonAvailabilityTime(Request $request)
     {
+
         $weekday =  date('w', strtotime($request->date));
         $facility = $this->facilityRepo->find($request->id);
 
         $a = FacilityNonAvailabilityTimeslot::create([
             'date' => $request->date,
-            'facility_id' => $request->id,
+            'facility_id' => $request->facilityID,
             'weekday' => $weekday,
             'start_time' => date('H:i', strtotime($request->start_time)),
             'end_time' => date('H:i', strtotime($request->end_time))               
@@ -277,5 +279,13 @@ class FacilityController extends Controller
     {
         $cities = DB::table('city_tbl')->where('state_id',$request->state_id)->get(); 
         return response(json_encode($cities));
+    }
+
+    public function getProfile($id)
+    {
+        //echo "hi";exit;
+        $facility = $this->facilityRepo->find($id);
+        $facilities_all = Facility::all();
+        return view('admin.facilities.profile', ['facility' => $facility, 'facilities_all' => $facilities_all]);
     }
 }

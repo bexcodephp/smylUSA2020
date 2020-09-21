@@ -28,12 +28,12 @@
                 <h6>Follow Us</h6>
                 <div class="list-group">
                     <a href="{{ url('/') }}" class="list-group-item list-group-item-action">HOME</a>
-                    <a href="{{ url('/aboutus') }}" class="list-group-item list-group-item-action">ABOUT US</a>
-                    <a href="{{ url('/works') }}" class="list-group-item list-group-item-action">HOW IT WORKS</a>
+                    <a href="{{ url('about-us') }}" class="list-group-item list-group-item-action">ABOUT US</a>
+                    <a href="{{ url('/how-it-works') }}" class="list-group-item list-group-item-action">HOW IT WORKS</a>
                     <a href="{{ url('/pricing') }}" class="list-group-item list-group-item-action">PRICING</a>
                     <a href="{{ url('/locations') }}" class="list-group-item list-group-item-action">LOCATIONS</a>
                     <a href="{{ url('/products') }}" class="list-group-item list-group-item-action">PRODUCTS</a>
-                    <a href="{{ url('/contactus') }}" class="list-group-item list-group-item-action">CONTACT</a>
+                    <a href="{{ url('/contact-us') }}" class="list-group-item list-group-item-action">CONTACT</a>
                 </div>
             </div>
             <div class="col-md-4 contactus">

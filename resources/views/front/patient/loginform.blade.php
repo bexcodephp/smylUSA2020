@@ -3,9 +3,13 @@
     <link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}"  type="text/css" >
 @endpush
 @section('content')
+<style type="text/css">
+    form .error {
+        color: #ff0000;
+    }
+</style>
 <main class="patient-login-first">
     {{--  slider  --}}
-    <?php //dd($customer);?>
     <section class="banner">
         <div class="hero-img">
             <div class="item" style="background-image:url('{{ asset('images/products/ourvalues.png') }}') ">
@@ -46,105 +50,99 @@
             </div>
             <div class="col-12">
                 <div class="tab-content" id="form-tabContent">
-                <?php //dd($address);?>
                     {{--  step 1  --}}
-                    <form  action="{{ route('submitMedicalForm', $order ? $order->reference : null) }}" method="post" class="tab-pane fade show active py-3 step-1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
-                    @csrf
+                    <form class="tab-pane fade show active py-3 step-1" name="step_1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
                         {{--  personel Information  --}}
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
                             </div>
-                           
+                            <?php //print_r($userdata->first_name);?>
                             <div class="col-sm-6 form-group">
                                 <label>First Name<span class="text-danger">*</span></label>
-                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $customer->first_name }}">
+                                <input type="text" name="firstname" class="form-control input-white" id="firstname" placeholder="First Name" value="{{ $customer->first_name }}">
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Last <span class="text-danger">*</span></label>
-                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $customer->last_name }}">
+                                <input type="text" name="lastname" class="form-control input-white" id="lastname" placeholder="Last Name" value="{{ $customer->last_name }}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Moblie Number<span class="text-danger">*</span></label>
-                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" value="{{ $customer->phone }}">
+                                <input type="text" name="phone" id="phone" placeholder="Phone Number"  value="{{ $customer->phone }}" class="form-control" />
                             </div>
-                            <?php 
-                                $createDate = new DateTime($customer->dob);
-
-                                $dob = $createDate->format('d-m-Y');
-                                //var_dump($dob); // string(10) "2012-09-09"
-                            ?>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Date of Birth<span class="text-danger">*</span></label>
-                                <input type="date" name="dob" class="form-control input-white" id="dob" value="{{ $dob }}" >
+                                 <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled />
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Patient ID<span class="text-danger">*</span></label>
-                                <input type="text" name="patient_id" value="{{ $customer->patient_id }}" class="form-control input-white" id="patient_id" placeholder="000000" readonly>
+                                <input type="text" class="form-control input-white" id="patient_id" placeholder="000000" value="{{ $customer->patient_id }}" disabled>
                             </div>
                         </div>
-                        {{--  Billing Information  --}}                        
+                        {{--  Billing Information  --}}
                         <div class="row mt-3">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Billing Information</h4>
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 1<span class="text-danger">*</span></label>
-                                <input type="text" name="address_1" class="form-control input-white" id="address_1" placeholder="Type Your Address">
+                                <input type="text" class="form-control input-white" id="address_1" name="address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 2<span class="text-danger">*</span></label>
-                                <input type="text" name="address_2" class="form-control input-white" id="address_2" placeholder="Type Your Address">
+                                <input type="text" class="form-control input-white" id="address_2" name="address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>City<span class="text-danger">*</span></label>
-                                <input type="text" name="city" class="form-control input-white" id="city" placeholder="Your City Name">
+                                <input type="text" class="form-control input-white" id="city" name="city" placeholder="Your City Name" value="{{ $address ? $address->city : null}}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>State<span class="text-danger">*</span></label>
-                                <input type="text" name="state" class="form-control input-white" id="state" placeholder="Your State Name">
+                                <select name="state" id="state" class="form-control" name="state">
+                                    <option selected value="">Select State</option>
+                                    @foreach($statesList as $key => $state)
+                                    <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Zip Code<span class="text-danger">*</span></label>
-                                <input type="text" name="zipcode" class="form-control input-white" id="zipcode" placeholder="000000">
+                                <input type="text" class="form-control input-white" name="zipcode" id="zipcode" placeholder="000000" value="{{ $address ? $address->zip : null }}">
                             </div>
                         </div>
                         {{--  Billing Information  --}}
-                        <?php  
-                                $sameAsChecked='';
-                                $readOnlyField="";
-                                if($address->same_as_shipping == 1){
-                                    $sameAsChecked='checked';                            
-                                }
-                                //print_r($address->billing_address);
-                        ?>
                         <div class="row mt-3">
                             <div class="col-12 mb-2 form-inline">
                                 <h4 class="sub-title color-blue text-bold mb-2">Shipping Information</h4>
-                                <div class="custom-control custom-checkbox ml-sm-4 ">                                
-                                    <input type="checkbox" name="same_as_shipping" id="sameAsBilling" value="1" {{$sameAsChecked}} > 
-                                    <label class="custom-control-label color-blue text-bold" for="rememberme"><u>Same As Billing Information</u></label>
+                                <div class="custom-control custom-checkbox ml-sm-4 ">
+                                    <input type="checkbox" class="custom-control-input" id="sameAsBilling">
+                                    <label class="custom-control-label color-blue text-bold" for="sameAsBilling"><u>Same As Billing Information</u></label>
                                 </div>
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 1</label>
-                                <input type="text" name="address_1" class="form-control input-white readyonly" id="address_1" placeholder="Type Your Address" value="{{ $address->billing_address}}" {{$readOnlyField}}>
+                                <input type="text" name="shipping_address_1" class="form-control input-white shipping_address_1" id="shipping_address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 2</label>
-                                <input type="text" name="address_2" class="form-control input-white readyonly" id="address_2" placeholder="Type Your Address" value="{{ $address->billing_address}}" {{$readOnlyField}} >
+                                <input type="text" id="shipping_address_2" class="form-control input-white shipping_address_2" name="shipping_address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>City</label>
-                                <input type="text" name="city" class="form-control input-white readyonly" id="city" placeholder="Your City Name" value="{{ $address->billing_city}}" {{$readOnlyField}}>
+                                <input type="text" class="form-control input-white shipping_city" id="shipping_city" name="shipping_city" placeholder="Your City Name" value="{{ $address ? $address->city : null}}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>State</label>
-                                <input type="text" name="state" class="form-control input-white readyonly" id="state" placeholder="Your State Name" value="{{ $address->billing_state}}" {{$readOnlyField}}>
+                                <select name="shipping_state" id="shipping_state" class="form-control" name="state">
+                                    <option selected value="">Select State</option>
+                                    @foreach($statesList as $key => $state)
+                                    <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Zip Code</label>
-                                <input type="text" name="zipcode" class="form-control input-white readyonly" id="zipcode" placeholder="000000" value="{{ $address->billing_zip}}" {{$readOnlyField}}>
+                                <input type="text" class="form-control input-white shipping_zipcode" name="shipping_zipcode" id="shipping_zipcode" placeholder="000000" value="{{ $address ? $address->zip : null }}">
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -260,48 +258,26 @@
                             </div>
                             <div class="col-12">
                                 <div class="row row-cols-1 row-cols-md-3">
+                                    @foreach($teethImages as $image)
                                     <div class="col mb-4">
                                         <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/steps_image_5.png') }}" />
+                                            <img class="card-img-top" src="{{ asset('storage/'.$image->image) }}" />
                                             <div class="card-body">
-                                                <p class="card-text">Image Description will be here Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et tur. Excepteur sint</p>
+                                                <p class="card-text">{{$image->description}}</p>
                                             </div>
                                             <div class="card-footer p-0">
-                                                <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic()">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
+                                                <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic('{{ $image->image }}')">Edit</button>
+                                                <a href="{{ route('user.removeTeethImage', $image->customer_image_id) }}" class="btn btn-link btn-delete">Delete</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col mb-4">
-                                        <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/steps_image_6.png') }}" />
-                                            <div class="card-body">
-                                                <p class="card-text">Image not have Description</p>
-                                            </div>
-                                            <div class="card-footer p-0">
-                                                <button type="button" class="btn btn-link btn-edit">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col mb-4">
-                                        <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/image_4_home_page_before_footer.jpg') }}" />
-                                            <div class="card-body">
-                                                <p class="card-text">Image not have Description</p>
-                                            </div>
-                                            <div class="card-footer p-0">
-                                                <button type="button" class="btn btn-link btn-edit">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @endforeach
                                 </div>
                             </div>
                         </div>
 
                         {{-- bite pictures --}}
-                        <div class="row mt-0 bite-pictures">
+                       <!--  <div class="row mt-0 bite-pictures">
                             <div class="col-12 align-self-center mb-3">
                                 <h4 class="sub-title color-blue text-bold">Bite Pictures</h4>
                             </div>
@@ -355,7 +331,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row">
                             {{--  <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
@@ -385,7 +361,7 @@
                                 <div class="row row-cols-1 row-cols-md-2">
                                     <div class="col mb-4">
                                         <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/stl_1.png') }}" />
+                                            <img class="card-img-top" src="{{ asset('images/products/stl_1.png') }}" onclick="btnEditLtsPic()"/>
                                             <div class="card-body">
                                                 <p class="card-text">Image Description will be here Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et tur. Excepteur sint</p>
                                             </div>
@@ -583,14 +559,16 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <form class="row justify-content-center">
+                <form class="row justify-content-center" action="{{ route('user.updateTeethImages') }}" method="POST" role="form" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-12 align-self-center mb-3 text-center">
-                        <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_smile">Add New Smile Picture</h4>
-                        <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_bite">Add New Bite Picture</h4>
+                        <h4 class="sub-title-1 color-blue text-bold" id="title_add_smile">Add New Smile Picture</h4>
+                        <h4 class="sub-title-1 color-blue text-bold" id="title_edit_smile">Edit New Smile Picture</h4>
+                        <!-- <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_bite">Add New Bite Picture</h4> -->
                     </div>
                     <div class="col-12 mb-4">
                         <div class="card h-100 card-2 mx-auto">
-                            <img class="card-img-top mx-auto" src="{{ asset('images/products/steps_image_5.png') }}" />
+                            <img class="card-img-top mx-auto" id="doc_src" />
                             <div class="card-body p-0">
                                 <textarea class="form-control" name="" id="" rows="3"></textarea>
                             </div>
@@ -603,14 +581,14 @@
                             </div>
                             <div class="col-auto">
                                 <div class="custom-file browse-file-btn">
-                                    <input type="file" class="custom-file-input" id="input_upload_pictures">
+                                    <input type="file" class="custom-file-input" name="images[]" multiple id="teethpic"> 
                                     <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="button" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button>
+                        <button type="submit" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button>
                     </div>
                 </form>
             </div>
@@ -658,7 +636,8 @@
 </div>
 @endsection
 @push('scripts')
-<script type="text/javascript" src="{{ asset('js/patient/medicalform.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="{{asset('js/patient/medicalform.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         // jQuery('body').on('click','.next-tab', function(){
@@ -701,16 +680,22 @@
         $('#upload_new_pic_modal').modal('show');
         $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
             $('#title_add_smile').show();
+            $('#title_edit_smile').hide();
             $('#title_add_bite').hide();
+            // $('#doc_src').attr();
+            $('#doc_src').hide();
         });
     }
     // EDIT smile pic modal
-    function btnEditSmilePic(){
+    function btnEditSmilePic(doc_name){
         $('#title_add_bite').hide();
         $('#upload_new_pic_modal').modal('show');
         $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
-            $('#title_add_smile').show();
+            $('#title_edit_smile').show();
+            $('#title_add_smile').hide();
             $('#title_add_bite').hide();
+            $("#doc_src").show();
+            $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
         });
     }
     // Upload new Bite pic modal
@@ -739,5 +724,71 @@
     function btnEditLtsPic(){
         $('#upload_new_stl_pic_modal').modal('show');
     }
+
+    $("#step_1").validate({
+        // Specify validation rules
+        rules: {
+            firstname: "required",
+            lastname: "required",    
+            phone: {
+                required: true,
+                digits: true,
+                maxlength: 10,
+            },
+            address_1:"required",
+            address_2: "required",
+            city : "required",
+            state : "required",
+            zipcode : "required",
+            shipping_address_1: "required",
+            shipping_address_2 : "required",
+            shipping_city : "required",
+            shipping_state : "required",
+            shipping_zipcode : "required",
+        },
+        messages: {
+            firstname: {
+                required: "Please enter first name",
+            },      
+            lastname: {
+                required: "Please enter last name",
+            },     
+            phone: {
+                required: "Please enter phone number",
+                digits: "Please enter valid phone number",
+                maxlength: "Phone number field accept only 10 digits",
+            },
+            address_1: {
+                required: "Please enter your billing address",
+            },
+            address_2: {
+                required: "Please enter your billing address",
+            },
+            city: {
+                required: "Please enter your billing city",
+            }, 
+            state: {
+                required: "Please select your billing state",
+            },
+            zipcode: {
+                required: "Please enter your billing zip code",
+            },
+            shipping_address_1: {
+                required: "Please enter your shipping address",
+            },
+            shipping_address_2: {
+                required: "Please enter your shipping address",
+            },
+            shipping_city: {
+                required: "Please enter shipping city",
+            }, 
+            shipping_state: {
+                required: "Please select your shipping state",
+            },
+            shipping_zipcode: {
+                required: "Please enter your shipping zip code",
+            },   
+        },
+  });
   </script>
 @endpush
