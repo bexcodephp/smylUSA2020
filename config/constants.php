@@ -18,5 +18,5 @@ return [
               ],
 
         'operator' => '5',
-
+        'dentist'  => '4',
     ];

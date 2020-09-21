@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Carbon;
 Use Carbon\Carbon;
 
+use Config;
+
 class EmployeeController extends Controller
 {
     /**
@@ -64,12 +66,12 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {            
+    public function create(Request $request)
+    {  
+        $role_type = $request->type;
         $facilities = Facility::where('is_active',1)->get(['facility_id','name']);
         $roles = $this->roleRepo->listRoles();
-        return view('admin.employees.create', compact('roles','facilities')
-    );
+        return view('admin.employees.create', compact('roles','facilities','role_type'));
     }
 
     /**
@@ -81,12 +83,14 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request)
     {
-        $role = Config::get('constants.operator');
-        // dd($var);
-        // exit();
-        // dd($request);    
-        //dd($request->file('license_certificates')->getClientOriginalName());
-        //dd($request);
+        $role_type = $request->role_type;
+        // print_r($role_type);exit();
+        if($role_type == "dentist"){
+            $role = Config::get('constants.dentist');    
+        } else if($role_type == "operator"){
+            $role = Config::get('constants.operator');
+        } else{}
+        // dd($role);
         $request->request->add(['role' => $role, 'password'=>Hash::make('12345678')]); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
@@ -129,7 +133,12 @@ class EmployeeController extends Controller
         $empRepo = new EmployeeRepository($recentOperator); //dd($empRepo);        
         $updateData['op_id'] = $operator_id; //dd($updateData);
         $result = $empRepo->update($updateData);  
-        return redirect('admin/employees/operator');
+        if($role_type == "dentist"){
+           return redirect('admin/employees/dentist');  
+        } else if($role_type == "operator"){
+            return redirect('admin/employees/operator');
+        } else{}
+        // return redirect('admin/employees/operator');
     }
 
     /**
@@ -183,6 +192,7 @@ class EmployeeController extends Controller
     public function edit(int $id)
     {
         //dd(Auth::guard('employee')->user()->id);
+        $back_url = redirect()->back()->getTargetUrl();
         $employee = $this->employeeRepo->findEmployeeById($id);
         $roles = $this->roleRepo->listRoles('created_at', 'desc');
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
@@ -194,7 +204,8 @@ class EmployeeController extends Controller
                 'roles' => $roles,
                 'isCurrentUser' => $isCurrentUser,
                 'selectedIds' => $employee->roles()->pluck('role_id')->all(),
-                'facilities'=> $facilities
+                'facilities'=> $facilities,
+                'back_url' => $back_url
             ]
         );
     }
@@ -209,8 +220,13 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
-        
-        $request->request->add(['role' => '5']); 
+        $role_type = $request->role_type;
+        if($role_type == "dentist"){
+            $role = Config::get('constants.dentist');    
+        } else if($role_type == "operator"){
+            $role = Config::get('constants.operator');
+        } else{}
+        $request->request->add(['role' => $role]); 
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);
@@ -264,8 +280,12 @@ class EmployeeController extends Controller
         // }
 
         // return redirect()->route('admin.employees.edit', $id)->with('message', 'Update successful');
-
-        return redirect('admin/employees/operator');
+        if($role_type == "dentist"){
+           return redirect('admin/employees/dentist');  
+        } else if($role_type == "operator"){
+            return redirect('admin/employees/operator');
+        } else{}
+        // return redirect('admin/employees/operator');
     }
 
     /**
