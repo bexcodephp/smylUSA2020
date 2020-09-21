@@ -10,7 +10,7 @@
             <form action="{{ route('admin.employees.store') }}" method="post" class="form" enctype="multipart/form-data"> 
                 <div class="box-body">
                     {{ csrf_field() }}
-                    
+                    <input id="role" name="role_type" type="hidden" value="{{$role_type}}">
                     <div class="form-group {{ $errors->has('fname') ? 'has-error' : '' }}">
                         <label for="fname">First Name <span class="text-danger">*</span></label>
                         <input type="text" name="fname" id="fname" placeholder="First Name" class="form-control" value="{{ old('fname') }}">

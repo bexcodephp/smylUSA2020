@@ -69,13 +69,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('facilities/{facility_id}/weekday/{weekday}', 'FacilityController@updateSpan')->name('facilities.updateSpan');
             Route::post('facilities/{facility_id}/weekday/{weekday}', 'FacilityController@updateFacilityTimespan')->name('facilities.updateFacilityTimespan');
             Route::post('facilities/updateTime/{facility_id}', 'FacilityController@updateTime')->name('facilities.updateTime');
-            Route::post('facilities/addNonAvailabilityTime', 'FacilityController@addNonAvailabilityTime')->name('addNonAvailabilityTime');
+            Route::post('facilities/addNonAvailabilityTime', 'FacilityController@addNonAvailabilityTime')->name('facilities.addNonAvailabilityTime');
             Route::post('facilities/updateNaHours/{id}', 'FacilityController@updateNonAvailabilityTime');
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
             Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
-
+        
             Route::resource('addresses', 'Addresses\AddressController');
+            
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');
             Route::resource('countries.provinces.cities', 'Cities\CityController');
@@ -89,7 +90,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
             Route::resource('employees', 'EmployeeController');
             Route::post('employees/delete_certificate/{id}', 'EmployeeController@deleteCertificate');
-            Route::post('employees/filter', 'EmployeeController@filter')->name('filter');
+            Route::get('employees/create/{type}', 'EmployeeController@create')->name('add');
             Route::post('employees/delete/{id}', 'EmployeeController@destroy')->name('delete');
             Route::post('employees/status', 'EmployeeController@status')->name('status');
             Route::post('employees/get_location', 'EmployeeController@getLocation')->name('get_location');
@@ -97,8 +98,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('employees/{id}/profile', 'EmployeeController@getProfile')->name('employee.profile');
             Route::put('employees/{id}/profile', 'EmployeeController@updateProfile')->name('employee.profile.update');
             Route::resource('roles', 'Roles\RoleController');
-            Route::resource('permissions', 'Permissions\PermissionController');
-            Route::resource('operators', 'OperatorController');
+            
         });
     });
 });
@@ -114,7 +114,6 @@ Route::namespace('Auth')->group(function () {
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');
 
-    Route::get('/login', 'LoginController@patientLogin'); ///
     Route::post('/login1', 'LoginController@login')->name("patientlogin");
 
     Route::group(['prefix' => 'pharmacist'], function () {
@@ -274,25 +273,11 @@ Route::namespace('Front')->group(function () {
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
-
-// update
-
-
-Route::get('/candidate', function () {
-    return view('front.users.u_ami_candidate');
+Route::get('admin/resources', 'ResourceController@index');
+Route::get('admin/resources/create', function () {
+    return view("admin.resource.create");
 });
-Route::get('/products', function () {
-    return view('front.users.u_products');
-});
-Route::get('/productsview', function () {
-    return view('front.users.u_products_view');
-});
-Route::get('/checkout', function () {
-    return view('front.checkout2-update');
-});
-Route::get('/pDashboard', function () {
-    return view('front.dashboard.patientDashboard');
-});
-// Route::get('/thankyou', function () {
-//     return view('front.auth.thankyou');
-// });
+Route::post('admin/resources/create', 'ResourceController@create');
+Route::get('admin/resources/edit/{id}','ResourceController@getResource');
+Route::post('admin/resources/edit/{id}','ResourceController@updateResource');
+Route::get('admin/resources/delete/{id}','ResourceController@destroyResource');

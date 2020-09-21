@@ -53,8 +53,7 @@ class RegisterController extends Controller
      * @return Customer
      */
     protected function create(array $data)
-    {
-        
+    {        
         return $this->customerRepo->createCustomer($data);
     }
 

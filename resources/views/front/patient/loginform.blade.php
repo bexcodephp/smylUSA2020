@@ -3,6 +3,11 @@
 <link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}" type="text/css">
 @endpush
 @section('content')
+<style type="text/css">
+    form .error {
+        color: #ff0000;
+    }
+</style>
 <main class="patient-login-first">
     {{-- slider  --}}
     <section class="banner">
@@ -45,9 +50,9 @@
             </div>
             <div class="col-12">
                 <div class="tab-content" id="form-tabContent">
-                    {{-- step 1  --}}
-                    <form class="tab-pane fade show active py-3 step-1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
-                        {{-- personel Information  --}}
+                    {{--  step 1  --}}
+                    <form class="tab-pane fade show active py-3 step-1" name="step_1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" >
+                        {{--  personel Information  --}}
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
@@ -56,23 +61,23 @@
                             ?>
                             <div class="col-sm-6 form-group">
                                 <label>First Name<span class="text-danger">*</span></label>
-                                <input type="text" name="first_name" class="form-control input-white" id="fname" placeholder="First Name" value="{{ $userdata->first_name }}">
+                                <input type="text" name="firstname" class="form-control input-white" id="firstname" placeholder="First Name" value="{{ $customer->first_name }}">
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Last <span class="text-danger">*</span></label>
-                                <input type="text" name="last_name" class="form-control input-white" id="lname" placeholder="Last Name" value="{{ $userdata->last_name }}">
+                                <input type="text" name="lastname" class="form-control input-white" id="lastname" placeholder="Last Name" value="{{ $customer->last_name }}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Moblie Number<span class="text-danger">*</span></label>
-                                <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" value="{{ $userdata->phone }}">
+                                <input type="text" name="phone" id="phone" placeholder="Phone Number"  value="{{ $customer->phone }}" class="form-control" />
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Date of Birth<span class="text-danger">*</span></label>
-                                <input type="date" class="form-control input-white" id="dob">
+                                 <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled />
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Patient ID<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="patient_id" placeholder="000000">
+                                <input type="text" class="form-control input-white" id="patient_id" placeholder="000000" value="{{ $customer->patient_id }}" disabled>
                             </div>
                         </div>
                         {{-- Billing Information  --}}
@@ -81,24 +86,29 @@
                                 <h4 class="sub-title color-blue text-bold">Billing Information</h4>
                             </div>
                             <div class="col-12 form-group">
-                                <label>Address 1<<span class="text-danger">*</span>/label>
-                                        <input type="text" class="form-control input-white" id="address_1" placeholder="Type Your Address">
+                                <label>Address 1<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control input-white" id="address_1" name="address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Address 2<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="address_2" placeholder="Type Your Address">
+                                <input type="text" class="form-control input-white" id="address_2" name="address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>City<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="city" placeholder="Your City Name">
+                                <input type="text" class="form-control input-white" id="city" name="city" placeholder="Your City Name" value="{{ $address ? $address->city : null}}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>State<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="state" placeholder="Your State Name">
+                                <select name="state_code" id="state" class="form-control" name="state">
+                                    <option selected value="">Select State</option>
+                                    @foreach($statesList as $key => $state)
+                                    <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Zip Code<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control input-white" id="zipcode" placeholder="000000">
+                                <input type="text" class="form-control input-white" name="zipcode" id="zipcode" placeholder="000000" value="{{ $address ? $address->zip : null }}">
                             </div>
                         </div>
                         {{-- Billing Information  --}}
@@ -106,8 +116,8 @@
                             <div class="col-12 mb-2 form-inline">
                                 <h4 class="sub-title color-blue text-bold mb-2">Shipping Information</h4>
                                 <div class="custom-control custom-checkbox ml-sm-4 ">
-                                    <input type="checkbox" class="custom-control-input" id="rememberme">
-                                    <label class="custom-control-label color-blue text-bold" for="rememberme"><u>Same As Billing Information</u></label>
+                                    <input type="checkbox" class="custom-control-input" id="sameAsBilling">
+                                    <label class="custom-control-label color-blue text-bold" for="sameAsBilling"><u>Same As Billing Information</u></label>
                                 </div>
                             </div>
                             <div class="col-12 form-group">
@@ -132,8 +142,8 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-12 text-right">
-                                <button type="button" class="btn btn-primary next-tab">Next</button>
+                            <div class="col-12 text-right">                               
+                                <button type="submit" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
                     </form>
@@ -244,42 +254,20 @@
                             </div>
                             <div class="col-12">
                                 <div class="row row-cols-1 row-cols-md-3">
+                                    @foreach($teethImages as $image)
                                     <div class="col mb-4">
                                         <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/steps_image_5.png') }}" />
+                                            <img class="card-img-top" src="{{ asset('storage/'.$image->image) }}" />
                                             <div class="card-body">
                                                 <p class="card-text">Image Description will be here Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et tur. Excepteur sint</p>
                                             </div>
                                             <div class="card-footer p-0">
-                                                <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic()">Edit</button>
+                                                <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic('{{ $image->image }}')">Edit</button>
                                                 <button type="button" class="btn btn-link btn-delete">Delete</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col mb-4">
-                                        <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/steps_image_6.png') }}" />
-                                            <div class="card-body">
-                                                <p class="card-text">Image not have Description</p>
-                                            </div>
-                                            <div class="card-footer p-0">
-                                                <button type="button" class="btn btn-link btn-edit">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col mb-4">
-                                        <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/image_4_home_page_before_footer.jpg') }}" />
-                                            <div class="card-body">
-                                                <p class="card-text">Image not have Description</p>
-                                            </div>
-                                            <div class="card-footer p-0">
-                                                <button type="button" class="btn btn-link btn-edit">Edit</button>
-                                                <button type="button" class="btn btn-link btn-delete">Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @endforeach
                                 </div>
                             </div>
                         </div>
@@ -574,7 +562,8 @@
                     </div>
                     <div class="col-12 mb-4">
                         <div class="card h-100 card-2 mx-auto">
-                            <img class="card-img-top mx-auto" src="{{ asset('images/products/steps_image_5.png') }}" />
+                            <!-- <img class="card-img-top mx-auto" src="{{ asset('images/products/steps_image_5.png') }}" /> -->
+                            <img class="card-img-top mx-auto" id="doc_src" />
                             <div class="card-body p-0">
                                 <textarea class="form-control" name="" id="" rows="3"></textarea>
                             </div>
@@ -642,6 +631,8 @@
 </div>
 @endsection
 @push('scripts')
+`<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="{{asset('js/patient/medicalform.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         // jQuery('body').on('click','.next-tab', function(){
@@ -688,13 +679,34 @@
         });
     }
     // EDIT smile pic modal
-    function btnEditSmilePic() {
+    function btnEditSmilePic(doc_name){
         $('#title_add_bite').hide();
         $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
+        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
+            if(doc_name == ""){
+                $("#doc_src").show();
+                $("#doc_src1").hide();
+                $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+            }else{
+                $("#doc_src1").show();
+                $("#doc_src").hide();
+                $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+            }
             $('#title_add_smile').show();
             $('#title_add_bite').hide();
         });
+
+         // $('#upload_new_pic_modal').modal('show');
+
+            // if(type=='png' || type =='jpeg' || type == 'jpg'){
+            //     $("#doc_src").show();
+            //     $("#doc_src1").hide();
+            //     $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+            // }else{
+            //     $("#doc_src1").show();
+            //     $("#doc_src").hide();
+            //     $('#doc_src1').attr('src', window.location.origin+'/storage/'+doc_name);
+            // }
     }
     // Upload new Bite pic modal
     function btnUploadBitePic() {
@@ -722,5 +734,51 @@
     function btnEditLtsPic() {
         $('#upload_new_stl_pic_modal').modal('show');
     }
-</script>
+
+    $("#step_1").validate({
+        // Specify validation rules
+        rules: {
+            firstname: "required",
+            lastname: "required",    
+            phone: {
+                required: true,
+                digits: true,
+                maxlength: 10,
+            },
+            address_1:"required",
+            address_2: "required",
+            city : "required",
+            state : "required",
+            zipcode : "required",
+        },
+        messages: {
+            firstname: {
+                required: "Please enter first name",
+            },      
+            lastname: {
+                required: "Please enter last name",
+            },     
+            phone: {
+                required: "Please enter phone number",
+                digits: "Please enter valid phone number",
+                maxlength: "Phone number field accept only 10 digits",
+            },
+            address_1: {
+                required: "Please enter your address",
+            },
+            address_2: {
+                required: "Please enter your address",
+            },
+            city: {
+                required: "Please enter city name",
+            }, 
+            state: {
+                required: "Please select your state",
+            },
+            zipcode: {
+                required: "Please enter your zip code",
+            },   
+        },
+  });
+  </script>
 @endpush

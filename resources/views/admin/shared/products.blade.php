@@ -23,7 +23,18 @@
                 </td>
                 <td>{{ $product->quantity }}</td>
                 <td>{{ config('cart.currency_symbol') }} {{ $product->price }}</td>
-                <td>@include('layouts.status', ['status' => $product->status])</td>
+                {{-- <td>@include('layouts.status', ['status' => $product->status])</td> --}}
+                <td>
+                    @if(isset($product->status))
+                        @if($product->status == 1)
+                            <span style="display: none; visibility: hidden">1</span>
+                            <button type="button" class="btn btn-link mx-2 w-auto btn-true text-green deactivate" data-id="{{$product->id}}"><i class="fa fa-check fa-lg"></i></button>
+                            @else
+                            <span style="display: none; visibility: hidden">0</span>
+                            <button type="button" class="btn btn-link mx-2 w-auto btn-false text-red activate " data-id="{{$product->id}}"><i class="fa fa-times fa-lg"></i></button>
+                        @endif
+                    @endif
+                </td>
                 <td>
                     <form action="{{ route('admin.products.destroy', $product->id) }}" method="post" class="form-horizontal">
                         {{ csrf_field() }}
