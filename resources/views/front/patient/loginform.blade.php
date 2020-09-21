@@ -736,11 +736,6 @@
             },
             address_1: "required",
             address_2: "required",
-<<<<<<< HEAD
-            city: "required",
-            state: "required",
-            zipcode: "required",
-=======
             city : "required",
             state : "required",
             zipcode : "required",
@@ -749,7 +744,6 @@
             shipping_city : "required",
             shipping_state : "required",
             shipping_zipcode : "required",
->>>>>>> develop
         },
         messages: {
             firstname: {
@@ -770,21 +764,12 @@
                 required: "Please enter your billing address",
             },
             city: {
-<<<<<<< HEAD
-                required: "Please enter city name",
-            },
-=======
                 required: "Please enter your billing city",
             }, 
->>>>>>> develop
             state: {
                 required: "Please select your billing state",
             },
             zipcode: {
-<<<<<<< HEAD
-                required: "Please enter your zip code",
-            },
-=======
                 required: "Please enter your billing zip code",
             },
             shipping_address_1: {
@@ -802,7 +787,6 @@
             shipping_zipcode: {
                 required: "Please enter your shipping zip code",
             },   
->>>>>>> develop
         },
     });
 </script>
