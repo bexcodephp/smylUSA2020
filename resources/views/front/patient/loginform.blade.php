@@ -263,7 +263,7 @@
                                         <div class="card h-100 card-2">
                                             <img class="card-img-top" src="{{ asset('storage/'.$image->image) }}" />
                                             <div class="card-body">
-                                                <p class="card-text">Image Description will be here Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et tur. Excepteur sint</p>
+                                                <p class="card-text">{{$image->description}}</p>
                                             </div>
                                             <div class="card-footer p-0">
                                                 <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic('{{ $image->image }}')">Edit</button>
