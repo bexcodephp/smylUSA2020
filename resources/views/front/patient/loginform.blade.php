@@ -630,7 +630,7 @@
 </div>
 @endsection
 @push('scripts')
-`<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="{{asset('js/patient/medicalform.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
