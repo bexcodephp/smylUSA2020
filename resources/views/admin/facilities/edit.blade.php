@@ -111,7 +111,13 @@
                             <div class="col-sm-12">
                                 <div class="form-group {{ $errors->has('state') ? 'has-error' : '' }}">
                                     <label for="state">State<span class="text-danger">*</span></label>
+<<<<<<< HEAD
+                                   
+
+                                    <select id="state" name="state" class="form-control">
+=======
                                     <select id="state" class="form-control">
+>>>>>>> ebe7eb4412a93d37735a4daa68577ff3da4c4687
                                         <option value="">Select state</option>
                                         <?php 
                                             $state_arr = array();
@@ -119,7 +125,7 @@
 
                                         @foreach ($states as $state)
                                             <?php 
-                                                $state_arr[$state->state_name] = $state->state_id;
+                                                $state_arr[$state->state_id] = $state->state_name;
                                             ?>
                                             <option id="opt_state_{{ $state->state_id }}" value="{{ $state->state_id }}">{{ $state->state_name }}</option>
                                         @endforeach
@@ -128,7 +134,11 @@
                                 </div>
                             </div>
                             
+<<<<<<< HEAD
+                            <input type="hidden" id="state_name" value="<?php echo $facility->state; ?>">
+=======
                             <input type="hidden" id="state_name" name="state" value="<?php echo $state_arr[$facility->state]; ?>">
+>>>>>>> ebe7eb4412a93d37735a4daa68577ff3da4c4687
 
                             <div class="col-sm-12">
                                 <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">

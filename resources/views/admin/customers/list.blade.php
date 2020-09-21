@@ -27,6 +27,9 @@
                                 <td>{{ $customer['id'] }}</td>
                                 <td>{{ $customer['name'] }}</td>
                                 <td>{{ $customer['email'] }}</td>
+<<<<<<< HEAD
+                                <td>{{-- @include('layouts.status', ['status' => ])--}} {{ $customer['status'] }}</td>
+=======
                                 <td>{{-- @include('layouts.status', ['status' => ])--}} 
                                 @if($customer['status'] == 1)
                                     <span style="display: none; visibility: hidden">1</span>
@@ -36,6 +39,7 @@
                                     <button type="button" class="btn btn-link mx-2 w-auto btn-false text-red activate " data-id="{{$customer['status']}}"><i class="fa fa-times fa-lg"></i></button>
                                 @endif
                                 </td>
+>>>>>>> ebe7eb4412a93d37735a4daa68577ff3da4c4687
                                 <td>
                                     <form action="{{ route('admin.customers.destroy', $customer['id']) }}" method="post" class="form-horizontal">
                                         {{ csrf_field() }}

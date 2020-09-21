@@ -74,7 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
             Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
-        
+            
             Route::resource('addresses', 'Addresses\AddressController');
             
             Route::resource('countries', 'Countries\CountryController');
