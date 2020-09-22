@@ -259,7 +259,7 @@ Route::namespace('Front')->group(function () {
         Route::get('medical_form/{order_id?}', 'AccountsController@medicalForm')->name('medical_form');
         Route::post('medical_form/{order_id?}', 'AccountsController@submitMedicalForm')->name('submitMedicalForm');
         Route::get('resources', 'AccountsController@resources')->name('resources');
-        Route::get('profile', 'AccountsController@profile')->name('profile');
+        Route::get('profile', 'AccountsController@profile')->name('dashboard.patientProfile');
         Route::get('orders', 'AccountsController@orders')->name('orders');
         Route::get('orders/{id}', 'AccountsController@ordersShow')->name('orders.show');
         Route::get('calendar', 'AccountsController@calendar')->name('calendar');
