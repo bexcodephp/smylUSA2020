@@ -277,14 +277,17 @@ class HomeController extends Controller
         return view('front.users.u_pricing', compact('products'));
     }
 
-    public function verifyEmail($code)
+    public function verifyEmail(Request $request,$code)
     {
+        // dd($request);
+
         $customer = Customer::where('email_verification_code', $code)->first();
         $customer->email_verified_at = date('Y-m-d H:i:s');
+        $customer->password = Hash::make($request->password); 
         $customer->save();
 
         Mail::to($customer)->send(new EmailVerification($customer));
-
+        
         return redirect('login')->with(['message' => "Email verified. Login Now", 'status' => '1']);
         
 

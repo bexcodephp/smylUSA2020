@@ -63,6 +63,8 @@ class RegisterController extends Controller
      */
     public function register(RegisterCustomerRequest $request)
     {  
+        //dd($request);
+
         $customer = $this->create($request->except('_method', '_token'));
         $userId = $customer->id;
         $userdata = Customer::find($userId);
