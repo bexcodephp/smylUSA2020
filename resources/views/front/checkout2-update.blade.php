@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/checkout.css') }}"  type="text/css" >
 @endpush
 @section('content')
-<main class="u-ami-candidate">
+<main class="checkout">
     {{--  slider  --}}
     <section class="banner">
         <div class="hero-img">

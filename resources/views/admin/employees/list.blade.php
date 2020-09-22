@@ -15,7 +15,7 @@
                 
             </div>
     
-            <!-- <form action="{{ route('admin.filter') }}" id="filter" class="collapse" method="post">
+            {{--<form action="{{ route('admin.filter') }}" id="filter" class="collapse" method="post">
                     {{ csrf_field() }}
                 <div class="form-row px-2">
                     <div class="input-group col-auto mr-2">
@@ -38,7 +38,7 @@
                         <button type="submit" name="submit" class="btn btn-primary" >submit</button>
                     </div>
                 </div>
-            </form> -->
+            </form>--}}
             
             <div class="box-tools pull-right mb-2">
                 <a href="{{ route('admin.employees.create') }}" class="btn btn-primary" role="{{$role->name}}">Add New</a>

@@ -1,0 +1,124 @@
+.all-cards .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0 12px 2px rgb(209 209 209 / 1);
+}
+
+.header-sidebar h3 {
+    padding: 0.2rem 1.25rem;
+}
+
+
+/* profile */
+
+.prof-img {
+    max-width: 120px;
+    width: 100%;
+    height: 120px;
+    background-color: #d5d5d5;
+    border-radius: 100%;
+}
+
+
+/* card-faq */
+
+.card-faq .resource-link {
+    text-decoration: underline;
+}
+
+
+/* notification */
+
+.card-notification .list-group-item {
+    position: relative;
+    padding-left: 25px;
+    border: 0px;
+}
+
+.card-notification .list-group-item:hover,
+.card-notification .list-group-item.active:hover,
+.card-notification .list-group-item-action:focus,
+.card-notification .list-group-item-action:hover {
+    background-color: #f8f9fa;
+}
+
+.card-notification .list-group-item a:hover {
+    text-decoration: none;
+}
+
+.card-notification .list-group-item::before {
+    content: "\f111";
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+    color: #2388ed;
+}
+
+.card-notification .list-group-item.active {
+    color: #2388ed;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+.card-notification .list-group-item.active .nf-caption {
+    color: #2388ed;
+}
+
+.card-notification .list-group-item p {
+    margin-bottom: 0;
+}
+
+.card-notification .nf-content {
+    position: relative;
+}
+
+@media only screen and (min-width: 992px) {
+    .all-cards .card {
+        min-height: 70vh;
+    }
+    .card-notification .list-group-item::before {
+        font-size: 10px;
+    }
+    .card-notification .card .slimScrollDiv,
+    .card-notification .card .scrollbar992 {
+        height: calc(70vh - 20px) !important;
+    }
+}
+
+@media only screen and (min-width: 1367px) {
+    .all-cards .card p {
+        font-size: 24px;
+    }
+    .card-faq .resource-link {
+        font-size: 24px;
+    }
+    .card-notification .list-group-item::before {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+    .card-notification .card .slimScrollDiv,
+    .card-notification .card .scrollbar992 {
+        height: calc(70vh - 100px) !important;
+    }
+    .card-welcome .prof-img {
+        max-width: 160px;
+        height: 160px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .all-cards h3 {
+        font-size: 20px;
+    }
+    .all-cards h4 {
+        font-size: 18px;
+    }
+    .all-cards h5 {
+        font-size: 14px;
+    }
+}

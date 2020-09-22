@@ -14,8 +14,7 @@
                 <h2>{{ ucfirst($role->name) }}</h2>    
                 <!-- <button name="filter" data-toggle="collapse" data-target="#filter" class="btn btn-primary">Filter</button> -->
             </div>
-
-            
+                        
             <div class="box-tools pull-right mb-2">
                 <a href="{{ route('admin.employees.create', ['type'=>$role->name]) }}" class="btn btn-primary" role="{{$role->name}}">Add New</a>
             </div>
