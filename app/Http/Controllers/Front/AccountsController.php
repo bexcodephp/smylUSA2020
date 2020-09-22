@@ -20,6 +20,7 @@ use App\Shop\Customers\Repositories\CustomerRepository;
 use App\Shop\Orders\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Shop\Couriers\Repositories\Interfaces\CourierRepositoryInterface;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
+use Illuminate\Support\Facades\Input;
 
 class AccountsController extends Controller
 {
@@ -99,10 +100,11 @@ class AccountsController extends Controller
             $order = null;
         }
         $customer = auth()->user();
+        $teethImages = CustomerImage::where('customer_id', $customer->id)->get();
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
 
-        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList'));
+        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList','teethImages'));
 
         //return view('front.medical_form', compact('order', 'address', 'history', 'customer'));
     }
@@ -289,22 +291,44 @@ class AccountsController extends Controller
     
     public function updateTeethImages(Request $request)
     {
-        if(count($request->file('images')) == 0)
-        {
-            return $this->sendResponse(false, "Teeth Images are required");
-        }
+        if(Input::get('submit')) {
+          $description = $request->description;
+            if($request->file('image') == 0)
+            {
+                return $this->sendResponse(false, "Teeth Images are required");
+            }
 
-        $user = $this->loggedUser();
-        foreach($request->images as $image)
-        {
-            CustomerImage::create([
-                'customer_id' => $user->id,
-                'image' => $this->saveImage($image, 'images')
-            ]);
-        }
-
-        event(new AddNotification($user->id, 1, 'You have uploaded teeth images.'));        
-        return $this->sendResponse(true, 'Image uplaoded');
+            $user = $this->loggedUser();
+           
+                CustomerImage::create([
+                    'customer_id' => $user->id,
+                    'image' => $this->saveImage($request->file('image'), 'images'),
+                    'description' => $description
+                ]);
+    
+            event(new AddNotification($user->id, 1, 'You have uploaded teeth images.'));        
+            return $this->sendResponse(true, 'Image uplaoded');
+      
+      }else {
+            $customers = CustomerImage::find($request->doc_id_name);
+            if(empty($customers ) && $customers ->count() == 0){
+                return $this->sendResponse(false, "Teeth Images are required");
+            }
+            //Merge new data from request
+            $updateArray = $request->all();
+            if(!empty($updateArray['image'])){
+              $path = $this->saveImage($request->file('image'),'images');
+              $updateArray['image'] = $path;
+            }
+            $customers->fill($updateArray);
+           
+            if($customers->save()){
+                event(new AddNotification($customers, 1, 'You have uploaded teeth images.'));        
+                return $this->sendResponse(true, 'Image uplaoded');
+            } else{
+                return $this->sendResponse(false, "Teeth Images are required");
+            }
+        } 
     }
 
     public function removeTeethImage($image)
@@ -314,7 +338,6 @@ class AccountsController extends Controller
         $teethImage->delete();
 
         return $this->sendResponse(true, 'Image removed');
-
     }
 
     public function updatePassword(Request $request)

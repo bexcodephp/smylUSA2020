@@ -1,6 +1,6 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-<link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}"  type="text/css" >
 @endpush
 @section('content')
 <style type="text/css">
@@ -200,6 +200,7 @@
                     </form>
                     {{-- step 3  --}}
                     <form class="tab-pane fade py-3 step-3" id="step_3" role="tabpanel" aria-labelledby="nav-contact-tab">
+
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Account Information</h4>
@@ -267,8 +268,9 @@
                                                 <p class="card-text">{{$image->description}}</p>
                                             </div>
                                             <div class="card-footer p-0">
-                                                <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic('{{ $image->image }}')">Edit</button>
-                                                <a href="{{ route('user.removeTeethImage', $image->customer_image_id) }}" class="btn btn-link btn-delete">Delete</a>
+                                                <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic('{{ $image->image }}','{{$image->customer_image_id}}','{{$image->description}}')">Edit</button>
+                                                <input type="hidden" name="" id="customer_image" value="{{$image->customer_image_id}}" hidden>
+                                                <button type="button" onclick="deleteSmilePictures('{{$image->customer_image_id}}')" data-token="{{ csrf_token() }}" class="btn btn-link btn-delete">Delete</button>
                                             </div>
                                         </div>
                                     </div>
@@ -560,9 +562,11 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <form class="row justify-content-center" action="{{ route('user.updateTeethImages') }}" method="POST" role="form" enctype="multipart/form-data">
+               
+                <form class="row justify-content-center" action="{{ route('user.updateTeethImages') }}" method="POST" role="form" id="smilepictures" enctype="multipart/form-data">
                     @csrf
                     <div class="col-12 align-self-center mb-3 text-center">
+                        <input type="hidden" name="doc_id_name" id="doc_id_hid">
                         <h4 class="sub-title-1 color-blue text-bold" id="title_add_smile">Add New Smile Picture</h4>
                         <h4 class="sub-title-1 color-blue text-bold" id="title_edit_smile">Edit New Smile Picture</h4>
                         <!-- <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_bite">Add New Bite Picture</h4> -->
@@ -571,7 +575,7 @@
                         <div class="card h-100 card-2 mx-auto">
                             <img class="card-img-top mx-auto" id="doc_src" />
                             <div class="card-body p-0">
-                                <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -582,14 +586,16 @@
                             </div>
                             <div class="col-auto">
                                 <div class="custom-file browse-file-btn">
-                                    <input type="file" class="custom-file-input" name="images[]" multiple id="teethpic"> 
+                                    <input type="file" class="custom-file-input" name="image" id="teethpic"> 
                                     <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button>
+                        <!-- <button type="submit" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button> -->
+                        <button type="submit" class="btn btn-primary" id="upload_pictures" name="submit" value="submit">Upload New Image</button>
+                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
                     </div>
                 </form>
             </div>
@@ -639,155 +645,6 @@
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="{{asset('js/patient/medicalform.js')}}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        // jQuery('body').on('click','.next-tab', function(){
-        //     var next = jQuery('.nav-tabs > .active').next('li');
-        //     if(next.length){
-        //         next.find('a').trigger('click');
-        //     }else{
-        //         jQuery('#myTabs a:first').tab('show');
-        //     }
-        // });
-
-        // jQuery('body').on('click','.previous-tab', function(){
-        //     var prev = jQuery('.nav-tabs > .active').prev('li')
-        //     if(prev.length){
-        //         prev.find('a').trigger('click');
-        //     }else{
-        //         jQuery('#myTabs a:last').tab('show');
-        //     }
-        // });
-
-        $('.selectpicker').selectpicker();
-        // change password modal
-        $('#change_pwd').on('click', function() {
-            $('#change_pwd_modal').modal('show')
-        });
-        // change btn_card_detail_change modal
-        $('#btn_card_detail_change').on('click', function() {
-            $('#card_detail_change_modal').modal('show')
-        });
-        // ADD card detail  modal
-        $('#btn_card_detail_add').on('click', function() {
-            $('#card_detail_add_modal').modal('show')
-        });
-    });
-    // UPLOAD new smile pic modal
-    function btnUploadNewPic() {
-        $('#title_add_bite').hide();
-        $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
-            $('#title_add_smile').show();
-            $('#title_edit_smile').hide();
-            $('#title_add_bite').hide();
-            // $('#doc_src').attr();
-            $('#doc_src').hide();
-        });
-    }
-    // EDIT smile pic modal
-    function btnEditSmilePic(doc_name) {
-        $('#title_add_bite').hide();
-        $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
-            $('#title_edit_smile').show();
-            $('#title_add_smile').hide();
-            $('#title_add_bite').hide();
-            $("#doc_src").show();
-            $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
-        });
-    }
-    // Upload new Bite pic modal
-    function btnUploadBitePic() {
-        $('#title_add_smile').hide();
-        $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
-            $('#title_add_bite').show();
-            $('#title_add_smile').hide();
-        });
-    }
-    // EDIT Bite pic modal
-    function btnEditBitePic() {
-        $('#title_add_smile').hide();
-        $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
-            $('#title_add_bite').show();
-            $('#title_add_smile').hide();
-        });
-    }
-    // Upload new STL pic modal
-    function btnUploadStl() {
-        $('#upload_new_stl_pic_modal').modal('show');
-    }
-    // EDIT STL pic modal
-    function btnEditLtsPic() {
-        $('#upload_new_stl_pic_modal').modal('show');
-    }
-
-    $("#step_1").validate({
-        // Specify validation rules
-        rules: {
-            firstname: "required",
-            lastname: "required",
-            phone: {
-                required: true,
-                digits: true,
-                maxlength: 10,
-            },
-            address_1: "required",
-            address_2: "required",
-            city : "required",
-            state : "required",
-            zipcode : "required",
-            shipping_address_1: "required",
-            shipping_address_2 : "required",
-            shipping_city : "required",
-            shipping_state : "required",
-            shipping_zipcode : "required",
-        },
-        messages: {
-            firstname: {
-                required: "Please enter first name",
-            },
-            lastname: {
-                required: "Please enter last name",
-            },
-            phone: {
-                required: "Please enter phone number",
-                digits: "Please enter valid phone number",
-                maxlength: "Phone number field accept only 10 digits",
-            },
-            address_1: {
-                required: "Please enter your billing address",
-            },
-            address_2: {
-                required: "Please enter your billing address",
-            },
-            city: {
-                required: "Please enter your billing city",
-            }, 
-            state: {
-                required: "Please select your billing state",
-            },
-            zipcode: {
-                required: "Please enter your billing zip code",
-            },
-            shipping_address_1: {
-                required: "Please enter your shipping address",
-            },
-            shipping_address_2: {
-                required: "Please enter your shipping address",
-            },
-            shipping_city: {
-                required: "Please enter shipping city",
-            }, 
-            shipping_state: {
-                required: "Please select your shipping state",
-            },
-            shipping_zipcode: {
-                required: "Please enter your shipping zip code",
-            },   
-        },
-    });
-</script>
+<script type="text/javascript" src="{{ asset('js/sweetalert2.all.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 @endpush

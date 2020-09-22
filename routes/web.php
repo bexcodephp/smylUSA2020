@@ -273,7 +273,7 @@ Route::namespace('Front')->group(function () {
         Route::post('profile/address-info', 'AccountsController@updateAddressInfo')->name('user.address_info');
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar')->name('user.updateAvatar');
         Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
-        Route::get('profile/delete-teeth-images/{image}', 'AccountsController@removeTeethImage')->name('user.removeTeethImage');
+        Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
         Route::post('update-password', 'AccountsController@updatePassword')->name('updatePassword');
     });
 
