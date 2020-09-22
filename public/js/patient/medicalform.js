@@ -24,7 +24,40 @@ $(document).ready(function () {
             $("input.shipping_zipcode").removeAttr("disabled");           
         }
     });
-    
-    
-    
+
+    $('#step1_submit').on('click', function () {
+        var formdata = new FormData($('#step_1')[0]);
+
+
+        $.ajax({
+            url: '/profile/update-step1',
+            type: "POST",
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                if(data=="success"){
+                    $('#nav_step_1').removeClass("active");
+                    $('#nav_step_2').addClass("active");
+                    $('#step_1').removeClass('active show');
+                    $('#step_2').addClass('active show');
+                }                
+            },
+            error: function() {
+                
+            }
+        });
+    });
+
+    $('#step2_prev').on('click', function () {
+        //alert("prev---step2");
+
+        $('#nav_step_2').removeClass("active");
+        $('#nav_step_1').addClass("active");
+
+        $('#step_2').removeClass('active show');
+        $('#step_1').addClass('active show');
+    }); 
 });

@@ -32,40 +32,42 @@
                 {{-- links for tab content panel  --}}
                 <ul class="nav nav-tabs tablist" id="myTabs" role="tablist">
                     <li role="presentation" class="">
-                        <a href="#step_1" class="nav-link active" aria-controls="step_1" role="tab" data-toggle="tab">Step <div class="step-no">1</div></a>
+                        <a href="#step_1" class="nav-link active" aria-controls="step_1" id="nav_step_1" role="tab" data-toggle="tab">Step <div class="step-no">1</div></a>
                     </li>
                     <li role="presentation">
-                        <a href="#step_2" class="nav-link" aria-controls="step_2" role="tab" data-toggle="tab">Step <div class="step-no">2</div></a>
+                        <a href="#step_2" class="nav-link disabled" aria-controls="step_2" id="nav_step_2" role="tab" data-toggle="tab">Step <div class="step-no">2</div></a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#step_3" class="nav-link" aria-controls="step_3" role="tab" data-toggle="tab">Step <div class="step-no">3</div></a>
+                        <a href="#step_3" class="nav-link" aria-controls="step_3" id="nav_step_3" role="tab" data-toggle="tab">Step <div class="step-no">3</div></a>
                     </li>
                     <li role="presentation">
-                        <a href="#step_4" class="nav-link" aria-controls="step_4" role="tab" data-toggle="tab">Step <div class="step-no">4</div></a>
+                        <a href="#step_4" class="nav-link" aria-controls="step_4" id="nav_step_4" role="tab" data-toggle="tab">Step <div class="step-no">4</div></a>
                     </li>
                     <li role="presentation">
-                        <a href="#step_5" class="nav-link" aria-controls="step_5" role="tab" data-toggle="tab">Step <div class="step-no">5</div></a>
+                        <a href="#step_5" class="nav-link" aria-controls="step_5" id="nav_step_5" role="tab" data-toggle="tab">Step <div class="step-no">5</div></a>
                     </li>
                 </ul>
             </div>
             <div class="col-12">
                 <div class="tab-content" id="form-tabContent">
                     {{-- step 1  --}}
-                    <form class="tab-pane fade show active py-3 step-1" name="step_1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <form action="" class="tab-pane fade show active py-3 step-1 form_cls" name="step_1" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab" method="post">
+
+                    
+
+                    @csrf
                         {{-- personel Information  --}}
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Personal Information</h4>
                             </div>
-                            <?php //print_r($userdata->first_name);
-                            ?>
                             <div class="col-sm-6 form-group">
                                 <label>First Name<span class="text-danger">*</span></label>
-                                <input type="text" name="firstname" class="form-control input-white" id="firstname" placeholder="First Name" value="{{ $customer->first_name }}">
+                                <input type="text" name="first_name" class="form-control input-white" id="firstname" placeholder="First Name" value="{{ $customer->first_name }}">
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Last <span class="text-danger">*</span></label>
-                                <input type="text" name="lastname" class="form-control input-white" id="lastname" placeholder="Last Name" value="{{ $customer->last_name }}">
+                                <input type="text" name="last_name" class="form-control input-white" id="lastname" placeholder="Last Name" value="{{ $customer->last_name }}">
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Moblie Number<span class="text-danger">*</span></label>
@@ -73,7 +75,7 @@
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Date of Birth<span class="text-danger">*</span></label>
-                                <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled />
+                                <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled/>
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>Patient ID<span class="text-danger">*</span></label>
@@ -99,7 +101,7 @@
                             </div>
                             <div class="col-lg-4 col-sm-6 form-group">
                                 <label>State<span class="text-danger">*</span></label>
-                                <select name="state" id="state" class="form-control" name="state">
+                                <select name="state" id="state" class="form-control">
                                     <option selected value="">Select State</option>
                                     @foreach($statesList as $key => $state)
                                     <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
@@ -148,12 +150,13 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-12 text-right">
-                                <button type="submit" class="btn btn-primary next-tab">Next</button>
+                                <button type="button" class="btn btn-primary next-tab" id="step1_submit">Next</button>
                             </div>
                         </div>
                     </form>
+
                     {{-- step 2  --}}
-                    <form class="tab-pane fade py-3 step-2" id="step_2" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <form class="tab-pane fade py-3 step-2 form_cls" id="step_2" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Medical History Form</h4>
@@ -164,7 +167,7 @@
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-md-6 mh-caption">
-                                        <p>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blodd cancers):</p>
+                                        <p>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blood cancers):</p>
                                     </div>
                                     <div class="col-md-6 select-facility select-option mb-3">
                                         {{--
@@ -180,7 +183,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mh-caption">
-                                        <p>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blodd cancers):</p>
+                                        <p>I have a branded                                                                   retainer:</p>
                                     </div>
                                     <div class="col-md-6 select-facility select-option mb-3">
                                         <select id="" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
@@ -192,14 +195,17 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-12 text-right">
+                            <div class="col-6 text-left">
+                                <button type="button" class="btn btn-primary prev-tab" id="step2_prev">Prev</button>
+                            </div>
+                            <div class="col-6 text-right">
                                 <button type="button" class="btn btn-primary skip-tab">Skip</button>
                                 <button type="button" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
                     </form>
                     {{-- step 3  --}}
-                    <form class="tab-pane fade py-3 step-3" id="step_3" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <form class="tab-pane fade py-3 step-3 form_cls" id="step_3" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="row mt-0">
                             <div class="col-12 mb-2">
                                 <h4 class="sub-title color-blue text-bold">Account Information</h4>
@@ -234,15 +240,17 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            {{-- <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
-                            <div class="col-12 text-right">
+                            <div class="col-6 text-left">
+                                <button type="button" class="btn btn-primary prev-tab">Prev</button>
+                            </div>
+                            <div class="col-6 text-right">
                                 <button type="button" class="btn btn-primary skip-tab">Skip</button>
                                 <button type="button" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
                     </form>
                     {{-- step 4  --}}
-                    <form class="tab-pane fade py-3 step-4" id="step_4" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <form class="tab-pane fade py-3 step-4 form_cls" id="step_4" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="row mt-0 pictures">
                             <div class="col-12 align-self-center mb-3">
                                 <h4 class="sub-title color-blue text-bold">Pictures</h4>
@@ -335,15 +343,17 @@
                         </div> -->
 
                         <div class="row">
-                            {{-- <button type="button" class="btn btn-primary prev-tab">Prev</button>  --}}
-                            <div class="col-12 text-right">
+                            <div class="col-6 text-left">
+                                <button type="button" class="btn btn-primary prev-tab">Prev</button>
+                            </div>
+                            <div class="col-6 text-right">
                                 <button type="button" class="btn btn-primary skip-tab">Skip</button>
                                 <button type="button" class="btn btn-primary next-tab">Next</button>
                             </div>
                         </div>
                     </form>
                     {{-- step 5  --}}
-                    <form class="tab-pane fade py-3 step-5" id="step_5" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <form class="tab-pane fade py-3 step-5 form_cls" id="step_5" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="row mt-0 pictures">
                             <div class="col-12 align-self-center mb-3">
                                 <h4 class="sub-title color-blue text-bold">STL Files</h4>
@@ -401,8 +411,10 @@
                         </div>
 
                         <div class="row">
-                            <!-- <button type="button" class="btn btn-primary prev-tab">Prev</button>  -->
-                            <div class="col-12 text-right">
+                            <div class="col-6 text-left">
+                                <button type="button" class="btn btn-primary prev-tab">Prev</button>
+                            </div>                            
+                            <div class="col-6 text-right">
                                 <button type="button" class="btn btn-primary next-finish">Finish</button>
                             </div>
                         </div>
