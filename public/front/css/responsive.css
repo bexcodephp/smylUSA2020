@@ -7,27 +7,27 @@
 @media only screen and (min-width: 768px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {}
 
 @media only screen and (min-width: 992px) {
-  h1 {
-    font-size: 2.3rem;
-  }
-  .bannerslider h1 {
-    font-size: 2.5rem;
-  }
-  .hero-img h1 {
-    font-size: 2.5rem;
-  }
-  /* h2 {
+    h1 {
+        font-size: 2.3rem;
+    }
+    .bannerslider h1 {
+        font-size: 2.5rem;
+    }
+    .hero-img h1 {
+        font-size: 2.5rem;
+    }
+    /* h2 {
     font-size: 1.5rem;
   } */
-  h4 {
-    font-size: 22px;
-  }
-  .contactus .media small {
-    font-size: 1rem;
-  }
-  .modal-content {
-    padding: 15px;
-  }
+    h4 {
+        font-size: 22px;
+    }
+    .contactus .media small {
+        font-size: 1rem;
+    }
+    .modal-content {
+        padding: 15px;
+    }
 }
 
 @media only screen and (min-width: 992px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {}
@@ -35,48 +35,48 @@
 @media only screen and (min-width: 1200px) {}
 
 @media only screen and (min-width: 1025px) {
-  h1 {
-    font-size: 2.3rem;
-  }
-  h2 {
-    font-size: 1.7rem;
-  }
-  .bannerslider h1 {
-    font-size: 3rem;
-  }
-  .hero-img h1 {
-    font-size: 3rem;
-  }
-  .height-vh100 {
-    height: 100vh;
-  }
-  .height-vh7565 {
-    height: 75vh;
-  }
-  .height-vh50 {
-    height: 50vh;
-  }
-  /*  smile bottom background */
-  .smile-bottom-bg h2 {
-    font-size: 1.6rem;
-  }
-  .smile-bottom-bg .btn {
-    max-width: 230px;
-    width: 100%;
-  }
-  input[type="email"],
-  input[type="text"],
-  input[type="password"],
-  input[type="number"],
-  input[type="date"],
-  input[type="email"].form-control,
-  input[type="text"].form-control,
-  input[type="password"].form-control,
-  input[type="number"].form-control,
-  input[type="date"].form-control,
-  input.form-control {
-    height: calc(2.15em + .75rem + 2px);
-  }
+    h1 {
+        font-size: 2.3rem;
+    }
+    h2 {
+        font-size: 1.7rem;
+    }
+    .bannerslider h1 {
+        font-size: 3rem;
+    }
+    .hero-img h1 {
+        font-size: 3rem;
+    }
+    .height-vh100 {
+        height: 100vh;
+    }
+    .height-vh7565 {
+        height: 75vh;
+    }
+    .height-vh50 {
+        height: 50vh;
+    }
+    /*  smile bottom background */
+    .smile-bottom-bg h2 {
+        font-size: 1.6rem;
+    }
+    .smile-bottom-bg .btn {
+        max-width: 230px;
+        width: 100%;
+    }
+    input[type="email"],
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="email"].form-control,
+    input[type="text"].form-control,
+    input[type="password"].form-control,
+    input[type="number"].form-control,
+    input[type="date"].form-control,
+    input.form-control {
+        height: calc(2.15em + .75rem + 2px);
+    }
 }
 
 @media only screen and (min-width: 1025px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {}
@@ -84,7 +84,7 @@
 @media only screen and (min-width: 1025px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {}
 
 @media only screen and (min-width: 1367px) {
-  /*
+    /*
   h2 {
       font-size: 2.6rem;
     }
@@ -92,236 +92,242 @@
         font-size: 2rem;
     }
     */
-  .btn {
-    font-size: 1.2rem;
-  }
-  h1 {
-    font-size: 40px;
-  }
-  .bannerslider h1 {
-    font-size: 3.6rem;
-  }
-  .hero-img h1 {
-    font-size: 3.6rem;
-  }
-  h4 {
-    font-size: 30px
-  }
-  .titleinverse::after,
-  .title::after {
-    width: 50px;
-    top: -20px;
-    right: -30px;
-  }
-  p {
-    font-size: 1.4rem;
-    line-height: 1.4;
-  }
-  .height-vh7565 {
-    height: 65vh;
-  }
-  /* floating button */
-  .floatnav a {
-    right: -270px;
-    width: 320px;
-    font-size: 1.5rem;
-  }
-  .floatnav a.amicandidate {
-    top: 45vh;
-  }
-  /*  smile bottom background */
-  /* .smile-bottom-bg h2 {
+    /* .btn {
+        font-size: 1.2rem;
+    } */
+    h1 {
+        font-size: 40px;
+    }
+    .bannerslider h1 {
+        font-size: 3.6rem;
+    }
+    .hero-img h1 {
+        font-size: 3.6rem;
+    }
+    h4 {
+        font-size: 30px
+    }
+    .titleinverse::after,
+    .title::after {
+        width: 50px;
+        top: -20px;
+        right: -30px;
+    }
+    p {
+        font-size: 1.4rem;
+        line-height: 1.4;
+    }
+    .height-vh7565 {
+        height: 65vh;
+    }
+    /* floating button */
+    .floatnav a {
+        right: -270px;
+        width: 320px;
+        font-size: 1.5rem;
+    }
+    .floatnav a.amicandidate {
+        top: 45vh;
+    }
+    /*  smile bottom background */
+    /* .smile-bottom-bg h2 {
     font-size: 2rem;
   } */
-  .smile-bottom-bg .btn {
-    max-width: 400px;
-    width: 100%;
-    font-size: 1.4rem;
-  }
-  /* select option customize */
-  .select-option .bootstrap-select .dropdown-menu li .dropdown-item {
-    padding-top: .7rem;
-    padding-bottom: .7rem;
-  }
-  .select-option .dropdown-toggle::after {
-    content: '';
-    border: none !important;
-    width: 26px;
-    height: 18px;
-  }
-  .bootstrap-select .bs-ok-default:after {
-    width: .8em !important;
-    height: 1.5rem !important;
-  }
-  /* input forms */
-  input[type="email"],
-  input[type="text"],
-  input[type="password"],
-  input[type="number"],
-  input[type="date"],
-  input[type="email"].form-control,
-  input[type="text"].form-control,
-  input[type="password"].form-control,
-  input[type="number"].form-control,
-  input[type="date"].form-control,
-  input.form-control {
-    height: calc(3.1em + .75rem + 2px);
-    font-size: 20px;
-  }
-  .close {
-    width: 55px;
-    height: 55px;
-  }
-  .modal-content {
-    padding: 20px;
-  }
-  /* browse file custom */
-  .browse-file-btn .custom-file-label {
-    min-height: 44px;
-  }
+    .smile-bottom-bg .btn {
+        max-width: 400px;
+        width: 100%;
+        font-size: 1.4rem;
+    }
+    /* select option customize */
+    /* .select-option .bootstrap-select .dropdown-menu li .dropdown-item {
+        padding-top: .7rem;
+        padding-bottom: .7rem;
+    }
+    .select-option .dropdown-toggle::after {
+        content: '';
+        border: none !important;
+        width: 26px;
+        height: 18px;
+    }
+    .bootstrap-select .bs-ok-default:after {
+        width: .8em !important;
+        height: 1.5rem !important;
+    } */
+    /* input forms */
+    /* input[type="email"],
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="email"].form-control,
+    input[type="text"].form-control,
+    input[type="password"].form-control,
+    input[type="number"].form-control,
+    input[type="date"].form-control,
+    input.form-control {
+        height: calc(3.1em + .75rem + 2px);
+        font-size: 20px;
+    } */
+    /* .close {
+        width: 55px;
+        height: 55px;
+    } */
+    .modal-content {
+        padding: 20px;
+    }
+    /* browse file custom */
+    .browse-file-btn .custom-file-label {
+        min-height: 44px;
+    }
 }
 
 @media only screen and (min-width: 1367px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {}
 
 @media only screen and (max-width: 1024px) {
-  .height-vh7565 {
-    height: 65vh;
-  }
-  .select-option .bootstrap-select>.dropdown-toggle {
-    padding-bottom: .4rem;
-    padding-top: .4rem;
-  }
-  .select-option .dropdown-toggle::after {
-    width: 16px;
-  }
-  .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
-    font-size: 1rem;
-  }
-  label {
-    font-size: 14px;
-  }
-  h4 {
-    font-size: 20px;
-  }
-  .btn {
-    font-size: 16px;
-    padding: .275rem .75rem;
-  }
+    .height-vh7565 {
+        height: 65vh;
+    }
+    .select-option .bootstrap-select>.dropdown-toggle {
+        padding-bottom: .4rem;
+        padding-top: .4rem;
+    }
+    .select-option .dropdown-toggle::after {
+        width: 16px;
+    }
+    .bootstrap-select .dropdown-toggle .filter-option-inner-inner,
+    .select-option .bootstrap-select .dropdown-menu li .dropdown-item {
+        font-size: 14px;
+    }
+    label {
+        font-size: 14px;
+    }
+    h4 {
+        font-size: 20px;
+    }
+    .btn {
+        font-size: 16px;
+        padding: .275rem .75rem;
+    }
 }
 
 @media only screen and (max-width: 991px) {
-  p {
-    font-size: .9rem;
-    line-height: 1.4;
-  }
-  h1 {
-    font-size: 2rem;
-  }
-  h2 {
-    font-size: 1.3rem;
-  }
-  .h3,
-  h3 {
-    font-size: 1.25rem;
-  }
-  h4 {
-    font-size: 20px;
-  }
-  .bannerslider h4 {
-    font-size: 1rem;
-  }
-  .hero-img h4 {
-    font-size: 1rem;
-  }
-  /* cart menu responsive */
-  .nav_cart {
-    margin-left: auto;
-  }
-  .footerlogo {
-    top: -25px
-  }
-  .footerlogo figcaption img {
-    height: 50px;
-    padding: 10px 20px;
-    max-width: 250px;
-  }
-  .followus .list-group-item,
-  .contactus .media small {
-    font-size: .9rem;
-  }
+    p {
+        font-size: .9rem;
+        line-height: 1.4;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.3rem;
+    }
+    .h3,
+    h3 {
+        font-size: 1.25rem;
+    }
+    h4 {
+        font-size: 20px;
+    }
+    .bannerslider h4 {
+        font-size: 1rem;
+    }
+    .hero-img h4 {
+        font-size: 1rem;
+    }
+    /* cart menu responsive */
+    .nav_cart {
+        margin-left: auto;
+    }
+    .footerlogo {
+        top: -25px
+    }
+    .footerlogo figcaption img {
+        height: 50px;
+        padding: 10px 20px;
+        max-width: 250px;
+    }
+    .followus .list-group-item,
+    .contactus .media small {
+        font-size: .9rem;
+    }
+    .select-option .bootstrap-select .dropdown-menu li .dropdown-item,
+    .bootstrap-select .dropdown-toggle .filter-option-inner-inner,
+    .form-control {
+        font-size: 12px;
+    }
 }
 
 @media only screen and (max-width: 991px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
-  .height-vh7565 {
-    height: 40vh;
-  }
-  .floatnav a.amicandidate {
-    top: 45vh;
-  }
+    .height-vh7565 {
+        height: 40vh;
+    }
+    .floatnav a.amicandidate {
+        top: 45vh;
+    }
 }
 
 @media only screen and (max-width: 767px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-  h4 {
-    font-size: 16px;
-  }
-  .btn {
-    font-size: 14px;
-    padding: .175rem .75rem;
-  }
-  .titleinverse::after,
-  .title::after {
-    width: 20px;
-    top: -10px;
-    right: -10px;
-  }
-  footer h6 {
-    margin-top: 1rem;
-  }
-  .floatnav a {
-    padding: 4px 10px;
-    font-size: .8rem;
-    right: -145px;
-    width: 180px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-  }
-  .floatnav a img {
-    width: 20px;
-    height: 20px;
-  }
-  /* remove br tag and adding space with span span must be added after br tag*/
-  .remove-br br {
-    display: none;
-  }
-  .remove-br span {
-    padding-right: 5px;
-  }
+    h1 {
+        font-size: 1.5rem;
+    }
+    h4 {
+        font-size: 16px;
+    }
+    .btn {
+        font-size: 14px;
+        padding: .175rem .75rem;
+    }
+    .titleinverse::after,
+    .title::after {
+        width: 20px;
+        top: -10px;
+        right: -10px;
+    }
+    footer h6 {
+        margin-top: 1rem;
+    }
+    .floatnav a {
+        padding: 4px 10px;
+        font-size: .8rem;
+        right: -145px;
+        width: 180px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    .floatnav a img {
+        width: 20px;
+        height: 20px;
+    }
+    /* remove br tag and adding space with span span must be added after br tag*/
+    .remove-br br {
+        display: none;
+    }
+    .remove-br span {
+        padding-right: 5px;
+    }
 }
 
 @media only screen and (max-width: 767px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
-  .hero-img::after {
-    max-height: 60px;
-    background-size: contain;
-  }
-  .modal-dialog {
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+    .hero-img::after {
+        max-height: 60px;
+        background-size: contain;
+    }
+    .modal-dialog {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media only screen and (max-width: 767px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-  .hero-img::after {
-    max-height: 85px;
-    background-size: contain;
-  }
+    .hero-img::after {
+        max-height: 85px;
+        background-size: contain;
+    }
 }
 
 @media only screen and (max-width: 576px) {
-  .smile-bottom-bg h2 {
-    font-size: 1rem;
-  }
+    .smile-bottom-bg h2 {
+        font-size: 1rem;
+    }
 }

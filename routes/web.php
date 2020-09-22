@@ -32,7 +32,7 @@ Route::namespace('Admin')->group(function () {
     Route::get('admin/logout', 'LoginController@logout')->name('admin.logout');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.' ], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.'], function () {
     Route::namespace('Admin')->group(function () {
         Route::group(['middleware' => ['role:admin|superadmin, guard:employee']], function () {
             Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -74,9 +74,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
             Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
-        
-            Route::resource('addresses', 'Addresses\AddressController');
             
+            Route::resource('addresses', 'Addresses\AddressController');
+
             Route::resource('countries', 'Countries\CountryController');
             Route::resource('countries.provinces', 'Provinces\ProvinceController');
             Route::resource('countries.provinces.cities', 'Cities\CityController');
@@ -118,26 +118,26 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
 
 Auth::routes(['verify' => true]);
 
-Route::namespace('Auth')->group(function () {    
+Route::namespace('Auth')->group(function () {
     Route::get('cart/login', 'CartLoginController@showLoginForm')->name('cart.login');
     Route::post('cart/login', 'CartLoginController@login')->name('cart.login');
     Route::get('logout', 'LoginController@logout');
 
     Route::post('/login1', 'LoginController@login')->name("patientlogin");
-    
-    Route::group(['prefix' => 'pharmacist'], function(){
+
+    Route::group(['prefix' => 'pharmacist'], function () {
         Route::get('login', 'LoginController@pharmaLoginFormShow');
         Route::post('login', 'LoginController@userLogin')->name('pharma_login');
         Route::post('register', 'UserRegisterController@register')->name('pharma_register');
     });
 
-    Route::group(['prefix' => 'dentist'], function(){
+    Route::group(['prefix' => 'dentist'], function () {
         Route::get('login', 'LoginController@dentistLoginFormShow');
         Route::post('login', 'LoginController@userLogin')->name('dentist_login');
         Route::post('register', 'UserRegisterController@register')->name('dentist_register');
     });
 
-    Route::group(['prefix' => 'vendor'], function(){
+    Route::group(['prefix' => 'vendor'], function () {
         Route::get('login', 'LoginController@vendorLoginFormShow');
         Route::post('login', 'LoginController@userLogin')->name('vendor_login');
         Route::post('register', 'UserRegisterController@register')->name('vendor_register');
@@ -162,16 +162,15 @@ Route::namespace('Front')->group(function () {
     Route::view('contact-us', 'front.users.u_contactus')->name('contact');
     Route::get('team', 'HomeController@team')->name('team');
     Route::post('contact', 'HomeController@contactUs')->name('contactUs');
-
-
+    
     Route::get('payment-success', 'HomeController@paymentSuccessView');
     Route::post('payment-success', 'HomeController@paymentSuccess');
 
-
+    
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
     Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
-    
+
 
     Route::post('booking', 'HomeController@bookAppointment')->name('bookAppointment');
     Route::post('getLocations', 'HomeController@getLocations')->name('getLocations');
@@ -204,7 +203,7 @@ Route::namespace('Front')->group(function () {
     });
 
     Route::group(['middleware' => ['usertype', 'web']], function () {
-        Route::group(['prefix' => 'dentist'], function(){
+        Route::group(['prefix' => 'dentist'], function () {
 
             Route::get('profile', 'DentistController@profile')->name('dentist.profile');
             Route::get('new-case', 'DentistController@newCase')->name('dentist.new-case');
@@ -248,7 +247,6 @@ Route::namespace('Front')->group(function () {
             Route::post('profile/personal-info', 'VendorController@updatePersonalInfo')->name('vendor.personal_info');
             Route::post('profile/employee/update-avatar', 'VendorController@updateAvatar')->name('vendor.updateAvatar');
             Route::post('profile/update-password', 'VendorController@updatePassword')->name('vendor.updatePassword');
-
         });
 
 
@@ -272,9 +270,10 @@ Route::namespace('Front')->group(function () {
 
         Route::post('profile/personal-info', 'AccountsController@updatePersonalInfo')->name('user.personal_info');
         Route::post('profile/address-info', 'AccountsController@updateAddressInfo')->name('user.address_info');
+        Route::post('profile/update-step1', 'AccountsController@updateUserInfoStep1');
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar')->name('user.updateAvatar');
         Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
-        Route::get('profile/delete-teeth-images/{image}', 'AccountsController@removeTeethImage')->name('user.removeTeethImage');
+        Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
         Route::post('update-password', 'AccountsController@updatePassword')->name('updatePassword');
     });
 
@@ -284,19 +283,25 @@ Route::namespace('Front')->group(function () {
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
 
+Route::get('/candidate', function () {
+    return view('front.users.u_ami_candidate');
+});
+Route::get('/products', function () {
+    return view('front.users.u_products');
+});
+Route::get('/productsview', function () {
+    return view('front.users.u_products_view');
+});
+Route::get('/checkout', function () {
+    return view('front.checkout2-update');
+});
+Route::get('/pDashboard', function () {
+    return view('front.dashboard.patientDashboard');
+});
 
-// Route::get('/candidate', function () {
-//     return view('front.users.u_ami_candidate');
-// });
-// Route::get('/products', function () {
-//     return view('front.users.u_products');
-// });
-// Route::get('/productsview', function () {
-//     return view('front.users.u_products_view');
-// });
-// Route::get('/checkout', function () {
-//     return view('front.checkout2-update');
-// });
-// Route::get('/pDashboard', function () {
-//     return view('front.dashboard.patientDashboard');
-// });
+Route::get('/patient-profile', function () {
+    return view('front.dashboard.patientProfile');
+});
+Route::get('/forgot-password', function () {
+    return view('front.auth.forgotPassword');
+});

@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 <main class="resetpassword">
-    {{--  slider  --}}
+    {{-- slider  --}}
     <section class="banner">
         <div class="hero-img">
             <div class="item" style="background-image:url('{{ asset('images/products/banner_location.jpg') }}') ">
@@ -28,23 +28,26 @@
                 <div class="card sign-in-card">
                     <h4 class="color-blue">Sign in Password</h4>
                     <div class="signin-form mt-xxl-6">
-                        <form class="row" action="{{ route('password.reset', $code) }}" role="form" method="post">
-                        {{ csrf_field() }}
+                        <form class="row" action="{{ route('verifyEmail', $code) }}" role="form" method="get">
+                            {{ csrf_field() }}
                             {{--  
                                 NOTE: 
                                 Add Hiiden class for hide old password  
                             --}}
-                            <div class="col-12 form-group hidden">
+                            <!-- <div class="col-12 form-group hidden">
                                 <label>Old Password</label>
-                                <input type="password" class="form-control input-gray" id="password" placeholder="Old Password">
-                            </div>
+                                <input type="password" class="form-control input-gray" name="old_password" id="password" placeholder="Old Password">
+                            </div> -->
+
+                            <input id="email" type="email" class="form-control bg-light border-0 rounded text-1" name="email" value="jayrjoshi8@gmail.com" required autofocus>
+
                             <div class="col-12 form-group">
                                 <label>New Password</label>
-                                <input type="password" class="form-control input-gray" id="password" placeholder="New Password">
+                                <input type="password" class="form-control input-gray" name="password" id="password" placeholder="New Password">
                             </div>
                             <div class="col-12 form-group">
                                 <label>Confirm New Password</label>
-                                <input type="password" class="form-control input-gray" id="password" placeholder="Confirm New Password">
+                                <input type="password" class="form-control input-gray" name="password_confirmation" id="password-confirm" placeholder="Confirm New Password">
                             </div>
                             <div class="col-12 text-left btn-signin mt-xl-4 my-3">
                                <!--  <a href="{{ url('/loginform') }}" class="btn btn-primary btn-lg text-center">Sign In</a> -->
@@ -60,8 +63,8 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
 
     });
-  </script>
+</script>
 @endpush

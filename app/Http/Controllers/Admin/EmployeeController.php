@@ -92,6 +92,7 @@ class EmployeeController extends Controller
         } else{}
         // dd($role);
         $request->request->add(['role' => $role, 'password'=>Hash::make('12345678')]); 
+        
         $request->merge([
             'location_associated' => json_encode($request->location_associated),
         ]);

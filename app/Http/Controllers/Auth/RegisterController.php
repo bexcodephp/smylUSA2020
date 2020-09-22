@@ -63,13 +63,13 @@ class RegisterController extends Controller
      */
     public function register(RegisterCustomerRequest $request)
     {  
+        //dd($request);
+
         $customer = $this->create($request->except('_method', '_token'));
         $userId = $customer->id;
         $userdata = Customer::find($userId);
-        //dd($userdata);
         Mail::to($customer)->send(new UserRegistration($customer));
         Mail::to($customer)->send(new AfterRegistration($customer));
-
         event(new AddNotification($customer->id, 1, 'Account Registration'));
         return view('front.auth.thankyou');
         //return view('front.patient.loginform',compact('userdata'))->with(['message' => 'Verify your email address to continue', 'status' => 0]);

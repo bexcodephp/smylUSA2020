@@ -11,7 +11,7 @@ class CustomerImage extends Model
     protected $fillable = [
         'customer_id',
         'image',
-        'description'
+        'description',
     ];
 
     public function customer()
