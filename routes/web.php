@@ -162,12 +162,11 @@ Route::namespace('Front')->group(function () {
     Route::view('contact-us', 'front.users.u_contactus')->name('contact');
     Route::get('team', 'HomeController@team')->name('team');
     Route::post('contact', 'HomeController@contactUs')->name('contactUs');
-
-
+    
     Route::get('payment-success', 'HomeController@paymentSuccessView');
     Route::post('payment-success', 'HomeController@paymentSuccess');
 
-
+    
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
     Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
@@ -274,7 +273,7 @@ Route::namespace('Front')->group(function () {
         Route::post('profile/update-step1', 'AccountsController@updateUserInfoStep1');
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar')->name('user.updateAvatar');
         Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
-        Route::get('profile/delete-teeth-images/{image}', 'AccountsController@removeTeethImage')->name('user.removeTeethImage');
+        Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
         Route::post('update-password', 'AccountsController@updatePassword')->name('updatePassword');
     });
 
