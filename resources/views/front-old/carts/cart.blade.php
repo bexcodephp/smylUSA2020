@@ -22,7 +22,7 @@
     <section class="section pt-0">
         <div class="container">
             @if(count($cartItems) == 0)
-<h4>Cart is empty</h4>
+                <h4>Cart is empty</h4>
             @else
             <div class="row mb-5">
                 <div class="col">

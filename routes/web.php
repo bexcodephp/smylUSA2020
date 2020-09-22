@@ -99,15 +99,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::put('employees/{id}/profile', 'EmployeeController@updateProfile')->name('employee.profile.update');
             Route::resource('roles', 'Roles\RoleController');
 
-            Route::get('admin/resources', 'ResourceController@index');
-            Route::get('admin/resources/create', function () {
-                return view("admin.resource.create");
+            Route::get('resources', 'ResourceController@index');
+            Route::get('resources/create', function () {
+                return view("admin/resource.create");
             });
-            Route::post('admin/resources/create', 'ResourceController@create');
-            Route::get('admin/resources/edit/{id}','ResourceController@getResource');
-            Route::post('admin/resources/edit/{id}','ResourceController@updateResource');
-            Route::get('admin/resources/delete/{id}','ResourceController@destroyResource');
-
+            Route::post('resources/create', 'ResourceController@create');
+            Route::get('resources/edit/{id}','ResourceController@getResource');
+            Route::post('resources/edit/{id}','ResourceController@updateResource');
+            Route::get('resources/delete/{id}','ResourceController@destroyResource');
+            
         });
     });
 });
@@ -162,12 +162,11 @@ Route::namespace('Front')->group(function () {
     Route::view('contact-us', 'front.users.u_contactus')->name('contact');
     Route::get('team', 'HomeController@team')->name('team');
     Route::post('contact', 'HomeController@contactUs')->name('contactUs');
-
-
+    
     Route::get('payment-success', 'HomeController@paymentSuccessView');
     Route::post('payment-success', 'HomeController@paymentSuccess');
 
-
+    
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
     Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
@@ -271,6 +270,7 @@ Route::namespace('Front')->group(function () {
 
         Route::post('profile/personal-info', 'AccountsController@updatePersonalInfo')->name('user.personal_info');
         Route::post('profile/address-info', 'AccountsController@updateAddressInfo')->name('user.address_info');
+        Route::post('profile/update-step1', 'AccountsController@updateUserInfoStep1');
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar')->name('user.updateAvatar');
         Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
         Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');

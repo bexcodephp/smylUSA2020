@@ -139,7 +139,7 @@
         font-size: 1.4rem;
     }
     /* select option customize */
-    .select-option .bootstrap-select .dropdown-menu li .dropdown-item {
+    /* .select-option .bootstrap-select .dropdown-menu li .dropdown-item {
         padding-top: .7rem;
         padding-bottom: .7rem;
     }
@@ -152,7 +152,7 @@
     .bootstrap-select .bs-ok-default:after {
         width: .8em !important;
         height: 1.5rem !important;
-    }
+    } */
     /* input forms */
     /* input[type="email"],
     input[type="text"],
@@ -168,10 +168,10 @@
         height: calc(3.1em + .75rem + 2px);
         font-size: 20px;
     } */
-    .close {
+    /* .close {
         width: 55px;
         height: 55px;
-    }
+    } */
     .modal-content {
         padding: 20px;
     }
@@ -194,8 +194,9 @@
     .select-option .dropdown-toggle::after {
         width: 16px;
     }
-    .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
-        font-size: 1rem;
+    .bootstrap-select .dropdown-toggle .filter-option-inner-inner,
+    .select-option .bootstrap-select .dropdown-menu li .dropdown-item {
+        font-size: 14px;
     }
     label {
         font-size: 14px;
@@ -248,6 +249,11 @@
     .followus .list-group-item,
     .contactus .media small {
         font-size: .9rem;
+    }
+    .select-option .bootstrap-select .dropdown-menu li .dropdown-item,
+    .bootstrap-select .dropdown-toggle .filter-option-inner-inner,
+    .form-control {
+        font-size: 12px;
     }
 }
 
