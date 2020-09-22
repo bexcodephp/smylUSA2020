@@ -364,9 +364,11 @@
                                 <div class="row row-cols-1 row-cols-md-2">
                                     <div class="col mb-4">
                                         <div class="card h-100 card-2">
-                                            <img class="card-img-top" src="{{ asset('images/products/stl_1.png') }}" onclick="btnEditLtsPic()"/>
-                                            <div class="card-body">
-                                                <p class="card-text">Image Description will be here Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et tur. Excepteur sint</p>
+                                            <!-- <img class="card-img-top" src="{{ asset('images/products/stl_1.png') }}" onclick="btnEditLtsPic()"/> -->
+                                            <div class="card-body" align="center">
+                                                <p class="card-text">Your dental scans will be uploaded here by our team once we have received your impression.
+                                                </br>
+                                                Thank you!</p>
                                             </div>
                                             <!-- <div class="card-footer p-0 justify-content-center">
                                                 <button type="button" class="btn btn-link btn-edit" onclick="btnEditLtsPic()">Edit</button>
@@ -374,7 +376,7 @@
                                             </div> -->
                                         </div>
                                     </div>
-                                    <div class="col mb-4">
+                                    <!-- <div class="col mb-4">
                                         <div class="card h-100 card-2">
                                             <img class="card-img-top" src="{{ asset('images/products/stl_2.png') }}" />
                                             <div class="card-body">
@@ -397,7 +399,7 @@
                                                 <p class="card-text">Image not have Description</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
