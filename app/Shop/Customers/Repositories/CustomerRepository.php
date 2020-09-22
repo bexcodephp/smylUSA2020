@@ -57,7 +57,8 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
             if (isset($params['password'])) {
                 $customer->password = bcrypt($params['password']);
             }
-            $customer->name = $params['name'];
+            // $customer->name = $params['name'];
+            $customer->name = $params['first_name'] . " " . $params['last_name'];
 
             $uuid1 = Uuid::uuid1();
             
