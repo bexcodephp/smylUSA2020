@@ -141,8 +141,8 @@
                         {{-- cart menu --}}
                         <ul class="navbar-nav nav_cart align-items-center order-lg-3">
                             <li class="nav-item">
-                                <a class="nav-link icon_cart" href="#">
-                                    <span class="badge badge-pill"></span>
+                                <a class="nav-link icon_cart" href="/cart">
+                                    <span class="badge badge-pill">{{ $cartCount }}</span>
                                 </a>
                             </li>
                         </ul>

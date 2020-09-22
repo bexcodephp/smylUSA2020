@@ -160,7 +160,17 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function(){
-       
+        $(".minus").click(function(){
+          var qty = $(this).parent().next("div").children(".qty").val();
+          if(qty > 0) {
+            $(this).parent().next("div").children(".qty").val(parseInt(qty) - 1);
+          }
+        });
+
+        $(".plus").click(function(){
+          var qty = $(this).parent().prev("div").children(".qty").val();
+          $(this).parent().prev("div").children(".qty").val(parseInt(qty) + 1);
+        });
     });
   </script>
 @endpush
