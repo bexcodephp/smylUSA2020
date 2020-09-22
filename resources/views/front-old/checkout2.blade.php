@@ -126,7 +126,7 @@
                                                     <div class="form-group col-md-6">
                                                         <label class="text-color-dark font-weight-semibold" for="b_last_name">Last Name:</label>
                                                         <input type="text" class="form-control line-height-1 bg-light-5" name="billing_last_name" id="b_last_name"
-                                                            {{ $customer ? $customer->billing_last_name : null }} >
+                                                            value="{{ $customer ? $customer->billing_last_name : null }}" >
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
