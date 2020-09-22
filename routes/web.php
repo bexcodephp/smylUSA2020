@@ -99,15 +99,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::put('employees/{id}/profile', 'EmployeeController@updateProfile')->name('employee.profile.update');
             Route::resource('roles', 'Roles\RoleController');
 
-            Route::get('admin/resources', 'ResourceController@index');
-            Route::get('admin/resources/create', function () {
-                return view("admin.resource.create");
+            Route::get('resources', 'ResourceController@index');
+            Route::get('resources/create', function () {
+                return view("admin/resource.create");
             });
-            Route::post('admin/resources/create', 'ResourceController@create');
-            Route::get('admin/resources/edit/{id}','ResourceController@getResource');
-            Route::post('admin/resources/edit/{id}','ResourceController@updateResource');
-            Route::get('admin/resources/delete/{id}','ResourceController@destroyResource');
-
+            Route::post('resources/create', 'ResourceController@create');
+            Route::get('resources/edit/{id}','ResourceController@getResource');
+            Route::post('resources/edit/{id}','ResourceController@updateResource');
+            Route::get('resources/delete/{id}','ResourceController@destroyResource');
+            
         });
     });
 });
