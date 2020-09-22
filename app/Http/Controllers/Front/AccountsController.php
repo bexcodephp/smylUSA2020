@@ -106,19 +106,16 @@ class AccountsController extends Controller
 
         return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList','teethImages'));
 
-        //return view('front.medical_form', compact('order', 'address', 'history', 'customer'));
+     //return view('front.medical_form', compact('order', 'address', 'history', 'customer','teethImages'));
     }
 
     public function submitMedicalForm(Request $request)
-    {        
-        //dd($request);
+    {  
         try {
-            //dd($request);
             DB::beginTransaction();
             $customer = auth()->user();
             if(PatientMedicalHistory::where('patient_id', $customer->id)->count() > 0)
             {
-                //dd($request);
                 return redirect()->back()->with(['error' => 'You\'ve already submitted the form.']);
             }
             
@@ -126,8 +123,7 @@ class AccountsController extends Controller
             //$input['patient_id'] = $customer->id;
             $state_code = ""; // need to add state code e.g. FL
             $input['patient_id'] = "ST".date('y-m-d').$state_code.$customer->id;
-            PatientMedicalHistory::create($input);
-           
+            PatientMedicalHistory::create($input);           
             
             $customer->update([
                 'dob' => date('Y-m-d', strtotime($request->dob)),
@@ -236,7 +232,6 @@ class AccountsController extends Controller
     {
         $user = $this->loggedUser();
 
-
         $user->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -253,7 +248,6 @@ class AccountsController extends Controller
     public function updateAddressInfo(Request $request)
     {
         $user = $this->loggedUser();
-
         $address = Address::where('customer_id', $user->id)->first();
         if(!$address){
             $input = $request->input();
@@ -262,15 +256,43 @@ class AccountsController extends Controller
         }else{
             $address->update([
                 'address_1' => $request->address_1,
-                'state_code' => $request->state_code,
-                'zip' => $request->zip,
+                'address_2' => $request->address_2,
+                'state_code' => $request->state,
+                'zip' => $request->zipcode,
                 'city' => $request->city,
             ]);
-        }
-        
+        }        
+
         event(new AddNotification($user->id, 1, 'You have updated address information.'));
 
         return $this->sendResponse(true,'Information updated');
+    }
+    // this is step 1 for patient info
+    public function updateUserInfoStep1(Request $request)
+    {
+        $user = $this->loggedUser();
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'name' => $request->first_name . ' ' . $request->last_name,
+            'phone' => $request->phone,
+            'dob' => date('Y-m-d', strtotime($request->dob)),
+        ]);
+        $address = Address::where('customer_id', $user->id)->first();
+        if(!$address){
+            $input = $request->input();
+            $input['customer_id'] = $user->id;
+            Address::create($input);
+        }else{
+            $address->update([
+                'address_1' => $request->address_1,
+                'address_2' => $request->address_2,
+                'state_code' => $request->state,
+                'zip' => $request->zipcode,
+                'city' => $request->city,
+            ]);
+        }
+        return "success";
     }
 
 
