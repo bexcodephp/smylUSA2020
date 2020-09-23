@@ -2,6 +2,11 @@
 @push('stylesheets')
 <link rel="stylesheet" href="{{ asset('front/css/sidebar.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('front/css/patient/patient-profile.css') }}" type="text/css">
+<style type="text/css">
+    form .error {
+        color: #ff0000;
+    }
+</style>
 @endpush
 @section('content')
 
@@ -13,12 +18,13 @@
         </div>
         <div class="col-12">
             <div class="accordion" id="accordion_profile">
-                <form class="card">
+                <form class="card" role="form" id="myprofile" action="{{ route('user.personal_info') }}" method="POST">
+                    @csrf
                     <div class="card-header" id="heading_p_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Personal Information</h2>
                             <div class="ml-sm-auto d-flex mt-md-0 mt-3">
-                                <button class="btn btn-primary ml-auto" type="button">Update</button>
+                                <button type="submit" class="btn btn-primary ml-auto">Update</button>
                                 <button class="btn btn-link px-2 ml-md-2 ml-auto btn-collapse" type="button" data-toggle="collapse" data-target="#p_info" aria-expanded="true" aria-controls="p_info"><i class="fas fa-angle" aria-hidden="true"></i></button>
                             </div>
                         </div>
@@ -28,23 +34,23 @@
                             <div class="row">
                                 <div class="col-sm-6 form-group">
                                     <label>First Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="firstname" class="form-control input-gray" id="firstname" placeholder="First Name" value="">
+                                    <input type="text" name="first_name" class="form-control input-white" id="first_name" placeholder="First Name" value="{{ $user->first_name }}">
                                 </div>
                                 <div class="col-sm-6 form-group">
-                                    <label>Last <span class="text-danger">*</span></label>
-                                    <input type="text" name="lastname" class="form-control input-gray" id="lastname" placeholder="Last Name" value="">
+                                    <label>Last Name<span class="text-danger">*</span></label>
+                                    <input type="text" name="last_name" class="form-control input-white" id="last_name" placeholder="Last Name" value="{{ $user->last_name }}">
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Moblie Number<span class="text-danger">*</span></label>
-                                    <input type="text" name="phone" id="phone" placeholder="Phone Number" value="" class="form-control" disabled />
+                                    <input type="text" name="phone" id="phone" placeholder="Phone Number" value="{{ $user->phone }}" class="form-control" />
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="text" name="dob" id="dob" value="" class="form-control input-gray" disabled placeholder="DOB" />
+                                    <input type="text" name="dob" id="dob" class="form-control input-white" value="{{ $user->dob ? date('m/d/Y', strtotime($user->dob)) : null }}" disabled />
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Patient ID<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control input-gray" id="patient_id" placeholder="000000" value="" disabled>
+                                    <input type="text" class="form-control input-white" name="patient_id" id="patient_id" placeholder="000000" value="{{ $user->patient_id }}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -457,6 +463,7 @@
 @endsection
 @push('scripts')
 <script src="{{ asset('front/js/sidebar.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.selectpicker').selectpicker();
@@ -482,5 +489,32 @@
     function btnReplaceProfilePic() {
         $('#upload_new_prof_pic_modal').modal('show');
     }
+
+    $("#myprofile").validate({
+        // Specify validation rules
+        rules: {
+            first_name: "required",
+            last_name: "required",    
+            phone: {
+                required: true,
+                digits: true,
+                maxlength: 10,
+            },
+        },
+        messages: {
+            first_name: {
+                required: "Please enter first name",
+            },      
+            last_name: {
+                required: "Please enter last name",
+            },     
+            phone: {
+                required: "Please enter phone number",
+                digits: "Please enter valid phone number",
+                maxlength: "Phone number field accept only 10 digits",
+            },
+            
+        },
+    });
 </script>
 @endpush

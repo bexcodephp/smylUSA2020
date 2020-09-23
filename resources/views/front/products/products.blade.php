@@ -77,24 +77,6 @@
                                         </div>
                                     </div>
                                 </div>
-<<<<<<< HEAD:resources/views/front/users/u_products.blade.php
-                            </div>
-                            <div class="card-footer p-0">
-                                <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
-                            </div>
-                            {{--
-                                NOTE:
-                                set id for individual popover OR tooltip box
-                            --}}
-                            <div class="popover-content" id="popover_content_1">
-                                <div class="popover-details">
-                                    {{-- change content START  --}}
-                                    <div class="popover-caption">
-                                        <p>SmylUSA offers Retainer to help you maintain your alignment after your Clear Alignment treatment is over. Our Retainers are made with Zendura plastics which are widely considered the best available. We highly recommended our customers to use retainers once they finish their alignment treatment.</p>
-                                        <div class="product-available py-2">
-                                            <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
-                                            <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">3232</span></h5>
-=======
                                 <div class="card-footer p-0">
                                     <form action="{{ route('cart.store') }}" class="form-inline cartForm" method="post">    
                                         {{ csrf_field() }}
@@ -113,30 +95,17 @@
                                                 <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
                                                 <h5 class="color-blue mb-0">{{ $product->sku }}&nbsp;:<span class="text-bold color-gray ml-2">3232</span></h5>
                                             </div>
->>>>>>> develop:resources/views/front/products/products.blade.php
                                         </div>
                                         {{--  change content END --}}
                                         {{--  left bottom arrow  --}}
                                         <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
                                     </div>
-<<<<<<< HEAD:resources/views/front/users/u_products.blade.php
-                                    {{-- change content END --}}
-                                    {{-- left bottom arrow  --}}
-                                    <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- content 2  --}}
-                    <div class="col mb-md-3 my-3 r-product element-item products">
-=======
                                 </div>
                             </div>
                         </div>
                     @endforeach
                     {{--  content 2  --}}
                     <!-- <div class="col mb-3 r-product element-item products">
->>>>>>> develop:resources/views/front/products/products.blade.php
                         <div class="card product-card">
                             <a class="card-header p-0 popover-set" title="popover_content_2" href="{{ url('/productsview') }}">
                                 <img src="{{asset('images/products/product_1.png')}}" class="card-img-top" alt="product">
@@ -188,17 +157,9 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD:resources/views/front/users/u_products.blade.php
-                    </div>
-                    {{--
-                        content 3
-                    --}}
-                    <div class="col mb-md-3 my-3 r-product element-item services ">
-=======
                     </div> -->
                     {{-- content 3 --}}
                     <!-- <div class="col mb-3 r-product element-item services ">
->>>>>>> develop:resources/views/front/products/products.blade.php
                         <div class="card product-card">
                             <a class="card-header p-0 popover-set" title="popover_content_3" href="{{ url('/productsview') }}">
                                 <img src="{{asset('images/products/product_3.png')}}" class="card-img-top" alt="product">
@@ -254,17 +215,9 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD:resources/views/front/users/u_products.blade.php
-                    </div>
-                    {{--
-                        content 4
-                    --}}
-                    <div class="col mb-md-3 my-3 r-product element-item products">
-=======
                     </div> -->
                     {{-- content 4 --}}
                     <!-- <div class="col mb-3 r-product element-item products">
->>>>>>> develop:resources/views/front/products/products.blade.php
                         <div class="card product-card">
                             <a class="card-header p-0 popover-set" title="popover_content_4" href="{{ url('/productsview') }}">
                                 <img src="{{asset('images/products/generic_square_2.jpg')}}" class="card-img-top" alt="product">
