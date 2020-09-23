@@ -122,7 +122,7 @@ class AccountsController extends Controller
             $input = $request->input();
             //$input['patient_id'] = $customer->id;
             $state_code = ""; // need to add state code e.g. FL
-            $input['patient_id'] = "ST".date('y-m-d').$state_code.$customer->id;
+            $input['patient_id'] = "ST".date('y-m-d').$state_code.$customer->id; // patient Id format e.g. ST200902FL24
             PatientMedicalHistory::create($input);           
             
             $customer->update([
@@ -160,8 +160,15 @@ class AccountsController extends Controller
 
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
+        // return view('front.user.profile', [
+        //     'customer' => $customer,
+        //     'address' => $addresses,
+        //     'user' => $user,
+        //     'teeth_images' => $teethImages,
+        //     'statesList' => $statesList
+        // ]);
 
-        return view('front.user.profile', [
+        return view('front.dashboard.patientProfile', [
             'customer' => $customer,
             'address' => $addresses,
             'user' => $user,

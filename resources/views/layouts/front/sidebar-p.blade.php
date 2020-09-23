@@ -7,20 +7,20 @@
   </button>
   <div class="header-sidebar mb-3">
     <h2 class="color-blue text-bold sidebar-title">Welcome</h2>
-    <h2 class="color-gray text-bold sidebar-subtitle">User Name</h2>
+    <h2 class="color-gray text-bold sidebar-subtitle">{{  auth()->user()->name }}</h2>
   </div>
   <ul class="list-group">
-    <li class="list-group-item @if (Request::is('pDashboard'))active @endif">
-      <a class="" href="{{ url('pDashboard') }}">Dashboard</a>
+    <li class="list-group-item @if (Request::is('dashboard'))active @endif">
+      <a class="" href="{{ url('dashboard') }}">Dashboard</a>
     </li>
-    <li class="list-group-item @if (Request::is('patient-profile'))active @endif">
-      <a class="" href="{{ url('patient-profile') }}">My Profile</a>
+    <li class="list-group-item @if (Request::is('profile'))active @endif">
+      <a class="" href="{{ url('profile') }}">My Profile</a>
     </li>
-    <li class="list-group-item @if (Request::is('pPictures'))active @endif">
-      <a class="" href="{{ url('pPictures') }}">My Pictures</a>
+    <li class="list-group-item @if (Request::is('patient-picture'))active @endif">
+      <a class="" href="{{ url('patient-picture') }}">My Pictures</a>
     </li>
-    <li class="list-group-item @if (Request::is('pOrders'))active @endif">
-      <a class="" href="{{ url('pOrders') }}">My Orders</a>
+    <li class="list-group-item @if (Request::is('patient-orders'))active @endif">
+      <a class="" href="{{ url('patient-orders') }}">My Orders</a>
     </li>
     <li class="list-group-item @if (Request::is('pPaymentPlan'))active @endif">
       <a class="" href="{{ url('pPaymentPlan') }}">Payment Plan</a>
