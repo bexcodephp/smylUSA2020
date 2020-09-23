@@ -295,13 +295,14 @@ Route::namespace('Front')->group(function () {
 // Route::get('/checkout', function () {
 //     return view('front.checkout2-update');
 // });
-// Route::get('/pDashboard', function () {
-//     return view('front.dashboard.patientDashboard');
-// });
 
-// Route::get('/patient-profile', function () {
-//     return view('front.dashboard.patientProfile');
-// });
+Route::get('/pDashboard', function () {
+    return view('front.dashboard.patientDashboard');
+});
+
+Route::get('/patient-profile', function () {
+    return view('front.dashboard.patientProfile');
+});
 
 Route::get('/patient-picture', function () {
     return view('front.dashboard.patientPicture');

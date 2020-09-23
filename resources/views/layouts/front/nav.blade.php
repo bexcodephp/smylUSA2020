@@ -77,7 +77,7 @@
                                 <div class="media">
                                     <ul class="navbar-nav d-flex flex-column nav-profile-caption align-self-center">
                                         <li class="nav-item nav-user-name">
-                                            <a class="nav-link" href="{{ url('/dashboard') }}"><?php if (Auth::check()) {
+                                            <a class="nav-link" href="{{ url('/profile') }}"><?php if (Auth::check()) {
                                                                                 echo Auth::user()->name;
                                                                             } ?></a>
                                         </li>
