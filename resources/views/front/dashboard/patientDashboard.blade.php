@@ -11,32 +11,34 @@
   <section class="py-xxl-5 py-4">
     <div class="row row-cols-1 row-cols-lg-3 all-cards">
       <!-- card 1 -->
-      <div class="col mb-4">
-        <div class="owl-carousel owl-theme welcome-slider">
-          <!-- card welcome -->
-          <div class="item">
-            <div class="card h-100 card-welcome ">
-              <div class="card-body">
-                <div class="col-12 text-center p-0 my-3">
-                  <h3 class="card-title text-center text-bold">Welcome</h3>
-                </div>
-                <div class="col-12 text-center p-0 mb-2">
-                  <img src="{{ asset('images/icons/person_male.png') }}" class="prof-img mx-auto" />
-                  <h3 class="text-center text-bold color-blue my-3">User Name</h3>
-                </div>
-                <div class="col-12 text-center p-0 my-3">
-                  <h5 class="text-center text-bold my-2">Patient ID</h5>
-                  <h5 class="text-center my-2">123456</h5>
-                </div>
-                <div class="col-12 text-center p-0 my-3">
-                  <h5 class="text-center text-bold my-2">Phone Number</h5>
-                  <h5 class="text-center my-2">+1 123 456 7890</h5>
-                </div>
-                <div class="col-12 text-center p-0 my-3">
-                  <h5 class="text-center text-bold my-2">Email ID</h5>
-                  <h5 class="text-center my-2">demo@gmail.com</h5>
-                </div>
-              </div>
+      <div class="col mb-4 ">
+        <!-- card welcome -->
+        <div class="card h-100 card-welcome ">
+          <div class="card-body">
+            <div class="col-12 text-center p-0 my-3">
+              <h3 class="card-title text-center text-bold">Welcome</h3>
+            </div>
+            <div class="col-12 text-center p-0 mb-2">
+              <img src="{{ asset('storage/'. auth()->user()->avatar) }}" class="prof-img" />
+              <h3 class="text-center text-bold color-blue my-3">{{ auth()->user()->name }}</h3>
+            </div>
+            <div class="col-12 text-center p-0 my-3">
+              <h5 class="text-center text-bold my-2">Patient ID</h5>
+              @if(auth()->user()->patient_id)
+                <h5 class="text-center my-2">{{  auth()->user()->patient_id }}</h5>
+              @endif  
+            </div>
+            <div class="col-12 text-center p-0 my-3">
+              <h5 class="text-center text-bold my-2">Phone Number</h5>
+              <?php
+                $number = auth()->user()->phone;
+                $formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "+1 $1 $2 $3", $number);
+              ?>
+              <h5 class="text-center my-2">{{ $formatted_number }}</h5>
+            </div>
+            <div class="col-12 text-center p-0 my-3">
+              <h5 class="text-center text-bold my-2">Email ID</h5>
+              <h5 class="text-center my-2">{{  auth()->user()->email }}</h5>
             </div>
           </div>
           <div class="item">

@@ -77,7 +77,7 @@
                                 <div class="media">
                                     <ul class="navbar-nav d-flex flex-column nav-profile-caption align-self-center">
                                         <li class="nav-item nav-user-name">
-                                            <a class="nav-link" href="#"><?php if (Auth::check()) {
+                                            <a class="nav-link" href="{{ url('/dashboard') }}"><?php if (Auth::check()) {
                                                                                 echo Auth::user()->name;
                                                                             } ?></a>
                                         </li>
@@ -147,8 +147,8 @@
                         {{-- cart menu --}}
                         <ul class="navbar-nav nav_cart align-items-center order-lg-3">
                             <li class="nav-item">
-                                <a class="nav-link icon_cart" href="#">
-                                    <span class="badge badge-pill"></span>
+                                <a class="nav-link icon_cart" href="/cart">
+                                    <span class="badge badge-pill">{{ $cartCount }}</span>
                                 </a>
                             </li>
                         </ul>

@@ -18,44 +18,46 @@
         </div>
     </section>
     <section class="container py-xxl-6 py-5">
-      <form class="row amicandidate-form py-3" id="shopCheckout">
+      @include('layouts.errors-and-messages')
+      <form class="row amicandidate-form py-3" id="shopCheckout" action="{{ route('checkout.store') }}" method="POST">
+        @csrf
         <div class="col-md-6 mb-md-0 mb-5">
             <h2 class="font-weight-bold mb-3">Shipping Information</h2>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="" for="first_name">First Name</label>
-                    <input type="text" class="form-control " name="first_name" id="first_name" readonly value="" required>
+                    <input type="text" class="form-control " name="first_name" id="first_name" value="{{ $customer ? $customer->first_name : null }}" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="" for="last_name">Last Name</label>
-                    <input type="text" class="form-control " name="last_name" id="last_name" readonly value="" required>
+                    <input type="text" class="form-control " name="last_name" id="last_name" value="{{ $customer ? $customer->last_name : null }}" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="" for="email">Email</label>
-                <input type="email" class="form-control " name="email" value="" id="email" required>
+                <input type="email" class="form-control " name="email" value="{{ $customer ? $customer->email : null }}" id="email" required>
             </div>
             <div class="form-group">
                 <label class="" for="email">Date Of Birth</label>
-                <input type="text" autocomplete="off" class="form-control datepicker " name="dob" value="" id="dob" required>
+                <input type="text" autocomplete="off" class="form-control datepicker " name="dob" value="{{ old('dob')}}" id="dob"  required>
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     <label class="" for="contact-number">Contact Number</label>
-                    <input type="text"  class="form-control " name="phone" value="" id="contact-number" required>
+                    <input type="text"  class="form-control " name="phone" value="{{ $customer ? $customer->phone : null }}" id="contact-number" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     <label class="" for="shipping_address">Complete Address</label>
                     <input type="text"
-                class="form-control " name="address_1" value="" id="shipping_address" required>
+                class="form-control " name="address_1" value="{{ $address ? $address->address_1 : null }}" id="shipping_address" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     <label class="" for="shipping_city">City / Town</label>
-                    <input type="text" class="form-control " name="city" value="" id="shipping_city" required>
+                    <input type="text" class="form-control " name="city" value="{{ $address ? $address->city : null }}" id="shipping_city" required>
                 </div>
             </div>
             <div class="form-row">
@@ -67,10 +69,11 @@
                     --}}
                     {{-- add "multiple" attribute for multi-selection --}}
                     <div class="select-option">
-                        <select name="state_code" id="shipping_state" required class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select State">
-                            {{-- @foreach($statesList as $key => $state) --}}
-                            <option value=""></option>
-                            {{-- @endforeach --}}
+                      <select name="state_code" id="shipping_state" required class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select State">
+                            <option selected value="" disabled>Select State</option>
+                          @foreach($statesList as $key => $state)
+                          <option value="{{ $key }}" @if($address ? $address->state_code : null == $key) selected @endif>{{ $state }}</option>
+                          @endforeach
                         </select>
                     </div>
                 </div>
@@ -78,7 +81,7 @@
             <div class="form-row">
                 <div class="form-group col">
                     <label class="" for="shipping_zip">Zip</label>
-                    <input type="text" class="form-control " name="zip" id="shipping_zip" value="" required>
+                    <input type="text" class="form-control " name="zip" id="shipping_zip" value="{{ $address ? $address->zip : null }}" required>
                 </div>
             </div>
             <h2 class="font-weight-bold mb-3">Billing Address</h2>
@@ -92,48 +95,49 @@
               <div class="form-row">
                   <div class="form-group col-md-6">
                       <label class="" for="b_first_name">First Name</label>
-                      <input type="text" class="form-control" name="billing_first_name" id="b_first_name" value="" >
+                      <input type="text" class="form-control" name="billing_first_name" id="b_first_name" value="{{ $customer ? $customer->billing_first_name : null }}" >
                   </div>
                   <div class="form-group col-md-6">
                       <label class="" for="b_last_name">Last Name</label>
-                      <input type="text" class="form-control" name="billing_last_name" id="b_last_name">
+                      <input type="text" class="form-control" name="billing_last_name" id="b_last_name" value="{{ $customer ? $customer->billing_last_name : null }}">
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col">
                       <label class="" for="b_contact-number">Contact Number</label>
-                      <input type="text" class="form-control" name="billing_phone" value="" id="b_contact-number">
+                      <input type="text" class="form-control" name="billing_phone" value="{{ $address ? $address->billing_phone : null }}" id="b_contact-number">
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col">
                       <label class="" for="billing_address">Complete Address</label>
-                      <input type="text" class="form-control" name="billing_address" value="" id="billing_address">
+                      <input type="text" class="form-control" name="billing_address" value="{{ $address ? $address->billing_address : null }}" id="billing_address">
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col">
                       <label class="" for="billing_city">City / Town</label>
-                      <input type="text" class="form-control" name="billing_city" value="" id="billing_city">
+                      <input type="text" class="form-control" name="billing_city" value="{{ $address ? $address->billing_city : null }}" id="billing_city">
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col">
                       <label class="" for="billing_state">State</label>
                       <div class="select-option">
-                        <select name="billing_state" id="billing_state"  class="form-control ">
-                            <option selected value="" disabled>Select State</option>
-                            {{-- @foreach($statesList as $key => $state) --}}
-                            <option value=""></option>
-                            {{-- @endforeach --}}
-                        </select>
+                        <select name="billing_state" id="billing_state"  class="form-control line-height-1 bg-light-5">
+                          <option selected value="" disabled>Select State</option>
+                          @foreach($statesList as $key => $state)
+                          <option value="{{ $key }}" @if($address ? $address->billing_state : null == $key) selected @endif>{{ $state }}
+                          </option>
+                          @endforeach
+                      </select>
                       </div>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col">
                       <label class="" for="billing_zip">Zip</label>
-                      <input type="text" class="form-control " name="billing_zip" id="billing_zip" value="">
+                      <input type="text" class="form-control " name="billing_zip" id="billing_zip" value="{{ $address ? $address->billing_zip : null }}">
                   </div>
               </div>
             </div>
@@ -157,18 +161,18 @@
               <div class="form-row">
                   <div class="form-group col-md-6">
                       <label class="" for="name_on_card">Name On Card</label>
-                      <input type="text" class="form-control " name="name_on_card" id="name_on_card" value="">
+                      <input type="text" class="form-control " name="name_on_card" id="name_on_card" value="{{ old('name_on_card')}}">
                   </div>
                   <div class="form-group col-md-6">
                       <label class="" for="card_number">Card Number</label>
-                      <input type="text" minlength="16" maxlength="16" class="form-control" name="card_number" value="" id="card_number" >
+                      <input type="text" minlength="16" maxlength="16" class="form-control" name="card_number" value="{{ old('card_number')}}" id="card_number" >
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-md-4">
                       <label class="" for="exp_month">Exp Month</label>
                       <div class="select-option">
-                        <select name="exp_month" id="exp_month" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select State">
+                        <select name="exp_month" id="exp_month" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" >
                             <option value="" disabled selected>Select Month</option>
                             <option value="1">1 - January</option>
                             <option value="2">2 - February</option>
@@ -188,8 +192,8 @@
                   <div class="form-group col-md-4">
                         <label class="" for="exp_year">Exp Year</label>
                         <div class="select-option">
-                            <select name="exp_year" id="exp_year" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select State">
-                                <option value="" disabled selected>Select Month</option>
+                            <select name="exp_year" id="exp_year" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" >
+                                <option value="" disabled selected>Select Year</option>
                                 @for($i = 20; $i<=35; $i++) <option value="{{ $i }}">20{{ $i }}</option> @endfor
                             </select>
                         </div>
@@ -215,27 +219,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{--  @foreach($cartItems as $cartItem)  --}}
+                            @foreach($cartItems as $cartItem)
                             <tr class="cart-item">
                                 <td class="product-thumbnail col-auto" data-label="Image">
                                     <div>
-                                        <img src="{{asset('images/products/product_1.png')}}" class="img-fluid" width="70" alt="" />
+                                        <img src="{{$cartItem->cover}}" class="img-fluid" width="70" alt="" />
                                     </div>
                                 </td>
                                 <td class="product-name col-auto" data-label="Product Name">
-                                    <div><a href="">Impression Kit</a></div>
+                                    <div><a href="{{ route('front.get.product', [$cartItem->product->slug]) }}">{{ $cartItem->name }}</a></div>
                                 </td>
                                 <td class="product-price col-auto" data-label="Unit Price">
-                                    <div class="unit-price">$79</div>
+                                    <div class="unit-price">${{ $cartItem->price }}</div>
                                 </td>
                                 <td class="product-quantity col-auto" data-label="Qty">
-                                    <div class="quantity">1</div>
+                                    <div class="quantity">{{ $cartItem->qty }}</div>
                                 </td>
                                 <td class="product-subtotal col-auto" data-label="Total">
-                                    <div class="sub-total">$79</div>
+                                    <div class="sub-total">${{ $cartItem->qty * $cartItem->price }}</div>
                                 </td>
                             </tr>
-                            {{--  @endforeach  --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -249,7 +253,7 @@
                                 <div class="cart-total-label text-bold">Cart Subtotal</div>
                             </td>
                             <td>
-                                <div class="cart-total-value">XXX</div>
+                                <div class="cart-total-value">${{ $subtotal }}</div>
                             </td>
                         </tr>
                         <tr class="border-bottom-0">
@@ -257,7 +261,7 @@
                                 <div class="cart-total-label text-bold">Shipping Fee</div>
                             </td>
                             <td>
-                                <div class="cart-total-value">XXX</div>
+                                <div class="cart-total-value">${{ $total > 0 ? $shippingFee : 0}}</div>
                             </td>
                         </tr>
                         <tr class="border-bottom-0">
@@ -265,14 +269,17 @@
                                 <div class="cart-total-label text-bold">Total</div>
                             </td>
                             <td>
-                                <div class="cart-total-value text-color-primary color-blue text-bold">XXX</div>
+                                <div class="cart-total-value text-color-primary color-blue text-bold">$ {{$total}}</div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div id="shopPayment">
-
+                <div class="col text-right">
+                    <button class="btn btn-primary btn-rounded font-weight-bold btn-h-2 btn-v-3"
+                        type="submit">PLACE ORDER</button>
+                </div>
             </div>
         </div>
       </form>

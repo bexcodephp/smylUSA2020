@@ -155,7 +155,7 @@ class CheckoutController extends Controller
         // if($impressionKit)
         //     $view = 'front.checkout';
         // else
-            $view = 'front.checkout2';
+            $view = 'front.checkout.checkout2-update';
 
         return view($view, [
             'customer' => $customer ?: null,
@@ -185,6 +185,8 @@ class CheckoutController extends Controller
      */
     public function store(CartCheckoutRequest $request)
     {
+        // print_r($request->input());
+        // exit;
         try {
             DB::beginTransaction();
             $checkoutRepo = new CheckoutRepository;

@@ -20,6 +20,7 @@ use App\Shop\Customers\Repositories\CustomerRepository;
 use App\Shop\Orders\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Shop\Couriers\Repositories\Interfaces\CourierRepositoryInterface;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
+use Illuminate\Support\Facades\Input;
 
 class AccountsController extends Controller
 {
@@ -99,24 +100,22 @@ class AccountsController extends Controller
             $order = null;
         }
         $customer = auth()->user();
+        $teethImages = CustomerImage::where('customer_id', $customer->id)->get();
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
 
-        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList'));
+        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList','teethImages'));
 
-        //return view('front.medical_form', compact('order', 'address', 'history', 'customer'));
+     //return view('front.medical_form', compact('order', 'address', 'history', 'customer','teethImages'));
     }
 
     public function submitMedicalForm(Request $request)
-    {        
-        //dd($request);
+    {  
         try {
-            //dd($request);
             DB::beginTransaction();
             $customer = auth()->user();
             if(PatientMedicalHistory::where('patient_id', $customer->id)->count() > 0)
             {
-                //dd($request);
                 return redirect()->back()->with(['error' => 'You\'ve already submitted the form.']);
             }
             
@@ -124,8 +123,7 @@ class AccountsController extends Controller
             //$input['patient_id'] = $customer->id;
             $state_code = ""; // need to add state code e.g. FL
             $input['patient_id'] = "ST".date('y-m-d').$state_code.$customer->id;
-            PatientMedicalHistory::create($input);
-           
+            PatientMedicalHistory::create($input);           
             
             $customer->update([
                 'dob' => date('Y-m-d', strtotime($request->dob)),
@@ -162,8 +160,15 @@ class AccountsController extends Controller
 
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
+        // return view('front.user.profile', [
+        //     'customer' => $customer,
+        //     'address' => $addresses,
+        //     'user' => $user,
+        //     'teeth_images' => $teethImages,
+        //     'statesList' => $statesList
+        // ]);
 
-        return view('front.user.profile', [
+        return view('front.dashboard.patientProfile', [
             'customer' => $customer,
             'address' => $addresses,
             'user' => $user,
@@ -234,7 +239,6 @@ class AccountsController extends Controller
     {
         $user = $this->loggedUser();
 
-
         $user->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -251,7 +255,6 @@ class AccountsController extends Controller
     public function updateAddressInfo(Request $request)
     {
         $user = $this->loggedUser();
-
         $address = Address::where('customer_id', $user->id)->first();
         if(!$address){
             $input = $request->input();
@@ -260,15 +263,43 @@ class AccountsController extends Controller
         }else{
             $address->update([
                 'address_1' => $request->address_1,
-                'state_code' => $request->state_code,
-                'zip' => $request->zip,
+                'address_2' => $request->address_2,
+                'state_code' => $request->state,
+                'zip' => $request->zipcode,
                 'city' => $request->city,
             ]);
-        }
-        
+        }        
+
         event(new AddNotification($user->id, 1, 'You have updated address information.'));
 
         return $this->sendResponse(true,'Information updated');
+    }
+    // this is step 1 for patient info
+    public function updateUserInfoStep1(Request $request)
+    {
+        $user = $this->loggedUser();
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'name' => $request->first_name . ' ' . $request->last_name,
+            'phone' => $request->phone,
+            'dob' => date('Y-m-d', strtotime($request->dob)),
+        ]);
+        $address = Address::where('customer_id', $user->id)->first();
+        if(!$address){
+            $input = $request->input();
+            $input['customer_id'] = $user->id;
+            Address::create($input);
+        }else{
+            $address->update([
+                'address_1' => $request->address_1,
+                'address_2' => $request->address_2,
+                'state_code' => $request->state,
+                'zip' => $request->zipcode,
+                'city' => $request->city,
+            ]);
+        }
+        return "success";
     }
 
 
@@ -289,22 +320,44 @@ class AccountsController extends Controller
     
     public function updateTeethImages(Request $request)
     {
-        if(count($request->file('images')) == 0)
-        {
-            return $this->sendResponse(false, "Teeth Images are required");
-        }
+        if(Input::get('submit')) {
+          $description = $request->description;
+            if($request->file('image') == 0)
+            {
+                return $this->sendResponse(false, "Teeth Images are required");
+            }
 
-        $user = $this->loggedUser();
-        foreach($request->images as $image)
-        {
-            CustomerImage::create([
-                'customer_id' => $user->id,
-                'image' => $this->saveImage($image, 'images')
-            ]);
-        }
-
-        event(new AddNotification($user->id, 1, 'You have uploaded teeth images.'));        
-        return $this->sendResponse(true, 'Image uplaoded');
+            $user = $this->loggedUser();
+           
+                CustomerImage::create([
+                    'customer_id' => $user->id,
+                    'image' => $this->saveImage($request->file('image'), 'images'),
+                    'description' => $description
+                ]);
+    
+            event(new AddNotification($user->id, 1, 'You have uploaded teeth images.'));        
+            return $this->sendResponse(true, 'Image uplaoded');
+      
+      }else {
+            $customers = CustomerImage::find($request->doc_id_name);
+            if(empty($customers ) && $customers ->count() == 0){
+                return $this->sendResponse(false, "Teeth Images are required");
+            }
+            //Merge new data from request
+            $updateArray = $request->all();
+            if(!empty($updateArray['image'])){
+              $path = $this->saveImage($request->file('image'),'images');
+              $updateArray['image'] = $path;
+            }
+            $customers->fill($updateArray);
+           
+            if($customers->save()){
+                event(new AddNotification($customers, 1, 'You have uploaded teeth images.'));        
+                return $this->sendResponse(true, 'Image uplaoded');
+            } else{
+                return $this->sendResponse(false, "Teeth Images are required");
+            }
+        } 
     }
 
     public function removeTeethImage($image)
@@ -314,7 +367,6 @@ class AccountsController extends Controller
         $teethImage->delete();
 
         return $this->sendResponse(true, 'Image removed');
-
     }
 
     public function updatePassword(Request $request)

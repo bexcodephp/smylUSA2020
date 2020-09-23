@@ -11,9 +11,11 @@
 .owl-theme .owl-dots {
     bottom: 0;
 }
-.owl-carousel.welcome-slider{
+
+.owl-carousel.welcome-slider {
     z-index: 0;
 }
+
 .welcome-slider .owl-stage-outer {
     overflow: visible !important;
 }
