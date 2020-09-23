@@ -295,13 +295,21 @@ Route::namespace('Front')->group(function () {
 // Route::get('/checkout', function () {
 //     return view('front.checkout2-update');
 // });
-Route::get('/dashboard', function () {
+
+Route::get('/pDashboard', function () {
     return view('front.dashboard.patientDashboard');
 });
 
-// Route::get('/patient-profile', function () {
-//     return view('front.dashboard.patientProfile');
-// });
-// Route::get('/forgot-password', function () {
-//     return view('front.auth.forgotPassword');
-// });
+Route::get('/patient-profile', function () {
+    return view('front.dashboard.patientProfile');
+});
+
+Route::get('/patient-picture', function () {
+    return view('front.dashboard.patientPicture');
+});
+Route::get('/patient-orders', function () {
+    return view('front.dashboard.patientMyOrders');
+});
+Route::get('/forgot-password', function () {
+    return view('front.auth.forgotPassword');
+});
