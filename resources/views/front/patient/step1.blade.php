@@ -7,11 +7,11 @@
         </div>
         <div class="col-sm-6 form-group">
             <label>First Name<span class="text-danger">*</span></label>
-            <input type="text" name="first_name" class="form-control input-white" id="firstname" placeholder="First Name" value="{{ $customer->first_name }}">
+            <input type="text" name="first_name" class="form-control input-white" id="first_name" placeholder="First Name" value="{{ $customer->first_name }}">
         </div>
         <div class="col-sm-6 form-group">
             <label>Last <span class="text-danger">*</span></label>
-            <input type="text" name="last_name" class="form-control input-white" id="lastname" placeholder="Last Name" value="{{ $customer->last_name }}">
+            <input type="text" name="last_name" class="form-control input-white" id="last_name" placeholder="Last Name" value="{{ $customer->last_name }}">
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Moblie Number<span class="text-danger">*</span></label>
@@ -94,7 +94,7 @@
     </div>
     <div class="row mt-3">
         <div class="col-12 text-right">
-            <button type="button" class="btn btn-primary next-tab" id="step1_submit">Next</button>
+            <button type="submit" class="btn btn-primary next-tab" id="step1_submit">Next</button>
         </div>
     </div>
 </form>
