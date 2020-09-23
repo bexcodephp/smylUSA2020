@@ -168,16 +168,13 @@
         height: calc(3.1em + .75rem + 2px);
         font-size: 20px;
     } */
-    /* .close {
-        width: 55px;
-        height: 55px;
-    } */
     .modal-content {
         padding: 20px;
     }
     /* browse file custom */
     .browse-file-btn .custom-file-label {
-        min-height: 44px;
+        /* min-height: 44px; */
+        min-height: calc(2.15em + .75rem + 2px);
     }
 }
 
@@ -254,6 +251,10 @@
     .bootstrap-select .dropdown-toggle .filter-option-inner-inner,
     .form-control {
         font-size: 12px;
+    }
+    .close {
+        width: 24px;
+        height: 24px;
     }
 }
 

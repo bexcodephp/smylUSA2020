@@ -1,8 +1,7 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-<link rel="stylesheet" href="{{ asset('front/css/table-responsive.css') }}" type="text/css">
-<link rel="stylesheet" href="{{ asset('front/css/patient/patient-profile.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('front/css/sidebar.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('front/css/patient/patient-profile.css') }}" type="text/css">
 <style type="text/css">
     form .error {
         color: #ff0000;
@@ -482,56 +481,6 @@
         });
 
     });
-    // UPLOAD new smile pic modal
-    function btnUploadNewPic() {
-        $('#title_add_bite').hide();
-        $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
-            $('#title_add_smile').show();
-            $('#title_edit_smile').hide();
-            $('#title_add_bite').hide();
-            // $('#doc_src').attr();
-            $('#doc_src').hide();
-        });
-    }
-    // EDIT smile pic modal
-    function btnEditSmilePic(doc_name) {
-        $('#title_add_bite').hide();
-        $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
-            $('#title_edit_smile').show();
-            $('#title_add_smile').hide();
-            $('#title_add_bite').hide();
-            $("#doc_src").show();
-            $('#doc_src').attr('src', window.location.origin + '/storage/' + doc_name);
-        });
-    }
-    // Upload new Bite pic modal
-    function btnUploadBitePic() {
-        $('#title_add_smile').hide();
-        $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
-            $('#title_add_bite').show();
-            $('#title_add_smile').hide();
-        });
-    }
-    // EDIT Bite pic modal
-    function btnEditBitePic() {
-        $('#title_add_smile').hide();
-        $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
-            $('#title_add_bite').show();
-            $('#title_add_smile').hide();
-        });
-    }
-    // Upload new STL pic modal
-    function btnUploadStl() {
-        $('#upload_new_stl_pic_modal').modal('show');
-    }
-    // EDIT STL pic modal
-    function btnEditLtsPic() {
-        $('#upload_new_stl_pic_modal').modal('show');
-    }
 
     function btnViewMedicalForm() {
         $('#view_document_modal').modal('show');
