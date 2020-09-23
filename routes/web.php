@@ -298,9 +298,11 @@ Route::get('/checkout', function () {
 Route::get('/dashboard', function () {
     return view('front.dashboard.patientDashboard');
 });
-Route::get('/patient-profile', function () {
-    return view('front.dashboard.patientProfile');
-});
+
+// Route::get('/patient-profile', function () {
+//     return view('front.dashboard.patientProfile');
+// });
+
 Route::get('/patient-picture', function () {
     return view('front.dashboard.patientPicture');
 });
