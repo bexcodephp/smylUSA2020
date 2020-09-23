@@ -25,7 +25,7 @@ $(document).ready(function () {
         }
     });
 
-     $("#step_1").validate({
+    $("#step_1").validate({
         // Specify validation rules
         rules: {
             first_name: "required",
@@ -87,8 +87,8 @@ $(document).ready(function () {
             },
             shipping_zipcode: {
                 required: "Please enter your shipping zip code",
-            },   
-        },
+            },
+        }
     });
 
     $('#step1_submit').on('click', function () {

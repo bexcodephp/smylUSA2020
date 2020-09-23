@@ -94,7 +94,7 @@
     </div>
     <div class="row mt-3">
         <div class="col-12 text-right">
-            <button type="submit" class="btn btn-primary next-tab" id="step1_submit">Next</button>
+            <button type="button" class="btn btn-primary next-tab" id="step1_submit">Next</button>
         </div>
     </div>
 </form>
