@@ -1,0 +1,34 @@
+.chat-box {
+    max-width: 450px;
+    position: absolute;
+    bottom: 0;
+    right: 100px;
+}
+
+.chat-box .btn.btn-open-chat {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    position: relative;
+    padding-right: 20px;
+}
+
+.chat-box button.btn .icon-online {
+    line-height: inherit;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btn-send {
+    position: absolute;
+    right: 10px;
+    height: 100%;
+    border: 0;
+    background: transparent;
+}
+
+.chat-item .chat-msg {
+    font-size: 18px;
+    text-transform: uppercase;
+}
