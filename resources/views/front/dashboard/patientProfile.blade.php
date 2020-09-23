@@ -38,7 +38,7 @@
                                     <input type="text" name="first_name" class="form-control input-white" id="first_name" placeholder="First Name" value="{{ $user->first_name }}">
                                 </div>
                                 <div class="col-sm-6 form-group">
-                                    <label>Last <span class="text-danger">*</span></label>
+                                    <label>Last Name<span class="text-danger">*</span></label>
                                     <input type="text" name="last_name" class="form-control input-white" id="last_name" placeholder="Last Name" value="{{ $user->last_name }}">
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
