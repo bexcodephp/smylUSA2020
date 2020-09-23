@@ -283,21 +283,21 @@ Route::namespace('Front')->group(function () {
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
 
-Route::get('/candidate', function () {
-    return view('front.users.u_ami_candidate');
-});
-Route::get('/products', function () {
-    return view('front.users.u_products');
-});
-Route::get('/productsview', function () {
-    return view('front.users.u_products_view');
-});
-Route::get('/checkout', function () {
-    return view('front.checkout2-update');
-});
-Route::get('/dashboard', function () {
-    return view('front.dashboard.patientDashboard');
-});
+// Route::get('/candidate', function () {
+//     return view('front.users.u_ami_candidate');
+// });
+// // Route::get('/products', function () {
+// //     return view('front.users.u_products');
+// // });
+// Route::get('/productsview', function () {
+//     return view('front.users.u_products_view');
+// });
+// Route::get('/checkout', function () {
+//     return view('front.checkout2-update');
+// });
+// Route::get('/pDashboard', function () {
+//     return view('front.dashboard.patientDashboard');
+// });
 
 // Route::get('/patient-profile', function () {
 //     return view('front.dashboard.patientProfile');
