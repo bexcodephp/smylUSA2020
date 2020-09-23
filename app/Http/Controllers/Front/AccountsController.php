@@ -122,7 +122,7 @@ class AccountsController extends Controller
             $input = $request->input();
             //$input['patient_id'] = $customer->id;
             $state_code = ""; // need to add state code e.g. FL
-            $input['patient_id'] = "ST".date('y-m-d').$state_code.$customer->id;
+            $input['patient_id'] = "ST".date('y-m-d').$state_code.$customer->id; // patient Id format e.g. ST200902FL24
             PatientMedicalHistory::create($input);           
             
             $customer->update([
