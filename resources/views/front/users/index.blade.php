@@ -7,7 +7,7 @@
     {{--  slider  --}}
     <section class="banner homebanner">
         <div class="bannerslider owl-carousel owl-theme ">
-           <div class="item" style="background-image:url('{{ asset("images/products/slide_17_1.png") }}')">
+            <div class="item" style="background-image:url('{{ asset("images/products/slide_17_1.png") }}')">
                 {{--  <img src="{{ asset("images/products/slide_17_1.png") }}" class="img-fluid" />  --}}
                 <div class="caption container d-flex h-100 py-5 animate__bounceInLeft">
                     <div class="my-auto">

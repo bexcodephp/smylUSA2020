@@ -74,7 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
             Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
-            
+
             Route::resource('addresses', 'Addresses\AddressController');
 
             Route::resource('countries', 'Countries\CountryController');
@@ -104,10 +104,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
                 return view("admin.resource.create");
             });
             Route::post('admin/resources/create', 'ResourceController@create');
-            Route::get('admin/resources/edit/{id}','ResourceController@getResource');
-            Route::post('admin/resources/edit/{id}','ResourceController@updateResource');
-            Route::get('admin/resources/delete/{id}','ResourceController@destroyResource');
-
+            Route::get('admin/resources/edit/{id}', 'ResourceController@getResource');
+            Route::post('admin/resources/edit/{id}', 'ResourceController@updateResource');
+            Route::get('admin/resources/delete/{id}', 'ResourceController@destroyResource');
         });
     });
 });
@@ -298,9 +297,14 @@ Route::get('/checkout', function () {
 Route::get('/pDashboard', function () {
     return view('front.dashboard.patientDashboard');
 });
-
 Route::get('/patient-profile', function () {
     return view('front.dashboard.patientProfile');
+});
+Route::get('/patient-picture', function () {
+    return view('front.dashboard.patientPicture');
+});
+Route::get('/patient-orders', function () {
+    return view('front.dashboard.patientMyOrders');
 });
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');

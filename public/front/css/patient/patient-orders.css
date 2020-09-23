@@ -1,0 +1,59 @@
+table.dataTable thead tr th,
+table.dataTable tbody tr td {
+    padding: 10px;
+    border-bottom: none;
+}
+
+table.dataTable thead tr th {
+    color: #2388ed;
+}
+
+table.dataTable tbody tr td {
+    word-break: break-all;
+}
+
+table.dataTable.no-footer {
+    border-bottom: none;
+}
+
+.dataTables_info,
+.paginate_button,
+.dataTables_wrapper .dataTables_paginate .paginate_button,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color: #2388ed !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #ffffff !important;
+    background: #2388ed;
+    border-color: #2388ed;
+    border-radius: 6px;
+}
+
+td .btn-link {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 767px) {
+    table.dataTable thead tr th,
+    table.dataTable tbody tr td {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    .dataTables_info,
+    .paginate_button,
+    .dataTables_wrapper .dataTables_paginate .paginate_button,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+        font-size: 12px;
+    }
+    table.dataTable .btn.btn-link {
+        font-size: 12px;
+    }
+    table.col_tbl td::before {
+        color: #2388ed;
+    }
+}

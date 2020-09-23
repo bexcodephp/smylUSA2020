@@ -16,11 +16,11 @@
     <li class="list-group-item @if (Request::is('patient-profile'))active @endif">
       <a class="" href="{{ url('patient-profile') }}">My Profile</a>
     </li>
-    <li class="list-group-item @if (Request::is('pPictures'))active @endif">
-      <a class="" href="{{ url('pPictures') }}">My Pictures</a>
+    <li class="list-group-item @if (Request::is('patient-picture'))active @endif">
+      <a class="" href="{{ url('patient-picture') }}">My Pictures</a>
     </li>
-    <li class="list-group-item @if (Request::is('pOrders'))active @endif">
-      <a class="" href="{{ url('pOrders') }}">My Orders</a>
+    <li class="list-group-item @if (Request::is('patient-orders'))active @endif">
+      <a class="" href="{{ url('patient-orders') }}">My Orders</a>
     </li>
     <li class="list-group-item @if (Request::is('pPaymentPlan'))active @endif">
       <a class="" href="{{ url('pPaymentPlan') }}">Payment Plan</a>

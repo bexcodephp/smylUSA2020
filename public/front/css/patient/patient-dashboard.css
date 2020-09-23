@@ -8,6 +8,25 @@
     padding: 0.2rem 1.25rem;
 }
 
+.owl-theme .owl-dots {
+    bottom: 0;
+}
+.owl-carousel.welcome-slider{
+    z-index: 0;
+}
+.welcome-slider .owl-stage-outer {
+    overflow: visible !important;
+}
+
+.welcome-slider .owl-item {
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.welcome-slider .owl-item.active {
+    opacity: 1;
+}
+
 
 /* profile */
 
