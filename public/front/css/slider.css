@@ -39,7 +39,7 @@
     background-image: url('../../../images/products/curve_blue.png');
 }
 
-.bannerslider .owl-theme .owl-dots {
+.owl-theme .owl-dots {
     position: absolute;
     bottom: 10%;
     width: 100%;
@@ -110,8 +110,8 @@
 /* responsive */
 
 @media only screen and (min-width: 768px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
-    .owl-carousel,
-    .owl-carousel .owl-item {
+    .owl-carousel.bannerslider,
+    .owl-carousel.bannerslider .owl-item {
         height: 50vh;
     }
     /* hero image */
@@ -122,8 +122,8 @@
 }
 
 @media only screen and (min-width: 992px) {
-    .owl-carousel,
-    .owl-carousel .owl-item {
+    .owl-carousel.bannerslider,
+    .owl-carousel.bannerslider .owl-item {
         height: calc(100vh - 100px);
     }
     /* hero image */
@@ -134,8 +134,8 @@
 }
 
 @media only screen and (min-width: 992px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
-    .owl-carousel,
-    .owl-carousel .owl-item {
+    .owl-carousel.bannerslider,
+    .owl-carousel.bannerslider .owl-item {
         height: 50vh;
     }
     /* hero image */
@@ -146,8 +146,8 @@
 }
 
 @media only screen and (min-width: 1025px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-    .owl-carousel,
-    .owl-carousel .owl-item {
+    .owl-carousel.bannerslider,
+    .owl-carousel.bannerslider .owl-item {
         min-height: 567px;
     }
     /* hero image */
@@ -158,8 +158,8 @@
 }
 
 @media only screen and (min-width: 1367px) {
-    .owl-carousel,
-    .owl-carousel .owl-item {
+    .owl-carousel.bannerslider,
+    .owl-carousel.bannerslider .owl-item {
         height: calc(100vh - 160px);
     }
     .bannerslider .owl-stage-outer::after {
@@ -176,8 +176,8 @@
 }
 
 @media only screen and (min-width: 1367px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-    /* .owl-carousel,
-  .owl-carousel .owl-item {
+    /* .owl-carousel.bannerslider,
+  .owl-carousel.bannerslider .owl-item {
     min-height: 900px;
   } */
     /* hero image */
@@ -198,8 +198,8 @@
 }
 
 @media only screen and (max-width: 991px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
-    .owl-carousel,
-    .owl-carousel .owl-item {
+    .owl-carousel.bannerslider,
+    .owl-carousel.bannerslider .owl-item {
         height: 50vh;
     }
     /* hero image */
@@ -210,8 +210,8 @@
 }
 
 @media only screen and (max-width: 767px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
-    .owl-carousel,
-    .owl-carousel .owl-item {
+    .owl-carousel.bannerslider,
+    .owl-carousel.bannerslider .owl-item {
         height: calc(100vh - 60px);
     }
     /* hero image */

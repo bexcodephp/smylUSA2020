@@ -1,11 +1,11 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="{{ asset('front/css/u_products.css') }}"  type="text/css" >
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="{{ asset('front/css/u_products.css') }}" type="text/css">
 @endpush
 @section('content')
 <main class="products">
-    {{--  slider  --}}
+    {{-- slider  --}}
     <section class="banner">
         <div class="bannerslider owl-carousel owl-theme">
             <div class="item" style="background-image:url('{{ asset("images/products/banner_products.png") }}')">
@@ -77,6 +77,24 @@
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD:resources/views/front/users/u_products.blade.php
+                            </div>
+                            <div class="card-footer p-0">
+                                <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
+                            </div>
+                            {{--
+                                NOTE:
+                                set id for individual popover OR tooltip box
+                            --}}
+                            <div class="popover-content" id="popover_content_1">
+                                <div class="popover-details">
+                                    {{-- change content START  --}}
+                                    <div class="popover-caption">
+                                        <p>SmylUSA offers Retainer to help you maintain your alignment after your Clear Alignment treatment is over. Our Retainers are made with Zendura plastics which are widely considered the best available. We highly recommended our customers to use retainers once they finish their alignment treatment.</p>
+                                        <div class="product-available py-2">
+                                            <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
+                                            <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">3232</span></h5>
+=======
                                 <div class="card-footer p-0">
                                     <form action="{{ route('cart.store') }}" class="form-inline cartForm" method="post">    
                                         {{ csrf_field() }}
@@ -95,17 +113,30 @@
                                                 <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
                                                 <h5 class="color-blue mb-0">{{ $product->sku }}&nbsp;:<span class="text-bold color-gray ml-2">3232</span></h5>
                                             </div>
+>>>>>>> develop:resources/views/front/products/products.blade.php
                                         </div>
                                         {{--  change content END --}}
                                         {{--  left bottom arrow  --}}
                                         <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
                                     </div>
+<<<<<<< HEAD:resources/views/front/users/u_products.blade.php
+                                    {{-- change content END --}}
+                                    {{-- left bottom arrow  --}}
+                                    <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- content 2  --}}
+                    <div class="col mb-md-3 my-3 r-product element-item products">
+=======
                                 </div>
                             </div>
                         </div>
                     @endforeach
                     {{--  content 2  --}}
                     <!-- <div class="col mb-3 r-product element-item products">
+>>>>>>> develop:resources/views/front/products/products.blade.php
                         <div class="card product-card">
                             <a class="card-header p-0 popover-set" title="popover_content_2" href="{{ url('/productsview') }}">
                                 <img src="{{asset('images/products/product_1.png')}}" class="card-img-top" alt="product">
@@ -143,7 +174,7 @@
                             </div>
                             <div class="popover-content" id="popover_content_2">
                                 <div class="popover-details">
-                                    {{--  change content START  --}}
+                                    {{-- change content START  --}}
                                     <div class="popover-caption">
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
                                         <div class="product-available  py-2">
@@ -151,15 +182,23 @@
                                             <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">XXXX</span></h5>
                                         </div>
                                     </div>
-                                    {{--  change content END --}}
-                                    {{--  left bottom arrow  --}}
+                                    {{-- change content END --}}
+                                    {{-- left bottom arrow  --}}
                                     <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD:resources/views/front/users/u_products.blade.php
+                    </div>
+                    {{--
+                        content 3
+                    --}}
+                    <div class="col mb-md-3 my-3 r-product element-item services ">
+=======
                     </div> -->
                     {{-- content 3 --}}
                     <!-- <div class="col mb-3 r-product element-item services ">
+>>>>>>> develop:resources/views/front/products/products.blade.php
                         <div class="card product-card">
                             <a class="card-header p-0 popover-set" title="popover_content_3" href="{{ url('/productsview') }}">
                                 <img src="{{asset('images/products/product_3.png')}}" class="card-img-top" alt="product">
@@ -201,7 +240,7 @@
                             --}}
                             <div class="popover-content" id="popover_content_3">
                                 <div class="popover-details">
-                                    {{--  change content START  --}}
+                                    {{-- change content START  --}}
                                     <div class="popover-caption">
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
                                         <div class="product-available py-2">
@@ -209,17 +248,25 @@
                                             <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">XXX</span></h5>
                                         </div>
                                     </div>
-                                    {{--  change content END --}}
-                                    {{--  left bottom arrow  --}}
+                                    {{-- change content END --}}
+                                    {{-- left bottom arrow  --}}
                                     <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD:resources/views/front/users/u_products.blade.php
+                    </div>
+                    {{--
+                        content 4
+                    --}}
+                    <div class="col mb-md-3 my-3 r-product element-item products">
+=======
                     </div> -->
                     {{-- content 4 --}}
                     <!-- <div class="col mb-3 r-product element-item products">
+>>>>>>> develop:resources/views/front/products/products.blade.php
                         <div class="card product-card">
-                            <a class="card-header p-0 popover-set"  title="popover_content_4" href="{{ url('/productsview') }}">
+                            <a class="card-header p-0 popover-set" title="popover_content_4" href="{{ url('/productsview') }}">
                                 <img src="{{asset('images/products/generic_square_2.jpg')}}" class="card-img-top" alt="product">
                             </a>
                             <div class="card-body text-center p-0">
@@ -259,7 +306,7 @@
                             --}}
                             <div class="popover-content" id="popover_content_4">
                                 <div class="popover-details">
-                                    {{--  change content START  --}}
+                                    {{-- change content START  --}}
                                     <div class="popover-caption">
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
                                         <div class="product-available py-2">
@@ -267,8 +314,8 @@
                                             <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">XXXX</span></h5>
                                         </div>
                                     </div>
-                                    {{--  change content END --}}
-                                    {{--  left bottom arrow  --}}
+                                    {{-- change content END --}}
+                                    {{-- left bottom arrow  --}}
                                     <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
                                 </div>
                             </div>
@@ -289,23 +336,24 @@
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
         var owl = $('.bannerslider');
         owl.owlCarousel({
-            loop:false,
-            items:1,
-            navigation : false,
+            loop: false,
+            items: 1,
+            navigation: false,
             autoplay: false,
             mouseDrag: false,
             touchDrag: false,
         });
         // init Isotope
-        var $grid = $('#product_display').isotope({
-        });
+        var $grid = $('#product_display').isotope({});
         // filter items on button click for Isotop
-        $('#nav_content_products').on( 'click', 'button', function() {
+        $('#nav_content_products').on('click', 'button', function() {
             var filterValue = $(this).attr('data-filter');
-            $grid.isotope({ filter: filterValue });
+            $grid.isotope({
+                filter: filterValue
+            });
             $('#nav_content_products .btn').removeClass('is-selected');
             $(this).addClass('is-selected');
         });
@@ -317,9 +365,9 @@
             if (windowWidth >= 1025) {
                 $('.popover-set').tooltip({
                     content: function() {
-                        return $('#'+$( this ).attr('title')).html();
+                        return $('#' + $(this).attr('title')).html();
                     },
-                    track:true,
+                    track: true,
                     position: {
                         collision: "none",
                         my: "left bottom",
@@ -337,6 +385,5 @@
         //--------------------------------
         //  end of document ready function
     });
-
-  </script>
+</script>
 @endpush
