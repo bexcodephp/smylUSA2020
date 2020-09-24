@@ -107,6 +107,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::get('resources/edit/{id}','ResourceController@getResource');
             Route::post('resources/edit/{id}','ResourceController@updateResource');
             Route::get('resources/delete/{id}','ResourceController@destroyResource');
+
             
         });
     });
@@ -261,6 +262,7 @@ Route::namespace('Front')->group(function () {
         Route::get('resources', 'AccountsController@resources')->name('resources');
         Route::get('profile', 'AccountsController@profile')->name('profile');
         Route::get('patient-orders', 'AccountsController@orders')->name('orders');
+        Route::post('formstep2', 'AccountsController@storeMedicalFormStep2');
         Route::get('orders/{id}', 'AccountsController@ordersShow')->name('orders.show');
         Route::get('calendar', 'AccountsController@calendar')->name('calendar');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
