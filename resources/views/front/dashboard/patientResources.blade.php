@@ -108,6 +108,70 @@
                   <p class="text-muted">1 week ago</p>
                 </a>
               </li>
+              <li class="list-group-item list-group-item-action">
+                <a href="#">
+                  <div class="d-flex w-100">
+                    <p class="mb-1 nf-caption">You have updated personal information.</p>
+                  </div>
+                  <p class="text-muted">1 week ago</p>
+                </a>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <a href="#">
+                  <div class="d-flex w-100">
+                    <p class="mb-1 nf-caption">You have updated personal information.</p>
+                  </div>
+                  <p class="text-muted">1 week ago</p>
+                </a>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <a href="#">
+                  <div class="d-flex w-100">
+                    <p class="mb-1 nf-caption">You have updated personal information.</p>
+                  </div>
+                  <p class="text-muted">1 week ago</p>
+                </a>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <a href="#">
+                  <div class="d-flex w-100">
+                    <p class="mb-1 nf-caption">You have updated personal information.</p>
+                  </div>
+                  <p class="text-muted">1 week ago</p>
+                </a>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <a href="#">
+                  <div class="d-flex w-100">
+                    <p class="mb-1 nf-caption">You have updated personal information.</p>
+                  </div>
+                  <p class="text-muted">1 week ago</p>
+                </a>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <a href="#">
+                  <div class="d-flex w-100">
+                    <p class="mb-1 nf-caption">You have updated personal information.</p>
+                  </div>
+                  <p class="text-muted">1 week ago</p>
+                </a>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <a href="#">
+                  <div class="d-flex w-100">
+                    <p class="mb-1 nf-caption">You have updated personal information.</p>
+                  </div>
+                  <p class="text-muted">1 week ago</p>
+                </a>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <a href="#">
+                  <div class="d-flex w-100">
+                    <p class="mb-1 nf-caption">You have updated personal information.</p>
+                  </div>
+                  <p class="text-muted">1 week ago</p>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -147,6 +211,9 @@
     $('video').mediaelementplayer({
       features: ['playpause', 'progress', 'current', 'duration', 'tracks', 'volume', 'fullscreen']
     });
+    // $('#btn_open_chat').click(function() {
+    //   $('#list_chat').slideToggle();
+    // });
   });
 </script>
 @endpush

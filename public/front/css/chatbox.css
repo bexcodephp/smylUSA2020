@@ -1,8 +1,13 @@
 .chat-box {
-    max-width: 450px;
+    max-width: 300px;
     position: absolute;
     bottom: 0;
     right: 100px;
+    z-index: 2;
+}
+
+.chat-box .card {
+    border: 0px;
 }
 
 .chat-box .btn.btn-open-chat {
@@ -10,14 +15,26 @@
     border-bottom-right-radius: 0;
     position: relative;
     padding-right: 20px;
+    padding-left: 20px;
+    text-align: left;
+    font-size: 14px;
 }
 
-.chat-box button.btn .icon-online {
+.chat-box button.btn-open-chat .status-onoff {
     line-height: inherit;
     position: absolute;
-    right: 10px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 14px;
+}
+
+.chat-box .btn-open-chat.online .status-onoff {
+    color: #00fb06;
+}
+
+.chat-box .btn-open-chat.offline .status-onoff {
+    color: #d1d1d1;
 }
 
 .btn-send {
@@ -26,9 +43,62 @@
     height: 100%;
     border: 0;
     background: transparent;
+    z-index: 3;
+    font-size: 20px;
 }
 
 .chat-item .chat-msg {
-    font-size: 18px;
+    font-size: 14px;
     text-transform: uppercase;
+    font-weight: bold;
+}
+
+.chat-item .small {
+    font-size: 12px;
+}
+
+.input-msg {
+    font-size: 12px;
+    border-color: #d1d1d1;
+}
+
+.list-chat li {
+    border: none;
+    padding: 5px 0px;
+}
+
+.btn-chat-mobile {
+    display: none;
+}
+
+@media only screen and (min-width: 1367px) {
+    .chat-box .btn.btn-open-chat {
+        font-size: 18px;
+    }
+    .btn-send {
+        font-size: 24px;
+    }
+    .chat-item .chat-msg {
+        font-size: 18px;
+    }
+    .chat-item .small {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (min-width: 1441px) {
+    .chat-box {
+        max-width: 450px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {}
+
+@media only screen and (max-width: 992px) {
+    .btn-chat-mobile {
+        display: block
+    }
+    .btn-open-chat {
+        display: none;
+    }
 }
