@@ -513,11 +513,10 @@ a.amiuser:focus {
 
 .rating {
     width: max-content;
-    display: flex;
     -ms-flex-direction: row-reverse !important;
     flex-direction: row-reverse !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
+    display: -ms-flexbox;
+    display: flex;
 }
 
 .rating>input {

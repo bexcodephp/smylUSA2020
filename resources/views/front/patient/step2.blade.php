@@ -230,8 +230,8 @@
             <button type="button" class="btn btn-primary prev-tab" id="step2_prev">Prev</button>
         </div>
         <div class="col-6 text-right">
-            <button type="button" class="btn btn-primary skip-tab">Skip</button>
-            <button type="button" class="btn btn-primary next-tab">Next</button>
+            <button type="button" class="btn btn-primary skip-tab" id="step2_skip">Skip</button>
+            <button type="button" class="btn btn-primary next-tab" id="step2_submit">Next</button>
         </div>
     </div>
 </form>

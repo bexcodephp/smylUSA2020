@@ -41,4 +41,15 @@
             <button type="button" class="btn btn-primary next-tab">Next</button>
         </div>
     </div>
+</div>
+</div>
+<div class="row mt-3">
+<div class="col-6 text-left">
+    <button type="button" class="btn btn-primary prev-tab" id="step3_prev">Prev</button>
+</div>
+<div class="col-6 text-right">
+    <button type="button" class="btn btn-primary skip-tab" id="step3_skip">Skip</button>
+    <button type="button" class="btn btn-primary next-tab" id="step3_submit">Next</button>
+</div>
+</div>
 </form>
