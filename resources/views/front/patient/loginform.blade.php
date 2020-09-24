@@ -364,4 +364,39 @@
 <script src="{{asset('js/patient/medicalform.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/sweetalert2.all.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    var ans1 = $("#ans1").val();
+    var ans2 = $("#ans2").val();
+    var ans3 = $("#ans3").val();
+    var ans4 = $("#ans4").val();
+    var ans5 = $("#ans5").val();
+    var ans6 = $("#ans6").val();
+    var ans7 = $("#ans7").val();
+    var ans8 = $("#ans8").val();
+    var ans9 = $("#ans9").val();
+    var ans10 = $("#ans10").val();
+    var ans11 = $("#ans11").val();
+    var ans12 = $("#ans12").val();
+    var ans13 = $("#ans13").val();
+    var ans14 = $("#ans14").val();
+    var ans15 = $("#ans15").val();
+    var ans16 = $("#ans16").val();
+    var ans17 = $("#ans17").val();
+    var ans18 = $("#ans18").val();
+    var ans19 = $("#ans19").val();
+    $.ajax({
+            url:'',
+            type:'POST',
+            data:{_token:'{{csrf_token()}}',ans1:ans1,ans2:ans2,ans3:ans3,ans4:ans4,ans5:ans5,ans6:ans6,ans7:ans7,ans8:ans8,ans9:ans9,ans10:ans10,ans11:ans11,ans12:ans12,ans13:ans13,ans14:ans14,ans15:ans15,ans16:ans16,ans17:ans17,ans18:ans18,ans19:ans19},
+            success:function (data) {
+                
+            }
+    });
+    // $("#step2submit").click(function(){
+    //     alert("test");
+    // });
+});
+</script>
 @endpush

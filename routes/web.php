@@ -260,7 +260,7 @@ Route::namespace('Front')->group(function () {
         Route::post('medical_form/{order_id?}', 'AccountsController@submitMedicalForm')->name('submitMedicalForm');
         Route::get('resources', 'AccountsController@resources')->name('resources');
         Route::get('profile', 'AccountsController@profile')->name('profile');
-        Route::get('orders', 'AccountsController@orders')->name('orders');
+        Route::get('patient-orders', 'AccountsController@orders')->name('orders');
         Route::get('orders/{id}', 'AccountsController@ordersShow')->name('orders.show');
         Route::get('calendar', 'AccountsController@calendar')->name('calendar');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
@@ -299,9 +299,16 @@ Route::namespace('Front')->group(function () {
 //     return view('front.dashboard.patientDashboard');
 // });
 
-// Route::get('/patient-profile', function () {
-//     return view('front.dashboard.patientProfile');
+Route::get('/patient-profile', function () {
+    return view('front.dashboard.patientProfile');
+});
+
+Route::get('/patient-picture', function () {
+    return view('front.dashboard.patientPicture');
+});
+// Route::get('/patient-orders', function () {
+//     return view('front.dashboard.patientMyOrders');
 // });
-// Route::get('/forgot-password', function () {
-//     return view('front.auth.forgotPassword');
-// });
+Route::get('/forgot-password', function () {
+    return view('front.auth.forgotPassword');
+});

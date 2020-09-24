@@ -189,14 +189,16 @@ class AccountsController extends Controller
     {
         $orders = $this->orderRepo->getCustomerOrders(auth()->user()->id);
         $products = Product::whereStatus(1)->orderBy('order_no', 'ASC')->get();
-        return view('front.user.orders', compact('orders', 'products'));
+        return view('front.dashboard.patientMyOrders', compact('orders', 'products'));
     }
     
     
     public function ordersShow($reference)
     {
-        $order = $this->orderRepo->getOrderDetail('reference', $reference);
-        return view('front.user.order_detail', compact('order'));
+        // print_r($reference);
+        // exit;
+        return $order = $this->orderRepo->getOrderDetail('reference', $reference);
+        // return view('front.user.order_detail', compact('order'));
     }
     
     
