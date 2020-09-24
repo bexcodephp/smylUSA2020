@@ -254,13 +254,13 @@ Route::namespace('Front')->group(function () {
             Route::resource('country.state', 'CountryStateController');
             Route::resource('state.city', 'StateCityController');
         });
-
+        Route::get('dashboard', 'AccountsController@dashboard')->name('patient.dashboard');
         Route::get('medical_form/{order_id?}', 'AccountsController@medicalForm')->name('medical_form');
         Route::post('medical_form/{order_id?}', 'AccountsController@submitMedicalForm')->name('submitMedicalForm');
         Route::get('resources', 'AccountsController@resources')->name('resources');
         Route::get('profile', 'AccountsController@profile')->name('profile');
         Route::get('orders', 'AccountsController@orders')->name('orders');
-        Route::get('orders/{id}', 'AccountsController@ordersShow')->name('orders.show');
+        Route::get('orders/{id}', 'AccountsController@ordersShow')->name('patient.orders.show');
         Route::get('calendar', 'AccountsController@calendar')->name('calendar');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
         Route::patch('accounts', 'AccountsController@update')->name('accounts.update');
@@ -295,17 +295,18 @@ Route::namespace('Front')->group(function () {
 //     return view('front.checkout2-update');
 // });
 
-Route::get('/pDashboard', function () {
-    return view('front.dashboard.patientDashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('front.dashboard.patientDashboard');
+// });
 
-Route::get('/patient-profile', function () {
-    return view('front.dashboard.patientProfile');
-});
+// Route::get('/patient-profile', function () {
+//     return view('front.dashboard.patientProfile');
+// });
 
 Route::get('/patient-picture', function () {
     return view('front.dashboard.patientPicture');
 });
+
 Route::get('/patient-orders', function () {
     return view('front.dashboard.patientMyOrders');
 });
