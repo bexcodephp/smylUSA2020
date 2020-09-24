@@ -39,20 +39,21 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2">
-                                        <!-- image 1 -->
-                                        <div class="col mb-4">
-                                            <div class="card h-100 card-2 p-0">
-                                                <img class="card-img-top" src="{{ asset('images/products/steps_image_5.png') }}" />
-                                                <div class="card-body">
-                                                    <p class="card-text"></p>
-                                                </div>
-                                                <div class="card-footer p-0">
-                                                    <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic()">Edit</button>
-                                                    <a href="" class="btn btn-link btn-delete">Delete</a>
+                                        @foreach($teethImages as $image)
+                                            <div class="col mb-4">
+                                                <div class="card h-100 card-2 p-0">
+                                                    <img class="card-img-top" src="{{ asset('storage/'.$image->image) }}" />
+                                                    <div class="card-body">
+                                                        <p class="card-text">{{$image->description}}</p>
+                                                    </div>
+                                                    <div class="card-footer p-0">
+                                                        <button type="button" class="btn btn-link btn-edit" onclick="btnEditSmilePic('{{ $image->image }}','{{$image->customer_image_id}}','{{$image->description}}')">Edit</button>
+                                                        <input type="hidden" name="" id="customer_image" value="{{$image->customer_image_id}}" hidden>
+                                                        <button type="button" onclick="deleteSmilePictures('{{$image->customer_image_id}}')" data-token="{{ csrf_token() }}" class="btn btn-link btn-delete">Delete</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- image 2 -->
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -190,18 +191,19 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <form class="row justify-content-center" action="" method="POST" role="form" enctype="multipart/form-data">
+                <form class="row justify-content-center" action="{{ route('user.updateTeethImages') }}" method="POST" role="form" id="smilepictures" enctype="multipart/form-data">
                     @csrf
                     <div class="col-12 align-self-center mb-3 text-center">
+                        <input type="hidden" name="doc_id_name" id="doc_id_hid">
                         <h4 class="sub-title-1 color-blue text-bold" id="title_add_smile">Add New Smile Picture</h4>
-                        <h4 class="sub-title-1 color-blue text-bold hidden" id="title_edit_smile">Edit New Smile Picture</h4>
+                        <h4 class="sub-title-1 color-blue text-bold" id="title_edit_smile">Edit New Smile Picture</h4>
                         <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_bite">Add New Bite Picture</h4>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="card h-100 card-2 mx-auto">
-                            <img class="card-img-top mx-auto" id="doc_src" src="{{ asset('images/products/steps_image_5.png') }}" />
+                            <img class="card-img-top mx-auto" id="doc_src" />
                             <div class="card-body p-0">
-                                <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -212,14 +214,15 @@
                             </div>
                             <div class="col-auto">
                                 <div class="custom-file browse-file-btn">
-                                    <input type="file" class="custom-file-input" name="images[]" multiple id="teethpic">
+                                    <input type="file" class="custom-file-input" name="image" id="teethpic">
                                     <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button>
+                        <button type="submit" class="btn btn-primary" id="upload_pictures" name="submit" value="submit">Upload New Image</button>
+                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
                     </div>
                 </form>
             </div>
@@ -288,6 +291,8 @@
 @endsection
 @push('scripts')
 <script src="{{ asset('front/js/sidebar.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/sweetalert2.all.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -297,24 +302,31 @@
     function btnUploadNewPic() {
         $('#title_add_bite').hide();
         $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
+        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
             $('#title_add_smile').show();
             $('#title_edit_smile').hide();
             $('#title_add_bite').hide();
+            $('#upload_pictures').show();
+            $('#edit_pictures').hide();
             // $('#doc_src').attr();
-            // $('#doc_src').hide();
+            $('#doc_src').hide();
         });
     }
+
     // EDIT smile pic modal
-    function btnEditSmilePic(doc_name) {
+    function btnEditSmilePic(doc_name,doc_id,description){
+        $('#doc_id_hid').val(doc_id);
         $('#title_add_bite').hide();
         $('#upload_new_pic_modal').modal('show');
-        $('#upload_new_pic_modal').on('shown.bs.modal', function(e) {
+        $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
             $('#title_edit_smile').show();
+            $('#upload_pictures').hide();
+            $('#edit_pictures').show();
             $('#title_add_smile').hide();
             $('#title_add_bite').hide();
             $("#doc_src").show();
-            // $('#doc_src').attr('src', window.location.origin + '/storage/' + doc_name);
+            $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+            $('#description').val(description);
         });
     }
     // Upload new Bite pic modal
@@ -351,5 +363,42 @@
     function btnViewLtsPic() {
         $('#view_pic_modal').modal('show');
     }
+
+    function deleteSmilePictures(opId){
+            _opId = opId;
+            const swalWithBootstrapButtons = swal.mixin({
+            confirmButtonClass: 'btn btn-info',
+            cancelButtonClass: 'btn btn-info',
+            buttonsStyling: true,
+        })
+    
+        swalWithBootstrapButtons({
+            title: '',
+            text: "Are you sure you want to Delete this smile pictures?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.value) {
+                var date = moment();
+                var newDate = date.format("YYYY-MM-DD hh:mm:ss");
+                console.log(newDate);
+                $.ajax({
+                    url: 'profile/delete-teeth-images/'+_opId,
+                    type: 'get',
+                    success: function(data){
+                      location.reload();
+                        // console.log(data);
+                    }
+                });
+            }
+            else if(result.dismiss === swal.DismissReason.cancel)
+                {
+                
+                }
+            })
+        }
 </script>
 @endpush

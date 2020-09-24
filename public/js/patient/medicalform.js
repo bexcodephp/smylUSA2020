@@ -89,6 +89,9 @@ $(document).ready(function () {
                 required: "Please enter your shipping zip code",
             },   
         },
+        submitHandler: function(form) {
+            form.submit();
+        }
     });
 
     $('#step1_submit').on('click', function () {

@@ -66,7 +66,7 @@
                 <label class="custom-control-label color-blue text-bold" for="sameAsBilling"><u>Same As Billing Information</u></label>
             </div>
         </div>
-        <div class="col-12 form-group">
+        <div class="col-12 form-group ">
             <label>Address 1</label>
             <input type="text" name="shipping_address_1" class="form-control input-white shipping_address_1" id="shipping_address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
         </div>
