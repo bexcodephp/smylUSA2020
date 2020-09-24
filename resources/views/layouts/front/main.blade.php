@@ -22,8 +22,10 @@
     <link rel="stylesheet" href="{{ asset('front/css/fontawesome-all.css') }}">
     {{--  animation css  --}}
     <link rel="stylesheet" href="{{ asset('front/css/animate.css') }}">
+    {{-- normalize --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
+    
     {{-- all common styles --}}
-
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/slider.css') }}">
