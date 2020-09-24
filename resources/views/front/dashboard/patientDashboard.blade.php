@@ -16,7 +16,7 @@
         <div class="owl-carousel owl-theme welcome-slider">
           <!-- card welcome -->
           <div class="item">
-            <div class="card h-100 card-welcome ">
+            <div class="card h-100 card-welcome">
               <div class="card-body">
                 <div class="col-12 text-center p-0 my-3">
                   <h3 class="card-title text-center text-bold">Welcome</h3>
@@ -166,7 +166,7 @@
       navigation: false,
       animateIn: 'animate__zoomIn',
       animateOut: 'animate__fadeOut',
-      autoplay: false,
+      autoplay: true,
       mouseDrag: false,
       autoplayTimeout: 5000,
       autoplayHoverPause: true
