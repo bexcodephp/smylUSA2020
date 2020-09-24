@@ -7,11 +7,11 @@
         </div>
         <div class="col-sm-6 form-group">
             <label>First Name<span class="text-danger">*</span></label>
-            <input type="text" name="first_name" class="form-control input-white" id="firstname" placeholder="First Name" value="{{ $customer->first_name }}">
+            <input type="text" name="first_name" class="form-control input-white" id="first_name" placeholder="First Name" value="{{ $customer->first_name }}">
         </div>
         <div class="col-sm-6 form-group">
             <label>Last <span class="text-danger">*</span></label>
-            <input type="text" name="last_name" class="form-control input-white" id="lastname" placeholder="Last Name" value="{{ $customer->last_name }}">
+            <input type="text" name="last_name" class="form-control input-white" id="last_name" placeholder="Last Name" value="{{ $customer->last_name }}">
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Moblie Number<span class="text-danger">*</span></label>
@@ -29,7 +29,7 @@
     {{-- Billing Information  --}}
     <div class="row mt-3">
         <div class="col-12 mb-2">
-            <h4 class="sub-title color-blue text-bold">Billing Information</h4>
+            <h4 class="sub-title color-blue text-bold">Shipping Information</h4>
         </div>
         <div class="col-12 form-group">
             <label>Address 1<span class="text-danger">*</span></label>
@@ -60,27 +60,27 @@
     {{-- Billing Information  --}}
     <div class="row mt-3">
         <div class="col-12 mb-2 form-inline">
-            <h4 class="sub-title color-blue text-bold mb-2">Shipping Information</h4>
+            <h4 class="sub-title color-blue text-bold mb-2">Billing Information</h4>
             <div class="custom-control custom-checkbox ml-sm-4 ">
-                <input type="checkbox" class="custom-control-input" id="sameAsBilling">
-                <label class="custom-control-label color-blue text-bold" for="sameAsBilling"><u>Same As Billing Information</u></label>
+                <input type="checkbox" name="sameAsShipping" class="custom-control-input" id="sameAsShipping">
+                <label class="custom-control-label color-blue text-bold" for="sameAsShipping"><u>Same As Shipping Information</u></label>
             </div>
         </div>
         <div class="col-12 form-group">
             <label>Address 1</label>
-            <input type="text" name="shipping_address_1" class="form-control input-white shipping_address_1" id="shipping_address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
+            <input type="text" name="billing_address_1" class="form-control input-white shipping_address_1" id="billing_address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
         </div>
         <div class="col-12 form-group">
             <label>Address 2</label>
-            <input type="text" id="shipping_address_2" class="form-control input-white shipping_address_2" name="shipping_address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
+            <input type="text" name="billing_address_2"  class="form-control input-white shipping_address_2" id="billing_address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>City</label>
-            <input type="text" class="form-control input-white shipping_city" id="shipping_city" name="shipping_city" placeholder="Your City Name" value="{{ $address ? $address->city : null}}">
+            <input type="text" class="form-control input-white shipping_city" id="billing_city" name="billing_city" placeholder="Your City Name" value="{{ $address ? $address->city : null}}">
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>State</label>
-            <select name="shipping_state" id="shipping_state" class="form-control" name="state">
+            <select name="shipping_state" id="billing_state" class="form-control" name="billing_state">
                 <option selected value="">Select State</option>
                 @foreach($statesList as $key => $state)
                 <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
@@ -89,7 +89,7 @@
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Zip Code</label>
-            <input type="text" class="form-control input-white shipping_zipcode" name="shipping_zipcode" id="shipping_zipcode" placeholder="000000" value="{{ $address ? $address->zip : null }}">
+            <input type="text" class="form-control input-white shipping_zipcode" name="billing_zip" id="billing_zip" placeholder="000000" value="{{ $address ? $address->zip : null }}">
         </div>
     </div>
     <div class="row mt-3">

@@ -1,6 +1,7 @@
 @extends('layouts.front.main')
 @push('stylesheets')
 <link rel="stylesheet" href="{{ asset('front/css/sidebar.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('front/css/chatbox.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('front/css/patient/patient-profile.css') }}" type="text/css">
 <style type="text/css">
     form .error {
@@ -253,6 +254,7 @@
         </div>
     </section>
 </main>
+@include('front.dashboard.patientChat')
 {{-- password change modal  --}}
 <div class="modal fade change-pwd-modal" id="change_pwd_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -494,7 +496,7 @@
         // Specify validation rules
         rules: {
             first_name: "required",
-            last_name: "required",    
+            last_name: "required",
             phone: {
                 required: true,
                 digits: true,
@@ -504,16 +506,16 @@
         messages: {
             first_name: {
                 required: "Please enter first name",
-            },      
+            },
             last_name: {
                 required: "Please enter last name",
-            },     
+            },
             phone: {
                 required: "Please enter phone number",
                 digits: "Please enter valid phone number",
                 maxlength: "Phone number field accept only 10 digits",
             },
-            
+
         },
     });
 </script>
