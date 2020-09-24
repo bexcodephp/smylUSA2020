@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#sameAsBilling').on('click', function () {
+    $('#sameAsShipping').on('click', function () {
         if($(this).prop("checked") == true){
             $('.readyonly').attr('readOnly',true); 
             var address_1 = $('#address_1').val();
@@ -7,25 +7,24 @@ $(document).ready(function () {
             var city = $('#city').val();
             var state = $('#state').val();
             var zipcode = $('#zipcode').val();
-            $("#shipping_address_1").val(address_1).attr("disabled", true);
-            $("#shipping_address_2").val(address_2).attr("disabled", true);
-            $("#shipping_city").val(city).attr("disabled", true);
-            $("#shipping_state").val(state).attr("disabled", true); 
-            $("#shipping_zipcode").val(zipcode).attr("disabled", true);
+            $("#billing_address_1").val(address_1).attr("disabled", true);
+            $("#billing_address_2").val(address_2).attr("disabled", true);
+            $("#billing_city").val(city).attr("disabled", true);
+            $("#billing_state").val(state).attr("disabled", true); 
+            $("#billing_zip").val(zipcode).attr("disabled", true);
             // var shipping = $("#shipping_address_1").val();         
         }
         else if($(this).prop("checked") == false){
-            console.log("Checkbox is unchecked."); 
             $('.readyonly').attr('readOnly',false); 
-            $("input.shipping_address_1").removeAttr("disabled");
-            $("input.shipping_address_2").removeAttr("disabled");
-            $("input.shipping_city").removeAttr("disabled");
-            $('#shipping_state').attr("disabled", false); 
-            $("input.shipping_zipcode").removeAttr("disabled");           
+            $("input.billing_address_1").removeAttr("disabled");
+            $("input.billing_address_2").removeAttr("disabled");
+            $("input.billing_city").removeAttr("disabled");
+            $('#billing_state').attr("disabled", false); 
+            $("input.billing_zip").removeAttr("disabled");           
         }
     });
 
-     $("#step_1").validate({
+    $("#step_1").validate({
         // Specify validation rules
         rules: {
             first_name: "required",
@@ -91,10 +90,11 @@ $(document).ready(function () {
         },
     });
 
+    // step1 submit ajax call
+
     $('#step1_submit').on('click', function () {
-
         var formdata = new FormData($('#step_1')[0]);
-
+        $("#step_1").validate();
         $.ajax({
             url: '/profile/update-step1',
             type: "POST",
@@ -117,15 +117,93 @@ $(document).ready(function () {
         });
     });
 
-    $('#step2_prev').on('click', function () {
-        //alert("prev---step2");
+    // step2 submit ajax call
 
+    $('#step2_submit').on('click', function () {
+        var formdata = new FormData($('#step_1')[0]);
+        $("#step_2").validate();
+        $.ajax({
+            url: '/profile/update-step2',
+            type: "POST",
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                if(data=="success"){
+                    $('#nav_step_2').removeClass("active");
+                    $('#nav_step_3').addClass("active");
+                    $('#step_2').removeClass('active show');
+                    $('#step_3').addClass('active show');
+                }                
+            },
+            error: function() {
+                
+            }
+        });
+    });
+
+    // previous btn js
+
+    $('#step2_prev').on('click', function () {
         $('#nav_step_2').removeClass("active");
         $('#nav_step_1').addClass("active");
 
         $('#step_2').removeClass('active show');
         $('#step_1').addClass('active show');
     }); 
+
+    $('#step3_prev').on('click', function () {
+        $('#nav_step_3').removeClass("active");
+        $('#nav_step_2').addClass("active");
+
+        $('#step_3').removeClass('active show');
+        $('#step_2').addClass('active show');
+    }); 
+
+    $('#step4_prev').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_3').addClass("active");
+
+        $('#step_4').removeClass('active show');
+        $('#step_3').addClass('active show');
+    }); 
+
+    $('#step5_prev').on('click', function () {
+        $('#nav_step_5').removeClass("active");
+        $('#nav_step_4').addClass("active");
+
+        $('#step_5').removeClass('active show');
+        $('#step_4').addClass('active show');
+    }); 
+
+    // skip btn js
+
+    $('#step2_skip').on('click', function () {
+        $('#nav_step_2').removeClass("active");
+        $('#nav_step_3').addClass("active");
+
+        $('#step_2').removeClass('active show');
+        $('#step_3').addClass('active show');
+    }); 
+    
+
+    $('#step3_skip').on('click', function () {
+        $('#nav_step_3').removeClass("active");
+        $('#nav_step_4').addClass("active");
+
+        $('#step_3').removeClass('active show');
+        $('#step_4').addClass('active show');
+    });
+
+    $('#step4_skip').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_5').addClass("active");
+
+        $('#step_4').removeClass('active show');
+        $('#step_5').addClass('active show');
+    });
 
     $('.selectpicker').selectpicker();
     // change password modal
