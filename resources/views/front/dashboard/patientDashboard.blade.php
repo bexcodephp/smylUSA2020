@@ -1,8 +1,9 @@
 @extends('layouts.front.main')
 @push('stylesheets')
 <link rel="stylesheet" href="{{ asset('front/css/table-responsive.css') }}" type="text/css">
-<link rel="stylesheet" href="{{ asset('front/css/patient/patient-dashboard.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('front/css/sidebar.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('front/css/chatbox.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('front/css/patient/patient-dashboard.css') }}" type="text/css">
 @endpush
 @section('content')
 
@@ -151,6 +152,7 @@
     </div>
   </section>
 </main>
+@include('front.dashboard.patientChat')
 @endsection
 @push('scripts')
 <script src="{{ asset('front/js/sidebar.js') }}"></script>

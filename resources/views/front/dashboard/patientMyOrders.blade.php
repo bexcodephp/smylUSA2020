@@ -1,6 +1,7 @@
 @extends('layouts.front.main')
 @push('stylesheets')
 <link rel="stylesheet" href="{{ asset('front/css/sidebar.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('front/css/chatbox.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('front/css/table-responsive.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('plugins/datatables/datatables.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('front/css/patient/patient-orders.css') }}" type="text/css">
@@ -77,6 +78,7 @@
         </div>
     </section>
 </main>
+@include('front.dashboard.patientChat')
 {{-- View picture modal  --}}
 <div class="modal fade view-order-details-modal" id="view_order_details_modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
