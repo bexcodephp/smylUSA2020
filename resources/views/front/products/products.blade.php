@@ -50,13 +50,9 @@
                     {{--  content 1  --}}
                     @foreach($products as $key => $product)
                         @php $catName=''; @endphp
-                        @foreach($categories as $key1 => $category)
-                            @if($categories[$key1]->products[$key1]->product_id == $product->id)
-                                @php $catName=$category->name; @endphp
-                            @endif
-                        @endforeach
+                       
 
-                    <div class="col mb-3 r-product element-item {{$catName}}">
+                    <div class="col mb-3 r-product element-item">
                             <div class="card product-card">
                                 {{--NOTE:
                                     set id title="id_name" attribute for popover displaying div--}}

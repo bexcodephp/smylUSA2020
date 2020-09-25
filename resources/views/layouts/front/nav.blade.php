@@ -81,10 +81,13 @@
                                                                                 echo Auth::user()->name;
                                                                             } ?></a>
                                         </li>
+                                        <?php if (Auth::check()) {?>
                                         <li class="nav-item nav-sign-out">
                                             <a class="nav-link" href="{{ route('logout') }}">Sign Out</a>
                                         </li>
+                                        <?php } ?>
                                     </ul>
+                                    <?php if (Auth::check()) { ?>
                                     <div class="btn-group nav-profile-icon">
                                         <button type="button" class="btn dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <img src="{{ asset('images/icons/person_male.png') }}" class="nav-profile-img" />
@@ -94,6 +97,7 @@
                                             <button class="dropdown-item" type="button">Dashboard</button>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </li>
                         </ul>
