@@ -16,22 +16,25 @@
         <div class="card mb-3 p-md-4 p-3">
           <div class="row">
             <!-- video 1 -->
-            <div class="col-xl-6 d-flex flex-column">
-              <div>
-                <video id="player1" preload="none" height="240" class="video-player p-0 col">
-                  <source type="video/youtube" src="http://www.youtube.com/watch?v=nOEw9iiopwI" />
-                </video>
+            @foreach ($resources as $resource)
+              <div class="col-xl-6 d-flex flex-column">
+                <div>
+                  <video id="player1" preload="none" height="240" class="video-player p-0 col">
+                    <source type="video/mp4" src="{{ url('storage/resource/'.$resource->url) }}" />
+                  </video>
+                </div>
+                <div class="caption mb-3">
+                  <h3 class="card-title text-bold color-blue mt-3">{{ $resource->title }}</h3>
+                  <p>{!! $resource->description !!}</p>
+                </div>
+                <div class="mb-3 mt-auto">
+                  <button class="btn btn-primary" type="button">Download Guidebook</button>
+                </div>
               </div>
-              <div class="caption mb-3">
-                <h3 class="card-title text-bold color-blue mt-3">Impression Kit</h3>
-                <p>How to use the impression kit to take your dental impression</p>
-              </div>
-              <div class="mb-3 mt-auto">
-                <button class="btn btn-primary" type="button">Download Guidebook</button>
-              </div>
-            </div>
+            @endforeach
             <!-- video 2 -->
-            <div class="col-xl-6 d-flex flex-column">
+
+            <!-- <div class="col-xl-6 d-flex flex-column">
               <div>
                 <video class="video-player p-0 col" id="" poster="http://www.mediaelementjs.com/images/big_buck_bunny.jpg">
 
@@ -44,13 +47,12 @@
               <div class="mb-3 mt-auto">
                 <button class="btn btn-primary" type="button">Download Guidebook</button>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
 
-        <div class="card mb-3 p-md-4 p-3">
+        <!-- <div class="card mb-3 p-md-4 p-3">
           <div class="row">
-            <!-- video 3 -->
             <div class="col-xl-6 mb-3 d-flex flex-column">
               <div>
                 <video class="video-player p-0 col" id="" poster="http://www.mediaelementjs.com/images/big_buck_bunny.jpg">
@@ -65,7 +67,6 @@
                 <button class="btn btn-primary" type="button">Download Guidebook</button>
               </div>
             </div>
-            <!-- video 4 -->
             <div class="col-xl-6 mb-3 d-flex flex-column">
               <div>
                 <video class="video-player p-0 col" id="" poster="http://www.mediaelementjs.com/images/big_buck_bunny.jpg">
@@ -81,7 +82,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-md col-12 mb-4 card-notification">
         <div class="card h-100 ">
@@ -92,15 +93,17 @@
             <ul class="list-group scrollbar992">
               <!-- list of notification -->
               <!-- for unreadable notification add "active" class to <li> tag -->
+              @foreach($notifications as $notify)
               <li class="list-group-item list-group-item-action active">
                 <a href="#">
                   <div class="d-flex w-100">
-                    <p class="mb-1 nf-caption">You have updated avatar.</p>
+                    <p class="mb-1 nf-caption">{{ $notify->message }}</p>
                   </div>
-                  <p class="text-muted">1 week ago</p>
+                  <p class="text-muted">{{ $notify->created_at->diffForHumans() }}</p>
                 </a>
               </li>
-              <li class="list-group-item list-group-item-action">
+              @endforeach
+              <!-- <li class="list-group-item list-group-item-action">
                 <a href="#">
                   <div class="d-flex w-100">
                     <p class="mb-1 nf-caption">You have updated personal information.</p>
@@ -171,7 +174,7 @@
                   </div>
                   <p class="text-muted">1 week ago</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>

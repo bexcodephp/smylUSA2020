@@ -262,7 +262,7 @@ Route::namespace('Front')->group(function () {
         Route::get('resources', 'AccountsController@resources')->name('resources');
         Route::get('profile', 'AccountsController@profile')->name('profile');
         Route::get('patient-orders', 'AccountsController@orders')->name('orders');
-        Route::post('formstep2', 'AccountsController@storeMedicalFormStep2');
+        // Route::post('formstep2', 'AccountsController@streMedicalFormStep2');
         Route::get('orders/{id}', 'AccountsController@ordersShow')->name('orders.show');
         Route::get('calendar', 'AccountsController@calendar')->name('calendar');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
@@ -320,9 +320,9 @@ Route::get('/patient-picture', function () {
 Route::get('/patient-orders', function () {
     return view('front.dashboard.patientMyOrders');
 });
-Route::get('/patient-resources', function () {
-    return view('front.dashboard.patientResources');
-});
+// Route::get('/patient-resources', function () {
+//     return view('front.dashboard.patientResources');
+// });
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
 });
