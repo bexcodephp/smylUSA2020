@@ -68,7 +68,7 @@
                                                         <td>{{ $order->created_at->format('d-m-Y') }} </td>
                                                         <td>{{ config('cart.currency_symbol').$order->total_paid }}</td>
                                                         <td>{{ $order->payment }}</td>
-                                                    <td> <label style="padding: 3px 10px; border-radius: 5px; background: {{ $order->orderStatus->color }}; color: white">{{ $order->orderStatus->name }}</label></td>
+                                                        <td> <label style="padding: 3px 10px; border-radius: 5px; background: {{ $order->orderStatus->color }}; color: white">{{ $order->orderStatus->name }}</label></td>
                                                         <td>
                                                         <a href="{{ route('orders.show', $order->reference) }}" class="label label-info" style="color: white;">View Detail</a>
                                                         </td>

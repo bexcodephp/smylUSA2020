@@ -1,10 +1,10 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('front/css/u_contactus.css') }}"  type="text/css" >
+<link rel="stylesheet" href="{{ asset('front/css/u_contactus.css') }}" type="text/css">
 @endpush
 @section('content')
 <main class="u-contactus">
-     {{--  slider  --}}
+    {{-- slider  --}}
     <section class="banner">
         <div class="hero-img">
             <div class="item" style="background-image:url('{{ asset('images/products/banner_contact_us.png') }}') ">
@@ -25,7 +25,7 @@
                             <h1 class="title">Get in Touch With Us</h1>
                         </div>
                         <div class="col-12 mb-3">
-                            <p>If you have any further questions or queries,<br/>do not hesitate to get in touch.</p>
+                            <p>If you have any further questions or queries,<br />do not hesitate to get in touch.</p>
                         </div>
                         <div class="col-12">
                             <form>
@@ -73,7 +73,7 @@
                                 <img src="{{ asset('images/icons/location_icon_footer_white.png') }}" class="float-left mr-2" />
                                 <div class="d-flex flex-column">
                                     <small class="color-white text-bold">Location</small>
-                                    <small>8761 N 56th<br/>St #290757 Tampa,<br/>33617</small>
+                                    <small>8761 N 56th<br />St #290757 Tampa,<br />33617</small>
                                 </div>
                             </div>
                         </li>
@@ -86,8 +86,8 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
 
     });
-  </script>
+</script>
 @endpush

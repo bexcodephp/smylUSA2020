@@ -93,5 +93,7 @@ main {
         position: relative;
         top: unset;
         left: unset;
+        padding-right: 15px;
+        padding-left: 15px;
     }
 }

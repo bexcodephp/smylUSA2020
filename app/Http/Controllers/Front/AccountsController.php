@@ -21,6 +21,8 @@ use App\Shop\Orders\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Shop\Couriers\Repositories\Interfaces\CourierRepositoryInterface;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
 use Illuminate\Support\Facades\Input;
+use App\Shop\Admins\Requests\UpdateAddressRequest;
+use Illuminate\Support\Facades\Storage;
 
 class AccountsController extends Controller
 {
@@ -189,14 +191,30 @@ class AccountsController extends Controller
     {
         $orders = $this->orderRepo->getCustomerOrders(auth()->user()->id);
         $products = Product::whereStatus(1)->orderBy('order_no', 'ASC')->get();
-        return view('front.user.orders', compact('orders', 'products'));
+        return view('front.dashboard.patientMyOrders', compact('orders', 'products'));
+    }
+
+    public function storeMedicalFormStep2(Request $request)
+    {
+        DB::table('magazine_details')->insert([
+            'magazine_id'      => $request->magazine,
+            'page'             => $request->pagename,
+            'page_description' => $request->description,
+            'page_number'      => $request->pageno,
+            'file'             => $audioName,
+            'created_at'       => $date,
+            'updated_at'       => $date,
+            'user_id'          => 1
+        ]);
     }
     
     
     public function ordersShow($reference)
     {
-        $order = $this->orderRepo->getOrderDetail('reference', $reference);
-        return view('front.user.order_detail', compact('order'));
+        // print_r($reference);
+        // exit;
+        return $order = $this->orderRepo->getOrderDetail('reference', $reference);
+        // return view('front.user.order_detail', compact('order'));
     }
     
     
@@ -269,8 +287,8 @@ class AccountsController extends Controller
             $address->update([
                 'address_1' => $request->address_1,
                 'address_2' => $request->address_2,
-                'state_code' => $request->state,
-                'zip' => $request->zipcode,
+                'state_code' => $request->state_code,
+                'zip' => $request->zip,
                 'city' => $request->city,
             ]);
         }        
@@ -278,17 +296,47 @@ class AccountsController extends Controller
         event(new AddNotification($user->id, 1, 'You have updated address information.'));
 
         return $this->sendResponse(true,'Information updated');
+    
     }
+
+    //My profile billing address update
+    public function updateBillingInfo(Request $request)
+    {
+        $user = $this->loggedUser();
+        $address = Address::where('customer_id', $user->id)->first();
+        if(!$address){
+            $input['customer_id'] = $user->id;
+            Address::create($input);
+        }else{
+            $address->update([
+                'billing_address_1' => $request->billing_address_1,
+                'billing_address_2' => $request->billing_address_2,
+                'billing_state' => $request->billing_state,
+                'billing_zip' => $request->billing_zip,
+                'billing_city' => $request->billing_city,
+            ]);
+        }        
+
+        event(new AddNotification($user->id, 1, 'You have updated address information.'));
+
+        return $this->sendResponse(true,'Information updated');
+    
+    }
+
     // this is step 1 for patient info
     public function updateUserInfoStep1(Request $request)
     {
         $user = $this->loggedUser();
+        $customer = auth()->user();
+        $customer_id = $user->id;
+        $state_code = "";
         $user->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'name' => $request->first_name . ' ' . $request->last_name,
             'phone' => $request->phone,
             'dob' => date('Y-m-d', strtotime($request->dob)),
+            'patient_id' => "ST".date('y-m-d').$state_code.$customer->id,
         ]);
         $address = Address::where('customer_id', $user->id)->first();
         if(!$address){
@@ -297,10 +345,15 @@ class AccountsController extends Controller
             Address::create($input);
         }else{
             $address->update([
+                'billing_address_1' => $request->billing_address_1,
+                'billing_address_2' => $request->billing_address_2,
+                'billing_state' => $request->billing_state,
+                'billing_zip' => $request->billing_zip,
+                'billing_city' => $request->billing_city,
                 'address_1' => $request->address_1,
                 'address_2' => $request->address_2,
-                'state_code' => $request->state,
-                'zip' => $request->zipcode,
+                'state_code' => $request->state_code,
+                'zip' => $request->zip,
                 'city' => $request->city,
             ]);
         }
@@ -371,6 +424,12 @@ class AccountsController extends Controller
 
         $teethImage->delete();
 
+
+           //  $avatar = CustomerImage::findOrFail($image);
+
+           // if(Storage::delete($avatar->filename)) {
+           //    $avatar->delete();
+           // }
         return $this->sendResponse(true, 'Image removed');
     }
 
@@ -399,5 +458,57 @@ class AccountsController extends Controller
         event(new AddNotification($user->id, 1, 'You have updated password.'));
 
         return $this->sendResponse(true, "Password updated successfully");
+    }
+
+    public function patientPicture($order_ref = null)
+    {
+        if($order_ref)
+        {
+            $order = Order::with(['detail', 'customer'])->where('reference', $order_ref)->firstorfail();
+            $history = PatientMedicalHistory::where('patient_id', $order->customer_id)->first();
+            $address = $order->customer->addresses()->first();   
+        }else{
+            $address = auth()->user()->addresses()->first();   
+            $history = null;
+            $order = null;
+        }
+        $customer = auth()->user();
+        $teethImages = CustomerImage::where('customer_id', $customer->id)->get();
+        $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
+
+
+        return view('front.dashboard.patientPicture', compact('order', 'address', 'history', 'customer', 'statesList','teethImages'));
+    }
+    public function updateProfilePicture(Request $request)
+    {
+        if(!$request->file('avatar'))
+        {
+            return $this->sendResponse(false, "Avatar field is required");
+        }
+        $user = $this->loggedUser();
+            //Merge new data from request
+            $updateArray = $request->all();
+            if(!empty($updateArray['avatar'])){
+              $path = $this->saveImage($request->file('avatar'),'images');
+              $updateArray['avatar'] = $path;
+            }
+            $user->fill($updateArray);
+           
+            if($user->save()){
+                event(new AddNotification($user->id, 1, 'You have updated avatar.'));        
+                return $this->sendResponse(true, 'Image uplaoded');
+            } else{
+                return $this->sendResponse(false, "Avatar Images are required");
+            }
+        }
+
+    public function removeProfileImage($image)
+    {
+        $teethImage = DB::table('customers')->where('id', $image)->update(['avatar' => '']);
+        // $teethImage = CustomerImage::find($image);
+
+        // $teethImage->delete();
+
+        return $this->sendResponse(true, 'Image removed');
     }
 }
