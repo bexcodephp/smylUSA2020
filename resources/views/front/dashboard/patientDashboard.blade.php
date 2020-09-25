@@ -114,7 +114,7 @@
               <p class="m-0">You can also visit our resources page to get additional information about your aligner treatment.</p>
             </div>
             <div class="col-12 text-center p-0 my-3">
-              <a href="" role="button" class="btn btn-link text-bold btn-lg text-underline resource-link">Resources</a>
+              <a href="/patient-resources" role="button" class="btn btn-link text-bold btn-lg text-underline resource-link">Resources</a>
             </div>
           </div>
         </div>
