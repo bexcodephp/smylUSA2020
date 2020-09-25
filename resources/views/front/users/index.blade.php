@@ -1,39 +1,39 @@
 @extends('layouts.front.main')
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('front/css/index.css') }}"  type="text/css" >
+<link rel="stylesheet" href="{{ asset('front/css/index.css') }}" type="text/css">
 @endpush
 @section('content')
 <main class="home">
-    {{--  slider  --}}
+    {{-- slider  --}}
     <section class="banner homebanner">
         <div class="bannerslider owl-carousel owl-theme ">
             <div class="item" style="background-image:url('{{ asset("images/products/slide_17_1.png") }}')">
-                {{--  <img src="{{ asset("images/products/slide_17_1.png") }}" class="img-fluid" />  --}}
+                {{-- <img src="{{ asset("images/products/slide_17_1.png") }}" class="img-fluid" /> --}}
                 <div class="caption container d-flex h-100 py-5 animate__bounceInLeft">
                     <div class="my-auto">
-                        <h1 class="">Smile More<br/>Confidently.</h1>
+                        <h1 class="">Smile More<br />Confidently.</h1>
                         <a href="" role="button" class="btn btn-primary my-md-3 my-2">Get Started</a>
                     </div>
                 </div>
             </div>
             <div class="item" style="background-image:url('{{ asset("images/products/slide_17_2.png") }}')">
-                {{--  <img src="{{ asset("images/products/slide_17_2.png") }}" class="img-fluid" />  --}}
+                {{-- <img src="{{ asset("images/products/slide_17_2.png") }}" class="img-fluid" /> --}}
                 <div class="caption container d-flex h-100 py-5">
                     <div class="my-auto">
-                        <h1 class="">Smile More<br/>Confidently.</h1>
+                        <h1 class="">Smile More<br />Confidently.</h1>
                         <a href="" role="button" class="btn btn-primary my-md-3 my-2">Get Started</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    {{--  mission section  --}}
+    {{-- mission section  --}}
     <section class="container mission py-xxl-6 py-5">
         <div class="row">
             {{-- <div class="col-12 order-1 mb-3"></div> --}}
-            <div class="col-xxl-5 col-md-4 align-items-center text-md-left text-center order-md-0 order-0 mb-md-0 mb-2">
+            <div class="col-xxl-5 col-xl-4 col-md-5 align-items-center text-md-left text-center order-md-0 order-0 mb-md-0 mb-2">
                 <h1 class="title">our mission</h1>
-                <p>To brighten people’s Smyl, self-confidence and charisma. To offer cost-effective aligner, teeth whitening and dental impression services that are accessible, easy to manage and customizable. To offer people a new, safe, and easy to administer treatment for teeth  traightening and whitening services.</p>
+                <p>To brighten people’s Smyl, self-confidence and charisma. To offer cost-effective aligner, teeth whitening and dental impression services that are accessible, easy to manage and customizable. To offer people a new, safe, and easy to administer treatment for teeth traightening and whitening services.</p>
                 <a name="" id="" class="btn btn-primary" href="#" role="button">More about us</a>
             </div>
             <div class="col-xxl-7 col-md-7 align-items-center align-self-center text-right order-md-1 order-1 mb-md-0 mb-2">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </section>
-    {{--  why choose smylUSA  --}}
+    {{-- why choose smylUSA  --}}
     <section class="container whychoose py-xxl-6 py-5">
         <div class="row">
             <div class="col-12 mb-3">
@@ -138,8 +138,8 @@
                     </div>
                     <div class="card-body">
                         <h5>$70- $90/ month</h5>
-                        <p>Easy monthly payment plan<br/>No credit checks, no forms to fill out</p>
-                        <h5>$200 Deposit, <br/>$ 70-90/month for 24 months ($2360 total).</h5>
+                        <p>Easy monthly payment plan<br />No credit checks, no forms to fill out</p>
+                        <h5>$200 Deposit, <br />$ 70-90/month for 24 months ($2360 total).</h5>
                         <p>Get your custom clear aligner shipped to your doorstep</p>
                     </div>
                     <div class="card-footer">
@@ -203,7 +203,7 @@
                     </h2>
                 </div>
                 <div class="col-xxl-4 col-md-6 align-self-end text-center">
-                    <a  id="" class="btn btn-primary inverse" href="{{ url('/candidate') }}" role="button">Am I A Candidate</a>
+                    <a id="" class="btn btn-primary inverse" href="{{ url('/candidate') }}" role="button">Am I A Candidate</a>
                 </div>
             </div>
         </div>
@@ -212,18 +212,18 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
         var owl = $('.bannerslider');
         owl.owlCarousel({
-            loop:true,
-            margin:10,
-            items:1,
-            navigation : false,
+            loop: true,
+            margin: 10,
+            items: 1,
+            navigation: false,
             animateIn: 'animate__fadeInUp',
             animateOut: 'animate__fadeOutDown',
             autoplay: true,
             mouseDrag: false,
         });
     });
-  </script>
+</script>
 @endpush

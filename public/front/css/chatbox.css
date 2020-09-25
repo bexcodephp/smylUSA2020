@@ -80,7 +80,7 @@
     max-height: 165px;
 }
 
-.chat-box .btn-chat-mobile,
+.btn-chat-mobile,
 .chat-box .mobile-card-header {
     display: none;
 }
