@@ -255,7 +255,7 @@ Route::namespace('Front')->group(function () {
             Route::resource('country.state', 'CountryStateController');
             Route::resource('state.city', 'StateCityController');
         });
-
+        Route::get('dashboard', 'AccountsController@dashboard')->name('patient.dashboard');
         Route::get('medical_form/{order_id?}', 'AccountsController@medicalForm')->name('medical_form');
         Route::get('patient-picture/{order_id?}', 'AccountsController@patientPicture')->name('patient-picture');
         Route::post('medical_form/{order_id?}', 'AccountsController@submitMedicalForm')->name('submitMedicalForm');
@@ -301,9 +301,9 @@ Route::namespace('Front')->group(function () {
 //     return view('front.checkout2-update');
 // });
 
-Route::get('/pDashboard', function () {
-    return view('front.dashboard.patientDashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('front.dashboard.patientDashboard');
+// });
 
 // Route::get('/patient-picture', function () {
 //     return view('front.dashboard.patientPicture');
@@ -316,6 +316,7 @@ Route::get('/patient-profile', function () {
 Route::get('/patient-picture', function () {
     return view('front.dashboard.patientPicture');
 });
+
 Route::get('/patient-orders', function () {
     return view('front.dashboard.patientMyOrders');
 });

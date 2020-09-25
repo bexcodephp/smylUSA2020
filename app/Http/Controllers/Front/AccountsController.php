@@ -223,6 +223,11 @@ class AccountsController extends Controller
        
         return view('front.user.calendar');
     }
+    // patient dashboard
+    public function dashboard()
+    {       
+        return view('front.dashboard.patientDashboard');
+    }
 
     public function update(Request $request)
     {
