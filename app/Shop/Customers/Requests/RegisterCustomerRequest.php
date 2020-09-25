@@ -14,11 +14,11 @@ class RegisterCustomerRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:15',
+            'last_name' => 'required|string|max:15',
             'email' => 'required|string|email|max:255|unique:customers',
             'password' => 'required|string|min:6',
-            'phone' => 'required',
+            'phone' => 'required|unique:customers,phone',
         ];
     }
 }
