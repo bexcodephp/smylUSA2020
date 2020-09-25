@@ -21,12 +21,9 @@ use App\Shop\Orders\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Shop\Couriers\Repositories\Interfaces\CourierRepositoryInterface;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
 use Illuminate\Support\Facades\Input;
-<<<<<<< HEAD
 use App\Table_resources;
-=======
 use App\Shop\Admins\Requests\UpdateAddressRequest;
 use Illuminate\Support\Facades\Storage;
->>>>>>> develop
 
 class AccountsController extends Controller
 {
