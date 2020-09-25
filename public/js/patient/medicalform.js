@@ -51,37 +51,6 @@ $(document).ready(function () {
         });
     });
 
-<<<<<<< HEAD
-    // step2 submit ajax call
-
-    $('#step2_submit').on('click', function () {
-        var formdata = new FormData($('#step_2')[0]);
-        $("#step_2").validate();
-        $.ajax({
-            url: '/profile/update-step2',
-            type: "POST",
-            data: formdata,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                if(data==200){
-                    $('#nav_step_2').removeClass("active");
-                    $('#nav_step_3').addClass("active");
-                    $('#step_2').removeClass('active show');
-                    $('#step_3').addClass('active show');
-                }                
-            },
-            error: function() {
-                
-            }
-        });
-    });
-
-    // previous btn js
-
-=======
->>>>>>> develop
     $('#step2_prev').on('click', function () {
         //alert("prev---step2");
 
