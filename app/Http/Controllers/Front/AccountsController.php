@@ -21,6 +21,7 @@ use App\Shop\Orders\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Shop\Couriers\Repositories\Interfaces\CourierRepositoryInterface;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
 use Illuminate\Support\Facades\Input;
+use App\Table_resources;
 
 class AccountsController extends Controller
 {
@@ -89,6 +90,7 @@ class AccountsController extends Controller
 
     public function medicalForm($order_ref = null)
     {
+
         if($order_ref)
         {
             $order = Order::with(['detail', 'customer'])->where('reference', $order_ref)->firstorfail();
@@ -101,10 +103,13 @@ class AccountsController extends Controller
         }
         $customer = auth()->user();
         $teethImages = CustomerImage::where('customer_id', $customer->id)->get();
+        $answers = DB::table('medical_form_question')
+            ->where('customer_id', $customer->id)
+            ->first();
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
 
-        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList','teethImages'));
+        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList','teethImages','answers'));
 
      //return view('front.medical_form', compact('order', 'address', 'history', 'customer','teethImages'));
     }
@@ -180,8 +185,9 @@ class AccountsController extends Controller
     public function resources()
     {
         $notifications = Notification::where('user_type', 1)->where('user_id', auth()->user()->id)->latest()->get();
-
-        return view('front.user.resources', compact('notifications'));
+        $resources = Table_resources::all();
+        // return view('front.user.resources', compact('notifications'));
+        return view('front.dashboard.patientResources',compact('resources','notifications'));
     }
     
     
@@ -192,18 +198,61 @@ class AccountsController extends Controller
         return view('front.dashboard.patientMyOrders', compact('orders', 'products'));
     }
 
-    public function storeMedicalFormStep2(Request $request)
+    public function updateUserInfoStep2(Request $request)
     {
-        DB::table('magazine_details')->insert([
-            'magazine_id'      => $request->magazine,
-            'page'             => $request->pagename,
-            'page_description' => $request->description,
-            'page_number'      => $request->pageno,
-            'file'             => $audioName,
-            'created_at'       => $date,
-            'updated_at'       => $date,
-            'user_id'          => 1
-        ]);
+        $user = $this->loggedUser();
+        $data = DB::table('medical_form_question')
+            ->where('customer_id', $user->id)
+            ->first();
+
+        if(isset($data->customer_id)) {
+            DB::table('medical_form_question')->where('customer_id','=',$user->id)->update([
+                'customer_id'   =>  $user->id,
+                'question1'      => $request->ans1,
+                'question2'      => $request->ans2,
+                'question3'      => $request->ans3,
+                'question4'      => $request->ans4,
+                'question5'      => $request->ans5,
+                'question6'      => $request->ans6,
+                'question7'      => $request->ans7,
+                'question8'      => $request->ans8,
+                'question9'      => $request->ans9,
+                'question10'      => $request->ans10,
+                'question11'      => $request->ans11,
+                'question12'      => $request->ans12,
+                'question13'      => $request->ans13,
+                'question14'      => $request->ans14,
+                'question15'      => $request->ans15,
+                'question16'      => $request->ans16,
+                'question17'      => $request->ans17,
+                'question18'      => $request->ans18,
+                'question19'      => $request->ans19,
+            ]);
+        }else {
+            DB::table('medical_form_question')->insert([
+                'customer_id'   =>  $user->id,
+                'question1'      => $request->ans1,
+                'question2'      => $request->ans2,
+                'question3'      => $request->ans3,
+                'question4'      => $request->ans4,
+                'question5'      => $request->ans5,
+                'question6'      => $request->ans6,
+                'question7'      => $request->ans7,
+                'question8'      => $request->ans8,
+                'question9'      => $request->ans9,
+                'question10'      => $request->ans10,
+                'question11'      => $request->ans11,
+                'question12'      => $request->ans12,
+                'question13'      => $request->ans13,
+                'question14'      => $request->ans14,
+                'question15'      => $request->ans15,
+                'question16'      => $request->ans16,
+                'question17'      => $request->ans17,
+                'question18'      => $request->ans18,
+                'question19'      => $request->ans19,
+            ]);
+        }
+        return 200;
     }
     
     

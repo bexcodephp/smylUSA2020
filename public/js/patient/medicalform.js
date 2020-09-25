@@ -120,7 +120,7 @@ $(document).ready(function () {
     // step2 submit ajax call
 
     $('#step2_submit').on('click', function () {
-        var formdata = new FormData($('#step_1')[0]);
+        var formdata = new FormData($('#step_2')[0]);
         $("#step_2").validate();
         $.ajax({
             url: '/profile/update-step2',
@@ -130,8 +130,7 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function(data) {
-                console.log(data);
-                if(data=="success"){
+                if(data==200){
                     $('#nav_step_2').removeClass("active");
                     $('#nav_step_3').addClass("active");
                     $('#step_2').removeClass('active show');
