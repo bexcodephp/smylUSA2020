@@ -7,28 +7,28 @@
     <div class="row mt-3">
         <div class="col-md-6 form-group">
             <label>Email</label>
-            <input type="text" class="form-control input-white" id="name_email" placeholder="Name">
+            <input type="text" class="form-control input-white" id="name_email" placeholder="Name" value="{{ auth()->user()->email }}">
         </div>
         <div class="col-md-6 form-group">
             <div class="col p-0">
                 <label>Password</label>
                 <button type="button" class="btn btn-link p-0 float-right" id="change_pwd"><u>Change</u></button>
             </div>
-            <input type="password" class="form-control input-white" id="password" placeholder="Password">
+            <input type="password" class="form-control input-white" id="password" placeholder="Password" value="{{ auth()->user()->password }}">
         </div>
         <div class="col-12 form-group">
             <div class="col p-0">
                 <label class="mr-3">Card Details</label>
                 <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_change"><u>Change</u></button>
-                <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_add"><u>Add</u></button>
+                <!-- <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_add"><u>Add</u></button> -->
             </div>
             <div class="row">
                 <div class="col-sm-auto mb-3">
-                    <input type="password" class="form-control input-white" id="password" placeholder="Password">
+                    <input type="password" class="form-control input-white" id="password" placeholder="Card Number">
                 </div>
-                <div class="col-sm-auto mb-3">
+               <!--  <div class="col-sm-auto mb-3">
                     <input type="password" class="form-control input-white" id="password" placeholder="Password">
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

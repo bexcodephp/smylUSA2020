@@ -506,4 +506,19 @@ class AccountsController extends Controller
 
         return $this->sendResponse(true, 'Image removed');
     }
+
+    public function updateCardDetail(Request $request)
+    {
+        // dd($request);
+        $user = $this->loggedUser();
+
+        $user->update([
+            'name_on_card' => $request->name_on_card,
+            'card_last_four' => $request->card_last_four,
+        ]);
+
+        event(new AddNotification($user->id, 1, 'You have updated card information.'));
+
+        return $this->sendResponse(true,'Information updated');
+    }
 }

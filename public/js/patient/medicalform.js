@@ -25,10 +25,27 @@ $(document).ready(function () {
         }
     });
 
+    $('#update_card').on('click', function () {
+        var formdata = new FormData($('#step_3_card')[0]);
+        $.ajax({
+            url: '/profile/card-detail',
+            type: "POST",
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                // console.log(data);
+                alert("success");              
+            },
+            error: function() {
+                
+            }
+        });
+    });
+
     $('#step1_submit').on('click', function () {
-
         var formdata = new FormData($('#step_1')[0]);
-
         $.ajax({
             url: '/profile/update-step1',
             type: "POST",
@@ -52,13 +69,22 @@ $(document).ready(function () {
     });
 
     $('#step2_prev').on('click', function () {
-        //alert("prev---step2");
+        // alert("prev---step2");
 
         $('#nav_step_2').removeClass("active");
         $('#nav_step_1').addClass("active");
 
         $('#step_2').removeClass('active show');
         $('#step_1').addClass('active show');
+    });
+    $('#step2_skip').on('click', function () {
+        // alert("prev---step2");
+
+        $('#nav_step_2').removeClass("active");
+        $('#nav_step_3').addClass("active");
+
+        $('#step_2').removeClass('active show');
+        $('#step_3').addClass('active show');
     }); 
 
     $('.selectpicker').selectpicker();
@@ -268,3 +294,4 @@ $(document).ready(function () {
             return false;
         }
     });
+

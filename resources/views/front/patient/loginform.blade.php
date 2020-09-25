@@ -101,52 +101,56 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-auto align-self-center">
-                        <h4 class="text-bold color-blue">Change Card Details</h4>
-                    </div>
-                    <div class="col align-self-center text-right">
-                        <button type="button" class="btn btn-primary">Update</button>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label class="text-bold">Name On Card</label>
-                                <input type="password" class="form-control input-white" id="old_pwd" placeholder="Old Password">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label class="text-bold">Card Number</label>
-                                <input type="password" class="form-control input-white" id="new_pwd" placeholder="New Password">
+                <form role="form" id="step_3_card">
+                    @csrf
+                    <div class="row">
+                        <div class="col-auto align-self-center">
+                            <h4 class="text-bold color-blue">Change Card Details</h4>
+                        </div>
+                        
+                        <div class="col-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="text-bold">Name On Card</label>
+                                    <input type="text" class="form-control input-white" name="name_on_card" id="name_on_card" placeholder="Name On Card">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="text-bold">Card Number</label>
+                                    <input type="text" class="form-control input-white" name="card_last_four" id="card_last_four" placeholder="Card Number">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="text-bold">Expiry</label>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="text-bold">CVV</label>
-                            </div>
-                            <div class="col form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                            <div class="col-sm col-auto form-group">
-                                <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-bold">Expiry</label>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" class="form-control input-white" id="re_new_pwd" placeholder="Expiry">
+                                </div>
+                               <!--  <div class="col-md-6 form-group">
+                                    <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                                </div> -->
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-bold">CVV</label>
+                                </div>
+                                <div class="col form-group">
+                                    <input type="test" class="form-control input-white" id="re_new_pwd" placeholder="CVV">
+                                </div>
+                                <div class="col-sm col-auto form-group">
+                                    <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col align-self-center text-right">
+                            <button type="button" class="btn btn-primary" id="update_card">Update</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
