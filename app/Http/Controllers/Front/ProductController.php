@@ -30,11 +30,12 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::whereStatus(1)->orderBy('order_no', 'ASC')->get();
-        $categories = Category::with(['products:product_id,category_id'])->get();
+        $categories = Category::with(['products:category_id,product_id'])->get();
         // return view('front.products.product-list', [
         //     'products' => $products,
         //     'categories' => $categories
         // ]);
+       
         return view('front.products.products', [
             'products' => $products,
             'categories' => $categories
