@@ -185,8 +185,6 @@ $(document).ready(function() {
             $("#license_certificates").val('');
         } else {}
     });
-
-    
 });
 </script>
 <script>

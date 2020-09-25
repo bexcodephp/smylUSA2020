@@ -104,10 +104,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
                 return view("admin/resource.create");
             });
             Route::post('resources/create', 'ResourceController@create');
-            Route::get('resources/edit/{id}','ResourceController@getResource');
-            Route::post('resources/edit/{id}','ResourceController@updateResource');
-            Route::get('resources/delete/{id}','ResourceController@destroyResource');
-            
+            Route::get('resources/edit/{id}', 'ResourceController@getResource');
+            Route::post('resources/edit/{id}', 'ResourceController@updateResource');
+            Route::get('resources/delete/{id}', 'ResourceController@destroyResource');
         });
     });
 });
@@ -162,11 +161,11 @@ Route::namespace('Front')->group(function () {
     Route::view('contact-us', 'front.users.u_contactus')->name('contact');
     Route::get('team', 'HomeController@team')->name('team');
     Route::post('contact', 'HomeController@contactUs')->name('contactUs');
-    
+
     Route::get('payment-success', 'HomeController@paymentSuccessView');
     Route::post('payment-success', 'HomeController@paymentSuccess');
 
-    
+
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
     Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
@@ -262,7 +261,8 @@ Route::namespace('Front')->group(function () {
         Route::post('medical_form/{order_id?}', 'AccountsController@submitMedicalForm')->name('submitMedicalForm');
         Route::get('resources', 'AccountsController@resources')->name('resources');
         Route::get('profile', 'AccountsController@profile')->name('profile');
-        Route::get('orders', 'AccountsController@orders')->name('orders');
+        Route::get('patient-orders', 'AccountsController@orders')->name('orders');
+        Route::post('formstep2', 'AccountsController@storeMedicalFormStep2');
         Route::get('orders/{id}', 'AccountsController@ordersShow')->name('orders.show');
         Route::get('calendar', 'AccountsController@calendar')->name('calendar');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
@@ -300,18 +300,28 @@ Route::namespace('Front')->group(function () {
 // Route::get('/checkout', function () {
 //     return view('front.checkout2-update');
 // });
-Route::get('/dashboard', function () {
+
+Route::get('/pDashboard', function () {
     return view('front.dashboard.patientDashboard');
 });
 
 // Route::get('/patient-picture', function () {
 //     return view('front.dashboard.patientPicture');
 // });
+
+Route::get('/patient-profile', function () {
+    return view('front.dashboard.patientProfile');
+});
+
+Route::get('/patient-picture', function () {
+    return view('front.dashboard.patientPicture');
+});
 Route::get('/patient-orders', function () {
     return view('front.dashboard.patientMyOrders');
+});
+Route::get('/patient-resources', function () {
+    return view('front.dashboard.patientResources');
 });
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
 });
-
-

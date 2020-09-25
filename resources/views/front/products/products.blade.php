@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="rp-price-rate d-flex flex-wrap py-3">
                                         <div class="col-6 text-left align-self-center">
-                                            <div class="rating" id="rating">
+                                            <div class="rating hidden-imp" id="rating">
                                                 <input type="radio" name="rating" value="5" id="5">
                                                 <label for="5"></label>
                                                 <input type="radio" name="rating" value="4" id="4">

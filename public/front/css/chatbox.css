@@ -1,0 +1,155 @@
+.chat-box {
+    max-width: 300px;
+    position: absolute;
+    bottom: 0;
+    right: 100px;
+    z-index: 4;
+}
+
+.chat-box .card {
+    border: 0px;
+}
+
+.chat-box .card .card-body {
+    padding: 0px;
+}
+
+.chat-box .btn.btn-open-chat {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    position: relative;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.chat-contents {
+    padding: 20px;
+}
+
+.chat-box .btn-open-chat .status-onoff {
+    line-height: inherit;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+
+.chat-box .btn-open-chat.online .status-onoff {
+    color: #00fb06;
+}
+
+.chat-box .btn-open-chat.offline .status-onoff {
+    color: #d1d1d1;
+}
+
+.btn-send {
+    position: absolute;
+    right: 10px;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    z-index: 3;
+    font-size: 20px;
+}
+
+.chat-item .chat-msg {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.chat-item .small {
+    font-size: 12px;
+}
+
+.input-msg {
+    font-size: 12px;
+    border-color: #d1d1d1;
+}
+
+.list-chat li {
+    border: none;
+    padding: 5px 0px;
+}
+
+.chat-contents .slimScrollDiv,
+.chat-contents .list-chat {
+    max-height: 165px;
+}
+
+.chat-box .btn-chat-mobile,
+.chat-box .mobile-card-header {
+    display: none;
+}
+
+@media only screen and (min-width: 992px) {}
+
+@media only screen and (min-width: 1367px) {
+    .chat-box .btn.btn-open-chat {
+        font-size: 18px;
+    }
+    .btn-send {
+        font-size: 24px;
+    }
+    .chat-item .chat-msg {
+        font-size: 18px;
+    }
+    .chat-item .small {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (min-width: 1441px) {
+    .chat-box {
+        max-width: 450px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .chat-box {
+        max-width: 250px;
+        right: 50px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .chat-box {
+        position: fixed;
+        bottom: 60px;
+        right: 15px;
+        max-width: 250px;
+    }
+    .chat-box .web-card-header {
+        display: none;
+    }
+    .chat-box .mobile-card-header {
+        display: block;
+        pointer-events: none !important;
+    }
+    .btn-chat-mobile {
+        display: block;
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        z-index: 4;
+    }
+    .btn-chat-mobile .btn {
+        color: #fff;
+        background: #2388ed;
+        border-radius: 100%;
+        padding: 0;
+        width: 44px;
+        height: 40px;
+        font-size: x-large;
+        box-shadow: 0 0px 4px 2px #f5f5f5;
+    }
+    .chat-item .chat-msg {
+        font-size: 12px;
+    }
+    .chat-item .small {
+        font-size: 10px;
+    }
+}

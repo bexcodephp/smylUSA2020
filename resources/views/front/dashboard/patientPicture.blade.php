@@ -1,6 +1,7 @@
 @extends('layouts.front.main')
 @push('stylesheets')
 <link rel="stylesheet" href="{{ asset('front/css/sidebar.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ asset('front/css/chatbox.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('front/css/patient/patient-picture.css') }}" type="text/css">
 @endpush
 @section('content')
@@ -185,6 +186,7 @@
         </div>
     </section>
 </main>
+@include('front.dashboard.patientChat')
 {{-- ADD/EDIT New SMILE/BITE picture modal  --}}
 <div class="modal fade upload-new-pic-modal pic-modal" id="upload_new_pic_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
