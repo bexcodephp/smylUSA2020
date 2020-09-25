@@ -301,7 +301,7 @@ Route::namespace('Front')->group(function () {
 //     return view('front.checkout2-update');
 // });
 
-Route::get('/pDashboard', function () {
+Route::get('/dashboard', function () {
     return view('front.dashboard.patientDashboard');
 });
 
