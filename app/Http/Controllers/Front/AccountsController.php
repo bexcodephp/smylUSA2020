@@ -306,6 +306,7 @@ class AccountsController extends Controller
     public function updateUserInfoStep1(Request $request)
     {
         $user = $this->loggedUser();
+        $customer = auth()->user();
         $customer_id = $user->id;
         $state_code = "";
         $user->update([
@@ -323,10 +324,15 @@ class AccountsController extends Controller
             Address::create($input);
         }else{
             $address->update([
+                'billing_address_1' => $request->billing_address_1,
+                'billing_address_2' => $request->billing_address_2,
+                'billing_state' => $request->billing_state,
+                'billing_zip' => $request->billing_zip,
+                'billing_city' => $request->billing_city,
                 'address_1' => $request->address_1,
                 'address_2' => $request->address_2,
-                'state_code' => $request->state,
-                'zip' => $request->zipcode,
+                'state_code' => $request->state_code,
+                'zip' => $request->zip,
                 'city' => $request->city,
             ]);
         }

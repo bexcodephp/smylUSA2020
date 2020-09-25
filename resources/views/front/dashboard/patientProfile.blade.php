@@ -18,13 +18,13 @@
         </div>
         <div class="col-12">
             <div class="accordion" id="accordion_profile">
-                <form class="card" role="form" id="myprofile" action="{{ route('user.personal_info') }}" method="POST">
+                <form class="card" role="form" id="myprofile">
                     @csrf
                     <div class="card-header" id="heading_p_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Personal Information</h2>
                             <div class="ml-sm-auto d-flex mt-md-0 mt-3">
-                                <button type="submit" class="btn btn-primary ml-auto">Update</button>
+                                <button type="button" class="btn btn-primary ml-auto" id="myprofile_update">Update</button>
                                 <button class="btn btn-link px-2 ml-md-2 ml-auto btn-collapse" type="button" data-toggle="collapse" data-target="#p_info" aria-expanded="true" aria-controls="p_info"><i class="fas fa-angle" aria-hidden="true"></i></button>
                             </div>
                         </div>
@@ -34,15 +34,15 @@
                             <div class="row">
                                 <div class="col-sm-6 form-group">
                                     <label>First Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="first_name" class="form-control input-white" id="first_name" placeholder="First Name" value="{{ $user->first_name }}">
+                                    <input type="text" name="first_name" class="form-control input-white" id="first_name" placeholder="First Name" value="{{ $user ? $user->first_name : null}}">
                                 </div>
                                 <div class="col-sm-6 form-group">
                                     <label>Last Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="last_name" class="form-control input-white" id="last_name" placeholder="Last Name" value="{{ $user->last_name }}">
+                                    <input type="text" name="last_name" class="form-control input-white" id="last_name" placeholder="Last Name" value="{{ $user ? $user->last_name : null}}">
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Moblie Number<span class="text-danger">*</span></label>
-                                    <input type="text" name="phone" id="phone" placeholder="Phone Number" value="{{ $user->phone }}" class="form-control" />
+                                    <input type="text" name="phone" id="phone" placeholder="Phone Number"  value="{{ $user ? $user->phone : null}}" class="form-control" onkeypress='return restrictAlphabets(event)'/>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
@@ -107,10 +107,7 @@
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Billing Information</h2>
                             <div class="ml-sm-auto d-flex mt-md-0 mt-3">                                
-                                <!-- <button class="btn btn-primary ml-auto" type="submit" id="billing_info_update">Update</button> -->
-
-                                <input type="button" class="btn btn-primary ml-auto" value="Update" id="billing_info_update"/>
-
+                                <button type="button" class="btn btn-primary ml-auto" value="Update" id="billing_info_update">Update</button>
                                 <button class="btn btn-link px-2 ml-md-2 ml-auto btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#bill_info" aria-expanded="false" aria-controls="bill_info">
                                     <i class="fas fa-angle " aria-hidden="true"></i>
                                 </button>
@@ -496,6 +493,75 @@
             $('#card_detail_add_modal').modal('show')
         });
 
+        //billing info validation
+        $('#billing_info_update').click(function() {
+            $(".error").hide();
+            var hasError = false;
+            var billing_address_1 = $("#billing_address_1").val();
+            var billing_address_2 = $("#billing_address_2").val();
+            var billing_city = $("#billing_city").val();
+            var billing_state = $("#billing_state").val();
+            var billing_zip = $("#billing_zip").val();
+
+            if (!billing_address_1) {
+                $("#billing_address_1").after('<span class="error">Billing address 1 is required.</span>');
+                hasError = true;
+            }
+
+            if (!billing_address_2) {
+                $("#billing_address_2").after('<span class="error">Billing address 2 is required.</span>');
+                hasError = true;
+            }
+
+            if (!billing_city) {
+                $("#billing_city").after('<span class="error">Billing city is required.</span>');
+                hasError = true;
+            }
+            if (!billing_state) {
+                $("#billing_state").after('<span class="error">Billing state is required.</span>');
+                hasError = true;
+            }
+            if (!billing_zip) {
+                $("#billing_zip").after('<span class="error">Billing zip code is required.</span>');
+                hasError = true;
+            }
+
+            if (hasError == true) {
+                return false;
+            }
+        });
+
+        //my profile validation
+        $('#myprofile_update').click(function() {
+            $(".error").hide();
+            var hasError = false;
+            var first_name = $("#first_name").val();
+            var last_name = $("#last_name").val();
+            var phoneReg = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            var phoneVal = $("#phone").val();
+
+            if (!first_name) {
+                $("#first_name").after('<span class="error">First Name is required.</span>');
+                hasError = true;
+            }
+
+            if (!last_name) {
+                $("#last_name").after('<span class="error">Last Name is required.</span>');
+                hasError = true;
+            }
+
+            if (phoneVal == '') {
+                $("#phone").after('<span class="error">Phone Number is required.</span>');
+                hasError = true;
+            } else if (!phoneReg.test(phoneVal)) {
+                $("#phone").after('<span class="error">Phone Number is required and must be a numeric and 10 digit.</span>');
+                hasError = true;
+            }
+            if (hasError == true) {
+                return false;
+            }
+        });
+
     });
 
     function btnViewMedicalForm() {
@@ -508,31 +574,24 @@
         $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
     }
 
-    $("#myprofile").validate({
-        // Specify validation rules
-        rules: {
-            first_name: "required",
-            last_name: "required",    
-            phone: {
-                required: true,
-                digits: true,
-                maxlength: 10,
+    //my profile update
+    $('#myprofile_update').on('click', function () {
+        var myprofiledetail = new FormData($('#myprofile')[0]);
+        $.ajax({
+            url: '/profile/personal-info',
+            type: "POST",
+            data: myprofiledetail,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                // console.log(data);
+                // alert("Billing Information update");
             },
-        },
-        messages: {
-            first_name: {
-                required: "Please enter first name",
-            },      
-            last_name: {
-                required: "Please enter last name",
-            },     
-            phone: {
-                required: "Please enter phone number",
-                digits: "Please enter valid phone number",
-                maxlength: "Phone number field accept only 10 digits",
-            },
-            
-        },
+            error: function() {
+                
+            }
+        });
     });
 
     //Shipping Information update
@@ -594,102 +653,50 @@
         });
     });
 
-    // $("#billing_info").validate({
-    //     // Specify validation rules
-    //     rules: {
-    //         billing_address_1:"required",
-    //         billing_address_2: "required",
-    //         billing_city : "required",
-    //         billing_state : "required",
-    //         billing_zip : "required",
-    //     },
-    //     messages: {
-    //         billing_address_1: {
-    //             required: "Please enter your billing address",
-    //         },
-    //         billing_address_2: {
-    //             required: "Please enter your billing address",
-    //         },
-    //         billing_city: {
-    //             required: "Please enter your billing city",
-    //         }, 
-    //         billing_state: {
-    //             required: "Please select your billing state",
-    //         },
-    //         billing_zip: {
-    //             required: "Please enter your billing zip code",
-    //         },   
-    //     },
-    //     submitHandler: function(form) {
-    //       form.submit();
-    //     }
-    // });
-
-    $('#billing_info').validate({
-
-    rules: {
-            billing_address_1:"required",
-            billing_address_2: "required",
-            billing_city : "required",
-            billing_state : "required",
-            billing_zip : "required",
-        },
-        messages: {
-            billing_address_1: {
-                required: "Please enter your billing address",
-            },
-            billing_address_2: {
-                required: "Please enter your billing address",
-            },
-            billing_city: {
-                required: "Please enter your billing city",
-            }, 
-            billing_state: {
-                required: "Please select your billing state",
-            },
-            billing_zip: {
-                required: "Please enter your billing zip code",
-            },   
-        },
-        submitHandler: function(form) {
-            form.submit();
-        }
-});
+    //delete Profile Picture
     function deleteProfilePictures(opId){
-            _opId = opId;
-            const swalWithBootstrapButtons = swal.mixin({
-            confirmButtonClass: 'btn btn-info',
-            cancelButtonClass: 'btn btn-info',
-            buttonsStyling: true,
-        })
+        _opId = opId;
+        const swalWithBootstrapButtons = swal.mixin({
+        confirmButtonClass: 'btn btn-info',
+        cancelButtonClass: 'btn btn-info',
+        buttonsStyling: true,
+    })
     
-        swalWithBootstrapButtons({
-            title: '',
-            text: "Are you sure you want to Delete this smile pictures?",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-            reverseButtons: false
-        }).then((result) => {
-            if (result.value) {
-                var date = moment();
-                var newDate = date.format("YYYY-MM-DD hh:mm:ss");
-                console.log(newDate);
-                $.ajax({
-                    url: 'profile/delete-profile-images/'+_opId,
-                    type: 'get',
-                    success: function(data){
-                      location.reload();
-                        // console.log(data);
-                    }
-                });
-            }
-            else if(result.dismiss === swal.DismissReason.cancel)
-                {
-                
+    swalWithBootstrapButtons({
+        title: '',
+        text: "Are you sure you want to Delete this smile pictures?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        reverseButtons: false
+    }).then((result) => {
+        if (result.value) {
+            var date = moment();
+            var newDate = date.format("YYYY-MM-DD hh:mm:ss");
+            console.log(newDate);
+            $.ajax({
+                url: 'profile/delete-profile-images/'+_opId,
+                type: 'get',
+                success: function(data){
+                  location.reload();
+                    // console.log(data);
                 }
-            })
+            });
         }
+        else if(result.dismiss === swal.DismissReason.cancel)
+            {
+            
+            }
+        })
+    }
+
+    function restrictAlphabets(e) {
+        var x = e.which || e.keycode;
+        if ((x >= 48 && x <= 57))
+            return true;
+        else
+            return false;
+    } 
 </script>
 @endpush

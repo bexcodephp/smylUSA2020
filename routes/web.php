@@ -270,7 +270,7 @@ Route::namespace('Front')->group(function () {
 
         Route::resource('customer.address', 'CustomerAddressController');
 
-        Route::post('profile/personal-info', 'AccountsController@updatePersonalInfo')->name('user.personal_info');
+        Route::post('profile/personal-info', 'AccountsController@updatePersonalInfo');
         Route::post('profile/address-info', 'AccountsController@updateAddressInfo');
         Route::post('profile/billing-info', 'AccountsController@updateBillingInfo');
         Route::post('profile/update-step1', 'AccountsController@updateUserInfoStep1');
