@@ -26,11 +26,11 @@ $(document).ready(function () {
     });
 
     $('#update_card').on('click', function () {
-        var formdata = new FormData($('#step_3_card')[0]);
+        var carddetail = new FormData($('#step_3_card')[0]);
         $.ajax({
-            url: '/profile/card-detail',
+            url: '/profile/card-info',
             type: "POST",
-            data: formdata,
+            data: carddetail,
             contentType: false,
             cache: false,
             processData: false,
@@ -208,7 +208,7 @@ $(document).ready(function () {
     } 
 
     //step 1 validation
-    $('#step1_submit').click(function() {
+    $('#step_1').click(function() {
         $(".error").hide();
         var hasError = false;
         var first_name = $("#first_name").val();
@@ -294,4 +294,5 @@ $(document).ready(function () {
             return false;
         }
     });
+
 
