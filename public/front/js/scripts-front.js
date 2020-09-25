@@ -65,7 +65,10 @@ $(document).ready(function() {
                 $(".nav_cart").remove();
                 $(".nav_wrapper").append(nav_cart);
             }
-
+            if ($(".nav_wrapper ul").hasClass('nav-sign-in-reg')) {
+                $(".nav-sign-in-reg").remove();
+                $(".nav_sub_1").append(nav_sign_in);
+            }
         }
     }
     // Execute on load
