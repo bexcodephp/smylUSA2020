@@ -446,6 +446,7 @@ class CheckoutController extends Controller
                 "card" => $customer->sources->data[0]
             ]);
             $response_array = $charge->__toArray(true);
+            //dd($response_array);
             return $response_array['balance_transaction'];
         } catch (\Throwable $th) {
             $error = $th->getMessage();

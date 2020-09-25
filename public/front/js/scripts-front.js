@@ -54,6 +54,21 @@ $(document).ready(function() {
             // profile sign out link
             $(".nav-sign-out").remove();
             $(".nav_main").append(nav_sign_out);
+        } else {
+            if ($(".nav_main li").hasClass('nav-user-name')) {
+                $(".nav-user-name").remove();
+                $(".nav-profile .nav-profile-caption").prepend(nav_user_name);
+                $(".nav-sign-out").remove();
+                $(".nav-profile .nav-profile-caption").append(nav_sign_out);
+            }
+            if ($(".navbar_toggler ul").hasClass('nav_cart')) {
+                $(".nav_cart").remove();
+                $(".nav_wrapper").append(nav_cart);
+            }
+            if ($(".nav_wrapper ul").hasClass('nav-sign-in-reg')) {
+                $(".nav-sign-in-reg").remove();
+                $(".nav_sub_1").append(nav_sign_in);
+            }
         }
     }
     // Execute on load

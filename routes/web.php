@@ -255,14 +255,14 @@ Route::namespace('Front')->group(function () {
             Route::resource('country.state', 'CountryStateController');
             Route::resource('state.city', 'StateCityController');
         });
-
+        Route::get('dashboard', 'AccountsController@dashboard')->name('patient.dashboard');
         Route::get('medical_form/{order_id?}', 'AccountsController@medicalForm')->name('medical_form');
         Route::get('patient-picture/{order_id?}', 'AccountsController@patientPicture')->name('patient-picture');
         Route::post('medical_form/{order_id?}', 'AccountsController@submitMedicalForm')->name('submitMedicalForm');
         Route::get('resources', 'AccountsController@resources')->name('resources');
         Route::get('profile', 'AccountsController@profile')->name('profile');
         Route::get('patient-orders', 'AccountsController@orders')->name('orders');
-        Route::post('formstep2', 'AccountsController@storeMedicalFormStep2');
+        // Route::post('formstep2', 'AccountsController@streMedicalFormStep2');
         Route::get('orders/{id}', 'AccountsController@ordersShow')->name('orders.show');
         Route::get('calendar', 'AccountsController@calendar')->name('calendar');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
@@ -305,6 +305,9 @@ Route::namespace('Front')->group(function () {
 Route::get('/dashboard', function () {
     return view('front.dashboard.patientDashboard');
 });
+// Route::get('/dashboard', function () {
+//     return view('front.dashboard.patientDashboard');
+// });
 
 // Route::get('/patient-picture', function () {
 //     return view('front.dashboard.patientPicture');
@@ -317,12 +320,13 @@ Route::get('/patient-profile', function () {
 Route::get('/patient-picture', function () {
     return view('front.dashboard.patientPicture');
 });
+
 Route::get('/patient-orders', function () {
     return view('front.dashboard.patientMyOrders');
 });
-Route::get('/patient-resources', function () {
-    return view('front.dashboard.patientResources');
-});
+// Route::get('/patient-resources', function () {
+//     return view('front.dashboard.patientResources');
+// });
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
 });

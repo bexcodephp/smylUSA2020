@@ -12,7 +12,7 @@
   </div>
   <ul class="list-group">
     <li class="list-group-item @if (Request::is('dashboard'))active @endif">
-      <a class="" href="{{ url('dashboard') }}">Dashboard</a>
+      <a class="" href="{{ route('patient.dashboard') }}">Dashboard</a>
     </li>
     <li class="list-group-item @if (Request::is('profile'))active @endif">
       <a class="" href="{{ url('profile') }}">My Profile</a>

@@ -28,7 +28,13 @@
                                         <img src="{{ asset("storage/$category->cover") }}" alt="" class="img-responsive">
                                     @endif
                                 </td>
-                                <td>@include('layouts.status', ['status' => $category->status])</td>
+                                <td>@if($category->status == 1)
+        <span style="display: none; visibility: hidden">1</span>
+        <button type="button" class="btn btn-link mx-2 w-auto btn-true text-green deactivate" data-id="{{$category->id}}"><i class="fa fa-check fa-lg"></i></button>
+        @else
+        <span style="display: none; visibility: hidden">0</span>
+        <button type="button" class="btn btn-link mx-2 w-auto btn-false text-red activate " data-id="{{$category->id}}"><i class="fa fa-times fa-lg"></i></button>
+    @endif</td>
                                 <td>
                                     <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post" class="form-horizontal">
                                         {{ csrf_field() }}
