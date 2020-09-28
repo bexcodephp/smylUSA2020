@@ -78,15 +78,19 @@
                             <div class="col-md-6 form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                                 <label>First Name</label>
                                 <input type="text" name="first_name" class="form-control input-white" id="f_name" placeholder="First Name" required>
-                                {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
+                                <span class="text-danger">{{ $errors->first('first_name') }}</span>
                             </div>
                             <div class="col-md-6 form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                                 <label>Last Name</label>
                                 <input type="text" name="last_name" class="form-control input-white" id="l_name" placeholder="Last Name" required>
+                                <span class="text-danger">{{ $errors->first('last_name') }}</span>
                             </div>
                             <div class="col-12 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label>Email Address</label>
                                 <input type="text" name="email" id="UserEmail" class="form-control input-white" placeholder="Email Address">
+                                @if(session('error'))
+                                    <span class="text-danger">{{session('error')}}</span>
+                                @endif
                             </div>
                             <div class="col-12 form-group hidden {{ $errors->has('password') ? 'has-error' : '' }}">
                                 <label>Password</label>
@@ -95,6 +99,7 @@
                             <div class="col-12 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                                 <label>Phone Number</label>
                                 <input type="text" name="phone" class="form-control input-white" id="phone" placeholder="Phone Number" onkeypress='return restrictAlphabets(event)'>
+                                <span class="text-danger">{{ $errors->first('phone') }}</span>
                             </div>
                             <div class="col-12 text-left btn-register mt-xl-3 my-3">
                                 <button type="submit" class="btn btn-primary btn-lg text-center" id="btn-submit">REGISTER NOW</button>

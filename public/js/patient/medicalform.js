@@ -1,100 +1,34 @@
 $(document).ready(function () {
-    $('#sameAsShipping').on('click', function () {
+    $('#sameAsBilling').on('click', function () {
         if($(this).prop("checked") == true){
             $('.readyonly').attr('readOnly',true); 
-            var address_1 = $('#address_1').val();
-            var address_2 = $('#address_2').val();
-            var city = $('#city').val();
-            var state = $('#state').val();
-            var zipcode = $('#zipcode').val();
-            $("#billing_address_1").val(address_1).attr("disabled", true);
-            $("#billing_address_2").val(address_2).attr("disabled", true);
-            $("#billing_city").val(city).attr("disabled", true);
-            $("#billing_state").val(state).attr("disabled", true); 
-            $("#billing_zip").val(zipcode).attr("disabled", true);
+            var billing_address_1 = $('#billing_address_1').val();
+            var billing_address_2 = $('#billing_address_2').val();
+            var billing_city = $('#billing_city').val();
+            var billing_state = $('#billing_state').val();
+            var billing_zip = $('#billing_zip').val();
+            $("#address_1").val(billing_address_1).attr("disabled", true);
+            $("#address_2").val(billing_address_2).attr("disabled", true);
+            $("#city").val(billing_city).attr("disabled", true);
+            $("#state_code").val(billing_state).attr("disabled", true); 
+            $("#zip").val(billing_zip).attr("disabled", true);
             // var shipping = $("#shipping_address_1").val();         
         }
         else if($(this).prop("checked") == false){
+            console.log("Checkbox is unchecked."); 
             $('.readyonly').attr('readOnly',false); 
-            $("input.billing_address_1").removeAttr("disabled");
-            $("input.billing_address_2").removeAttr("disabled");
-            $("input.billing_city").removeAttr("disabled");
-            $('#billing_state').attr("disabled", false); 
-            $("input.billing_zip").removeAttr("disabled");           
+            $("input.address_1").removeAttr("disabled");
+            $("input.address_2").removeAttr("disabled");
+            $("input.city").removeAttr("disabled");
+            $('#state_code').attr("disabled", false); 
+            $("input.zip").removeAttr("disabled");           
         }
     });
 
-    $("#step_1").validate({
-        // Specify validation rules
-        rules: {
-            first_name: "required",
-            last_name: "required",    
-            phone: {
-                required: true,
-                digits: true,
-                maxlength: 10,
-            },
-            address_1:"required",
-            address_2: "required",
-            city : "required",
-            state : "required",
-            zipcode : "required",
-            shipping_address_1: "required",
-            shipping_address_2 : "required",
-            shipping_city : "required",
-            shipping_state : "required",
-            shipping_zipcode : "required",
-        },
-        messages: {
-            first_name: {
-                required: "Please enter first name",
-            },      
-            last_name: {
-                required: "Please enter last name",
-            },     
-            phone: {
-                required: "Please enter phone number",
-                digits: "Please enter valid phone number",
-                maxlength: "Phone number field accept only 10 digits",
-            },
-            address_1: {
-                required: "Please enter your billing address",
-            },
-            address_2: {
-                required: "Please enter your billing address",
-            },
-            city: {
-                required: "Please enter your billing city",
-            }, 
-            state: {
-                required: "Please select your billing state",
-            },
-            zipcode: {
-                required: "Please enter your billing zip code",
-            },
-            shipping_address_1: {
-                required: "Please enter your shipping address",
-            },
-            shipping_address_2: {
-                required: "Please enter your shipping address",
-            },
-            shipping_city: {
-                required: "Please enter shipping city",
-            }, 
-            shipping_state: {
-                required: "Please select your shipping state",
-            },
-            shipping_zipcode: {
-                required: "Please enter your shipping zip code",
-            },   
-        },
-    });
-
-    // step1 submit ajax call
-
     $('#step1_submit').on('click', function () {
+
         var formdata = new FormData($('#step_1')[0]);
-        $("#step_1").validate();
+
         $.ajax({
             url: '/profile/update-step1',
             type: "POST",
@@ -117,6 +51,7 @@ $(document).ready(function () {
         });
     });
 
+<<<<<<< HEAD
     // step2 submit ajax call
 
     $('#step2_submit').on('click', function () {
@@ -145,64 +80,17 @@ $(document).ready(function () {
 
     // previous btn js
 
+=======
+>>>>>>> develop
     $('#step2_prev').on('click', function () {
+        //alert("prev---step2");
+
         $('#nav_step_2').removeClass("active");
         $('#nav_step_1').addClass("active");
 
         $('#step_2').removeClass('active show');
         $('#step_1').addClass('active show');
     }); 
-
-    $('#step3_prev').on('click', function () {
-        $('#nav_step_3').removeClass("active");
-        $('#nav_step_2').addClass("active");
-
-        $('#step_3').removeClass('active show');
-        $('#step_2').addClass('active show');
-    }); 
-
-    $('#step4_prev').on('click', function () {
-        $('#nav_step_4').removeClass("active");
-        $('#nav_step_3').addClass("active");
-
-        $('#step_4').removeClass('active show');
-        $('#step_3').addClass('active show');
-    }); 
-
-    $('#step5_prev').on('click', function () {
-        $('#nav_step_5').removeClass("active");
-        $('#nav_step_4').addClass("active");
-
-        $('#step_5').removeClass('active show');
-        $('#step_4').addClass('active show');
-    }); 
-
-    // skip btn js
-
-    $('#step2_skip').on('click', function () {
-        $('#nav_step_2').removeClass("active");
-        $('#nav_step_3').addClass("active");
-
-        $('#step_2').removeClass('active show');
-        $('#step_3').addClass('active show');
-    }); 
-    
-
-    $('#step3_skip').on('click', function () {
-        $('#nav_step_3').removeClass("active");
-        $('#nav_step_4').addClass("active");
-
-        $('#step_3').removeClass('active show');
-        $('#step_4').addClass('active show');
-    });
-
-    $('#step4_skip').on('click', function () {
-        $('#nav_step_4').removeClass("active");
-        $('#nav_step_5').addClass("active");
-
-        $('#step_4').removeClass('active show');
-        $('#step_5').addClass('active show');
-    });
 
     $('.selectpicker').selectpicker();
     // change password modal
@@ -280,38 +168,134 @@ $(document).ready(function () {
 
 
     function deleteSmilePictures(opId){
-            _opId = opId;
-            const swalWithBootstrapButtons = swal.mixin({
-            confirmButtonClass: 'btn btn-info',
-            cancelButtonClass: 'btn btn-info',
-            buttonsStyling: true,
-        })
+        _opId = opId;
+        const swalWithBootstrapButtons = swal.mixin({
+        confirmButtonClass: 'btn btn-info',
+        cancelButtonClass: 'btn btn-info',
+        buttonsStyling: true,
+    })
     
-        swalWithBootstrapButtons({
-            title: '',
-            text: "Are you sure you want to Delete this smile pictures?",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-            reverseButtons: false
-        }).then((result) => {
-            if (result.value) {
-                var date = moment();
-                var newDate = date.format("YYYY-MM-DD hh:mm:ss");
-                console.log(newDate);
-                $.ajax({
-                    url: 'profile/delete-teeth-images/'+_opId,
-                    type: 'get',
-                    success: function(data){
-                      location.reload();
-                        // console.log(data);
-                    }
-                });
-            }
-            else if(result.dismiss === swal.DismissReason.cancel)
-                {
-                
+    swalWithBootstrapButtons({
+        title: '',
+        text: "Are you sure you want to Delete this smile pictures?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        reverseButtons: false
+    }).then((result) => {
+        if (result.value) {
+            var date = moment();
+            var newDate = date.format("YYYY-MM-DD hh:mm:ss");
+            console.log(newDate);
+            $.ajax({
+                url: 'profile/delete-teeth-images/'+_opId,
+                type: 'get',
+                success: function(data){
+                  location.reload();
+                    // console.log(data);
                 }
-            })
+            });
         }
+        else if(result.dismiss === swal.DismissReason.cancel)
+            {
+            
+            }
+        })
+    }
+
+    function restrictAlphabets(e) {
+        var x = e.which || e.keycode;
+        if ((x >= 48 && x <= 57))
+            return true;
+        else
+            return false;
+    } 
+
+    //step 1 validation
+    $('#step1_submit').click(function() {
+        $(".error").hide();
+        var hasError = false;
+        var first_name = $("#first_name").val();
+        var last_name = $("#last_name").val();
+        var phoneReg = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        var phoneVal = $("#phone").val();
+        var billing_address_1 = $("#billing_address_1").val();
+        var billing_address_2 = $("#billing_address_2").val();
+        var billing_city = $("#billing_city").val();
+        var billing_state = $("#billing_state").val();
+        var billing_zip = $("#billing_zip").val();
+        var address_1 = $("#address_1").val();
+        var address_2 = $("#address_2").val();
+        var city = $("#city").val();
+        var state = $("#state").val();
+        var zip = $("#zip").val();
+
+        if (!first_name) {
+            $("#first_name").after('<span class="error">First Name is required.</span>');
+            hasError = true;
+        }
+
+        if (!last_name) {
+            $("#last_name").after('<span class="error">Last Name is required.</span>');
+            hasError = true;
+        }
+
+        if (phoneVal == '') {
+            $("#phone").after('<span class="error">Phone Number is required.</span>');
+            hasError = true;
+        } else if (!phoneReg.test(phoneVal)) {
+            $("#phone").after('<span class="error">Phone Number is required and must be a numeric and 10 digit.</span>');
+            hasError = true;
+        }
+
+        if (!billing_address_1) {
+            $("#billing_address_1").after('<span class="error">Billing address 1 is required.</span>');
+            hasError = true;
+        }
+
+        if (!billing_address_2) {
+            $("#billing_address_2").after('<span class="error">Billing address 2 is required.</span>');
+            hasError = true;
+        }
+
+        if (!billing_city) {
+            $("#billing_city").after('<span class="error">Billing city is required.</span>');
+            hasError = true;
+        }
+        if (!billing_state) {
+            $("#billing_state").after('<span class="error">Billing state is required.</span>');
+            hasError = true;
+        }
+        if (!billing_zip) {
+            $("#billing_zip").after('<span class="error">Billing zip code is required.</span>');
+            hasError = true;
+        }
+
+        if (!address_1) {
+            $("#address_1").after('<span class="error">Shipping address 1 is required.</span>');
+            hasError = true;
+        }
+
+        if (!address_2) {
+            $("#address_2").after('<span class="error">Shipping address 2 is required.</span>');
+            hasError = true;
+        }
+
+        if (!city) {
+            $("#city").after('<span class="error">Shipping city is required.</span>');
+            hasError = true;
+        }
+        if (!state) {
+            $("#state").after('<span class="error">Shipping state is required.</span>');
+            hasError = true;
+        }
+        if (!zip) {
+            $("#zip").after('<span class="error">Shipping zip code is required.</span>');
+            hasError = true;
+        }
+
+        if (hasError == true) {
+            return false;
+        }
+    });
