@@ -274,6 +274,7 @@ Route::namespace('Front')->group(function () {
         Route::post('profile/address-info', 'AccountsController@updateAddressInfo');
         Route::post('profile/billing-info', 'AccountsController@updateBillingInfo');
         Route::post('profile/update-step1', 'AccountsController@updateUserInfoStep1');
+        Route::post('profile/update-step2', 'AccountsController@updateUserInfoStep2');
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar');
         Route::post('profile/card-info', 'AccountsController@updateCard');
         Route::post('profile/card-add', 'AccountsController@AddCard');

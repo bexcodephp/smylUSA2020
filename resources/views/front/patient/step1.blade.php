@@ -72,11 +72,11 @@
         </div>
         <div class="col-12 form-group ">
             <label>Address 1</label>
-            <input type="text" name="address_1" class="form-control input-white address_1" id="address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}">
+            <input type="text" name="address_1" class="form-control input-white address_1" id="address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}" >
         </div>
         <div class="col-12 form-group">
             <label>Address 2</label>
-            <input type="text" id="address_2" class="form-control input-white address_2" name="address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
+            <input type="text" id="address_2" class="form-control input-white address_2" name="address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}" required>
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>City</label>
