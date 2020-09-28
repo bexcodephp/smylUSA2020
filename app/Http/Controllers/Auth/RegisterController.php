@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Shop\Customers\Requests\RegisterCustomerRequest;
 use App\Shop\Customers\Repositories\Interfaces\CustomerRepositoryInterface;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
 
 class RegisterController extends Controller
 {
@@ -61,9 +64,17 @@ class RegisterController extends Controller
      * @param RegisterCustomerRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function register(RegisterCustomerRequest $request)
+    public function register(Request $request)
     {  
-        //dd($request);
+
+        $validator = Validator::make($request->input(), [
+            'email' => 'required|string|email|max:255|unique:customers,email',
+        ]);
+      
+        if($validator->fails())
+        {
+            return $this->sendResponse(false, $validator->errors()->first());
+        }
 
         $customer = $this->create($request->except('_method', '_token'));
         $userId = $customer->id;

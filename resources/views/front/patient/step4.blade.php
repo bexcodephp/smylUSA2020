@@ -93,11 +93,11 @@
 
     <div class="row">
         <div class="col-6 text-left">
-            <button type="button" class="btn btn-primary prev-tab">Prev</button>
+            <button type="button" class="btn btn-primary prev-tab" id="step4_prev">Prev</button>
         </div>
         <div class="col-6 text-right">
-            <button type="button" class="btn btn-primary skip-tab">Skip</button>
-            <button type="button" class="btn btn-primary next-tab">Next</button>
+            <button type="button" class="btn btn-primary skip-tab" id="step4_skip">Skip</button>
+            <button type="button" class="btn btn-primary next-tab" id="step4_submit">Next</button>
         </div>
     </div>
 </form>

@@ -104,10 +104,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
                 return view("admin/resource.create");
             });
             Route::post('resources/create', 'ResourceController@create');
-            Route::get('resources/edit/{id}','ResourceController@getResource');
-            Route::post('resources/edit/{id}','ResourceController@updateResource');
-            Route::get('resources/delete/{id}','ResourceController@destroyResource');
-            
+            Route::get('resources/edit/{id}', 'ResourceController@getResource');
+            Route::post('resources/edit/{id}', 'ResourceController@updateResource');
+            Route::get('resources/delete/{id}', 'ResourceController@destroyResource');
         });
     });
 });
@@ -162,11 +161,11 @@ Route::namespace('Front')->group(function () {
     Route::view('contact-us', 'front.users.u_contactus')->name('contact');
     Route::get('team', 'HomeController@team')->name('team');
     Route::post('contact', 'HomeController@contactUs')->name('contactUs');
-    
+
     Route::get('payment-success', 'HomeController@paymentSuccessView');
     Route::post('payment-success', 'HomeController@paymentSuccess');
 
-    
+
     Route::get('email-verify/{code}', 'HomeController@verifyEmail')->name('verifyEmail');
     Route::get('generate_password/{code}', 'HomeController@generate_password')->name('generatePassword');
     Route::post('voodoo_response', 'HomeController@voodooResponse');
@@ -188,6 +187,7 @@ Route::namespace('Front')->group(function () {
     Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
     Route::post('checkout', 'CheckoutController@store')->name('checkout.store');
     Route::post('checkout/medical-form', 'CheckoutController@storeMedicalForm')->name('checkout.storeMedicalForm');
+    Route::post('patient-picture', 'CheckoutController@storeMedicalForm')->name('checkout.storeMedicalForm');
     Route::get('checkout/execute', 'CheckoutController@executePayPalPayment')->name('checkout.execute');
     Route::post('checkout/execute/{order_id}', 'CheckoutController@charge')->name('checkout.execute');
     Route::get('checkout/cancel/{order_id}', 'CheckoutController@cancel')->name('checkout.cancel');
@@ -255,12 +255,14 @@ Route::namespace('Front')->group(function () {
             Route::resource('country.state', 'CountryStateController');
             Route::resource('state.city', 'StateCityController');
         });
-
+        Route::get('dashboard', 'AccountsController@dashboard')->name('patient.dashboard');
         Route::get('medical_form/{order_id?}', 'AccountsController@medicalForm')->name('medical_form');
+        Route::get('patient-picture/{order_id?}', 'AccountsController@patientPicture')->name('patient-picture');
         Route::post('medical_form/{order_id?}', 'AccountsController@submitMedicalForm')->name('submitMedicalForm');
         Route::get('resources', 'AccountsController@resources')->name('resources');
         Route::get('profile', 'AccountsController@profile')->name('profile');
-        Route::get('orders', 'AccountsController@orders')->name('orders');
+        Route::get('patient-orders', 'AccountsController@orders')->name('orders');
+        // Route::post('formstep2', 'AccountsController@streMedicalFormStep2');
         Route::get('orders/{id}', 'AccountsController@ordersShow')->name('orders.show');
         Route::get('calendar', 'AccountsController@calendar')->name('calendar');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
@@ -268,12 +270,15 @@ Route::namespace('Front')->group(function () {
 
         Route::resource('customer.address', 'CustomerAddressController');
 
-        Route::post('profile/personal-info', 'AccountsController@updatePersonalInfo')->name('user.personal_info');
-        Route::post('profile/address-info', 'AccountsController@updateAddressInfo')->name('user.address_info');
+        Route::post('profile/personal-info', 'AccountsController@updatePersonalInfo');
+        Route::post('profile/address-info', 'AccountsController@updateAddressInfo');
+        Route::post('profile/billing-info', 'AccountsController@updateBillingInfo');
         Route::post('profile/update-step1', 'AccountsController@updateUserInfoStep1');
-        Route::post('profile/update-avatar', 'AccountsController@updateAvatar')->name('user.updateAvatar');
+        Route::post('profile/update-avatar', 'AccountsController@updateAvatar');
         Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
+        Route::post('profile/update-profile-picture', 'AccountsController@updateProfilePicture')->name('user.updateProfilePicture');
         Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
+        Route::get('profile/delete-profile-images/{id}', 'AccountsController@removeProfileImage');
         Route::post('update-password', 'AccountsController@updatePassword')->name('updatePassword');
     });
 
@@ -296,9 +301,13 @@ Route::namespace('Front')->group(function () {
 //     return view('front.checkout2-update');
 // });
 
-Route::get('/pDashboard', function () {
-    return view('front.dashboard.patientDashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('front.dashboard.patientDashboard');
+// });
+
+// Route::get('/patient-picture', function () {
+//     return view('front.dashboard.patientPicture');
+// });
 
 Route::get('/patient-profile', function () {
     return view('front.dashboard.patientProfile');
@@ -307,9 +316,13 @@ Route::get('/patient-profile', function () {
 Route::get('/patient-picture', function () {
     return view('front.dashboard.patientPicture');
 });
+
 Route::get('/patient-orders', function () {
     return view('front.dashboard.patientMyOrders');
 });
+// Route::get('/patient-resources', function () {
+//     return view('front.dashboard.patientResources');
+// });
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
 });

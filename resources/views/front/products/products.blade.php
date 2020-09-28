@@ -35,9 +35,12 @@
                             NOTE:
                             set class name for isotop in data filter
                         --}}
+
                         <button data-filter="*" type="button" class="btn nav-link is-selected">All</button>
-                        <button data-filter=".services" type="button" class="btn nav-link">Services</button>
-                        <button data-filter=".products" type="button" class="btn nav-link">Products</button>
+                        @foreach($categories as $key => $category)
+                        <button data-filter=".{{$category->name}}" type="button" class="btn nav-link">{{$category->name}}</button>
+                        {{-- <button data-filter=".products" type="button" class="btn nav-link">Products</button>--}}
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -46,11 +49,18 @@
                     {{-- NOTE:for isotop add class name as per the diffrentiation --}}
                     {{--  content 1  --}}
                     @foreach($products as $key => $product)
-                        <div class="col mb-3 r-product element-item products">
+                        @php $catName=''; @endphp
+                        @foreach($categories as $key1 => $category)
+                            @if($categories[$key1]->products[$key1]->product_id == $product->id)
+                                @php $catName=$category->name; @endphp
+                            @endif
+                        @endforeach
+
+                    <div class="col mb-3 r-product element-item {{$catName}}">
                             <div class="card product-card">
                                 {{--NOTE:
                                     set id title="id_name" attribute for popover displaying div--}}
-                                <a class="card-header popover-set p-0" title="popover_content_1" href="{{ route('front.get.product', $product->slug) }}">
+                                <a class="card-header popover-set p-0" title="popover_content_{{$product->id}}" href="{{ route('front.get.product', $product->slug) }}">
                                     <img src="{{ asset('storage/'.$product->cover) }}" class="card-img-top" alt="product">
                                 </a>
                                 <div class="card-body text-center p-0">
@@ -59,7 +69,7 @@
                                     </div>
                                     <div class="rp-price-rate d-flex flex-wrap py-3">
                                         <div class="col-6 text-left align-self-center">
-                                            <div class="rating" id="rating">
+                                            <div class="rating hidden-imp" id="rating">
                                                 <input type="radio" name="rating" value="5" id="5">
                                                 <label for="5"></label>
                                                 <input type="radio" name="rating" value="4" id="4">
@@ -86,14 +96,14 @@
                                     </form>
                                 </div>
                                 {{--NOTE:set id for individual popover OR tooltip box--}}
-                                <div class="popover-content" id="popover_content_1">
+                                <div class="popover-content" id="popover_content_{{$product->id}}">
                                     <div class="popover-details">
                                         {{--  change content START  --}}
                                         <div class="popover-caption">
-                                            <p>SmylUSA offers Retainer to help you maintain your alignment after your Clear Alignment treatment is over. Our Retainers are made with Zendura plastics which are widely considered the best available. We highly recommended our customers to use retainers once they finish their alignment treatment.</p>
+                                            <p>{{ $product->description }}</p>
                                             <div class="product-available py-2">
                                                 <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
-                                                <h5 class="color-blue mb-0">{{ $product->sku }}&nbsp;:<span class="text-bold color-gray ml-2">3232</span></h5>
+                                                <h5 class="color-blue mb-0">SKU:<span class="text-bold color-gray ml-2">{{ $product->sku }}</span></h5>
                                             </div>
                                         </div>
                                         {{--  change content END --}}
@@ -104,177 +114,6 @@
                             </div>
                         </div>
                     @endforeach
-                    {{--  content 2  --}}
-                    <!-- <div class="col mb-3 r-product element-item products">
-                        <div class="card product-card">
-                            <a class="card-header p-0 popover-set" title="popover_content_2" href="{{ url('/productsview') }}">
-                                <img src="{{asset('images/products/product_1.png')}}" class="card-img-top" alt="product">
-                            </a>
-                            <div class="card-body text-center p-0">
-                                <div class="col-12 card-title">
-                                    <h5 class="m-0">Impression Kit</h5>
-                                </div>
-                                <div class="rp-price-rate d-flex flex-wrap py-3">
-                                    <div class="col-6 text-left align-self-center">
-                                        {{--
-                                            NOTE ->>
-                                            "Sequence of rating selection star is in reverse order"
-                                        --}}
-                                        <div class="rating" id="rating">
-                                            <input type="radio" name="rating" value="5" id="5">
-                                            <label for="5"></label>
-                                            <input type="radio" name="rating" value="4" id="4">
-                                            <label for="4"></label>
-                                            <input type="radio" name="rating" value="3" id="3">
-                                            <label for="3"></label>
-                                            <input type="radio" name="rating" value="2" id="2">
-                                            <label for="2"></label>
-                                            <input type="radio" name="rating" value="1" id="1">
-                                            <label for="1"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 rp-price align-self-center">
-                                        <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer p-0">
-                                <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
-                            </div>
-                            <div class="popover-content" id="popover_content_2">
-                                <div class="popover-details">
-                                    {{-- change content START  --}}
-                                    <div class="popover-caption">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                        <div class="product-available  py-2">
-                                            <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
-                                            <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">XXXX</span></h5>
-                                        </div>
-                                    </div>
-                                    {{-- change content END --}}
-                                    {{-- left bottom arrow  --}}
-                                    <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    {{-- content 3 --}}
-                    <!-- <div class="col mb-3 r-product element-item services ">
-                        <div class="card product-card">
-                            <a class="card-header p-0 popover-set" title="popover_content_3" href="{{ url('/productsview') }}">
-                                <img src="{{asset('images/products/product_3.png')}}" class="card-img-top" alt="product">
-                            </a>
-                            <div class="card-body text-center p-0">
-                                <div class="col-12 card-title">
-                                    <h5 class="m-0">Teeth Whitening Kit</h5>
-                                </div>
-                                <div class="rp-price-rate d-flex flex-wrap py-3">
-                                    <div class="col-6 text-left align-self-center">
-                                        {{--
-                                            NOTE ->>
-                                            "Sequence of rating selection star is in reverse order"
-                                        --}}
-                                        <div class="rating" id="rating">
-                                            <input type="radio" name="rating" value="5" id="5">
-                                            <label for="5"></label>
-                                            <input type="radio" name="rating" value="4" id="4">
-                                            <label for="4"></label>
-                                            <input type="radio" name="rating" value="3" id="3">
-                                            <label for="3"></label>
-                                            <input type="radio" name="rating" value="2" id="2">
-                                            <label for="2"></label>
-                                            <input type="radio" name="rating" value="1" id="1">
-                                            <label for="1"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 rp-price align-self-center">
-                                        <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer p-0">
-                                <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
-                            </div>
-                            {{--
-                                NOTE: POPOVER
-                                set id for individual popover OR tooltip box
-                            --}}
-                            <div class="popover-content" id="popover_content_3">
-                                <div class="popover-details">
-                                    {{-- change content START  --}}
-                                    <div class="popover-caption">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                        <div class="product-available py-2">
-                                            <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
-                                            <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">XXX</span></h5>
-                                        </div>
-                                    </div>
-                                    {{-- change content END --}}
-                                    {{-- left bottom arrow  --}}
-                                    <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    {{-- content 4 --}}
-                    <!-- <div class="col mb-3 r-product element-item products">
-                        <div class="card product-card">
-                            <a class="card-header p-0 popover-set" title="popover_content_4" href="{{ url('/productsview') }}">
-                                <img src="{{asset('images/products/generic_square_2.jpg')}}" class="card-img-top" alt="product">
-                            </a>
-                            <div class="card-body text-center p-0">
-                                <div class="col-12 card-title">
-                                    <h5 class="m-0">Aligner</h5>
-                                </div>
-                                <div class="rp-price-rate d-flex flex-wrap py-3">
-                                    <div class="col-6 text-left align-self-center">
-                                        {{--
-                                            NOTE ->>
-                                            "Sequence of rating selection star is in reverse order"
-                                        --}}
-                                        <div class="rating" id="rating">
-                                            <input type="radio" name="rating" value="5" id="5">
-                                            <label for="5"></label>
-                                            <input type="radio" name="rating" value="4" id="4">
-                                            <label for="4"></label>
-                                            <input type="radio" name="rating" value="3" id="3">
-                                            <label for="3"></label>
-                                            <input type="radio" name="rating" value="2" id="2">
-                                            <label for="2"></label>
-                                            <input type="radio" name="rating" value="1" id="1">
-                                            <label for="1"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 rp-price align-self-center">
-                                        <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer p-0">
-                                <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
-                            </div>
-                            {{--
-                                NOTE:
-                                set id for individual popover OR tooltip box
-                            --}}
-                            <div class="popover-content" id="popover_content_4">
-                                <div class="popover-details">
-                                    {{-- change content START  --}}
-                                    <div class="popover-caption">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                        <div class="product-available py-2">
-                                            <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
-                                            <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">XXXX</span></h5>
-                                        </div>
-                                    </div>
-                                    {{-- change content END --}}
-                                    {{-- left bottom arrow  --}}
-                                    <img src="{{asset('images/icons/arrow_cross_bottom.png')}}" />
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
                 </div>
                 {{-- popover display START FOR Dynamic purpose for each products --}}
                 {{-- popover display END--}}
