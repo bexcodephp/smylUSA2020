@@ -69,6 +69,11 @@ $(document).ready(function() {
                 $(".nav-sign-in-reg").remove();
                 $(".nav_sub_1").append(nav_sign_in);
             }
+            if ($(".navbar_toggler div").hasClass('nav-profile-icon')) {
+                $(".nav-profile-icon").remove();
+                $(".navbar_content .nav_sub_1 .nav-profile.nav-sub-right .media").append(nav_profile_icon);
+            }
+
         }
     }
     // Execute on load

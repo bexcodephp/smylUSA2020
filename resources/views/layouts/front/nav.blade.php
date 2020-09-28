@@ -85,15 +85,17 @@
                                             <a class="nav-link" href="{{ route('logout') }}">Sign Out</a>
                                         </li>
                                     </ul>
+                                    <?php if (Auth::check()) {?>
                                     <div class="btn-group nav-profile-icon">
                                         <button type="button" class="btn dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="{{ asset('images/icons/person_male.png') }}" class="nav-profile-img" />
+                                            <img src="{{ asset('storage/'. auth()->user()->avatar) }}" class="nav-profile-img" />
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <button class="dropdown-item" type="button">Profile</button>
                                             <button class="dropdown-item" type="button">Dashboard</button>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </li>
                         </ul>
