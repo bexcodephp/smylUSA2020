@@ -1,6 +1,8 @@
+var _flag_billing = 0;
 $(document).ready(function () {
     $('#sameAsBilling').on('click', function () {
         if($(this).prop("checked") == true){
+            _flag_billing = 1;
             $('.readyonly').attr('readOnly',true); 
             var billing_address_1 = $('#billing_address_1').val();
             var billing_address_2 = $('#billing_address_2').val();
@@ -15,6 +17,7 @@ $(document).ready(function () {
             // var shipping = $("#shipping_address_1").val();         
         }
         else if($(this).prop("checked") == false){
+            _flag_billing = 0;
             console.log("Checkbox is unchecked."); 
             $('.readyonly').attr('readOnly',false); 
             $("input.address_1").removeAttr("disabled");
@@ -25,18 +28,25 @@ $(document).ready(function () {
         }
     });
 
-    $('#update_card').on('click', function () {
-        var carddetail = new FormData($('#step_3_card')[0]);
+    $('#step1_submit').on('click', function () {
+        var formdata = new FormData($('#step_1')[0]);
+        formdata.append('same_as_shipping',_flag_billing);
+
         $.ajax({
-            url: '/profile/card-info',
+            url: '/profile/update-step1',
             type: "POST",
-            data: carddetail,
+            data: formdata,
             contentType: false,
             cache: false,
             processData: false,
             success: function(data) {
-                // console.log(data);
-                alert("success");              
+                console.log(data);
+                if(data=="success"){
+                    $('#nav_step_1').removeClass("active");
+                    $('#nav_step_2').addClass("active");
+                    $('#step_1').removeClass('active show');
+                    $('#step_2').addClass('active show');
+                }                
             },
             error: function() {
                 
@@ -44,65 +54,52 @@ $(document).ready(function () {
         });
     });
 
-    
-
-    // previous btn js
-
     $('#step2_prev').on('click', function () {
+        // alert("prev---step2");
+
         $('#nav_step_2').removeClass("active");
         $('#nav_step_1').addClass("active");
 
         $('#step_2').removeClass('active show');
         $('#step_1').addClass('active show');
-    }); 
+    });
 
     $('#step3_prev').on('click', function () {
         $('#nav_step_3').removeClass("active");
         $('#nav_step_2').addClass("active");
-
         $('#step_3').removeClass('active show');
         $('#step_2').addClass('active show');
     }); 
-
     $('#step4_prev').on('click', function () {
         $('#nav_step_4').removeClass("active");
         $('#nav_step_3').addClass("active");
-
         $('#step_4').removeClass('active show');
         $('#step_3').addClass('active show');
     }); 
-
     $('#step5_prev').on('click', function () {
         $('#nav_step_5').removeClass("active");
         $('#nav_step_4').addClass("active");
-
         $('#step_5').removeClass('active show');
         $('#step_4').addClass('active show');
     }); 
 
     // skip btn js
-
     $('#step2_skip').on('click', function () {
         $('#nav_step_2').removeClass("active");
         $('#nav_step_3').addClass("active");
-
         $('#step_2').removeClass('active show');
         $('#step_3').addClass('active show');
     }); 
-    
 
     $('#step3_skip').on('click', function () {
         $('#nav_step_3').removeClass("active");
         $('#nav_step_4').addClass("active");
-
         $('#step_3').removeClass('active show');
         $('#step_4').addClass('active show');
     });
-
     $('#step4_skip').on('click', function () {
         $('#nav_step_4').removeClass("active");
         $('#nav_step_5').addClass("active");
-
         $('#step_4').removeClass('active show');
         $('#step_5').addClass('active show');
     });
@@ -119,12 +116,9 @@ $(document).ready(function () {
     });
 
     // finish btn redirection
-
     $('#step5_finish').on('click', function () {
         window.location.href = "/dashboard";
     });
-
-
 
     $('.selectpicker').selectpicker();
     // change password modal
@@ -132,14 +126,23 @@ $(document).ready(function () {
         $('#change_pwd_modal').modal('show')
     });
     // change btn_card_detail_change modal
-    $('#btn_card_detail_change').on('click', function () {
-        $('#card_detail_change_modal').modal('show')
-    });
-    // ADD card detail  modal
-    $('#btn_card_detail_add').on('click', function () {
-        $('#card_detail_add_modal').modal('show')
-    });
-   
+    var card_number = $("#card_number").val();
+    if(card_number == ""){
+        $('#btn_card_detail_change').hide();
+        $('#btn_card_detail_add').on('click', function () {
+            $('#btn_card_detail_add').show();
+            $('#btn_card_detail_change').hide();
+            $('#card_detail_add_modal').modal('show')
+        });
+    } else{
+        // ADD card detail  modal
+        $('#btn_card_detail_add').hide();
+        $('#btn_card_detail_change').on('click', function () {
+            $('#btn_card_detail_change').show();
+            $('#btn_card_detail_add').hide();
+            $('#card_detail_change_modal').modal('show')
+        });
+    }
 });
 
 // UPLOAD new smile pic modal
@@ -246,6 +249,30 @@ $(document).ready(function () {
             return false;
     } 
 
+    jQuery(function($) {
+        var cb1 = $('#sameAsBilling').is(':checked');
+        if(cb1 == true){
+            var billing_address_1 = $('#billing_address_1').val();
+            var billing_address_2 = $('#billing_address_2').val();
+            var billing_city = $('#billing_city').val();
+            var billing_state = $('#billing_state').val();
+            var billing_zip = $('#billing_zip').val();
+            $("#address_1").val(billing_address_1).attr('disabled', true);
+            $("#address_2").val(billing_address_2).attr("disabled", true);
+            $("#city").val(billing_city).attr("disabled", true);
+            $("#state_code").val(billing_state).attr("disabled", true); 
+            $("#zip").val(billing_zip).attr("disabled", true);  
+        } else{
+            _flag_billing = 0;
+            $('.readyonly').attr('readOnly',false); 
+            $("input.address_1").removeAttr("disabled");
+            $("input.address_2").removeAttr("disabled");
+            $("input.city").removeAttr("disabled");
+            $('#state_code').attr("disabled", false); 
+            $("input.zip").removeAttr("disabled");
+        }
+    });
+
     //step 1 validation
     $('#step_1').click(function() {
         $(".error").hide();
@@ -334,49 +361,110 @@ $(document).ready(function () {
         }
     });
 
-    $("#step_1").valid(
-        {
-            rules:{
-                address_1: "required",
-        },
-        messages:{
-            address_1: {
-                required: "Please enter bb add",
-            }
-        }
-    });
-    
-    
+    $('#update_card').click(function() {
+        $(".error").hide();
+        var hasError = false;
+        var cardHolderName = $("#name_on_card").val();
+        var cardHolderNameRegex = /^[a-z ,.'-]+$/i;
+        var cardNumber = $("#card_last_four").val();
+        var cvvNumber = $("#cvv").val();
+        var cvvRegex = /^[0-9]{3,3}$/;
 
-    $('#step1_submit').on('click', function () {
-        var formdata = new FormData($('#step_1')[0]);  
-
-        var address_1 = $("#address_1").val(); 
-          
-        if(!$("#step_1").valid()){
-            return false;
-        }
-        $.ajax({
-            url: '/profile/update-step1',
-            type: "POST",
-            data: formdata,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                console.log(data);
-                if(data=="success"){
-                    $('#nav_step_1').removeClass("active");
-                    $('#nav_step_2').addClass("active");
-                    $('#step_1').removeClass('active show');
-                    $('#step_2').addClass('active show');
-                }                
-            },
-            error: function() {
-                
+            if (cardHolderName == "") {
+                $("#name_on_card").after('<span class="error">Please Enter card Name</span>');
+                hasError = true;
+            }else if (!cardHolderNameRegex.test(cardHolderName)) {
+                $("#name_on_card").after('<span class="error">Card Holder Name is Invalid</span>');
+                hasError = true;
             }
-        });
+
+            if (cardNumber == "") {
+                $("#card_last_four").after('<span class="error">Card Number is Invalid</span>');
+                hasError = true;
+            }
+
+            // if (cvvNumber == "") {
+            //     $("#cvv").after('<span class="error">Enter CVV</span>');
+            //     hasError = true;
+            // } else if (!cvvNumber.test(cvvRegex)) {
+            //     $("#cvv").after('<span class="error">CVV is Invalid</span>');
+            //     hasError = true;
+            // }
+
+            if (hasError == true) {
+                return false;
+            }
+
+            var carddetail = new FormData($('#step_3_card')[0]);
+            $.ajax({
+                url: '/profile/card-info',
+                type: "POST",
+                data: carddetail,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // console.log(data);
+                    alert("success");  
+                },
+                error: function() {
+                    
+                }
+            });
     });
+
+    $('#add_card').click(function() {
+        $(".error").hide();
+        var hasError = false;
+        var cardHolderName = $("#add_name_on_card").val();
+        var cardHolderNameRegex = /^[a-z ,.'-]+$/i;
+        var cardNumber = $("#add_card_last_four").val();
+        var cvvNumber = $("#cvv").val();
+        var cvvRegex = /^[0-9]{3,3}$/;
+
+            if (cardHolderName == "") {
+                $("#add_name_on_card").after('<span class="error">Please Enter card Name</span>');
+                hasError = true;
+            }else if (!cardHolderNameRegex.test(cardHolderName)) {
+                $("#add_name_on_card").after('<span class="error">Card Holder Name is Invalid</span>');
+                hasError = true;
+            }
+
+            if (cardNumber == "") {
+                $("#add_card_last_four").after('<span class="error">Card Number is Invalid</span>');
+                hasError = true;
+            }
+
+            // if (cvvNumber == "") {
+            //     $("#cvv").after('<span class="error">Enter CVV</span>');
+            //     hasError = true;
+            // } else if (!cvvNumber.test(cvvRegex)) {
+            //     $("#cvv").after('<span class="error">CVV is Invalid</span>');
+            //     hasError = true;
+            // }
+
+            if (hasError == true) {
+                return false;
+            }
+
+            var carddetail = new FormData($('#step_3_card_add')[0]);
+            $.ajax({
+                url: '/profile/card-add',
+                type: "POST",
+                data: carddetail,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // console.log(data);
+                    alert("success");   
+                },
+                error: function() {
+                    
+                }
+            });
+    });
+
 
     // step 2 ajax update
     $('#step2_submit').on('click', function () {
@@ -402,5 +490,3 @@ $(document).ready(function () {
             }
         });
     });
-
-    

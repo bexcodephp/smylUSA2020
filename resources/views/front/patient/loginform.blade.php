@@ -157,4 +157,9 @@
 <script src="{{asset('js/patient/medicalform.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/sweetalert2.all.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<!-- <script type="text/javascript">
+    $(document).ready(function() {
+        $('.selectpicker').selectpicker();
+    });
+</script> -->
 @endpush
