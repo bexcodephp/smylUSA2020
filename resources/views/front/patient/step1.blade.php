@@ -30,7 +30,7 @@
     <div class="row mt-3">
         <div class="col-12 mb-2">
             <h4 class="sub-title color-blue text-bold">Billing Information</h4>
-        </div>
+        </div>        
         <div class="col-12 form-group">
             <label>Address 1<span class="text-danger">*</span></label>
             <input type="text" class="form-control input-white" id="billing_address_1" name="billing_address_1" placeholder="Type Your Address" value="{{ $address ? $address->billing_address_1 : null}}">

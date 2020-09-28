@@ -67,8 +67,6 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        // dd($request);
-        
         $this->validateLogin($request);
         
         if ($this->hasTooManyLoginAttempts($request)) {

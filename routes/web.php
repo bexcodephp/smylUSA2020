@@ -322,9 +322,9 @@ Route::get('/patient-picture', function () {
     return view('front.dashboard.patientPicture');
 });
 
-Route::get('/patient-orders', function () {
-    return view('front.dashboard.patientMyOrders');
-});
+// Route::get('/patient-orders', function () {
+//     return view('front.dashboard.patientMyOrders');
+// });
 // Route::get('/patient-resources', function () {
 //     return view('front.dashboard.patientResources');
 // });
