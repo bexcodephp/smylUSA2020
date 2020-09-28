@@ -44,48 +44,76 @@ $(document).ready(function () {
         });
     });
 
-    $('#step1_submit').on('click', function () {
-        var formdata = new FormData($('#step_1')[0]);
-        $.ajax({
-            url: '/profile/update-step1',
-            type: "POST",
-            data: formdata,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                console.log(data);
-                if(data=="success"){
-                    $('#nav_step_1').removeClass("active");
-                    $('#nav_step_2').addClass("active");
-                    $('#step_1').removeClass('active show');
-                    $('#step_2').addClass('active show');
-                }                
-            },
-            error: function() {
-                
-            }
-        });
-    });
+    
+
+    // previous btn js
 
     $('#step2_prev').on('click', function () {
-        // alert("prev---step2");
-
         $('#nav_step_2').removeClass("active");
         $('#nav_step_1').addClass("active");
 
         $('#step_2').removeClass('active show');
         $('#step_1').addClass('active show');
-    });
-    $('#step2_skip').on('click', function () {
-        // alert("prev---step2");
+    }); 
 
+    $('#step3_prev').on('click', function () {
+        $('#nav_step_3').removeClass("active");
+        $('#nav_step_2').addClass("active");
+
+        $('#step_3').removeClass('active show');
+        $('#step_2').addClass('active show');
+    }); 
+
+    $('#step4_prev').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_3').addClass("active");
+
+        $('#step_4').removeClass('active show');
+        $('#step_3').addClass('active show');
+    }); 
+
+    $('#step5_prev').on('click', function () {
+        $('#nav_step_5').removeClass("active");
+        $('#nav_step_4').addClass("active");
+
+        $('#step_5').removeClass('active show');
+        $('#step_4').addClass('active show');
+    }); 
+
+    // skip btn js
+
+    $('#step2_skip').on('click', function () {
         $('#nav_step_2').removeClass("active");
         $('#nav_step_3').addClass("active");
 
         $('#step_2').removeClass('active show');
         $('#step_3').addClass('active show');
     }); 
+    
+
+    $('#step3_skip').on('click', function () {
+        $('#nav_step_3').removeClass("active");
+        $('#nav_step_4').addClass("active");
+
+        $('#step_3').removeClass('active show');
+        $('#step_4').addClass('active show');
+    });
+
+    $('#step4_skip').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_5').addClass("active");
+
+        $('#step_4').removeClass('active show');
+        $('#step_5').addClass('active show');
+    });
+
+    // finish btn redirection
+
+    $('#step5_finish').on('click', function () {
+        window.location.href = "/dashboard";
+    });
+
+
 
     $('.selectpicker').selectpicker();
     // change password modal
@@ -208,7 +236,7 @@ $(document).ready(function () {
     } 
 
     //step 1 validation
-    $('#step1_submit').click(function() {
+    $('#step1_submitt').click(function() {
         $(".error").hide();
         var hasError = false;
         var first_name = $("#first_name").val();
@@ -295,3 +323,73 @@ $(document).ready(function () {
         }
     });
 
+    $("#step_1").valid(
+        {
+            rules:{
+                address_1: "required",
+        },
+        messages:{
+            address_1: {
+                required: "Please enter bb add",
+            }
+        }
+    });
+    
+    
+
+    $('#step1_submit').on('click', function () {
+        var formdata = new FormData($('#step_1')[0]);  
+
+        var address_1 = $("#address_1").val(); alert(address_1);
+          
+        if(!$("#step_1").valid()){
+            return false;
+        }
+        $.ajax({
+            url: '/profile/update-step1',
+            type: "POST",
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                if(data=="success"){
+                    $('#nav_step_1').removeClass("active");
+                    $('#nav_step_2').addClass("active");
+                    $('#step_1').removeClass('active show');
+                    $('#step_2').addClass('active show');
+                }                
+            },
+            error: function() {
+                
+            }
+        });
+    });
+
+    // step 2 ajax update
+    $('#step2_submit').on('click', function () {
+        var formdata = new FormData($('#step_2')[0]);
+        $("#step_2").valid();        
+        $.ajax({
+            url: '/profile/update-step2',
+            type: "POST",
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                if(data==200){
+                    $('#nav_step_2').removeClass("active");
+                    $('#nav_step_3').addClass("active");
+                    $('#step_2').removeClass('active show');
+                    $('#step_3').addClass('active show');
+                }                
+            },
+            error: function() {
+                
+            }
+        });
+    });
+
+    
