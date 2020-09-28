@@ -20,15 +20,19 @@
             <div class="col p-0">
                 <label class="mr-3">Card Details</label>
                 <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_change"><u>Change</u></button>
-                <!-- <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_add"><u>Add</u></button> -->
+                <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_add"><u>Add</u></button>
             </div>
             <div class="row">
                 <div class="col-sm-auto mb-3">
                     <?php
                         $cardnumber = $customer->card_last_four;
-                        $newstring = substr($cardnumber, -4);
+                        if($cardnumber == ""){
+                            $cardformat = "";
+                        }else {
+                            $cardformat = 'XXXX-XXXX-XXXX-'.substr($cardnumber, -4);
+                        }
                     ?>
-                    <input type="text" class="form-control input-white" id="password" placeholder="Card Number" value="{{$newstring }}">
+                    <input type="text" class="form-control input-white" id="card_number" placeholder="Card Number" value="{{$cardformat }}">
                 </div>
                <!--  <div class="col-sm-auto mb-3">
                     <input type="password" class="form-control input-white" id="password" placeholder="Password">
@@ -100,7 +104,11 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label class="text-bold">Card Number</label>
-                                    <input type="text" class="form-control input-white" name="card_last_four" id="card_last_four" placeholder="Card Number" value="{{ $customer ? $customer->card_last_four : null}}" onkeypress='return restrictAlphabets(event)'>
+                                    <?php
+                                        $cardnumber = $customer->card_last_four;
+                                        $cardformat = 'XXXX-XXXX-XXXX-'.substr($cardnumber, -4);
+                                    ?>
+                                    <input type="text" class="form-control input-white" name="card_last_four" id="card_last_four" placeholder="Card Number" value="{{ $cardformat}}" >
                                 </div>
                             </div>
                         </div>
@@ -110,7 +118,31 @@
                                     <label class="text-bold">Expiry</label>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="month" class="form-control input-white" id="re_new_pwd" placeholder="Month,Year">
+                                   <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
+                                   <select name="expiryMonth"
+                                        id="expiryMonth" class="demoSelectBox">
+                                        <?php
+                                        for ($i = date("m"); $i <= 12; $i ++) {
+                                            $monthValue = $i;
+                                            if (strlen($i) < 2) {
+                                                $monthValue = "0" . $monthValue;
+                                            }
+                                            ?>
+                                        <option value="<?php echo $monthValue; ?>"><?php echo $i; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select> <select name="expiryMonth" id="expiryMonth"
+                                        class="demoSelectBox">
+                                        <?php
+                                    for ($i = date("Y"); $i <= 2030; $i ++) {
+                                        $yearValue = substr($i, 2);
+                                        ?>
+                                        <option value="<?php echo $yearValue; ?>"><?php echo $i; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                    </select>
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
                                     <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="Year">
@@ -123,7 +155,7 @@
                                     <label class="text-bold">CVV</label>
                                 </div>
                                 <div class="col form-group">
-                                    <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="Enter CVV" onkeypress='return restrictAlphabets(event)'>
+                                    <input type="text" class="form-control input-white" id="cvv" name="cvv" placeholder="Enter CVV" maxlength='4'>
                                 </div>
                                 <div class="col-sm col-auto form-group">
                                     <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
@@ -142,52 +174,86 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-auto align-self-center">
-                        <h4 class="text-bold color-blue">Add New Card</h4>
-                    </div>
-                    <div class="col align-self-center text-right">
-                        <button type="button" class="btn btn-primary">Add</button>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label class="text-bold">Name On Card</label>
-                                <input type="password" class="form-control input-white" id="old_pwd" placeholder="Old Password">
+                <form role="form" id="step_3_card_add">
+                    @csrf
+                    <div class="row">
+                        <div class="col-auto align-self-center">
+                            <h4 class="text-bold color-blue">Add New Card</h4>
+                        </div>
+                        <div class="col align-self-center text-right">
+                            <button type="button" class="btn btn-primary" id="add_card">Add</button>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="text-bold">Name On Card</label>
+                                    <input type="text" class="form-control input-white" name="add_name_on_card" id="add_name_on_card" placeholder="Name On Card" value="{{ $customer ? $customer->name_on_card : null}}">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="text-bold">Card Number</label>
+                                    <?php
+                                            $cardnumber = $customer->card_last_four;
+                                            if($cardnumber == ""){
+                                                $cardformat = "";
+                                            }else {
+                                                $cardformat = 'XXXX-XXXX-XXXX-'.substr($cardnumber, -4);
+                                            }
+                                        ?>
+                                    <input type="text" class="form-control input-white" name="add_card_last_four" id="add_card_last_four" placeholder="Card Number" value="{{ $cardformat}}" >
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label class="text-bold">Card Number</label>
-                                <input type="password" class="form-control input-white" id="new_pwd" placeholder="New Password">
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-bold">Expiry</label>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                   <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
+                                   <select name="add_expiryMonth" id="add_expiryMonth" class="demoSelectBox">
+                                    <?php
+                                    for ($i = date("m"); $i <= 12; $i ++) {
+                                        $monthValue = $i;
+                                        if (strlen($i) < 2) {
+                                            $monthValue = "0" . $monthValue;
+                                        }
+                                        ?>
+                                    <option value="<?php echo $monthValue; ?>"><?php echo $i; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select> <select name="add_expiryMonth" id="add_expiryMonth"
+                                    class="demoSelectBox">
+                                    <?php
+                                for ($i = date("Y"); $i <= 2030; $i ++) {
+                                    $yearValue = substr($i, 2);
+                                    ?>
+                                    <option value="<?php echo $yearValue; ?>"><?php echo $i; ?></option>
+                                    <?php
+                                }
+                                ?>
+                                </select>
+                                </div>
+                                <!-- <div class="col-md-6 form-group">
+                                    <input type="year" class="form-control input-white" id="re_new_pwd" placeholder="Year">
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-bold">CVV</label>
+                                </div>
+                                <div class="col form-group">
+                                    <input type="text" class="form-control input-white" id="add_cvv" name="add_cvv" placeholder="Enter CVV" maxlength='4'>
+                                </div>
+                                <div class="col-sm col-auto form-group">
+                                    <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="text-bold">Expiry</label>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <input type="month" class="form-control input-white" id="re_new_pwd" placeholder="Month,Year">
-                            </div>
-                            <!-- <div class="col-md-6 form-group">
-                                <input type="year" class="form-control input-white" id="re_new_pwd" placeholder="Year">
-                            </div> -->
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="text-bold">CVV</label>
-                            </div>
-                            <div class="col form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                            <div class="col-sm col-auto form-group">
-                                <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
