@@ -86,6 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
+                                
                                     <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2">
                                         <div class="col mb-4">
                                             <div class="card h-100 card-2">
