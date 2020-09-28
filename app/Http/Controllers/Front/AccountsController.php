@@ -162,14 +162,6 @@ class AccountsController extends Controller
 
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
-        // return view('front.user.profile', [
-        //     'customer' => $customer,
-        //     'address' => $addresses,
-        //     'user' => $user,
-        //     'teeth_images' => $teethImages,
-        //     'statesList' => $statesList
-        // ]);
-
         return view('front.dashboard.patientProfile', [
             'customer' => $customer,
             'address' => $addresses,
@@ -213,16 +205,13 @@ class AccountsController extends Controller
     
     public function ordersShow($reference)
     {
-        // print_r($reference);
-        // exit;
         return $order = $this->orderRepo->getOrderDetail('reference', $reference);
         // return view('front.user.order_detail', compact('order'));
     }
     
     
     public function calendar()
-    {
-       
+    {       
         return view('front.user.calendar');
     }
 
@@ -521,5 +510,10 @@ class AccountsController extends Controller
         event(new AddNotification($user->id, 1, 'You have updated card information.'));
 
         return $this->sendResponse(true,'Information updated');
+    }
+
+    public function dashboard(Request $request)
+    {       
+        return view('front.dashboard.patientDashboard');
     }
 }
