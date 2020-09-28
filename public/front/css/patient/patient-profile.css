@@ -131,6 +131,11 @@
     border-color: transparent;
 }
 
+.bank-card-details {
+    max-width: 375px;
+    width: 100%;
+}
+
 @media only screen and (min-width: 992px) {
     .card-2 .card-img-top,
     .med-history-form .card-2 .card-img-top {

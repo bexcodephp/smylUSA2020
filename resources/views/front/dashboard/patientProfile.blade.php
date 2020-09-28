@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Moblie Number<span class="text-danger">*</span></label>
-                                    <input type="text" name="phone" id="phone" placeholder="Phone Number"  value="{{ $user ? $user->phone : null}}" class="form-control" onkeypress='return restrictAlphabets(event)'/>
+                                    <input type="text" name="phone" id="phone" placeholder="Phone Number" value="{{ $user ? $user->phone : null}}" class="form-control" onkeypress='return restrictAlphabets(event)' />
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
@@ -80,20 +80,40 @@
                                         <label>Password</label>
                                         <button type="button" class="btn btn-link p-0 float-right" id="change_pwd"><u>Change</u></button>
                                     </div>
-                                    <input type="password" class="form-control input-gray" id="password" placeholder="Password">
+                                    <input type="password" class="form-control input-gray" id="acc_password" placeholder="Password">
                                 </div>
                                 <div class="col-12 form-group">
                                     <div class="col p-0">
                                         <label class="mr-3">Card Details</label>
+                                        <!-- remove or add "hidden" class for showing any button -->
                                         <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_change"><u>Change</u></button>
-                                        <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_add"><u>Add</u></button>
+                                        <button type="button" class="btn btn-link p-0 mx-3 hidden" id="btn_card_detail_add"><u>Add</u></button>
                                     </div>
-                                    <div class="row">
+                                    <!-- remove or add "hidden" class for show -->
+                                    <div class="row hidden" id="bank_card_details">
+                                        <div class="col-auto bank-card-details mt-3">
+                                            <div class="card px-0 py-3">
+                                                <div class="col-12 acc-card-chip">
+                                                    <img src="{{ asset('images/icons/chip.png') }}" class="mb-2" width="30"/>
+                                                </div>
+                                                <div class="col-12 acc-card-number">
+                                                    <label class="text-bold">XXXX XXXX XXXX 3456</label>
+                                                </div>
+                                                <div class="col-12 acc-card-valid">
+                                                    <label class="text-uppercase">Valid Thru&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
+                                                </div>
+                                                <div class="col-12 acc-card-name">
+                                                    <label class="text-bold">Name Surname</label><img src="{{ asset('images/icons/card_elipse.png') }}" width="37" class="float-right" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row hidden">
                                         <div class="col-sm-auto mb-3">
-                                            <input type="password" class="form-control input-gray" id="password" placeholder="Password">
+                                            <input type="text" class="form-control input-gray" id="" placeholder="">
                                         </div>
                                         <div class="col-sm-auto mb-3">
-                                            <input type="password" class="form-control input-gray" id="password" placeholder="Password">
+                                            <input type="text" class="form-control input-gray" id="" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +128,7 @@
                     <div class="card-header" id="heading_bill_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Billing Information</h2>
-                            <div class="ml-sm-auto d-flex mt-md-0 mt-3">                                
+                            <div class="ml-sm-auto d-flex mt-md-0 mt-3">
                                 <button type="button" class="btn btn-primary ml-auto" value="Update" id="billing_info_update">Update</button>
                                 <button class="btn btn-link px-2 ml-md-2 ml-auto btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#bill_info" aria-expanded="false" aria-controls="bill_info">
                                     <i class="fas fa-angle " aria-hidden="true"></i>
@@ -182,9 +202,9 @@
                                     <label>State</label>
                                     <select id="state_code" name="state_code" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
                                         <option selected value="">Select State</option>
-                                            @foreach($statesList as $key => $state)
-                                            <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
-                                            @endforeach
+                                        @foreach($statesList as $key => $state)
+                                        <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
@@ -233,7 +253,7 @@
                                 <div class="form-inline flex-md-wrap flex-nowrap">
                                     <div><input type="text" class="form-control disp-file-name h-auto input-gray" id="file_name" placeholder=".jpeg, .png"></div>
                                     <div class="custom-file browse-file-btn ml-2">
-                                        <input type="file" class="custom-file-input" name="avatar" id="img_file_upid"> 
+                                        <input type="file" class="custom-file-input" name="avatar" id="img_file_upid">
                                         <span id="mgs_ta"></span>
                                         <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                     </div>
@@ -312,24 +332,28 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">Name On Card</label>
-                                <input type="password" class="form-control input-white" id="old_pwd" placeholder="Old Password">
+                                <input type="text" class="form-control input-white" id="add_card_name" placeholder="Name On Card">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">Card Number</label>
-                                <input type="password" class="form-control input-white" id="new_pwd" placeholder="New Password">
+                                <input type="text" class="form-control input-white" id="add_card_no" placeholder="Card Number">
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">
-                                <label class="text-bold">Expiry</label>
+                                <label class="text-bold">Expiry<span class="text-danger hidden">*</span></label>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                            <div class="col-md-6 form-group select-option input-white">
+                                <select id="add_month" name="month" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
+                                    <option selected value="">Month</option>
+                                </select>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                            <div class="col-md-6 form-group select-option input-white">
+                                <select id="add_year" name="year" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
+                                    <option selected value="">Year</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -339,7 +363,7 @@
                                 <label class="text-bold">CVV</label>
                             </div>
                             <div class="col form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                                <input type="text" class="form-control input-white" id="change_cvv" placeholder="CVV">
                             </div>
                             <div class="col-sm col-auto form-group">
                                 <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
@@ -368,24 +392,28 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">Name On Card</label>
-                                <input type="password" class="form-control input-white" id="old_pwd" placeholder="Old Password">
+                                <input type="text" class="form-control input-white" id="change_card_name" placeholder="Name On Card">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">Card Number</label>
-                                <input type="password" class="form-control input-white" id="new_pwd" placeholder="New Password">
+                                <input type="text" class="form-control input-white" id="change_card_no" placeholder="Card Number">
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">
-                                <label class="text-bold">Expiry</label>
+                                <label class="text-bold">Expiry<span class="text-danger hidden">*</span></label>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                            <div class="col-md-6 form-group select-option input-white">
+                                <select id="change_month" name="month" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
+                                    <option selected value="">Month</option>
+                                </select>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                            <div class="col-md-6 form-group select-option input-white">
+                                <select id="change_year" name="year" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
+                                    <option selected value="">Year</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -395,7 +423,7 @@
                                 <label class="text-bold">CVV</label>
                             </div>
                             <div class="col form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                                <input type="text" class="form-control input-white" id="add_cvv" placeholder="CVV">
                             </div>
                             <div class="col-sm col-auto form-group">
                                 <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
@@ -438,7 +466,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
+                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value="save">Update Image</button>
                     </div>
                 </form>
             </div>
@@ -543,12 +571,14 @@
                 processData: false,
                 success: function(data) {
                     $("#mybilling").show();
-                    setTimeout(function() { $("#mybilling").hide(); }, 5000);
+                    setTimeout(function() {
+                        $("#mybilling").hide();
+                    }, 5000);
                     // console.log(data);
                     // alert("Billing Information update");
                 },
                 error: function() {
-                    
+
                 }
             });
         });
@@ -593,10 +623,12 @@
                 processData: false,
                 success: function(data) {
                     $("#myElem").show();
-                    setTimeout(function() { $("#myElem").hide(); }, 5000);
+                    setTimeout(function() {
+                        $("#myElem").hide();
+                    }, 5000);
                 },
                 error: function() {
-                    
+
                 }
             });
         });
@@ -607,15 +639,15 @@
         $('#view_document_modal').modal('show');
     }
 
-    function btnReplaceProfilePic(doc_name,doc_id) {
+    function btnReplaceProfilePic(doc_name, doc_id) {
         $('#upload_new_prof_pic_modal').modal('show');
         $("#doc_src").show();
-        $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+        $('#doc_src').attr('src', window.location.origin + '/storage/' + doc_name);
     }
 
 
     //Shipping Information update
-    $('#ship_info_update').on('click', function () {
+    $('#ship_info_update').on('click', function() {
         var shippingdetail = new FormData($('#shipping_info')[0]);
         $.ajax({
             url: '/profile/address-info',
@@ -626,18 +658,20 @@
             processData: false,
             success: function(data) {
                 $("#myshipping").show();
-                setTimeout(function() { $("#myshipping").hide(); }, 5000);
+                setTimeout(function() {
+                    $("#myshipping").hide();
+                }, 5000);
                 // console.log(data);
                 // alert("Shipping Information update");
             },
             error: function() {
-                
+
             }
         });
     });
 
     // profile Picture 
-    $('#img_file_upid').on('change',function(ev){
+    $('#img_file_upid').on('change', function(ev) {
         var image_detail = new FormData($('#update_profile')[0]);
         $.ajax({
             url: '/profile/update-avatar',
@@ -650,45 +684,42 @@
                 location.reload();
                 // alert("success");
             },
-            error: function() {     
-            }
+            error: function() {}
         });
     });
 
     //delete Profile Picture
-    function deleteProfilePictures(opId){
+    function deleteProfilePictures(opId) {
         _opId = opId;
         const swalWithBootstrapButtons = swal.mixin({
-        confirmButtonClass: 'btn btn-info',
-        cancelButtonClass: 'btn btn-info',
-        buttonsStyling: true,
-    })
-    
-    swalWithBootstrapButtons({
-        title: '',
-        text: "Are you sure you want to Delete this smile pictures?",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-        reverseButtons: false
-    }).then((result) => {
-        if (result.value) {
-            var date = moment();
-            var newDate = date.format("YYYY-MM-DD hh:mm:ss");
-            console.log(newDate);
-            $.ajax({
-                url: 'profile/delete-profile-images/'+_opId,
-                type: 'get',
-                success: function(data){
-                  location.reload();
-                    // console.log(data);
-                }
-            });
-        }
-        else if(result.dismiss === swal.DismissReason.cancel)
-            {
-            
+            confirmButtonClass: 'btn btn-info',
+            cancelButtonClass: 'btn btn-info',
+            buttonsStyling: true,
+        })
+
+        swalWithBootstrapButtons({
+            title: '',
+            text: "Are you sure you want to Delete this smile pictures?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.value) {
+                var date = moment();
+                var newDate = date.format("YYYY-MM-DD hh:mm:ss");
+                console.log(newDate);
+                $.ajax({
+                    url: 'profile/delete-profile-images/' + _opId,
+                    type: 'get',
+                    success: function(data) {
+                        location.reload();
+                        // console.log(data);
+                    }
+                });
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+
             }
         })
     }
@@ -699,6 +730,6 @@
             return true;
         else
             return false;
-    } 
+    }
 </script>
 @endpush

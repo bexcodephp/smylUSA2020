@@ -74,7 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
             Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
-            
+
             Route::resource('addresses', 'Addresses\AddressController');
 
             Route::resource('countries', 'Countries\CountryController');
@@ -292,4 +292,8 @@ Route::namespace('Front')->group(function () {
 
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
+});
+
+Route::get('/candidate', function () {
+    return view('front.users.u_ami_candidate');
 });
