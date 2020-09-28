@@ -30,7 +30,7 @@
     <div class="row mt-3">
         <div class="col-12 mb-2">
             <h4 class="sub-title color-blue text-bold">Billing Information</h4>
-        </div>
+        </div>        
         <div class="col-12 form-group">
             <label>Address 1<span class="text-danger">*</span></label>
             <input type="text" class="form-control input-white" id="billing_address_1" name="billing_address_1" placeholder="Type Your Address" value="{{ $address ? $address->billing_address_1 : null}}">
@@ -52,6 +52,14 @@
                 @endforeach
             </select>
         </div>
+
+        <!-- for updating design of select option-->
+        <!-- <div class="col-lg-4 col-sm-6 form-group select-option">
+            <label>State<span class="text-danger">*</span></label>
+            <select name="billing_state" id="billing_state" class="form-control selectpicker show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select State">
+            </select>
+        </div> -->
+
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Zip Code<span class="text-danger">*</span></label>
             <input type="text" class="form-control input-white" name="billing_zip" id="billing_zip" placeholder="000000" value="{{ $address ? $address->billing_zip : null }}" onkeypress='return restrictAlphabets(event)'>

@@ -10,6 +10,9 @@
             <div class="box">
                 <div class="box-body">
                     <h2>Customers</h2>
+                    <div class="box-tools pull-right mb-2">
+                        <a href="{{ route('admin.customers.create') }}" class="btn btn-primary">Add New</a>
+                    </div>
                     {{-- @include('layouts.search', ['route' => route('admin.operators.index')]) --}}
                     <table class="table table-striped table-bordered">
                         <thead>

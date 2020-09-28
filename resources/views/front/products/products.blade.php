@@ -49,14 +49,7 @@
                     {{-- NOTE:for isotop add class name as per the diffrentiation --}}
                     {{--  content 1  --}}
                     @foreach($products as $key => $product)
-                        @php $catName=''; @endphp
-                        @foreach($categories as $key1 => $category)
-                            @if($categories[$key1]->products[$key1]->product_id == $product->id)
-                                @php $catName=$category->name; @endphp
-                            @endif
-                        @endforeach
-
-                    <div class="col mb-3 r-product element-item {{$catName}}">
+                            <div class="col mb-3 r-product element-item {{$product->cat_name}}">
                             <div class="card product-card">
                                 {{--NOTE:
                                     set id title="id_name" attribute for popover displaying div--}}
@@ -100,7 +93,7 @@
                                     <div class="popover-details">
                                         {{--  change content START  --}}
                                         <div class="popover-caption">
-                                            <p>{{ $product->description }}</p>
+                                            <p>{!! $product->description !!}</p>
                                             <div class="product-available py-2">
                                                 <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
                                                 <h5 class="color-blue mb-0">SKU:<span class="text-bold color-gray ml-2">{{ $product->sku }}</span></h5>

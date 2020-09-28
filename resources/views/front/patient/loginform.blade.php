@@ -35,7 +35,7 @@
                         <a href="#step_1" class="nav-link active" aria-controls="step_1" id="nav_step_1" role="tab" data-toggle="tab">Step <div class="step-no">1</div></a>
                     </li>
                     <li role="presentation">
-                        <a href="#step_2" class="nav-link disabled" aria-controls="step_2" id="nav_step_2" role="tab" data-toggle="tab">Step <div class="step-no">2</div></a>
+                        <a href="#step_2" class="nav-link " aria-controls="step_2" id="nav_step_2" role="tab" data-toggle="tab">Step <div class="step-no">2</div></a>
                     </li>
                     <li role="presentation" class="">
                         <a href="#step_3" class="nav-link disabled" aria-controls="step_3" id="nav_step_3" role="tab" data-toggle="tab">Step <div class="step-no">3</div></a>
@@ -157,4 +157,9 @@
 <script src="{{asset('js/patient/medicalform.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/sweetalert2.all.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<!-- <script type="text/javascript">
+    $(document).ready(function() {
+        $('.selectpicker').selectpicker();
+    });
+</script> -->
 @endpush
