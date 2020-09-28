@@ -8,6 +8,7 @@ use App\Shop\Categories\Category;
 use App\Http\Controllers\Controller;
 use App\Shop\Products\Transformations\ProductTransformable;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
+use DB;
 
 class ProductController extends Controller
 {
@@ -31,6 +32,8 @@ class ProductController extends Controller
     {
         $products = Product::whereStatus(1)->orderBy('order_no', 'ASC')->get();
         $categories = Category::with(['products:category_id,product_id'])->get();
+
+        $products = DB::select("SELECT p.*,cat.name as cat_name FROM products p LEFT JOIN category_product c ON c.product_id = p.id LEFT JOIN categories cat ON cat.id = c.category_id" );
         // return   view('front.products.product-list', [
         //     'products' => $products,
         //     'categories' => $categories
