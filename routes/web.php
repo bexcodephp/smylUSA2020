@@ -325,9 +325,9 @@ Route::get('/patient-picture', function () {
 // Route::get('/patient-orders', function () {
 //     return view('front.dashboard.patientMyOrders');
 // });
-// Route::get('/patient-resources', function () {
-//     return view('front.dashboard.patientResources');
-// });
+Route::get('/patient-resources', function () {
+    return view('front.dashboard.patientResources');
+});
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
 });
