@@ -331,3 +331,4 @@ Route::get('/patient-resources', function () {
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
 });
+Route::get('/customer/print-pdf', [ 'as' => 'customer.printpdf', 'uses' => 'CustomerController@printPDF']);

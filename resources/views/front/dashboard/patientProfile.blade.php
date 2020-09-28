@@ -215,7 +215,7 @@
                                     <img class="card-img-top" id="img_prv" />
                                     <div class="card-footer p-0">
                                         <button type="button" class="btn btn-link btn-view p-0" onclick="btnViewMedicalForm()">View</button>
-                                        <a href="#" class="btn btn-link btn-delete p-0">Delete</a>
+                                        <!-- <a href="#" class="btn btn-link btn-delete p-0">Delete</a> -->
                                     </div>
                                 </div>
                             </div>
@@ -456,9 +456,159 @@
                         <h4 class="sub-title-1 color-blue text-bold" id="title_add_smile">View Document</h4>
                     </div>
                     <div class="col-12 mb-3">
-                        <div class="embed-responsive embed-responsive-16by9">
+                        <span>Profile Information</span>
+                        <table class="table">
+                            <tr>
+                                <td> First Name</td>
+                                <td>{{$customer->first_name}}</td>
+                            </tr>
+                            <tr>
+                                <td> Last Name</td>
+                                <td>{{$customer->last_name}}</td>
+                            </tr>
+                            <tr>
+                                <td>  Moblie Number</td>
+                                <td>{{$customer->phone}}</td>
+                            </tr>
+                            <tr>
+                                <td>  Date of Birth</td>
+                                <td>{{$customer->dob}}</td>
+                            </tr>
+                            <tr>
+                                <td>   Patient ID</td>
+                                <td>{{$customer->patient_id}}</td>
+                            </tr>
+                        </table>
+                        <span>Address</span>
+                        <table class="table">
+                            <tr>
+                                <td>  Address 1</td>
+                                <td>{{$address->address_1}}</td>
+                            </tr>
+                            <tr>
+                                <td>  Address 2</td>
+                                <td>{{$address->address_2}}</td>
+                            </tr>
+                            <tr>
+                                <td>  City</td>
+                                <td>{{$address->city}}</td>
+                            </tr>
+                            <tr>
+                                <td>  State</td>
+                                <td>{{$address->state_code}}</td>
+                            </tr>
+                            <tr>
+                                <td>  Zip Code</td>
+                                <td>{{$address->zip}}</td>
+                            </tr>
+                        </table>
+                        <span>Shipping Address</span>
+                        <table class="table">
+                            <tr>
+                                <td>  Address 1</td>
+                                <td>{{$address->billing_address_1}}</td>
+                            </tr>
+                            <tr>
+                                <td>  Address 2</td>
+                                <td>{{$address->billing_address_2}}</td>
+                            </tr>
+                            <tr>
+                                <td>  City</td>
+                                <td>{{$address->billing_city}}</td>
+                            </tr>
+                            <tr>
+                                <td>  State</td>
+                                <td>{{$address->billing_state}}</td>
+                            </tr>
+                            <tr>
+                                <td>  Zip Code</td>
+                                <td>{{$address->billing_zip}}</td>
+                            </tr>
+                        </table>
+                        <span>Questions</span>
+                        <table class="table">
+                          <tr>
+                            <td>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blood cancers):</td>
+                            <td>{{$answers->question1}}</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              I have a branded retainer:
+                            </td>
+                            <td>{{$answers->question2}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have crowns:</td>
+                            <td>{{$answers->question3}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have primary (baby) teeth:</td>
+                            <td>{{$answers->question4}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have bridgework:</td>
+                            <td>{{$answers->question5}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blood cancers):</td>
+                            <td>{{$answers->question6}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have an impacted tooth:</td>
+                            <td>{{$answers->question7}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have an implant:</td>
+                            <td>{{$answers->question8}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have eneers:</td>
+                            <td>{{$answers->question9}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have a recent radiograph of my teeth:</td>
+                            <td>{{$answers->question10}}</td>
+                          </tr>
+                          <tr>
+                            <td>Do you feel pain in any of your teeth?</td>
+                            <td>{{$answers->question11}}</td>
+                          </tr>
+                          <tr>
+                            <td>Do you have any sores or lumps in or near your mouth?</td>
+                            <td>{{$answers->question12}}</td>
+                          </tr>
+                          <tr>
+                            <td>Do you currently have any head, neck or jaw injuries?</td>
+                            <td>{{$answers->question13}}</td>
+                          </tr>
+                          <tr>
+                            <td>Do you currently experience: jaw clicking, pain, difficulty opening and /or closing or difficulty chewing?</td>
+                            <td>{{$answers->question14}}</td>
+                          </tr>
+                          <tr>
+                            <td>Have you noticed any loosening of your teeth or do you have untreated periodontal disease?</td>
+                            <td>{{$answers->question15}}</td>
+                          </tr>
+                          <tr>
+                            <td>Do you have any known allergies to any dental materials?</td>
+                            <td>{{$answers->question16}}</td>
+                          </tr>
+                          <tr>
+                            <td>I have a history of IV bisphosphonate treatment:</td>
+                            <td>{{$answers->question17}}</td>
+                          </tr>
+                          <tr>
+                            <td>I am currently on acute corticosteroids or in immunosuppression,chemotherapy, or radiation:</td>
+                            <td>{{$answers->question18}}</td>
+                          </tr>
+                          <tr>
+                            <td>Chief Complaint:</td>
+                            <td>{{$answers->question19}}</td>
+                          </tr>  
+                        </table>
+                        <!-- <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" allowfullscreen></iframe>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <div class="col-12 text-center">
                         <div class="custom-file browse-file-btn">
@@ -470,6 +620,8 @@
                         </div>
                     </div> -->
                 </form>
+                <a href="{{route('customer.printpdf')}}" target="_blank" class="btn btn-primary btn-edit">Print PDF</a>
+                    <!-- <button type="submit" class="btn btn-primary btn-edit" id="">Generate PDF</button> -->
             </div>
         </div>
     </div>

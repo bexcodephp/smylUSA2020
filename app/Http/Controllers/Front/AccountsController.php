@@ -163,14 +163,23 @@ class AccountsController extends Controller
 
         $teethImages = CustomerImage::where('customer_id', $user->id)->get();
 
+        $answers = DB::table('medical_form_question')
+            ->where('customer_id', $customer->id)
+            ->first();
+
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
+
+        // echo "<pre>";
+        // print_r($user);
+        // exit();
 
         return view('front.dashboard.patientProfile', [
             'customer' => $customer,
             'address' => $addresses,
             'user' => $user,
             'teeth_images' => $teethImages,
-            'statesList' => $statesList
+            'statesList' => $statesList,
+            'answers' => $answers
         ]);
     }
 
@@ -191,7 +200,7 @@ class AccountsController extends Controller
         return view('front.dashboard.patientMyOrders', compact('orders', 'products'));
     }
 
-    public function storeMedicalFormStep2(Request $request)
+    public function updateUserInfoStep2(Request $request)
     {
         $user = $this->loggedUser();
         $data = DB::table('medical_form_question')

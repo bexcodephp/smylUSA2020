@@ -130,6 +130,7 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         ),
         'L' => 
         array (
+            'League\\MimeTypeDetection\\' => 25,
             'League\\Fractal\\' => 15,
             'League\\Flysystem\\' => 17,
             'Lcobucci\\JWT\\' => 13,
@@ -423,6 +424,10 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'League\\MimeTypeDetection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
+        ),
         'League\\Fractal\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/fractal/src',
@@ -658,6 +663,7 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         'App\\Http\\Controllers\\Admin\\Permissions\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Permissions/PermissionController.php',
         'App\\Http\\Controllers\\Admin\\Products\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Products/ProductController.php',
         'App\\Http\\Controllers\\Admin\\Provinces\\ProvinceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Provinces/ProvinceController.php',
+        'App\\Http\\Controllers\\Admin\\ResourceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ResourceController.php',
         'App\\Http\\Controllers\\Admin\\Roles\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Roles/RoleController.php',
         'App\\Http\\Controllers\\Admin\\UserAssessmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UserAssessmentController.php',
         'App\\Http\\Controllers\\Api\\AppointmentApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AppointmentApiController.php',
@@ -689,6 +695,7 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         'App\\Http\\Controllers\\Front\\Payments\\BankTransferController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/Payments/BankTransferController.php',
         'App\\Http\\Controllers\\Front\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/ProductController.php',
         'App\\Http\\Controllers\\Front\\VendorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/VendorController.php',
+        'App\\Http\\Controllers\\ResourceController' => __DIR__ . '/../..' . '/app/Http/Controllers/_ResourceController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\CheckUserType' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckUserType.php',
         'App\\Http\\Middleware\\EmailVerification' => __DIR__ . '/../..' . '/app/Http/Middleware/EmailVerification.php',
@@ -890,6 +897,7 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         'App\\Shop\\Teams\\Team' => __DIR__ . '/../..' . '/app/Shop/Teams/Team.php',
         'App\\Shop\\Tools\\UploadableTrait' => __DIR__ . '/../..' . '/app/Shop/Tools/UploadableTrait.php',
         'App\\Subscriber' => __DIR__ . '/../..' . '/app/Subscriber.php',
+        'App\\Table_resources' => __DIR__ . '/../..' . '/app/Table_resources.php',
         'App\\Traits\\GetWeekday' => __DIR__ . '/../..' . '/app/Traits/GetWeekday.php',
         'App\\Utilities' => __DIR__ . '/../..' . '/app/Utilities.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
@@ -949,6 +957,7 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         'CreateProvincesTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_26_035202_create_provinces_table.php',
         'CreateShoppingcartTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_17_011245_create_shoppingcart_table.php',
         'CreateStatesTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_03_023925_create_states_table.php',
+        'CreateTableResources' => __DIR__ . '/../..' . '/database/migrations/2020_09_15_084006_create_table_resources.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',
@@ -1126,9 +1135,6 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         'Doctrine\\DBAL\\FetchMode' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/FetchMode.php',
         'Doctrine\\DBAL\\Id\\TableGenerator' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Id/TableGenerator.php',
         'Doctrine\\DBAL\\Id\\TableGeneratorSchemaVisitor' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Id/TableGeneratorSchemaVisitor.php',
-        'Doctrine\\DBAL\\Internal\\DependencyOrderCalculator' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Internal/DependencyOrderCalculator.php',
-        'Doctrine\\DBAL\\Internal\\DependencyOrderEdge' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Internal/DependencyOrderEdge.php',
-        'Doctrine\\DBAL\\Internal\\DependencyOrderNode' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Internal/DependencyOrderNode.php',
         'Doctrine\\DBAL\\LockMode' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/LockMode.php',
         'Doctrine\\DBAL\\Logging\\DebugStack' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Logging/DebugStack.php',
         'Doctrine\\DBAL\\Logging\\EchoSQLLogger' => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL/Logging/EchoSQLLogger.php',
@@ -3130,6 +3136,12 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         'League\\Fractal\\Serializer\\Serializer' => __DIR__ . '/..' . '/league/fractal/src/Serializer/Serializer.php',
         'League\\Fractal\\Serializer\\SerializerAbstract' => __DIR__ . '/..' . '/league/fractal/src/Serializer/SerializerAbstract.php',
         'League\\Fractal\\TransformerAbstract' => __DIR__ . '/..' . '/league/fractal/src/TransformerAbstract.php',
+        'League\\MimeTypeDetection\\EmptyExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/EmptyExtensionToMimeTypeMap.php',
+        'League\\MimeTypeDetection\\ExtensionMimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/ExtensionMimeTypeDetector.php',
+        'League\\MimeTypeDetection\\ExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/ExtensionToMimeTypeMap.php',
+        'League\\MimeTypeDetection\\FinfoMimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/FinfoMimeTypeDetector.php',
+        'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
+        'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'Mailchimp' => __DIR__ . '/..' . '/mailchimp/mailchimp/src/Mailchimp.php',
         'Mailchimp_Absplit_UnknownError' => __DIR__ . '/..' . '/mailchimp/mailchimp/src/Mailchimp/Exceptions.php',
         'Mailchimp_Absplit_UnknownSplitTest' => __DIR__ . '/..' . '/mailchimp/mailchimp/src/Mailchimp/Exceptions.php',
@@ -5607,6 +5619,7 @@ class ComposerStaticInitdb8b34ac884e55def7700546af7a91e2
         'Symfony\\Component\\VarDumper\\VarDumper' => __DIR__ . '/..' . '/symfony/var-dumper/VarDumper.php',
         'Symfony\\Contracts\\EventDispatcher\\Event' => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts/Event.php',
         'Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts/EventDispatcherInterface.php',
+        'Symfony\\Contracts\\Service\\Attribute\\Required' => __DIR__ . '/..' . '/symfony/service-contracts/Attribute/Required.php',
         'Symfony\\Contracts\\Service\\ResetInterface' => __DIR__ . '/..' . '/symfony/service-contracts/ResetInterface.php',
         'Symfony\\Contracts\\Service\\ServiceLocatorTrait' => __DIR__ . '/..' . '/symfony/service-contracts/ServiceLocatorTrait.php',
         'Symfony\\Contracts\\Service\\ServiceProviderInterface' => __DIR__ . '/..' . '/symfony/service-contracts/ServiceProviderInterface.php',
