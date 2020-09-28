@@ -63,15 +63,50 @@ $(document).ready(function () {
         $('#step_2').removeClass('active show');
         $('#step_1').addClass('active show');
     });
-    $('#step2_skip').on('click', function () {
-        // alert("prev---step2");
 
+    $('#step3_prev').on('click', function () {
+        $('#nav_step_3').removeClass("active");
+        $('#nav_step_2').addClass("active");
+        $('#step_3').removeClass('active show');
+        $('#step_2').addClass('active show');
+    }); 
+    $('#step4_prev').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_3').addClass("active");
+        $('#step_4').removeClass('active show');
+        $('#step_3').addClass('active show');
+    }); 
+    $('#step5_prev').on('click', function () {
+        $('#nav_step_5').removeClass("active");
+        $('#nav_step_4').addClass("active");
+        $('#step_5').removeClass('active show');
+        $('#step_4').addClass('active show');
+    }); 
+
+    // skip btn js
+    $('#step2_skip').on('click', function () {
         $('#nav_step_2').removeClass("active");
         $('#nav_step_3').addClass("active");
-
         $('#step_2').removeClass('active show');
         $('#step_3').addClass('active show');
     }); 
+
+    $('#step3_skip').on('click', function () {
+        $('#nav_step_3').removeClass("active");
+        $('#nav_step_4').addClass("active");
+        $('#step_3').removeClass('active show');
+        $('#step_4').addClass('active show');
+    });
+    $('#step4_skip').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_5').addClass("active");
+        $('#step_4').removeClass('active show');
+        $('#step_5').addClass('active show');
+    });
+    // finish btn redirection
+    $('#step5_finish').on('click', function () {
+        window.location.href = "/dashboard";
+    });
 
     $('.selectpicker').selectpicker();
     // change password modal
@@ -96,7 +131,6 @@ $(document).ready(function () {
             $('#card_detail_change_modal').modal('show')
         });
     }
-   
 });
 
 // UPLOAD new smile pic modal
@@ -203,29 +237,29 @@ $(document).ready(function () {
             return false;
     } 
 
-jQuery(function($) {
-    var cb1 = $('#sameAsBilling').is(':checked');
-    if(cb1 == true){
-        var billing_address_1 = $('#billing_address_1').val();
-        var billing_address_2 = $('#billing_address_2').val();
-        var billing_city = $('#billing_city').val();
-        var billing_state = $('#billing_state').val();
-        var billing_zip = $('#billing_zip').val();
-        $("#address_1").val(billing_address_1).attr('disabled', true);
-        $("#address_2").val(billing_address_2).attr("disabled", true);
-        $("#city").val(billing_city).attr("disabled", true);
-        $("#state_code").val(billing_state).attr("disabled", true); 
-        $("#zip").val(billing_zip).attr("disabled", true);  
-    } else{
-        _flag_billing = 0;
-        $('.readyonly').attr('readOnly',false); 
-        $("input.address_1").removeAttr("disabled");
-        $("input.address_2").removeAttr("disabled");
-        $("input.city").removeAttr("disabled");
-        $('#state_code').attr("disabled", false); 
-        $("input.zip").removeAttr("disabled");
-    }
-});
+    jQuery(function($) {
+        var cb1 = $('#sameAsBilling').is(':checked');
+        if(cb1 == true){
+            var billing_address_1 = $('#billing_address_1').val();
+            var billing_address_2 = $('#billing_address_2').val();
+            var billing_city = $('#billing_city').val();
+            var billing_state = $('#billing_state').val();
+            var billing_zip = $('#billing_zip').val();
+            $("#address_1").val(billing_address_1).attr('disabled', true);
+            $("#address_2").val(billing_address_2).attr("disabled", true);
+            $("#city").val(billing_city).attr("disabled", true);
+            $("#state_code").val(billing_state).attr("disabled", true); 
+            $("#zip").val(billing_zip).attr("disabled", true);  
+        } else{
+            _flag_billing = 0;
+            $('.readyonly').attr('readOnly',false); 
+            $("input.address_1").removeAttr("disabled");
+            $("input.address_2").removeAttr("disabled");
+            $("input.city").removeAttr("disabled");
+            $('#state_code').attr("disabled", false); 
+            $("input.zip").removeAttr("disabled");
+        }
+    });
 
     //step 1 validation
     $('#step_1').click(function() {
@@ -417,4 +451,30 @@ jQuery(function($) {
                     
                 }
             });
+    });
+
+
+    // step 2 ajax update
+    $('#step2_submit').on('click', function () {
+        var formdata = new FormData($('#step_2')[0]);
+        $("#step_2").valid();        
+        $.ajax({
+            url: '/profile/update-step2',
+            type: "POST",
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                if(data==200){
+                    $('#nav_step_2').removeClass("active");
+                    $('#nav_step_3').addClass("active");
+                    $('#step_2').removeClass('active show');
+                    $('#step_3').addClass('active show');
+                }                
+            },
+            error: function() {
+                
+            }
+        });
     });
