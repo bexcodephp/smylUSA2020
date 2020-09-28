@@ -340,7 +340,7 @@ $(document).ready(function () {
     $('#step1_submit').on('click', function () {
         var formdata = new FormData($('#step_1')[0]);  
 
-        var address_1 = $("#address_1").val(); alert(address_1);
+        var address_1 = $("#address_1").val(); 
           
         if(!$("#step_1").valid()){
             return false;
