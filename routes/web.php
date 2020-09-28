@@ -283,8 +283,7 @@ Route::namespace('Front')->group(function () {
         Route::get('profile/delete-profile-images/{id}', 'AccountsController@removeProfileImage');
         Route::post('update-password', 'AccountsController@updatePassword')->name('updatePassword');
     });
-
-
+    
     // Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
