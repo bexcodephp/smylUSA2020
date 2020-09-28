@@ -409,10 +409,9 @@ class AccountsController extends Controller
         return $this->sendResponse(true, 'Image updated');
     }
     
-    public function updateTeethImages(Request $request)
+    public function addTeethImages(Request $request)
     {
-        if(Input::get('submit')) {
-          $description = $request->description;
+        $description = $request->description;
             if($request->file('image') == 0)
             {
                 return $this->sendResponse(false, "Teeth Images are required");
@@ -420,17 +419,19 @@ class AccountsController extends Controller
 
             $user = $this->loggedUser();
            
-                CustomerImage::create([
-                    'customer_id' => $user->id,
-                    'image' => $this->saveImage($request->file('image'), 'images'),
-                    'description' => $description
-                ]);
+            CustomerImage::create([
+                'customer_id' => $user->id,
+                'image' => $this->saveImage($request->file('image'), 'images'),
+                'description' => $description
+            ]);
     
-            event(new AddNotification($user->id, 1, 'You have uploaded teeth images.'));        
-            return $this->sendResponse(true, 'Image uplaoded');
-      
-      }else {
-            $customers = CustomerImage::find($request->doc_id_name);
+        event(new AddNotification($user->id, 1, 'You have uploaded teeth images.'));        
+        return $this->sendResponse(true, 'Image uplaoded');
+    }
+
+    public function editTeethImages(Request $request)
+    {
+        $customers = CustomerImage::find($request->doc_id_name);
             if(empty($customers ) && $customers ->count() == 0){
                 return $this->sendResponse(false, "Teeth Images are required");
             }
@@ -448,7 +449,6 @@ class AccountsController extends Controller
             } else{
                 return $this->sendResponse(false, "Teeth Images are required");
             }
-        } 
     }
 
     public function removeTeethImage($image)

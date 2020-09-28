@@ -35,7 +35,7 @@
                         <a href="#step_1" class="nav-link active" aria-controls="step_1" id="nav_step_1" role="tab" data-toggle="tab">Step <div class="step-no">1</div></a>
                     </li>
                     <li role="presentation">
-                        <a href="#step_2" class="nav-link " aria-controls="step_2" id="nav_step_2" role="tab" data-toggle="tab">Step <div class="step-no">2</div></a>
+                        <a href="#step_2" class="nav-link disableds" aria-controls="step_2" id="nav_step_2" role="tab" data-toggle="tab">Step <div class="step-no">2</div></a>
                     </li>
                     <li role="presentation" class="">
                         <a href="#step_3" class="nav-link disabled" aria-controls="step_3" id="nav_step_3" role="tab" data-toggle="tab">Step <div class="step-no">3</div></a>
@@ -73,8 +73,10 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
                
-                <form class="row justify-content-center" action="{{ route('user.updateTeethImages') }}" method="POST" role="form" id="smilepictures" enctype="multipart/form-data">
+                <form class="row justify-content-center" role="form" id="smilepictures" enctype="multipart/form-data">
                     @csrf
+                    <p id="add_image" style="display:none;color:green">Add Successfully</p>
+                    <p id="edit_image" style="display:none;color:green">Updated Successfully</p>
                     <div class="col-12 align-self-center mb-3 text-center">
                         <input type="hidden" name="doc_id_name" id="doc_id_hid">
                         <h4 class="sub-title-1 color-blue text-bold" id="title_add_smile">Add New Smile Picture</h4>
@@ -96,7 +98,7 @@
                             </div>
                             <div class="col-auto">
                                 <div class="custom-file browse-file-btn">
-                                    <input type="file" class="custom-file-input" name="image" id="teethpic"> 
+                                    <input type="file" class="custom-file-input" name="image" id="teethpic" onchange="validateImage()"> 
                                     <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                 </div>
                             </div>
@@ -104,8 +106,8 @@
                     </div>
                     <div class="col-12 text-center">
                         <!-- <button type="submit" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button> -->
-                        <button type="submit" class="btn btn-primary" id="upload_pictures" name="submit" value="submit">Upload New Image</button>
-                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
+                        <button type="button" class="btn btn-primary" id="upload_new_pictures" name="submit_1" value="submit_1">Upload New Image</button>
+                        <button type="button" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
                     </div>
                 </form>
             </div>

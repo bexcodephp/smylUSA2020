@@ -278,7 +278,8 @@ Route::namespace('Front')->group(function () {
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar');
         Route::post('profile/card-info', 'AccountsController@updateCard');
         Route::post('profile/card-add', 'AccountsController@AddCard');
-        Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
+        Route::post('profile/add-teethimages', 'AccountsController@addTeethImages'); 
+        Route::post('profile/edit-teethimages', 'AccountsController@editTeethImages');
         Route::post('profile/update-profile-picture', 'AccountsController@updateProfilePicture')->name('user.updateProfilePicture');
         Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
         Route::get('profile/delete-profile-images/{id}', 'AccountsController@removeProfileImage');
