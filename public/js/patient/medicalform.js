@@ -107,6 +107,17 @@ $(document).ready(function () {
         $('#step_5').addClass('active show');
     });
 
+    // next redirection
+    
+
+    $('#step4_submit').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_5').addClass("active");
+
+        $('#step_4').removeClass('active show');
+        $('#step_5').addClass('active show');
+    });
+
     // finish btn redirection
 
     $('#step5_finish').on('click', function () {
