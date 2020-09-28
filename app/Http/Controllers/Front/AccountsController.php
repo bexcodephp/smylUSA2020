@@ -182,8 +182,10 @@ class AccountsController extends Controller
     public function resources()
     {
         $notifications = Notification::where('user_type', 1)->where('user_id', auth()->user()->id)->latest()->get();
+        $resources = DB::table('table_resources')->get();
+        return view('front.dashboard.patientResources', compact('notifications','resources'));
 
-        return view('front.user.resources', compact('notifications'));
+        // return view('front.user.resources', compact('notifications'));
     }
     
     

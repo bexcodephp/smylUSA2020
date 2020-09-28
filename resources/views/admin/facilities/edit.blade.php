@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                             
-                            <input type="hidden" id="state_name" name="state" value="<?php echo $state_arr[$facility->state]; ?>">
+                            <input type="hidden" id="state_name" name="state" value="<?php echo $facility->state; ?>">
 
                             <div class="col-sm-12">
                                 <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
@@ -345,9 +345,9 @@
 <!-- /.content -->
 @endsection
 
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @section('js')
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false&&libraries=geometry,places"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false"></script>
 
 <script>
     var marker;
@@ -360,8 +360,14 @@
         $('#modal_upload_docs').on('hidden.bs.modal', function (e) {
             // do something...
         });
+
+        $("#state option").each(function() {
+          if($(this).text() == $('#state_name').val()) {
+            $(this).attr('selected', 'selected');            
+          }                        
+        });
         
-        $('#state').val($('#state_name').val());
+        // $('#state').text($('#state_name').val());
 
         $('#state').on('change', function(){
             var stateID = $(this).val();
@@ -380,11 +386,13 @@
                         obj = jQuery.parseJSON(data);
 
                         $('#city').html("");
-
+                        var opt= "";
                         for(var i=0;i<obj.length;i++)
                         {
-                            $('#city').append('<option value="'+obj[i].city_name+'">'+obj[i].city_name+'</option>')
+                            opt+='<option value="'+obj[i].city_name+'">'+obj[i].city_name+'</option>';
                         }
+                        
+                        $('#city').append(opt);
                     }
                 })
             }else{
@@ -398,14 +406,12 @@
             return false;
             }
         });
-
-
+        GetCity();
     });
 
     function GetCity()
     {
-        var stateID = $('#state_name').val();
-        
+        var stateID = $('#state').val();
         if(stateID){
             $.ajax({
                 url:'../getcity',
@@ -434,7 +440,7 @@
         }
     }
 
-    GetCity();
+
 
     initAutocomplete(parseFloat(document.getElementById('latitude').value),parseFloat(document.getElementById('longitude').value));
 
