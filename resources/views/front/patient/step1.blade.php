@@ -70,7 +70,11 @@
         <div class="col-12 mb-2 form-inline">
             <h4 class="sub-title color-blue text-bold mb-2">Shipping Information</h4>
             <div class="custom-control custom-checkbox ml-sm-4 ">
-                <input type="checkbox" class="custom-control-input" id="sameAsBilling" name="same_as_shipping">
+                @if($address->same_as_shipping == 1)
+                <input type="checkbox" class="custom-control-input" id="sameAsBilling" value="{{ $address ? $address->same_as_shipping : null }}" checked>
+                @else
+                <input type="checkbox" class="custom-control-input" id="sameAsBilling">
+                @endif
                 <label class="custom-control-label color-blue text-bold" for="sameAsBilling"><u>Same As Billing Information</u></label>
             </div>
         </div>
