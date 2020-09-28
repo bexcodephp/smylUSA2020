@@ -63,7 +63,7 @@
                 </form>
                 <!-- Bite Pictures -->
                 <form class="card account-info">
-                    <div class="card-header" id="heading_bite_pic">
+                    <!-- <div class="card-header" id="heading_bite_pic">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Bite Pictures</h2>
                             <div class="ml-sm-auto d-flex mt-md-0 mt-3">
@@ -71,7 +71,7 @@
                                 <button class="btn btn-link px-2 ml-md-2 ml-auto btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#bite_pic" aria-expanded="false" aria-controls="bite_pic"><i class="fas fa-angle" aria-hidden="true"></i></button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div id="bite_pic" class="collapse" aria-labelledby="heading_bite_pic" data-parent="#accordion_my_picture">
                         <div class="card-body">
                             <div class="row mt-3 bite-pictures">
@@ -86,6 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
+                                
                                     <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2">
                                         <div class="col mb-4">
                                             <div class="card h-100 card-2">
@@ -111,7 +112,7 @@
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">STL Files</h2>
                             <div class="ml-sm-auto d-flex mt-md-0 mt-3">
-                                <button type="button" class="btn btn-primary ml-auto" onclick="btnUploadStl()">Upload New</button>
+                                <!-- <button type="button" class="btn btn-primary ml-auto" onclick="btnUploadStl()">Upload New</button> -->
                                 <button class="btn btn-link px-2 ml-md-2 ml-auto btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#stl_file" aria-expanded="false" aria-controls="stl_file"><i class="fas fa-angle" aria-hidden="true"></i></button>
                             </div>
                         </div>
@@ -127,7 +128,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row row-cols-1 row-cols-md-2">
+                                    <!-- <div class="row row-cols-1 row-cols-md-2">
                                         <div class="col mb-4">
                                             <div class="card h-100 card-2">
                                                 <img class="card-img-top" src="{{ asset('images/products/stl_1.png') }}" onclick="btnViewLtsPic()" />
@@ -176,7 +177,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

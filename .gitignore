@@ -31,3 +31,4 @@ storage/app/public/storage
 database/migrations/2020_08_28_125846_create_facility_non_availability_timeslots_table.php
 *.lock
 *.sql
+After /storage/*.key paste /vendor

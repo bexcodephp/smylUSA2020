@@ -274,7 +274,9 @@ Route::namespace('Front')->group(function () {
         Route::post('profile/address-info', 'AccountsController@updateAddressInfo');
         Route::post('profile/billing-info', 'AccountsController@updateBillingInfo');
         Route::post('profile/update-step1', 'AccountsController@updateUserInfoStep1');
+        Route::post('profile/update-step2', 'AccountsController@updateUserInfoStep2');
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar');
+        Route::post('profile/card-info', 'AccountsController@updateCard');
         Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
         Route::post('profile/update-profile-picture', 'AccountsController@updateProfilePicture')->name('user.updateProfilePicture');
         Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
@@ -304,6 +306,9 @@ Route::namespace('Front')->group(function () {
 // Route::get('/dashboard', function () {
 //     return view('front.dashboard.patientDashboard');
 // });
+// Route::get('/dashboard', function () {
+//     return view('front.dashboard.patientDashboard');
+// });
 
 // Route::get('/patient-picture', function () {
 //     return view('front.dashboard.patientPicture');
@@ -317,9 +322,9 @@ Route::get('/patient-picture', function () {
     return view('front.dashboard.patientPicture');
 });
 
-Route::get('/patient-orders', function () {
-    return view('front.dashboard.patientMyOrders');
-});
+// Route::get('/patient-orders', function () {
+//     return view('front.dashboard.patientMyOrders');
+// });
 // Route::get('/patient-resources', function () {
 //     return view('front.dashboard.patientResources');
 // });

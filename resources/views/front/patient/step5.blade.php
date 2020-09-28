@@ -13,7 +13,7 @@
                                     </div> -->
                                 </div>
                             </div>
-                            
+                            <!-- if STL files are uploaded  -->
                             <div class="col-12">
                                 <div class="row row-cols-1 row-cols-md-2">
                                     <!-- <div class="col mb-4">
@@ -54,6 +54,7 @@
                                     </div> -->
                                 </div>
                             </div>
+                            <!-- if STL files are not uploaded  -->
                             <div class="col-12">
                                 <div class="card card-2 text-center">
                                 <p class="card-text">Your dental scans will be uploaded here by our team once we have received your impression.
@@ -67,8 +68,8 @@
                             <div class="col-6 text-left">
                                 <button type="button" class="btn btn-primary prev-tab" id="step5_prev">Prev</button>
                             </div>
-                            <div class="col-12 text-right">
-                                <button type="button" class="btn btn-primary next-finish">Finish</button>
+                            <div class="col-6 text-right">
+                                <button type="button" class="btn btn-primary next-finish" id="step5_finish">Finish</button>
                             </div>
                         </div>
                     </form>

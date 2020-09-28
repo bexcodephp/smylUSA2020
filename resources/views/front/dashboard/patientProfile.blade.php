@@ -20,6 +20,7 @@
             <div class="accordion" id="accordion_profile">
                 <form class="card" role="form" id="myprofile">
                     @csrf
+                    <p id="myElem" style="display:none">Update Personal Information</p>
                     <div class="card-header" id="heading_p_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Personal Information</h2>
@@ -103,6 +104,7 @@
                 <!-- Billing Information -->
                 <form class="card billing-info" id="billing_info">
                     @csrf
+                    <p id="mybilling" style="display:none">Update Billing Information</p>
                     <div class="card-header" id="heading_bill_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Billing Information</h2>
@@ -149,6 +151,7 @@
                 <!-- Shipping Information -->
                 <form class="card shipping-info" id="shipping_info">
                     @csrf
+                    <p id="myshipping" style="display:none">Update Shipping Information</p>
                     <div class="card-header" id="heading_ship_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Shipping Information</h2>
@@ -529,9 +532,28 @@
             if (hasError == true) {
                 return false;
             }
+
+            var billingdetail = new FormData($('#billing_info')[0]);
+            $.ajax({
+                url: '/profile/billing-info',
+                type: "POST",
+                data: billingdetail,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    $("#mybilling").show();
+                    setTimeout(function() { $("#mybilling").hide(); }, 5000);
+                    // console.log(data);
+                    // alert("Billing Information update");
+                },
+                error: function() {
+                    
+                }
+            });
         });
 
-        //my profile validation
+        //my profile validation with update
         $('#myprofile_update').click(function() {
             $(".error").hide();
             var hasError = false;
@@ -560,6 +582,23 @@
             if (hasError == true) {
                 return false;
             }
+
+            var myprofiledetail = new FormData($('#myprofile')[0]);
+            $.ajax({
+                url: '/profile/personal-info',
+                type: "POST",
+                data: myprofiledetail,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    $("#myElem").show();
+                    setTimeout(function() { $("#myElem").hide(); }, 5000);
+                },
+                error: function() {
+                    
+                }
+            });
         });
 
     });
@@ -574,25 +613,6 @@
         $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
     }
 
-    //my profile update
-    $('#myprofile_update').on('click', function () {
-        var myprofiledetail = new FormData($('#myprofile')[0]);
-        $.ajax({
-            url: '/profile/personal-info',
-            type: "POST",
-            data: myprofiledetail,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                // console.log(data);
-                // alert("Billing Information update");
-            },
-            error: function() {
-                
-            }
-        });
-    });
 
     //Shipping Information update
     $('#ship_info_update').on('click', function () {
@@ -605,28 +625,10 @@
             cache: false,
             processData: false,
             success: function(data) {
+                $("#myshipping").show();
+                setTimeout(function() { $("#myshipping").hide(); }, 5000);
                 // console.log(data);
                 // alert("Shipping Information update");
-            },
-            error: function() {
-                
-            }
-        });
-    });
-
-    //billing Information update
-    $('#billing_info_update').on('click', function () {
-        var billingdetail = new FormData($('#billing_info')[0]);
-        $.ajax({
-            url: '/profile/billing-info',
-            type: "POST",
-            data: billingdetail,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                // console.log(data);
-                // alert("Billing Information update");
             },
             error: function() {
                 
