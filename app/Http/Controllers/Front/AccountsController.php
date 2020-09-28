@@ -368,7 +368,7 @@ class AccountsController extends Controller
             'name' => $request->first_name . ' ' . $request->last_name,
             'phone' => $request->phone,
             'dob' => date('Y-m-d', strtotime($request->dob)),
-            'patient_id' => "ST".date('y-m-d').$state_code.$customer->id,
+            'patient_id' => "ST".date('ymd').$state_code.$customer->id,
         ]);
         $address = Address::where('customer_id', $user->id)->first();
         if(!$address){
