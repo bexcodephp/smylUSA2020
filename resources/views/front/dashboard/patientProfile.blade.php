@@ -1,3 +1,4 @@
+
 @extends('layouts.front.main')
 @push('stylesheets')
 <link rel="stylesheet" href="{{ asset('front/css/sidebar.css') }}" type="text/css">
@@ -559,6 +560,8 @@
                                 <td>{{$address->billing_zip}}</td>
                             </tr>
                         </table>
+
+                        @if(count((array)$answers) > 0)
                         <span>Questions</span>
                         <table class="table">
                           <tr>
@@ -640,6 +643,7 @@
                             <td>{{$answers->question19}}</td>
                           </tr>  
                         </table>
+                        @endif
                         <!-- <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" allowfullscreen></iframe>
                         </div> -->
