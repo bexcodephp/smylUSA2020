@@ -84,7 +84,6 @@ class EmployeeController extends Controller
     public function store(CreateEmployeeRequest $request)
     {
         $role_type = $request->role_type;
-        // print_r($role_type);exit();
         if($role_type == "dentist"){
             $role = Config::get('constants.dentist');    
         } else if($role_type == "operator"){
@@ -129,10 +128,20 @@ class EmployeeController extends Controller
         // update op_id
 
         $updateData = [];
-        $operator_id = "OP".Carbon::now()->format('ymd').$employee->id; 
+        if($role_type == "dentist"){
+            $dentist_id = "DN".Carbon::now()->format('ymd').$employee->id; 
+        } else if($role_type == "operator"){
+            $operator_id = "OP".Carbon::now()->format('ymd').$employee->id; 
+        } else{}
         $recentOperator = $this->employeeRepo->findEmployeeById($employee->id); //dd($recentOperator);
-        $empRepo = new EmployeeRepository($recentOperator); //dd($empRepo);        
-        $updateData['op_id'] = $operator_id; //dd($updateData);
+        $empRepo = new EmployeeRepository($recentOperator); //dd($empRepo); 
+        if($role_type == "dentist"){
+            $updateData['op_id'] = $dentist_id;
+        } else if($role_type == "operator"){
+            $updateData['op_id'] = $operator_id;
+        } else{}  
+
+        // $updateData['op_id'] = $operator_id; //dd($updateData);
         $result = $empRepo->update($updateData);  
         if($role_type == "dentist"){
            return redirect('admin/employees/dentist');  
