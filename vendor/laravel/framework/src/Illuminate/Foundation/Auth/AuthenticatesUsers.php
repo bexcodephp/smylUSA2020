@@ -156,7 +156,9 @@ trait AuthenticatesUsers
     {
         $this->guard()->logout();
 
-        $request->session()->invalidate();
+        // Comment because of cart issue on logout
+
+        // $request->session()->invalidate();
 
         return $this->loggedOut($request) ?: redirect('/');
     }
