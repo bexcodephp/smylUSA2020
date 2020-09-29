@@ -46,6 +46,8 @@ $(document).ready(function () {
                     $('#nav_step_2').addClass("active");
                     $('#step_1').removeClass('active show');
                     $('#step_2').addClass('active show');
+
+                    $('#nav_step_1').addClass("disabled");
                 }                
             },
             error: function() {
@@ -103,6 +105,18 @@ $(document).ready(function () {
         $('#step_4').removeClass('active show');
         $('#step_5').addClass('active show');
     });
+
+    // next redirection
+    
+
+    $('#step4_submit').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_5').addClass("active");
+
+        $('#step_4').removeClass('active show');
+        $('#step_5').addClass('active show');
+    });
+
     // finish btn redirection
     $('#step5_finish').on('click', function () {
         window.location.href = "/dashboard";
@@ -141,7 +155,7 @@ $(document).ready(function () {
             $('#title_add_smile').show();
             $('#title_edit_smile').hide();
             $('#title_add_bite').hide();
-            $('#upload_pictures').show();
+            $('#upload_new_pictures').show();
             $('#edit_pictures').hide();
             // $('#doc_src').attr();
             $('#doc_src').hide();
@@ -155,7 +169,7 @@ $(document).ready(function () {
         $('#upload_new_pic_modal').modal('show');
         $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
             $('#title_edit_smile').show();
-            $('#upload_pictures').hide();
+            $('#upload_new_pictures').hide();
             $('#edit_pictures').show();
             $('#title_add_smile').hide();
             $('#title_add_bite').hide();
@@ -262,9 +276,11 @@ $(document).ready(function () {
     });
 
     //step 1 validation
-    $('#step_1').click(function() {
+   
+    function ValidateStep1()
+    {        
         $(".error").hide();
-        var hasError = false;
+        
         var first_name = $("#first_name").val();
         var last_name = $("#last_name").val();
         var phoneReg = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -280,12 +296,12 @@ $(document).ready(function () {
         var state = $("#state").val();
         var zip = $("#zip").val();
 
-        if (!first_name) {
+        if (first_name == "") {
             $("#first_name").after('<span class="error">First Name is required.</span>');
             hasError = true;
         }
 
-        if (!last_name) {
+        if (last_name == "") {
             $("#last_name").after('<span class="error">Last Name is required.</span>');
             hasError = true;
         }
@@ -298,48 +314,48 @@ $(document).ready(function () {
             hasError = true;
         }
 
-        if (!billing_address_1) {
+        if (billing_address_1 == "") {
             $("#billing_address_1").after('<span class="error">Billing address 1 is required.</span>');
             hasError = true;
         }
 
-        if (!billing_address_2) {
+        if (billing_address_2 == "") {
             $("#billing_address_2").after('<span class="error">Billing address 2 is required.</span>');
             hasError = true;
         }
 
-        if (!billing_city) {
+        if (billing_city == "") {
             $("#billing_city").after('<span class="error">Billing city is required.</span>');
             hasError = true;
         }
-        if (!billing_state) {
+        if (billing_state == "") {
             $("#billing_state").after('<span class="error">Billing state is required.</span>');
             hasError = true;
         }
-        if (!billing_zip) {
+        if (billing_zip == "") {
             $("#billing_zip").after('<span class="error">Billing zip code is required.</span>');
             hasError = true;
         }
 
-        if (!address_1) {
+        if (address_1 == "") {
             $("#address_1").after('<span class="error">Shipping address 1 is required.</span>');
             hasError = true;
         }
 
-        if (!address_2) {
+        if (address_2 == "") {
             $("#address_2").after('<span class="error">Shipping address 2 is required.</span>');
             hasError = true;
         }
 
-        if (!city) {
+        if (city == "") {
             $("#city").after('<span class="error">Shipping city is required.</span>');
             hasError = true;
         }
-        if (!state) {
+        if (state == "") {
             $("#state").after('<span class="error">Shipping state is required.</span>');
             hasError = true;
         }
-        if (!zip) {
+        if (zip == "") {
             $("#zip").after('<span class="error">Shipping zip code is required.</span>');
             hasError = true;
         }
@@ -347,7 +363,11 @@ $(document).ready(function () {
         if (hasError == true) {
             return false;
         }
-    });
+        else
+        {
+            return true;
+        }
+    }
 
     $('#update_card').click(function() {
         $(".error").hide();
@@ -475,6 +495,72 @@ $(document).ready(function () {
             },
             error: function() {
                 
+            }
+        });
+    });
+
+    function validateImage() {
+        var formData = new FormData();
+        var file = document.getElementById("teethpic").files[0];
+        formData.append("Filedata", file);
+        var t = file.type.split('/').pop().toLowerCase();
+        if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+            alert('Please select a valid image file');
+            document.getElementById("teethpic").value = '';
+            return false;
+        }
+        if (file.size > 1024000) {
+            alert('Max Upload size is 1MB only');
+            document.getElementById("teethpic").value = '';
+            return false;
+        }
+        return true;
+    }
+
+    $('#upload_new_pictures').on('click', function() {
+        var uploadimage = new FormData($('#smilepictures')[0]);
+        $.ajax({
+            url: '/profile/add-teethimages',
+            type: "POST",
+            data: uploadimage,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                $("#add_image").show();
+                setTimeout(function() {
+                    $("#add_image").hide();
+                }, 5000);
+                $("#upload_new_pic_modal").modal("hide");
+                // console.log(data);
+                // alert("Updated Successfully");
+            },
+            error: function() {
+
+            }
+        });
+    });
+
+    $('#edit_pictures').on('click', function() {
+        var uploadimage = new FormData($('#smilepictures')[0]);
+        $.ajax({
+            url: '/profile/edit-teethimages',
+            type: "POST",
+            data: uploadimage,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                $("#edit_image").show();
+                setTimeout(function() {
+                    $("#edit_image").hide();
+                }, 5000);
+                $("#upload_new_pic_modal").modal("hide");
+                // console.log(data);
+                // alert("Updated Successfully");
+            },
+            error: function() {
+
             }
         });
     });

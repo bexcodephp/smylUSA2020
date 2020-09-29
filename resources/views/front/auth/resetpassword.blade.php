@@ -30,15 +30,6 @@
                     <div class="signin-form mt-xxl-6">
                         <form class="row" action="{{ route('verifyEmail', $code) }}" role="form" method="get">
                             {{ csrf_field() }}
-                            {{--  
-                                NOTE: 
-                                Add Hiiden class for hide old password  
-                            --}}
-                            <!-- <div class="col-12 form-group hidden">
-                                <label>Old Password</label>
-                                <input type="password" class="form-control input-gray" name="old_password" id="password" placeholder="Old Password">
-                            </div> -->
-
                             <input id="email" type="email" class="form-control bg-light border-0 rounded text-1" name="email" value="jayrjoshi8@gmail.com" required autofocus>
 
                             <div class="col-12 form-group">

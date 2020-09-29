@@ -201,10 +201,9 @@ Route::namespace('Front')->group(function () {
         Route::get('bank-transfer', 'BankTransferController@index')->name('bank-transfer.index');
         Route::post('bank-transfer', 'BankTransferController@store')->name('bank-transfer.store');
     });
-
+    
     Route::group(['middleware' => ['usertype', 'web']], function () {
         Route::group(['prefix' => 'dentist'], function () {
-
             Route::get('profile', 'DentistController@profile')->name('dentist.profile');
             Route::get('new-case', 'DentistController@newCase')->name('dentist.new-case');
             Route::get('approved-case', 'DentistController@approvedCase')->name('dentist.approved-case');
@@ -214,7 +213,6 @@ Route::namespace('Front')->group(function () {
             Route::post('profile/employee/update-avatar', 'DentistController@updateAvatar')->name('dentist.updateAvatar');
             Route::post('profile/update-password', 'DentistController@updatePassword')->name('dentist.updatePassword');
         });
-
 
         Route::group(['prefix' => 'operator'], function () {
             Route::get('dashboard', 'OperatorController@dashboard')->name('operator.dashboard');
@@ -229,9 +227,6 @@ Route::namespace('Front')->group(function () {
             Route::post('employee/update-password', 'OperatorController@updatePassword')->name('employee.updatePassword');
             Route::post('case/submit', 'OperatorController@submitCase')->name('operator.submitCase');
         });
-
-
-
 
         Route::group(['prefix' => 'vendor'], function () {
             Route::get('dashboard', 'VendorController@dashboard')->name('vendor.dashboard');
@@ -248,9 +243,7 @@ Route::namespace('Front')->group(function () {
             Route::post('profile/employee/update-avatar', 'VendorController@updateAvatar')->name('vendor.updateAvatar');
             Route::post('profile/update-password', 'VendorController@updatePassword')->name('vendor.updatePassword');
         });
-
-
-
+        
         Route::namespace('Addresses')->group(function () {
             Route::resource('country.state', 'CountryStateController');
             Route::resource('state.city', 'StateCityController');
@@ -278,14 +271,15 @@ Route::namespace('Front')->group(function () {
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar');
         Route::post('profile/card-info', 'AccountsController@updateCard');
         Route::post('profile/card-add', 'AccountsController@AddCard');
-        Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
+        Route::post('profile/add-teethimages', 'AccountsController@addTeethImages'); 
+        Route::post('profile/edit-teethimages', 'AccountsController@editTeethImages');
+        // Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
         Route::post('profile/update-profile-picture', 'AccountsController@updateProfilePicture')->name('user.updateProfilePicture');
         Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
         Route::get('profile/delete-profile-images/{id}', 'AccountsController@removeProfileImage');
         Route::post('update-password', 'AccountsController@updatePassword')->name('updatePassword');
     });
-
-
+    
     // Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');

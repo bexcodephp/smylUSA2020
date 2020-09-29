@@ -71,7 +71,7 @@
                                     NOTE ->>
                                     "Sequence of rating selection star is in reverse order"
                                 --}}
-                                <div class="rating mb-2" id="rating">
+                                <!-- <div class="rating mb-2" id="rating">
                                     <input type="radio" name="rating" value="5" id="5">
                                     <label for="5"></label>
                                     <input type="radio" name="rating" value="4" id="4">
@@ -82,7 +82,7 @@
                                     <label for="2"></label>
                                     <input type="radio" name="rating" value="1" id="1">
                                     <label for="1"></label>
-                                </div>
+                                </div> -->
                             </div>
                             {{-- price --}}
                             <div class="col-12 rp-price align-self-center mb-3">
@@ -148,7 +148,11 @@
                             </div>
                             <div class="rp-price-rate d-flex flex-wrap py-3">
                                 <div class="col-6 text-left align-self-center">
-                                    <div class="rating" id="rating">
+                                    {{--
+                                        NOTE ->>
+                                        "Sequence of rating selection star is in reverse order"
+                                    --}}
+                                    <!-- <div class="rating" id="rating">
                                         <input type="radio" name="rating" value="5" id="5">
                                         <label for="5"></label>
                                         <input type="radio" name="rating" value="4" id="4">
@@ -159,7 +163,7 @@
                                         <label for="2"></label>
                                         <input type="radio" name="rating" value="1" id="1">
                                         <label for="1"></label>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-6 rp-price align-self-center">
                                     <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>{{$product->price}}</h6>
@@ -193,7 +197,7 @@
                                         NOTE ->>
                                         "Sequence of rating selection star is in reverse order"
                                     --}}
-                                    <div class="rating" id="rating">
+                                    <!-- <div class="rating" id="rating">
                                         <input type="radio" name="rating" value="5" id="5">
                                         <label for="5"></label>
                                         <input type="radio" name="rating" value="4" id="4">
@@ -204,7 +208,7 @@
                                         <label for="2"></label>
                                         <input type="radio" name="rating" value="1" id="1">
                                         <label for="1"></label>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-6 rp-price align-self-center">
                                     <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
@@ -232,7 +236,7 @@
                                         NOTE ->>
                                         "Sequence of rating selection star is in reverse order"
                                     --}}
-                                    <div class="rating" id="rating">
+                                    <!-- <div class="rating" id="rating">
                                         <input type="radio" name="rating" value="5" id="5">
                                         <label for="5"></label>
                                         <input type="radio" name="rating" value="4" id="4">
@@ -243,7 +247,7 @@
                                         <label for="2"></label>
                                         <input type="radio" name="rating" value="1" id="1">
                                         <label for="1"></label>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-6 rp-price align-self-center">
                                     <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
@@ -271,7 +275,7 @@
                                         NOTE ->>
                                         "Sequence of rating selection star is in reverse order"
                                     --}}
-                                    <div class="rating" id="rating">
+                                    <!-- <div class="rating" id="rating">
                                         <input type="radio" name="rating" value="5" id="5">
                                         <label for="5"></label>
                                         <input type="radio" name="rating" value="4" id="4">
@@ -282,7 +286,7 @@
                                         <label for="2"></label>
                                         <input type="radio" name="rating" value="1" id="1">
                                         <label for="1"></label>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-6 rp-price align-self-center">
                                     <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
@@ -338,7 +342,7 @@
             cssEase: 'linear',
             asNavFor: '#products_slider_nav'
         });
-        // bottom products slider navigation
+        // bottom products thumbnail slider navigation
         $('#products_slider_nav').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
