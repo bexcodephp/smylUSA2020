@@ -22,21 +22,38 @@
                 <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_change"><u>Change</u></button>
                 <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_add"><u>Add</u></button>
             </div>
+            <!-- add hidden class for show or hide -->
             <div class="row">
                 <div class="col-sm-auto mb-3">
                     <?php
-                        $cardnumber = $customer->card_last_four;
-                        if($cardnumber == ""){
-                            $cardformat = "";
-                        }else {
-                            $cardformat = 'XXXX-XXXX-XXXX-'.substr($cardnumber, -4);
-                        }
+                    $cardnumber = $customer->card_last_four;
+                    if ($cardnumber == "") {
+                        $cardformat = "";
+                    } else {
+                        $cardformat = 'XXXX-XXXX-XXXX-' . substr($cardnumber, -4);
+                    }
                     ?>
                     <input type="text" class="form-control input-white" id="card_number" placeholder="Card Number" value="{{$cardformat }}">
                 </div>
-               <!--  <div class="col-sm-auto mb-3">
-                    <input type="password" class="form-control input-white" id="password" placeholder="Password">
-                </div> -->
+            </div>
+            <!-- add hidden class for show or hide -->
+            <div class="row" id="bank_card_details">
+                <div class="col-auto bank-card-details mt-3">
+                    <div class="card px-0 py-3">
+                        <div class="col-12 acc-card-chip">
+                            <img src="{{ asset('images/icons/chip.png') }}" class="mb-2" width="30" />
+                        </div>
+                        <div class="col-12 acc-card-number">
+                            <label class="text-bold">XXXX XXXX XXXX <span>3456</span></label>
+                        </div>
+                        <div class="col-12 acc-card-valid">
+                            <label class="text-uppercase">Valid Thru&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
+                        </div>
+                        <div class="col-12 acc-card-name">
+                            <label class="text-bold">Name Surname</label><img src="{{ asset('images/icons/card_elipse.png') }}" width="37" class="float-right" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -105,10 +122,10 @@
                                 <div class="col-md-6 form-group">
                                     <label class="text-bold">Card Number</label>
                                     <?php
-                                        $cardnumber = $customer->card_last_four;
-                                        $cardformat = 'XXXX-XXXX-XXXX-'.substr($cardnumber, -4);
+                                    $cardnumber = $customer->card_last_four;
+                                    $cardformat = 'XXXX-XXXX-XXXX-' . substr($cardnumber, -4);
                                     ?>
-                                    <input type="text" class="form-control input-white" name="card_last_four" id="card_last_four" placeholder="Card Number" value="{{ $cardformat}}" >
+                                    <input type="text" class="form-control input-white" name="card_last_four" id="card_last_four" placeholder="Card Number" value="{{ $cardformat}}">
                                 </div>
                             </div>
                         </div>
@@ -118,30 +135,28 @@
                                     <label class="text-bold">Expiry</label>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                   <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
-                                   <select name="expiryMonth"
-                                        id="expiryMonth" class="demoSelectBox">
+                                    <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
+                                    <select name="expiryMonth" id="expiryMonth" class="demoSelectBox">
                                         <?php
-                                        for ($i = date("m"); $i <= 12; $i ++) {
+                                        for ($i = date("m"); $i <= 12; $i++) {
                                             $monthValue = $i;
                                             if (strlen($i) < 2) {
                                                 $monthValue = "0" . $monthValue;
                                             }
-                                            ?>
-                                        <option value="<?php echo $monthValue; ?>"><?php echo $i; ?></option>
+                                        ?>
+                                            <option value="<?php echo $monthValue; ?>"><?php echo $i; ?></option>
                                         <?php
                                         }
                                         ?>
-                                    </select> <select name="expiryMonth" id="expiryMonth"
-                                        class="demoSelectBox">
+                                    </select> <select name="expiryMonth" id="expiryMonth" class="demoSelectBox">
                                         <?php
-                                    for ($i = date("Y"); $i <= 2030; $i ++) {
-                                        $yearValue = substr($i, 2);
+                                        for ($i = date("Y"); $i <= 2030; $i++) {
+                                            $yearValue = substr($i, 2);
                                         ?>
-                                        <option value="<?php echo $yearValue; ?>"><?php echo $i; ?></option>
+                                            <option value="<?php echo $yearValue; ?>"><?php echo $i; ?></option>
                                         <?php
-                                    }
-                                    ?>
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
@@ -192,14 +207,14 @@
                                 <div class="col-md-6 form-group">
                                     <label class="text-bold">Card Number</label>
                                     <?php
-                                            $cardnumber = $customer->card_last_four;
-                                            if($cardnumber == ""){
-                                                $cardformat = "";
-                                            }else {
-                                                $cardformat = 'XXXX-XXXX-XXXX-'.substr($cardnumber, -4);
-                                            }
-                                        ?>
-                                    <input type="text" class="form-control input-white" name="add_card_last_four" id="add_card_last_four" placeholder="Card Number" value="{{ $cardformat}}" >
+                                    $cardnumber = $customer->card_last_four;
+                                    if ($cardnumber == "") {
+                                        $cardformat = "";
+                                    } else {
+                                        $cardformat = 'XXXX-XXXX-XXXX-' . substr($cardnumber, -4);
+                                    }
+                                    ?>
+                                    <input type="text" class="form-control input-white" name="add_card_last_four" id="add_card_last_four" placeholder="Card Number" value="{{ $cardformat}}">
                                 </div>
                             </div>
                         </div>
@@ -209,30 +224,29 @@
                                     <label class="text-bold">Expiry</label>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                   <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
-                                   <select name="add_expiryMonth" id="add_expiryMonth" class="demoSelectBox">
-                                    <?php
-                                    for ($i = date("m"); $i <= 12; $i ++) {
-                                        $monthValue = $i;
-                                        if (strlen($i) < 2) {
-                                            $monthValue = "0" . $monthValue;
+                                    <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
+                                    <select name="add_expiryMonth" id="add_expiryMonth" class="demoSelectBox">
+                                        <?php
+                                        for ($i = date("m"); $i <= 12; $i++) {
+                                            $monthValue = $i;
+                                            if (strlen($i) < 2) {
+                                                $monthValue = "0" . $monthValue;
+                                            }
+                                        ?>
+                                            <option value="<?php echo $monthValue; ?>"><?php echo $i; ?></option>
+                                        <?php
                                         }
                                         ?>
-                                    <option value="<?php echo $monthValue; ?>"><?php echo $i; ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select> <select name="add_expiryMonth" id="add_expiryMonth"
-                                    class="demoSelectBox">
-                                    <?php
-                                for ($i = date("Y"); $i <= 2030; $i ++) {
-                                    $yearValue = substr($i, 2);
-                                    ?>
-                                    <option value="<?php echo $yearValue; ?>"><?php echo $i; ?></option>
-                                    <?php
-                                }
-                                ?>
-                                </select>
+                                    </select> <select name="add_expiryMonth" id="add_expiryMonth" class="demoSelectBox">
+                                        <?php
+                                        for ($i = date("Y"); $i <= 2030; $i++) {
+                                            $yearValue = substr($i, 2);
+                                        ?>
+                                            <option value="<?php echo $yearValue; ?>"><?php echo $i; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
                                     <input type="year" class="form-control input-white" id="re_new_pwd" placeholder="Year">
