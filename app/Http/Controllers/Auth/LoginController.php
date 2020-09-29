@@ -35,7 +35,7 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/accounts';
-    // protected $redirectTo = '/medical_form';
+    // protected $redirectTo = '/medical_form'; // solving vendor issue in git
     
     protected function redirectTo()
     {
