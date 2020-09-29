@@ -46,15 +46,29 @@
                     </div>
                     <div class="form-group {{ $errors->has('location_associated') ? 'has-error' : '' }}">
                         <label for="location_associated">Location Associated<span class="text-danger">*</span></label>
-                        <?php 
-                            $location_list = json_decode($employee->location_associated);
-                            $select = '';
-                        ?>
+                        
                         
                         <select name="location_associated[]" id="location_associated" class="form-control select2" multiple="multiple">
                             <option></option>
+
+                            <?php
+                                    
+                            ?>
+
                             @foreach($facilities as $location)
-                                <?php if(in_array($location->facility_id,$location_list)){ $select = 'selected'; } else{ $select = "";} ?>
+                                <?php 
+                                if($employee->location_associated != null){
+                                    $location_list = json_decode($employee->location_associated);
+
+                                    if(in_array($location->facility_id,$location_list)){
+
+                                    $select = 'selected'; }
+                                     else{ $select = "";} 
+                                }
+                                else{
+                                    $select = '';
+                                }
+                                ?>
                                 <option id="" value="{{ $location->facility_id }}" {{$select}} >{{ ucfirst($location->name) }}</option>
                             @endforeach
                         </select>
@@ -72,7 +86,10 @@
                             <tbody id="add_new_location">
                             <?php $no=1; ?>
                             @foreach($facilities as $location)
-                            <?php if(in_array($location->facility_id,$location_list)){  ?>
+                            <?php 
+                                if($employee->location_associated != null)
+                                {
+                                    if(in_array($location->facility_id,$location_list)){  ?>
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $location->name }}</td>
@@ -80,7 +97,9 @@
                                         <td>{{ $location->state }}</td>
                                         <td>{{ $location->zipcode }}</td>
                                     </tr>
-                            <?php } ?>
+                            <?php 
+                                    }
+                                } ?>
                             @endforeach                           
                             </tbody>                            
                         </table>
