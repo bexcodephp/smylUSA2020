@@ -144,7 +144,9 @@
                         </div>
                         <div class="card-body text-center p-0">
                             <div class="col-12 card-title">
-                                <h5 class="m-0">{{ $product->name }}</h5>
+                                <a href="{{ route('front.get.product', $product->slug) }}">
+                                    <h5 class="m-0">{{ $product->name }}</h5>
+                                </a>
                             </div>
                             <div class="rp-price-rate d-flex flex-wrap py-3">
                                 <div class="col-6 text-left align-self-center">
@@ -181,123 +183,7 @@
                     </div>
                 </div>
                 @endforeach
-                {{--  content 2  --}}
-                <!-- <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
-                    <div class="card product-card">
-                        <div class="card-header p-0">
-                            <img src="{{asset('images/products/product_2.png')}}" class="card-img-top" alt="product">
-                        </div>
-                        <div class="card-body text-center p-0">
-                            <div class="col-12 card-title">
-                                <h5 class="m-0">Retainers</h5>
-                            </div>
-                            <div class="rp-price-rate d-flex flex-wrap py-3">
-                                <div class="col-6 text-left align-self-center">
-                                    {{--
-                                        NOTE ->>
-                                        "Sequence of rating selection star is in reverse order"
-                                    --}}
-                                    <!-- <div class="rating" id="rating">
-                                        <input type="radio" name="rating" value="5" id="5">
-                                        <label for="5"></label>
-                                        <input type="radio" name="rating" value="4" id="4">
-                                        <label for="4"></label>
-                                        <input type="radio" name="rating" value="3" id="3">
-                                        <label for="3"></label>
-                                        <input type="radio" name="rating" value="2" id="2">
-                                        <label for="2"></label>
-                                        <input type="radio" name="rating" value="1" id="1">
-                                        <label for="1"></label>
-                                    </div> -->
-                                </div>
-                                <div class="col-6 rp-price align-self-center">
-                                    <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer p-0">
-                            <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
-                        </div>
-                    </div>
-                </div> -->
-                {{--  content 3  --}}
-                <!-- <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
-                    <div class="card product-card">
-                        <div class="card-header p-0">
-                            <img src="{{asset('images/products/generic_square_2.jpg')}}" class="card-img-top" alt="product">
-                        </div>
-                        <div class="card-body text-center p-0">
-                            <div class="col-12 card-title">
-                                <h5 class="m-0">Aligner</h5>
-                            </div>
-                            <div class="rp-price-rate d-flex flex-wrap py-3">
-                                <div class="col-6 text-left align-self-center">
-                                    {{--
-                                        NOTE ->>
-                                        "Sequence of rating selection star is in reverse order"
-                                    --}}
-                                    <!-- <div class="rating" id="rating">
-                                        <input type="radio" name="rating" value="5" id="5">
-                                        <label for="5"></label>
-                                        <input type="radio" name="rating" value="4" id="4">
-                                        <label for="4"></label>
-                                        <input type="radio" name="rating" value="3" id="3">
-                                        <label for="3"></label>
-                                        <input type="radio" name="rating" value="2" id="2">
-                                        <label for="2"></label>
-                                        <input type="radio" name="rating" value="1" id="1">
-                                        <label for="1"></label>
-                                    </div> -->
-                                </div>
-                                <div class="col-6 rp-price align-self-center">
-                                    <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer p-0">
-                            <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
-                        </div>
-                    </div>
-                </div> -->
-                {{--  content 4  --}}
-                <!-- <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
-                    <div class="card product-card">
-                        <div class="card-header p-0">
-                            <img src="{{asset('images/products/product_3.png')}}" class="card-img-top" alt="product">
-                        </div>
-                        <div class="card-body text-center p-0">
-                            <div class="col-12 card-title">
-                                <h5 class="m-0">Teeth Whitening Kit</h5>
-                            </div>
-                            <div class="rp-price-rate d-flex flex-wrap py-3">
-                                <div class="col-6 text-left align-self-center">
-                                    {{--
-                                        NOTE ->>
-                                        "Sequence of rating selection star is in reverse order"
-                                    --}}
-                                    <!-- <div class="rating" id="rating">
-                                        <input type="radio" name="rating" value="5" id="5">
-                                        <label for="5"></label>
-                                        <input type="radio" name="rating" value="4" id="4">
-                                        <label for="4"></label>
-                                        <input type="radio" name="rating" value="3" id="3">
-                                        <label for="3"></label>
-                                        <input type="radio" name="rating" value="2" id="2">
-                                        <label for="2"></label>
-                                        <input type="radio" name="rating" value="1" id="1">
-                                        <label for="1"></label>
-                                    </div> -->
-                                </div>
-                                <div class="col-6 rp-price align-self-center">
-                                    <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer p-0">
-                            <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
-                        </div>
-                    </div>
-                </div> -->
+              
             </div>
         </div>
     </section>

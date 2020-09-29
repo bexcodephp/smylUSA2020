@@ -46,7 +46,9 @@ class CustomerController extends Controller
             ->first();
 
         $address = $customerRepo->findAddresses()->first();
-       // This  $data array will be passed to our PDF blade       
+        if(count((array)$answers) > 0 ) {
+
+
         $data = [          
             'first_name' => $customer->first_name,
             'last_name' => $customer->last_name,  
@@ -82,8 +84,45 @@ class CustomerController extends Controller
             'answer17'=> $answers->question17,
             'answer18'=> $answers->question18,
             'answer19'=> $answers->question19
+        ];
+        }  else {
+            $data = [          
+                'first_name' => $customer->first_name,
+                'last_name' => $customer->last_name,  
+                'phone' => $customer->phone,  
+                'dob' => $customer->dob,  
+                'patient_id' => $customer->patient_id,  
+                'address_1' => $address->address_1,  
+                'address_2' => $address->address_2,  
+                'city' => $address->city,  
+                'state_code' => $address->state_code,  
+                'zip' => $address->zip,  
+                'billing_address_1' => $address->billing_address_1,  
+                'billing_address_2' => $address->billing_address_2,  
+                'billing_city' => $address->billing_city,  
+                'billing_state' => $address->billing_state,  
+                'billing_zip' => $address->billing_zip,  
+                'answer1'=> '',
+                'answer2'=> '',
+                'answer3'=> '',
+                'answer4'=> '',
+                'answer5'=> '',
+                'answer6'=> '',
+                'answer7'=> '',
+                'answer8'=> '',
+                'answer9'=> '',
+                'answer10'=> '',
+                'answer11'=> '',
+                'answer12'=> '',
+                'answer13'=> '',
+                'answer14'=> '',
+                'answer15'=> '',
+                'answer16'=> '',
+                'answer17'=> '',
+                'answer18'=> '',
+                'answer19'=> ''
             ];
-        
+        }
         $pdf = PDF::loadView('front/dashboard/pdf_view', $data);  
         return $pdf->download('medium.pdf');
     }
