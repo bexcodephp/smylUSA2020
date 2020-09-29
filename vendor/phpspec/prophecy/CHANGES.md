@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 1.12.1 / 2020/10/29
 ===================
 
 * [fixed] Incorrect handling of inherited 'self' return types [@ciaranmcnulty]
 
+=======
+>>>>>>> develop
 1.12.0 / 2020/10/28
 ===================
 
