@@ -14,7 +14,7 @@
                 <label>Password</label>
                 <button type="button" class="btn btn-link p-0 float-right" id="change_pwd"><u>Change</u></button>
             </div>
-            <input type="password" class="form-control input-white" id="password" placeholder="Password" value="{{ auth()->user()->password }}">
+            <input type="password" class="form-control input-white" id="password" placeholder="********">
         </div>
         <div class="col-12 form-group">
             <div class="col p-0">
@@ -26,12 +26,12 @@
             <div class="row">
                 <div class="col-sm-auto mb-3">
                     <?php
-                    $cardnumber = $customer->card_last_four;
-                    if ($cardnumber == "") {
-                        $cardformat = "";
-                    } else {
-                        $cardformat = 'XXXX-XXXX-XXXX-' . substr($cardnumber, -4);
-                    }
+                        $cardnumber = $customer->card_last_four;
+                        if($cardnumber == ""){
+                            $cardformat = "";
+                        }else {
+                            $cardformat = 'XXXX XXXX XXXX '.substr($cardnumber, -4);
+                       }
                     ?>
                     <input type="text" class="form-control input-white" id="card_number" placeholder="Card Number" value="{{$cardformat }}">
                 </div>
@@ -122,13 +122,10 @@
                                 <div class="col-md-6 form-group">
                                     <label class="text-bold">Card Number</label>
                                     <?php
-<<<<<<< HEAD
+
                                     $cardnumber = $customer->card_last_four;
                                     $cardformat = 'XXXX-XXXX-XXXX-' . substr($cardnumber, -4);
-=======
-                                        $cardnumber = $customer->card_last_four;
-                                        $cardformat = 'XXXX XXXX XXXX '.substr($cardnumber, -4);
->>>>>>> develop
+
                                     ?>
                                     <input type="text" class="form-control input-white" name="card_last_four" id="card_last_four" placeholder="Card Number" value="{{ $cardformat}}">
                                 </div>
@@ -140,7 +137,7 @@
                                     <label class="text-bold">Expiry</label>
                                 </div>
                                 <div class="col-md-6 form-group">
-<<<<<<< HEAD
+
                                     <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
                                     <select name="expiryMonth" id="expiryMonth" class="demoSelectBox">
                                         <?php
@@ -164,10 +161,11 @@
                                         }
                                         ?>
                                     </select>
-=======
+
                                    <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
-                                   <input class="form-control input-white" maxlength='5' id="inputExpDate" placeholder="MM/YY" type="text" onkeyup="formatString(event);">
->>>>>>> develop
+
+                                   <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" value="{{ $customer->card_expiry}}" onkeyup="formatString(event);" >
+
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
                                     <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="Year">
@@ -217,7 +215,7 @@
                                 <div class="col-md-6 form-group">
                                     <label class="text-bold">Card Number</label>
                                     <?php
-<<<<<<< HEAD
+
                                     $cardnumber = $customer->card_last_four;
                                     if ($cardnumber == "") {
                                         $cardformat = "";
@@ -226,16 +224,7 @@
                                     }
                                     ?>
                                     <input type="text" class="form-control input-white" name="add_card_last_four" id="add_card_last_four" placeholder="Card Number" value="{{ $cardformat}}">
-=======
-                                            $cardnumber = $customer->card_last_four;
-                                            if($cardnumber == ""){
-                                                $cardformat = "";
-                                            }else {
-                                                $cardformat = 'XXXX XXXX XXXX '.substr($cardnumber, -4);
-                                            }
-                                        ?>
-                                    <input type="text" class="form-control input-white" name="add_card_last_four" id="add_card_last_four" placeholder="Card Number" value="{{ $cardformat}}" >
->>>>>>> develop
+
                                 </div>
                             </div>
                         </div>
@@ -245,7 +234,7 @@
                                     <label class="text-bold">Expiry</label>
                                 </div>
                                 <div class="col-md-6 form-group">
-<<<<<<< HEAD
+
                                     <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
                                     <select name="add_expiryMonth" id="add_expiryMonth" class="demoSelectBox">
                                         <?php
@@ -269,10 +258,11 @@
                                         }
                                         ?>
                                     </select>
-=======
+
                                    <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
-                                    <input class="form-control input-white" maxlength='5' id="inputExpDate" placeholder="MM/YY" type="text" onkeyup="formatString(event);">
->>>>>>> develop
+
+                                    <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" value="{{ $customer->card_expiry}}" onkeyup="formatString(event);" >
+
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
                                     <input type="year" class="form-control input-white" id="re_new_pwd" placeholder="Year">

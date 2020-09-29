@@ -231,7 +231,8 @@ $(document).ready(function () {
                 url: 'profile/delete-teeth-images/'+_opId,
                 type: 'get',
                 success: function(data){
-                  location.reload();
+                    getPicturesImage();
+                        // location.reload();
                     // console.log(data);
                 }
             });
@@ -377,6 +378,7 @@ $(document).ready(function () {
         var cardNumber = $("#card_last_four").val();
         var cvvNumber = $("#cvv").val();
         var cvvRegex = /^[0-9]{3,3}$/;
+        var expirydate = $("#inputExpDate").val();
 
             if (cardHolderName == "") {
                 $("#name_on_card").after('<span class="error">Please Enter card Name</span>');
@@ -388,6 +390,11 @@ $(document).ready(function () {
 
             if (cardNumber == "") {
                 $("#card_last_four").after('<span class="error">Card Number is Invalid</span>');
+                hasError = true;
+            }
+
+            if (expirydate == "") {
+                $("#inputExpDate").after('<span class="error">Select Expiry Date</span>');
                 hasError = true;
             }
 
@@ -414,7 +421,12 @@ $(document).ready(function () {
                 success: function(data) {
                     // console.log(data);
                     $('#card_detail_change_modal').modal("hide");
-                    alert("success");  
+                    // alert("success");  
+                    swal(
+                      '',
+                      'Update Successfully',
+                      'success'
+                    ) 
                 },
                 error: function() {
                     
@@ -430,6 +442,7 @@ $(document).ready(function () {
         var cardNumber = $("#add_card_last_four").val();
         var cvvNumber = $("#cvv").val();
         var cvvRegex = /^[0-9]{3,3}$/;
+        var expirydate = $("#inputExpDate").val();
 
             if (cardHolderName == "") {
                 $("#add_name_on_card").after('<span class="error">Please Enter card Name</span>');
@@ -441,6 +454,11 @@ $(document).ready(function () {
 
             if (cardNumber == "") {
                 $("#add_card_last_four").after('<span class="error">Card Number is Invalid</span>');
+                hasError = true;
+            }
+
+            if (expirydate == "") {
+                $("#inputExpDate").after('<span class="error">Select Expiry Date</span>');
                 hasError = true;
             }
 
@@ -467,7 +485,12 @@ $(document).ready(function () {
                 success: function(data) {
                     // console.log(data);
                     $('#card_detail_add_modal').modal("hide");
-                    alert("success");   
+                    // alert("success");  
+                    swal(
+                      '',
+                      'Added Successfully',
+                      'success'
+                    ) 
                 },
                 error: function() {
                     
@@ -595,8 +618,8 @@ $(document).ready(function () {
 
                     for (var i=0;i<obj.length;i++)
                     {
-                        if(!obj[i].description){
-                            description == "";
+                        if(obj[i].description == null){
+                            description = "";
                         }else{
                             description = obj[i].description;
                         }

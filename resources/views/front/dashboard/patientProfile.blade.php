@@ -117,7 +117,7 @@
                                                     <label class="text-bold">XXXX XXXX XXXX <span>{{$cardformat}}</span></label>
                                                 </div>
                                                 <div class="col-12 acc-card-valid">
-                                                    <label class="text-uppercase">Expiry&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
+                                                    <label class="text-uppercase">Expiry&nbsp;<span class="text-bold">{{ $customer->card_expiry}}</span></label>
                                                 </div>
                                                 <!-- <div class="col-12 acc-card-name">
                                                     <label class="text-bold">{{$customer->name_on_card}}</label><img src="{{ asset('images/icons/card_elipse.png') }}" width="37" class="float-right" />
@@ -372,7 +372,7 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                    <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
-                                   <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" onkeyup="formatString(event);">
+                                   <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" value="{{ $customer->card_expiry}}" onkeyup="formatString(event);" >
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
                                     <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="Year">
@@ -439,7 +439,7 @@
                                     <label class="text-bold">Expiry</label>
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" onkeyup="formatString(event);">
+                                    <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" value="{{ $customer->card_expiry}}" onkeyup="formatString(event);" >
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
                                     <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
@@ -982,6 +982,7 @@
         var cardNumber = $("#card_last_four").val();
         var cvvNumber = $("#cvv").val();
         var cvvRegex = /^[0-9]{3,3}$/;
+        var expirydate = $("#inputExpDate").val();
 
             if (cardHolderName == "") {
                 $("#name_on_card").after('<span class="error">Please Enter card Name</span>');
@@ -993,6 +994,11 @@
 
             if (cardNumber == "") {
                 $("#card_last_four").after('<span class="error">Card Number is Invalid</span>');
+                hasError = true;
+            }
+
+            if (expirydate == "") {
+                $("#inputExpDate").after('<span class="error">Select Expiry Date</span>');
                 hasError = true;
             }
 
@@ -1040,6 +1046,7 @@
         var cardNumber = $("#add_card_last_four").val();
         var cvvNumber = $("#cvv").val();
         var cvvRegex = /^[0-9]{3,3}$/;
+        var expirydate = $("#inputExpDate").val();
 
             if (cardHolderName == "") {
                 $("#add_name_on_card").after('<span class="error">Please Enter card Name</span>');
@@ -1051,6 +1058,11 @@
 
             if (cardNumber == "") {
                 $("#add_card_last_four").after('<span class="error">Card Number is Invalid</span>');
+                hasError = true;
+            }
+
+            if (expirydate == "") {
+                $("#inputExpDate").after('<span class="error">Select Expiry Date</span>');
                 hasError = true;
             }
 
