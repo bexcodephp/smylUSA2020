@@ -9,6 +9,9 @@
             <div class="box">
                 <div class="box-body">
                     <h2>Resources</h2>
+                    <div class="box-tools pull-right mb-2">
+                        <a href="/admin/resources/create" class="btn btn-primary">Add New</a>
+                    </div>
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
