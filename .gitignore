@@ -1,19 +1,20 @@
-/node_modules
+/node_modules/
 /public/hot
 /public/storage
+/public/img
+/public/fonts/vendor
+/public/css/app.css
+/public/js/app.js
 /storage/*.key
 /vendor
-.env
-.env.backup
-.phpunit.result.cache
+/.idea
+/.vagrant
+composer.json
+composer.lock
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-<<<<<<< HEAD
-composer.json
-composer.lock
-=======
 .env
 .DS_Store
 /public/.DS_Store
@@ -29,3 +30,4 @@ storage/app/public/storage
 *.zip
 *.lock
 *.sql
+
