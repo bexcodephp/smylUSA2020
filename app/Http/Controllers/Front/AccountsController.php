@@ -108,6 +108,10 @@ class AccountsController extends Controller
         $teethImages = CustomerImage::where('customer_id', $customer->id)->get();
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
+        if($address == null)
+        {
+            $address = "";   
+        }
 
         return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList','teethImages','answers'));
 
@@ -557,10 +561,10 @@ class AccountsController extends Controller
     public function updateCard(Request $request)
     {
         $user = $this->loggedUser();
-
         $user->update([
             'name_on_card' => $request->name_on_card,
             'card_last_four' => $request->card_last_four,
+            'card_expiry' => $request->inputExpDate,
         ]);
 
         event(new AddNotification($user->id, 1, 'You have updated card information.'));
@@ -575,7 +579,9 @@ class AccountsController extends Controller
         $user->update([
             'name_on_card' => $request->add_name_on_card,
             'card_last_four' => $request->add_card_last_four,
+            'card_expiry' => $request->inputExpDate,
         ]);
+        dd($user);
 
         event(new AddNotification($user->id, 1, 'You have updated card information.'));
 
@@ -585,6 +591,15 @@ class AccountsController extends Controller
     public function dashboard(Request $request)
     {       
         return view('front.dashboard.patientDashboard');
+
+    }
+    public function getPicturesImage()
+    {
+        $user = $this->loggedUser();
+
+        $teethImages = CustomerImage::where('customer_id', $user->id)->get();
+
+        return json_encode($teethImages);
 
     }
 }

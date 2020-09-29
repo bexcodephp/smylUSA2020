@@ -48,6 +48,8 @@ class Customer extends Authenticatable implements JWTSubject
         'billing_last_name',
         'name_on_card',
         'card_last_four',
+        'card_expiry',
+        'is_form_completed',
     ];
 
     /**

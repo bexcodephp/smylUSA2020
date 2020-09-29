@@ -14,8 +14,8 @@
             </div>
         </div>
         <div class="col-12">
-            <div class="row row-cols-1 row-cols-md-3">
-                @foreach($teethImages as $image)
+            <div class="row row-cols-1 row-cols-md-3" id="teeth_img_cont">
+                <!-- @foreach($teethImages as $image)
                 <div class="col mb-4">
                     <div class="card h-100 card-2">
                         <img class="card-img-top" src="{{ asset('storage/'.$image->image) }}" />
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @endforeach -->
             </div>
         </div>
     </div>
