@@ -377,7 +377,7 @@ class AccountsController extends Controller
             'name' => $request->first_name . ' ' . $request->last_name,
             'phone' => $request->phone,
             'dob' => date('Y-m-d', strtotime($request->dob)),
-            'patient_id' => "ST".date('y-m-d').$state_code.$customer->id,
+            'patient_id' => "ST".date('ymd').$state_code.$customer->id,
         ]);
         $address = Address::where('customer_id', $user->id)->first();
         if(!$address){
@@ -396,6 +396,7 @@ class AccountsController extends Controller
                 'state_code' => $request->state_code,
                 'zip' => $request->zip,
                 'city' => $request->city,
+                'same_as_shipping' =>$request->same_as_shipping,
             ]);
         }
         return "success";
@@ -567,8 +568,23 @@ class AccountsController extends Controller
         return $this->sendResponse(true,'Information updated');
     }
 
+    public function AddCard(Request $request)
+    {
+        $user = $this->loggedUser();
+
+        $user->update([
+            'name_on_card' => $request->add_name_on_card,
+            'card_last_four' => $request->add_card_last_four,
+        ]);
+
+        event(new AddNotification($user->id, 1, 'You have updated card information.'));
+
+        return $this->sendResponse(true,'Information updated');
+    }
+    
     public function dashboard(Request $request)
     {       
         return view('front.dashboard.patientDashboard');
+
     }
 }

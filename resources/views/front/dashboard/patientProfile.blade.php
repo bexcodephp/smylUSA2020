@@ -20,7 +20,7 @@
             <div class="accordion" id="accordion_profile">
                 <form class="card" role="form" id="myprofile">
                     @csrf
-                    <p id="myElem" style="display:none">Update Personal Information</p>
+                    <p id="myElem" style="display:none; color:green">Updated Successfully</p>
                     <div class="card-header" id="heading_p_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Personal Information</h2>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Moblie Number<span class="text-danger">*</span></label>
-                                    <input type="text" name="phone" id="phone" placeholder="Phone Number"  value="{{ $user ? $user->phone : null}}" class="form-control" onkeypress='return restrictAlphabets(event)'/>
+                                    <input type="text" name="phone" id="phone" placeholder="Phone Number" value="{{ $user ? $user->phone : null}}" class="form-control" onkeypress='return restrictAlphabets(event)' />
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
@@ -80,20 +80,40 @@
                                         <label>Password</label>
                                         <button type="button" class="btn btn-link p-0 float-right" id="change_pwd"><u>Change</u></button>
                                     </div>
-                                    <input type="password" class="form-control input-gray" id="password" placeholder="Password">
+                                    <input type="password" class="form-control input-gray" id="acc_password" placeholder="Password">
                                 </div>
                                 <div class="col-12 form-group">
                                     <div class="col p-0">
                                         <label class="mr-3">Card Details</label>
+                                        <!-- remove or add "hidden" class for showing any button -->
                                         <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_change"><u>Change</u></button>
-                                        <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_add"><u>Add</u></button>
+                                        <button type="button" class="btn btn-link p-0 mx-3 hidden" id="btn_card_detail_add"><u>Add</u></button>
                                     </div>
-                                    <div class="row">
+                                    <!-- remove or add "hidden" class for show -->
+                                    <div class="row hidden" id="bank_card_details">
+                                        <div class="col-auto bank-card-details mt-3">
+                                            <div class="card px-0 py-3">
+                                                <div class="col-12 acc-card-chip">
+                                                    <img src="{{ asset('images/icons/chip.png') }}" class="mb-2" width="30"/>
+                                                </div>
+                                                <div class="col-12 acc-card-number">
+                                                    <label class="text-bold">XXXX XXXX XXXX 3456</label>
+                                                </div>
+                                                <div class="col-12 acc-card-valid">
+                                                    <label class="text-uppercase">Valid Thru&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
+                                                </div>
+                                                <div class="col-12 acc-card-name">
+                                                    <label class="text-bold">Name Surname</label><img src="{{ asset('images/icons/card_elipse.png') }}" width="37" class="float-right" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row hidden">
                                         <div class="col-sm-auto mb-3">
-                                            <input type="password" class="form-control input-gray" id="password" placeholder="Password">
+                                            <input type="text" class="form-control input-gray" id="" placeholder="">
                                         </div>
                                         <div class="col-sm-auto mb-3">
-                                            <input type="password" class="form-control input-gray" id="password" placeholder="Password">
+                                            <input type="text" class="form-control input-gray" id="" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -104,11 +124,11 @@
                 <!-- Billing Information -->
                 <form class="card billing-info" id="billing_info">
                     @csrf
-                    <p id="mybilling" style="display:none">Update Billing Information</p>
+                    <p id="mybilling" style="display:none;color:green">Updated Successfully</p>
                     <div class="card-header" id="heading_bill_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Billing Information</h2>
-                            <div class="ml-sm-auto d-flex mt-md-0 mt-3">                                
+                            <div class="ml-sm-auto d-flex mt-md-0 mt-3">
                                 <button type="button" class="btn btn-primary ml-auto" value="Update" id="billing_info_update">Update</button>
                                 <button class="btn btn-link px-2 ml-md-2 ml-auto btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#bill_info" aria-expanded="false" aria-controls="bill_info">
                                     <i class="fas fa-angle " aria-hidden="true"></i>
@@ -151,7 +171,7 @@
                 <!-- Shipping Information -->
                 <form class="card shipping-info" id="shipping_info">
                     @csrf
-                    <p id="myshipping" style="display:none">Update Shipping Information</p>
+                    <p id="myshipping" style="display:none;color:green">Updated Successfully</p>
                     <div class="card-header" id="heading_ship_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Shipping Information</h2>
@@ -182,9 +202,9 @@
                                     <label>State</label>
                                     <select id="state_code" name="state_code" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
                                         <option selected value="">Select State</option>
-                                            @foreach($statesList as $key => $state)
-                                            <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
-                                            @endforeach
+                                        @foreach($statesList as $key => $state)
+                                        <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
@@ -233,7 +253,7 @@
                                 <div class="form-inline flex-md-wrap flex-nowrap">
                                     <div><input type="text" class="form-control disp-file-name h-auto input-gray" id="file_name" placeholder=".jpeg, .png"></div>
                                     <div class="custom-file browse-file-btn ml-2">
-                                        <input type="file" class="custom-file-input" name="avatar" id="img_file_upid"> 
+                                        <input type="file" class="custom-file-input" name="avatar" id="img_file_upid">
                                         <span id="mgs_ta"></span>
                                         <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                     </div>
@@ -250,11 +270,17 @@
                             <div class="col mb-4">
                                 <div class="h-100 card-2 card-doc">
                                     <img class="card-img-top" src="{{ asset('storage/'.$user->avatar) }}" />
+                                    @if($user->avatar == "")
+                                    <div class="card-footer p-0">
+                                        <button type="button" class="btn btn-link btn-view p-0" onclick="btnAddProfilePic()">Add</button>
+                                    </div>
+                                    @else
                                     <div class="card-footer p-0">
                                         <button type="button" class="btn btn-link btn-view p-0" onclick="btnReplaceProfilePic('{{ $user->avatar }}','{{$user->id}}')">Replace</button>
                                         <!-- <a href="#" class="btn btn-link btn-delete p-0">Delete</a> -->
                                         <button type="button" onclick="deleteProfilePictures('{{$user->id}}')" data-token="{{ csrf_token() }}" class="btn btn-link btn-delete">Delete</button>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <!-- image 2 -->
@@ -312,24 +338,28 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">Name On Card</label>
-                                <input type="password" class="form-control input-white" id="old_pwd" placeholder="Old Password">
+                                <input type="text" class="form-control input-white" id="add_card_name" placeholder="Name On Card">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">Card Number</label>
-                                <input type="password" class="form-control input-white" id="new_pwd" placeholder="New Password">
+                                <input type="text" class="form-control input-white" id="add_card_no" placeholder="Card Number">
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">
-                                <label class="text-bold">Expiry</label>
+                                <label class="text-bold">Expiry<span class="text-danger hidden">*</span></label>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                            <div class="col-md-6 form-group select-option input-white">
+                                <select id="add_month" name="month" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
+                                    <option selected value="">Month</option>
+                                </select>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                            <div class="col-md-6 form-group select-option input-white">
+                                <select id="add_year" name="year" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
+                                    <option selected value="">Year</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -339,7 +369,7 @@
                                 <label class="text-bold">CVV</label>
                             </div>
                             <div class="col form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                                <input type="text" class="form-control input-white" id="change_cvv" placeholder="CVV">
                             </div>
                             <div class="col-sm col-auto form-group">
                                 <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
@@ -368,24 +398,28 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">Name On Card</label>
-                                <input type="password" class="form-control input-white" id="old_pwd" placeholder="Old Password">
+                                <input type="text" class="form-control input-white" id="change_card_name" placeholder="Name On Card">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label class="text-bold">Card Number</label>
-                                <input type="password" class="form-control input-white" id="new_pwd" placeholder="New Password">
+                                <input type="text" class="form-control input-white" id="change_card_no" placeholder="Card Number">
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12">
-                                <label class="text-bold">Expiry</label>
+                                <label class="text-bold">Expiry<span class="text-danger hidden">*</span></label>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                            <div class="col-md-6 form-group select-option input-white">
+                                <select id="change_month" name="month" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
+                                    <option selected value="">Month</option>
+                                </select>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                            <div class="col-md-6 form-group select-option input-white">
+                                <select id="change_year" name="year" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
+                                    <option selected value="">Year</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -395,7 +429,7 @@
                                 <label class="text-bold">CVV</label>
                             </div>
                             <div class="col form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                                <input type="text" class="form-control input-white" id="add_cvv" placeholder="CVV">
                             </div>
                             <div class="col-sm col-auto form-group">
                                 <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
@@ -438,7 +472,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
+                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value="save">Update Image</button>
                     </div>
                 </form>
             </div>
@@ -626,6 +660,45 @@
         </div>
     </div>
 </div>
+{{-- ADD New picture modal Profile picture --}}
+<div class="modal fade upload-new-prof-pic-modal pic-modal" id="add_new_prof_pic_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
+                <form class="row justify-content-center" action="{{ route('user.updateProfilePicture') }}" method="POST" role="form" enctype="multipart/form-data">
+                    @csrf
+                    <div class="col-12 align-self-center mb-3 text-center">
+                        <h4 class="sub-title-1 color-blue text-bold" id="title_add_smile">Add New Profile Picture</h4>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <div class="card h-100 card-2 mx-auto">
+                            <img class="card-img-top mx-auto" id="" src="{{ asset('images/icons/person_male.png') }}" />
+                            <!-- <img class="card-img-top mx-auto" id="doc_src" /> -->
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control h-auto disp-file-name" id="input_upload_pictures_name" />
+                            </div>
+                            <div class="col-auto">
+                                <div class="custom-file browse-file-btn">
+                                    <input type="file" class="custom-file-input" name="avatar" id="teethpic">
+                                    <label class="custom-file-label" for="input_upload_pictures" aria-describedby="input_upload_prof_picture"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">New Image Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @push('scripts')
 <script src="{{ asset('front/js/sidebar.js') }}"></script>
@@ -695,12 +768,14 @@
                 processData: false,
                 success: function(data) {
                     $("#mybilling").show();
-                    setTimeout(function() { $("#mybilling").hide(); }, 5000);
+                    setTimeout(function() {
+                        $("#mybilling").hide();
+                    }, 5000);
                     // console.log(data);
                     // alert("Billing Information update");
                 },
                 error: function() {
-                    
+
                 }
             });
         });
@@ -745,10 +820,12 @@
                 processData: false,
                 success: function(data) {
                     $("#myElem").show();
-                    setTimeout(function() { $("#myElem").hide(); }, 5000);
+                    setTimeout(function() {
+                        $("#myElem").hide();
+                    }, 5000);
                 },
                 error: function() {
-                    
+
                 }
             });
         });
@@ -759,15 +836,20 @@
         $('#view_document_modal').modal('show');
     }
 
-    function btnReplaceProfilePic(doc_name,doc_id) {
+    function btnReplaceProfilePic(doc_name, doc_id) {
         $('#upload_new_prof_pic_modal').modal('show');
         $("#doc_src").show();
-        $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+        $('#doc_src').attr('src', window.location.origin + '/storage/' + doc_name);
     }
 
+    function btnAddProfilePic() {
+        $('#add_new_prof_pic_modal').modal('show');
+        // $("#doc_src").show();
+        // $('#doc_src').attr('src',"images/icons/person_male.png");
+        }
 
     //Shipping Information update
-    $('#ship_info_update').on('click', function () {
+    $('#ship_info_update').on('click', function() {
         var shippingdetail = new FormData($('#shipping_info')[0]);
         $.ajax({
             url: '/profile/address-info',
@@ -778,18 +860,20 @@
             processData: false,
             success: function(data) {
                 $("#myshipping").show();
-                setTimeout(function() { $("#myshipping").hide(); }, 5000);
+                setTimeout(function() {
+                    $("#myshipping").hide();
+                }, 5000);
                 // console.log(data);
                 // alert("Shipping Information update");
             },
             error: function() {
-                
+
             }
         });
     });
 
     // profile Picture 
-    $('#img_file_upid').on('change',function(ev){
+    $('#img_file_upid').on('change', function(ev) {
         var image_detail = new FormData($('#update_profile')[0]);
         $.ajax({
             url: '/profile/update-avatar',
@@ -802,45 +886,42 @@
                 location.reload();
                 // alert("success");
             },
-            error: function() {     
-            }
+            error: function() {}
         });
     });
 
     //delete Profile Picture
-    function deleteProfilePictures(opId){
+    function deleteProfilePictures(opId) {
         _opId = opId;
         const swalWithBootstrapButtons = swal.mixin({
-        confirmButtonClass: 'btn btn-info',
-        cancelButtonClass: 'btn btn-info',
-        buttonsStyling: true,
-    })
-    
-    swalWithBootstrapButtons({
-        title: '',
-        text: "Are you sure you want to Delete this smile pictures?",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-        reverseButtons: false
-    }).then((result) => {
-        if (result.value) {
-            var date = moment();
-            var newDate = date.format("YYYY-MM-DD hh:mm:ss");
-            console.log(newDate);
-            $.ajax({
-                url: 'profile/delete-profile-images/'+_opId,
-                type: 'get',
-                success: function(data){
-                  location.reload();
-                    // console.log(data);
-                }
-            });
-        }
-        else if(result.dismiss === swal.DismissReason.cancel)
-            {
-            
+            confirmButtonClass: 'btn btn-info',
+            cancelButtonClass: 'btn btn-info',
+            buttonsStyling: true,
+        })
+
+        swalWithBootstrapButtons({
+            title: '',
+            text: "Are you sure you want to Delete this smile pictures?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.value) {
+                var date = moment();
+                var newDate = date.format("YYYY-MM-DD hh:mm:ss");
+                console.log(newDate);
+                $.ajax({
+                    url: 'profile/delete-profile-images/' + _opId,
+                    type: 'get',
+                    success: function(data) {
+                        location.reload();
+                        // console.log(data);
+                    }
+                });
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+
             }
         })
     }
@@ -851,6 +932,6 @@
             return true;
         else
             return false;
-    } 
+    }
 </script>
 @endpush

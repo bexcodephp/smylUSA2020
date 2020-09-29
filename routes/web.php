@@ -74,7 +74,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
             Route::delete('facilities/deleteNaHours/{id}', 'FacilityController@destroyNonAvailabilityTime')->name('deleteNaHours');
             Route::post('facilities/getcity', 'FacilityController@getcity');
             Route::get('facilities/{id}/profile', 'FacilityController@getProfile')->name('facilities.profile');
-            
+
             Route::resource('addresses', 'Addresses\AddressController');
 
             Route::resource('countries', 'Countries\CountryController');
@@ -277,6 +277,7 @@ Route::namespace('Front')->group(function () {
         Route::post('profile/update-step2', 'AccountsController@updateUserInfoStep2');
         Route::post('profile/update-avatar', 'AccountsController@updateAvatar');
         Route::post('profile/card-info', 'AccountsController@updateCard');
+        Route::post('profile/card-add', 'AccountsController@AddCard');
         Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
         Route::post('profile/update-profile-picture', 'AccountsController@updateProfilePicture')->name('user.updateProfilePicture');
         Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
@@ -290,45 +291,11 @@ Route::namespace('Front')->group(function () {
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
 });
 
-// Route::get('/candidate', function () {
-//     return view('front.users.u_ami_candidate');
-// });
-// Route::get('/products', function () {
-//     return view('front.users.u_products');
-// });
-// Route::get('/productsview', function () {
-//     return view('front.users.u_products_view');
-// });
-// Route::get('/checkout', function () {
-//     return view('front.checkout2-update');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('front.dashboard.patientDashboard');
-// });
-// Route::get('/dashboard', function () {
-//     return view('front.dashboard.patientDashboard');
-// });
-
-// Route::get('/patient-picture', function () {
-//     return view('front.dashboard.patientPicture');
-// });
-
-Route::get('/patient-profile', function () {
-    return view('front.dashboard.patientProfile');
-});
-
-Route::get('/patient-picture', function () {
-    return view('front.dashboard.patientPicture');
-});
-
-// Route::get('/patient-orders', function () {
-//     return view('front.dashboard.patientMyOrders');
-// });
-Route::get('/patient-resources', function () {
-    return view('front.dashboard.patientResources');
-});
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
 });
 Route::get('/customer/print-pdf', [ 'as' => 'customer.printpdf', 'uses' => 'CustomerController@printPDF']);
+
+Route::get('/candidate', function () {
+    return view('front.users.u_ami_candidate');
+});
