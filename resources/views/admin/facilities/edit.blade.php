@@ -1,12 +1,17 @@
 @extends('layouts.admin.app')
+@push('stylesheets')
+<link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css" rel="stylesheet" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/bootstrap-timepicker.min.css') }}">
+@endpush
 @section('css')
-    <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-timepicker.min.css') }}">
-    <style>
-        .timeTable td, .timeTable th {
-            padding: 10px;
-        }
-    </style>
+<style>
+    .timeTable td,
+    .timeTable th {
+        padding: 10px;
+    }
+</style>
 @endsection
 @section('content')
 <style>
@@ -67,7 +72,7 @@
                                 <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                                     <label for="name">Address <span class="text-danger">*</span></label>
                                     <input type="text" name="address" id="address" placeholder="address" class="form-control" value="{{ $facility->address }}">
-                                     <span class="text-danger">{{ $errors->first('address') }}</span>
+                                    <span class="text-danger">{{ $errors->first('address') }}</span>
                                 </div>
                             </div>
 
@@ -86,7 +91,7 @@
                                         placeholder="latitude" class="form-control" value="{{ $facility->latitude }}">
                                 </div>
                             </div> -->
-                            
+
                             <!-- <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Lontitude <span class="text-danger">*</span></label>
@@ -102,34 +107,34 @@
                                         placeholder="city" class="form-control" value="{{ $facility->city }}">
                                 </div>
                             </div> -->
-                            
+
                             <input type="hidden" name="latitude" id="latitude" value="{{ $facility->latitude }}">
                             <input type="hidden" name="longitude" id="longitude" value="{{ $facility->longitude }}">
                             <input type="hidden" id="state_id" value="{{ $facility->state }}">
                             <input type="hidden" id="city_id" value="{{ $facility->city }}">
-                            
+
                             <div class="col-sm-12">
                                 <div class="form-group {{ $errors->has('state') ? 'has-error' : '' }}">
                                     <label for="state">State<span class="text-danger">*</span></label>
-                                   
+
 
                                     <select id="state" name="state" class="form-control">
                                         <option value="">Select state</option>
-                                        <?php 
-                                            $state_arr = array();
+                                        <?php
+                                        $state_arr = array();
                                         ?>
 
                                         @foreach ($states as $state)
-                                            <?php 
-                                                $state_arr[$state->state_id] = $state->state_name;
-                                            ?>
-                                            <option id="opt_state_{{ $state->state_id }}" value="{{ $state->state_id }}">{{ $state->state_name }}</option>
+                                        <?php
+                                        $state_arr[$state->state_id] = $state->state_name;
+                                        ?>
+                                        <option id="opt_state_{{ $state->state_id }}" value="{{ $state->state_id }}">{{ $state->state_name }}</option>
                                         @endforeach
                                     </select>
                                     <span class="text-danger">{{ $errors->first('state') }}</span>
                                 </div>
                             </div>
-                            
+
                             <input type="hidden" id="state_name" name="state" value="<?php echo $facility->state; ?>">
 
                             <div class="col-sm-12">
@@ -144,11 +149,11 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                    <input id="my-input-searchbox" name="searchbox_location" type="text" placeholder="Search Location Here">
+                        <input id="my-input-searchbox" name="searchbox_location" type="text" placeholder="Search Location Here">
                         <div class="map" id="map" style="height: 355px;"></div>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <!-- <div class="col-sm-3">
                         <div class="form-group">
@@ -160,12 +165,12 @@
                     <div class="col-sm-3">
                         <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                             <label for="image">Facility Image</label>
-                            <img src="{{ url('storage/'.$facility->image) }}" width="100"/>
+                            <img src="{{ url('storage/'.$facility->image) }}" width="100" />
                             <input type="file" name="image" id="image" class="form-control">
                             <span class="text-danger">{{ $errors->first('image') }}</span>
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-3">
                         <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
                             <label for="status">Status<span class="text-danger">*</span></label>
@@ -181,53 +186,54 @@
 
             <!-- Start time slot-->
             <h2>Hours of operation<span class="text-danger">*</span></h2>
-                <div class="box-body">
-                    <table class="timeTable" style="width: 100%;">
-                        <thead>
-                            <tr style="padding: 5px;">
-                                <th>Day</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Is Closed</th>
-                                <!-- <th>Action</th> -->
-                            </tr>
-                        </thead>
-                        <?php //dd(config('constants.WEEKDAYS'));?>
-                        <tbody>
-                            @foreach(config('constants.WEEKDAYS') as $key =>$days)
-                            <tr style="padding: 5px; border: 1px solid;">
-                                <td style="width: 30%">{{ $days }}</td> 
-                                <td>
-                                    <div class="input-group">
+            <div class="box-body">
+                <table class="timeTable" style="width: 100%;">
+                    <thead>
+                        <tr style="padding: 5px;">
+                            <th>Day</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Is Closed</th>
+                            <!-- <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <?php //dd(config('constants.WEEKDAYS'));
+                    ?>
+                    <tbody>
+                        @foreach(config('constants.WEEKDAYS') as $key =>$days)
+                        <tr style="padding: 5px; border: 1px solid;">
+                            <td style="width: 30%">{{ $days }}</td>
+                            <td>
+                                <div class="input-group">
                                     <input type="text" class="form-control timepicker" name="start[{{$key}}]" value="{{ isset($timeslots[$key]) ? $timeslots[$key]['start_time'] : '' }}">
-                                    
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
+
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
                                     </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control timepicker" name="end[{{$key}}]" value="{{ isset($timeslots[$key]) ? $timeslots[$key]['end_time'] : '' }}">
-                                    
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" class="form-control timepicker" name="end[{{$key}}]" value="{{ isset($timeslots[$key]) ? $timeslots[$key]['end_time'] : '' }}">
+
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
                                     </div>
-                                </td> 
-                                <td>
-                                    <input type="checkbox" name="closed[{{$key}}]" value="1" {{ (isset($timeslots[$key]) && $timeslots[$key]['is_closed'] == 1) ? "checked" : '' }} >
-                                </td> 
-                                <!-- <td>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="closed[{{$key}}]" value="1" {{ (isset($timeslots[$key]) && $timeslots[$key]['is_closed'] == 1) ? "checked" : '' }}>
+                            </td>
+                            <!-- <td>
                                     <a href="{{ route('admin.facilities.updateSpan', [$facility->facility_id, 0]) }}" class="btn btn-info">Update Spans</a>
                                 </td>  -->
-                            </tr> 
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-                <!-- /.box-body -->
+            <!-- /.box-body -->
             <div class="box-footer">
                 <div class="btn-group">
                     <a href="{{ route('admin.facilities.index') }}" class="btn btn-default">Back</a>
@@ -235,214 +241,220 @@
                 </div>
             </div>
         </form>
-                <!-- End time slot-->
-            
-            <!-- Start Non availability section -->
-            <h2>Non-availability Hours</h2>
-            <button type="button" name="add" id="addNaHours" class="btn btn-primary">ADD</button>
-                <div class="box-body">
-                    <table class="timeTable" style="width: 100%;">
-                        <thead>
-                            <tr style="padding: 5px;">                                
-                                <th>Date</th>
-                                <!-- <th>Day</th> -->
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <?php //dd(config('constants.WEEKDAYS'));?>
-                        <tbody>
-                            @foreach($nontimeslots as $key =>$days)
-                            <?php //dd($days['date']);?>
-                            <tr style="padding: 5px; border: 1px solid;" id="tr_{{$days['id']}}">
-                                <td>
-                                <input type="date" name="date[{{$key}}]" class="form-control" value="{{$days['date']}}" id="date_{{$key}}">
-                                </td> 
-                                <!-- <td style="width: 30%"></td>  -->
-                                <td>
-                                    <div class="input-group">
-                                    <input type="text" class="form-control timepicker" name="start[{{$key}}]" value="{{ isset($days['start_time']) ? $days['start_time'] : '' }}" id="start_time_{{$key}}">
-                                    
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control timepicker" name="end[{{$key}}]" value="{{ isset($days['end_time']) ? $days['end_time'] : '' }}" id="end_time_{{$key}}">
-                                    
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </div>
-                                    </div>
-                                </td>                                
-                                <td>
-                                <button onclick="updateNonAvailabilityHours('{{ $days["id"] }}','{{ $key }}');" type="button" id="updateNaHours" class="btn mx-2 w-auto btn-edit">update</button>
-                                    <button onclick="deleteNonAvailabilityHours('{{ $days["id"] }}');" type="button" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
-                                </td> 
-                            </tr> 
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-        
-        
+        <!-- End time slot-->
+
+        <!-- Start Non availability section -->
+        <h2>Non-availability Hours</h2>
+        <button type="button" name="add" id="addNaHours" class="btn btn-primary">ADD</button>
+        <div class="box-body">
+            <table class="timeTable" style="width: 100%;">
+                <thead>
+                    <tr style="padding: 5px;">
+                        <th>Date</th>
+                        <!-- <th>Day</th> -->
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <?php //dd(config('constants.WEEKDAYS'));
+                ?>
+                <tbody>
+                    @foreach($nontimeslots as $key =>$days)
+                    <?php //dd($days['date']);
+                    ?>
+                    <tr style="padding: 5px; border: 1px solid;" id="tr_{{$days['id']}}">
+                        <td>
+                            <input type="date" name="date[{{$key}}]" class="form-control" value="{{$days['date']}}" id="date_{{$key}}">
+                        </td>
+                        <!-- <td style="width: 30%"></td>  -->
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="start[{{$key}}]" value="{{ isset($days['start_time']) ? $days['start_time'] : '' }}" id="start_time_{{$key}}">
+
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" name="end[{{$key}}]" value="{{ isset($days['end_time']) ? $days['end_time'] : '' }}" id="end_time_{{$key}}">
+
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button onclick="updateNonAvailabilityHours('{{ $days["id"] }}','{{ $key }}');" type="button" id="updateNaHours" class="btn mx-2 w-auto btn-edit">update</button>
+                            <button onclick="deleteNonAvailabilityHours('{{ $days["id"] }}');" type="button" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+
         <!-- End Non availability section   -->
 
-            
+
     </div>
     <!-- /.box -->
-    
+
 </section>
 
 <!-- Start modal  -->
 <div class="modal fade modal-upload-docs" id="modal_upload_docs" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-uppercase btn_blue" id="exampleModalLabel">Add Non-Availability Hours</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase btn_blue" id="exampleModalLabel">Add Non-Availability Hours</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
                     <form action="{{ route('admin.facilities.addNonAvailabilityTime', $facility->facility_id) }}" id="addNonAvailabilityTime" method="post">
                         {{ csrf_field() }}
                         <div class="form-row px-2">
-                            <div class="input-group col-auto mr-2">
+                            <div class="form-group col-auto">
                                 <label>Date:</label>
-                                <input type="date" name="date" class="form-control">
+                                <div class="input-group mr-2">
+                                    <input type="date" name="date" class="form-control">
+                                </div>
                             </div>
-                            <div class="input-group col-auto mr-2">
+                            <div class="form-group col-auto">
                                 <label>From :</label>
-                                <input type="text" class="form-control timepicker" name="start_time">
+                                <div class="input-group mr-2">
+                                    <input type="text" class="form-control timepicker" name="start_time">
                                     <div class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
+                                </div>
                             </div>
-                            <div class="input-group col-auto mr-2">
+                            <div class="form-group col-auto">
                                 <label>To :</label>
-                                <input type="text"  class="form-control timepicker" name="end_time">
+                                <div class="input-group mr-2">
+                                    <input type="text" class="form-control timepicker" name="end_time">
                                     <div class="input-group-addon">
                                         <i class="fa fa-clock-o"></i>
                                     </div>
-                            </div> 
+                                </div>
+                            </div>
                             <div class="col btn-filter">
                                 <input type="hidden" name="facilityID" value="{{$facility->facility_id}}">
                                 <button type="submit" name="submit" class="btn btn-primary" id="saveNaHours">submit</button>
                             </div>
+
                         </div>
                     </form>
-                    </div>
-                </div>
                 </div>
             </div>
         </div>
-           <!-- end modal  -->
+    </div>
+</div>
+<!-- end modal  -->
 <!-- /.content -->
 @endsection
 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @section('js')
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&sensor=false"></script>
 
 <script>
     var marker;
 
-    $(document).ready(function(){
-        $('#addNaHours').on('click', function () {
+    $(document).ready(function() {
+        $('#addNaHours').on('click', function() {
             $('#modal_upload_docs').modal('show');
-        });        
+        });
 
-        $('#modal_upload_docs').on('hidden.bs.modal', function (e) {
+        $('#modal_upload_docs').on('hidden.bs.modal', function(e) {
             // do something...
         });
 
         $("#state option").each(function() {
-          if($(this).text() == $('#state_name').val()) {
-            $(this).attr('selected', 'selected');            
-          }                        
+            if ($(this).text() == $('#state_name').val()) {
+                $(this).attr('selected', 'selected');
+            }
         });
-        
+
         // $('#state').text($('#state_name').val());
 
-        $('#state').on('change', function(){
+        $('#state').on('change', function() {
             var stateID = $(this).val();
-            $('#state_name').val($('#opt_state_'+stateID).text());
-            if(stateID){
+            $('#state_name').val($('#opt_state_' + stateID).text());
+            if (stateID) {
                 $.ajax({
-                    url:'../getcity',
-                    type:'post',
-                    data:{
-                        '_token':'{{csrf_token()}}',
-                        'state_id':stateID
+                    url: '../getcity',
+                    type: 'post',
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                        'state_id': stateID
                     },
-                    success:function (data) {
+                    success: function(data) {
                         var obj = Object();
 
                         obj = jQuery.parseJSON(data);
 
                         $('#city').html("");
-                        var opt= "";
-                        for(var i=0;i<obj.length;i++)
-                        {
-                            opt+='<option value="'+obj[i].city_name+'">'+obj[i].city_name+'</option>';
+                        var opt = "";
+                        for (var i = 0; i < obj.length; i++) {
+                            opt += '<option value="' + obj[i].city_name + '">' + obj[i].city_name + '</option>';
                         }
-                        
+
                         $('#city').append(opt);
                     }
                 })
-            }else{
-                $('#city').html('<option value="">Select state first</option>'); 
+            } else {
+                $('#city').html('<option value="">Select state first</option>');
             }
         });
 
-        $(window).keydown(function(event){
-            if(event.keyCode == 13) {
-            event.preventDefault();
-            return false;
+        $(window).keydown(function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
             }
         });
         GetCity();
     });
 
-    function GetCity()
-    {
+    function GetCity() {
         var stateID = $('#state').val();
-        if(stateID){
+        if (stateID) {
             $.ajax({
-                url:'../getcity',
-                type:'post',
-                data:{
-                    '_token':'{{csrf_token()}}',
-                    'state_id':stateID
+                url: '../getcity',
+                type: 'post',
+                data: {
+                    '_token': '{{csrf_token()}}',
+                    'state_id': stateID
                 },
-                success:function (data) {
+                success: function(data) {
                     var obj = Object();
 
                     obj = jQuery.parseJSON(data);
 
                     $('#city').html("");
 
-                    for(var i=0;i<obj.length;i++)
-                    {
-                        $('#city').append('<option value="'+obj[i].city_name+'">'+obj[i].city_name+'</option>')
+                    for (var i = 0; i < obj.length; i++) {
+                        $('#city').append('<option value="' + obj[i].city_name + '">' + obj[i].city_name + '</option>')
                     }
-                    
+
                     $('#city').val($('#city_id').val());
                 }
             })
-        }else{
-            $('#city').html('<option value="">Select state first</option>'); 
+        } else {
+            $('#city').html('<option value="">Select state first</option>');
         }
     }
 
 
 
-    initAutocomplete(parseFloat(document.getElementById('latitude').value),parseFloat(document.getElementById('longitude').value));
+    initAutocomplete(parseFloat(document.getElementById('latitude').value), parseFloat(document.getElementById('longitude').value));
 
     function initMap() {
         var lat = parseFloat(document.getElementById('latitude').value);
@@ -450,37 +462,44 @@
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 12,
-            center: {lat: lat, lng: lng}
+            center: {
+                lat: lat,
+                lng: lng
+            }
         });
         var geocoder = new google.maps.Geocoder();
 
         marker = new google.maps.Marker({
             map: map,
-            position: {lat: lat, lng: lng}
+            position: {
+                lat: lat,
+                lng: lng
+            }
         });
 
-        $('#address').blur(function(){
+        $('#address').blur(function() {
             geocodeAddress(geocoder, map);
         });
     }
 
     function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
+        geocoder.geocode({
+            'address': address
+        }, function(results, status) {
             if (status === 'OK') {
-            if(marker && marker.setMap)
-            {
-                marker.setMap(null);
-            }
-            resultsMap.setCenter(results[0].geometry.location);
-            marker = new google.maps.Marker({
-                map: resultsMap,
-                position: results[0].geometry.location
-            });
-            $('#latitude').val(results[0].geometry.location.lat());
-            $('#longitude').val(results[0].geometry.location.lng());
+                if (marker && marker.setMap) {
+                    marker.setMap(null);
+                }
+                resultsMap.setCenter(results[0].geometry.location);
+                marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                });
+                $('#latitude').val(results[0].geometry.location.lat());
+                $('#longitude').val(results[0].geometry.location.lng());
             } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+                alert('Geocode was not successful for the following reason: ' + status);
             }
         });
     }
@@ -488,20 +507,20 @@
     function GetCurrentLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
+        } else {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
-        
+
     function showPosition(position) {
-        initAutocomplete(position.coords.latitude,position.coords.longitude);
+        initAutocomplete(position.coords.latitude, position.coords.longitude);
     }
 
-    function initAutocomplete(latitude,longitude) {
+    function initAutocomplete(latitude, longitude) {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {
-            lat: latitude,
-            lng: longitude
+                lat: latitude,
+                lng: longitude
             },
             zoom: 6,
             disableDefaultUI: false,
@@ -511,7 +530,10 @@
 
         marker = new google.maps.Marker({
             map: map,
-            position: {lat: latitude, lng: longitude}
+            position: {
+                lat: latitude,
+                lng: longitude
+            }
         });
 
         // Create the search box and link it to the UI element.
@@ -533,8 +555,8 @@
         autocomplete.addListener('place_changed', function() {
             var place = autocomplete.getPlace();
             if (!place.geometry) {
-            console.log("Returned place contains no geometry");
-            return;
+                console.log("Returned place contains no geometry");
+                return;
             }
             var bounds = new google.maps.LatLngBounds();
             marker.setPosition(place.geometry.location);
@@ -545,10 +567,10 @@
             $('#longitude').val(lng);
 
             if (place.geometry.viewport) {
-            // Only geocodes have viewport.
-            bounds.union(place.geometry.viewport);
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
             } else {
-            bounds.extend(place.geometry.location);
+                bounds.extend(place.geometry.location);
             }
             map.fitBounds(bounds);
         });
@@ -556,39 +578,39 @@
         //addYourLocationButton(map, marker);
     }
 
-    function deleteNonAvailabilityHours(id){
-        if (confirm('Are you want to delete?')) {            
+    function deleteNonAvailabilityHours(id) {
+        if (confirm('Are you want to delete?')) {
             $.ajax({
-                url:'../deleteNaHours/'+id,
-                type:'delete',
-                data:{
-                    '_token':'{{csrf_token()}}',
-                    'id':id
+                url: '../deleteNaHours/' + id,
+                type: 'delete',
+                data: {
+                    '_token': '{{csrf_token()}}',
+                    'id': id
                 },
-                success:function (data) {
-                    $("#tr_"+id).hide();
+                success: function(data) {
+                    $("#tr_" + id).hide();
                 }
             });
-        }else{
+        } else {
             return false;
         }
     }
 
-    function updateNonAvailabilityHours(id,index){
-        var date = $("#date_"+index).val(); 
-        var start_time = $("#start_time_"+index).val(); 
-        var end_time = $("#end_time_"+index).val(); 
+    function updateNonAvailabilityHours(id, index) {
+        var date = $("#date_" + index).val();
+        var start_time = $("#start_time_" + index).val();
+        var end_time = $("#end_time_" + index).val();
         $.ajax({
-            url:'../updateNaHours/'+id,
-            type:'post',
-            data:{
-                '_token':'{{csrf_token()}}',
-                'id':id,
-                'date':date,
-                'start_time':start_time,
-                'end_time':end_time
+            url: '../updateNaHours/' + id,
+            type: 'post',
+            data: {
+                '_token': '{{csrf_token()}}',
+                'id': id,
+                'date': date,
+                'start_time': start_time,
+                'end_time': end_time
             },
-            success:function (data) {
+            success: function(data) {
                 alert('success');
             }
         })
@@ -604,12 +626,12 @@
 </script>
 
 <script src="{{ asset('js/bootstrap-timepicker.min.js') }}"></script>
-    <script>
+<script>
     //Timepicker
     $('.timepicker').timepicker({
-        showInputs: false        
+        showInputs: false
     });
-    </script>
+</script>
 <!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFwwS2kdFZZ2xk-zTShxSofwKP4wqqUYY&callback=initMap"></script> -->
 @endsection

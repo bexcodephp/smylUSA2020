@@ -1,7 +1,11 @@
 @extends('layouts.front.main')
 @push('stylesheets')
+<<<<<<< HEAD
+<link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}" type="text/css">
+=======
     <link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}"  type="text/css" >
     <link rel="stylesheet" href="{{ asset('front/css/patient/patient-profile.css') }}" type="text/css">
+>>>>>>> develop
 @endpush
 @section('content')
 <style type="text/css">
@@ -52,15 +56,15 @@
             <div class="col-12">
                 <div class="tab-content" id="form-tabContent">
                     {{-- step 1  --}}
-                        @include('front.patient.step1')
+                    @include('front.patient.step1')
                     {{-- step 2  --}}
-                        @include('front.patient.step2')
+                    @include('front.patient.step2')
                     {{-- step 3  --}}
-                        @include('front.patient.step3')
+                    @include('front.patient.step3')
                     {{-- step 4  --}}
-                        @include('front.patient.step4')                    
-                    {{-- step 5  --}}                    
-                        @include('front.patient.step5')                                        
+                    @include('front.patient.step4')
+                    {{-- step 5  --}}
+                    @include('front.patient.step5')
                 </div>
             </div>
         </div>
@@ -73,7 +77,7 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-               
+
                 <form class="row justify-content-center" role="form" id="smilepictures" enctype="multipart/form-data">
                     @csrf
                     <p id="add_image" style="display:none;color:green">Add Successfully</p>
@@ -99,7 +103,7 @@
                             </div>
                             <div class="col-auto">
                                 <div class="custom-file browse-file-btn">
-                                    <input type="file" class="custom-file-input" name="image" id="teethpic" onchange="validateImage()"> 
+                                    <input type="file" class="custom-file-input" name="image" id="teethpic" onchange="validateImage()">
                                     <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                 </div>
                             </div>
@@ -108,7 +112,7 @@
                     <div class="col-12 text-center">
                         <!-- <button type="submit" class="btn btn-primary btn-edit" id="upload_pictures">Upload</button> -->
                         <button type="button" class="btn btn-primary" id="upload_new_pictures" name="submit_1" value="submit_1">Upload New Image</button>
-                        <button type="button" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
+                        <button type="button" class="btn btn-primary" id="edit_pictures" name="save" value="save">Update Image</button>
                     </div>
                 </form>
             </div>

@@ -125,7 +125,7 @@ class CustomerController extends Controller
         $update->updateCustomer($data);
 
         $request->session()->flash('message', 'Update successful');
-        return redirect()->route('admin.customers.edit', $id);
+        return redirect("admin/customers");
     }
 
     /**

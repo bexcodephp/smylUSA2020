@@ -24,7 +24,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
-                        <a href="{{ route('admin.brands.index') }}" class="btn btn-default">Back</a>
+                        <a href="/admin/resources" class="btn btn-default">Back</a>
                         <button type="submit" class="btn btn-primary">Create</button>
                     </div>
                 </div>
