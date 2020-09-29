@@ -128,6 +128,11 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
+                                    <div class="card card-2 text-center">
+                                        <p class="card-text">Your dental scans will be uploaded here by our team once we have received your impression.
+                                                        </br>
+                                                        Thank you!</p>
+                                    </div>
                                     <!-- <div class="row row-cols-1 row-cols-md-2">
                                         <div class="col mb-4">
                                             <div class="card h-100 card-2">
@@ -212,7 +217,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <div class="row">
-                            <div class="col">
+                            <div class="col hidden">
                                 <input type="text" class="form-control" id="input_upload_pictures_name" />
                             </div>
                             <div class="col-auto">

@@ -264,17 +264,13 @@ class HomeController extends Controller
 
     public function howItWorks()
     {
-
-        // return view('front.howitworks');
         return view('front.users.u_works');
     }
 
     public function pricing()
     {
         $products = Product::Active()->orderBy('order_no', 'ASC')->get();
-
-        // return view('front.pricing', compact('products'));
-        return view('front.users.u_pricing', compact('products'));
+        return view('front.products.pricing', compact('products'));
     }
 
     public function verifyEmail(Request $request,$code)

@@ -102,11 +102,14 @@ class AccountsController extends Controller
             $order = null;
         }
         $customer = auth()->user();
+        $answers = DB::table('medical_form_question')
+            ->where('customer_id', $customer->id)
+            ->first();
         $teethImages = CustomerImage::where('customer_id', $customer->id)->get();
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
 
-        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList','teethImages'));
+        return view('front.patient.loginform', compact('order', 'address', 'history', 'customer', 'statesList','teethImages','answers'));
 
      //return view('front.medical_form', compact('order', 'address', 'history', 'customer','teethImages'));
     }
@@ -160,30 +163,33 @@ class AccountsController extends Controller
 
         $teethImages = CustomerImage::where('customer_id', $user->id)->get();
 
+        $answers = DB::table('medical_form_question')
+            ->where('customer_id', $customer->id)
+            ->first();
+
         $statesList = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
-        // return view('front.user.profile', [
-        //     'customer' => $customer,
-        //     'address' => $addresses,
-        //     'user' => $user,
-        //     'teeth_images' => $teethImages,
-        //     'statesList' => $statesList
-        // ]);
+        // echo "<pre>";
+        // print_r($user);
+        // exit();
 
         return view('front.dashboard.patientProfile', [
             'customer' => $customer,
             'address' => $addresses,
             'user' => $user,
             'teeth_images' => $teethImages,
-            'statesList' => $statesList
+            'statesList' => $statesList,
+            'answers' => $answers
         ]);
     }
 
     public function resources()
     {
         $notifications = Notification::where('user_type', 1)->where('user_id', auth()->user()->id)->latest()->get();
+        $resources = DB::table('table_resources')->get();
+        return view('front.dashboard.patientResources', compact('notifications','resources'));
 
-        return view('front.user.resources', compact('notifications'));
+        // return view('front.user.resources', compact('notifications'));
     }
     
     
@@ -194,33 +200,73 @@ class AccountsController extends Controller
         return view('front.dashboard.patientMyOrders', compact('orders', 'products'));
     }
 
-    public function storeMedicalFormStep2(Request $request)
+    public function updateUserInfoStep2(Request $request)
     {
-        DB::table('magazine_details')->insert([
-            'magazine_id'      => $request->magazine,
-            'page'             => $request->pagename,
-            'page_description' => $request->description,
-            'page_number'      => $request->pageno,
-            'file'             => $audioName,
-            'created_at'       => $date,
-            'updated_at'       => $date,
-            'user_id'          => 1
-        ]);
+        $user = $this->loggedUser();
+        $data = DB::table('medical_form_question')
+            ->where('customer_id', $user->id)
+            ->first();
+
+        if(isset($data->customer_id)) {
+            DB::table('medical_form_question')->where('customer_id','=',$user->id)->update([
+                'customer_id'   =>  $user->id,
+                'question1'      => $request->ans1,
+                'question2'      => $request->ans2,
+                'question3'      => $request->ans3,
+                'question4'      => $request->ans4,
+                'question5'      => $request->ans5,
+                'question6'      => $request->ans6,
+                'question7'      => $request->ans7,
+                'question8'      => $request->ans8,
+                'question9'      => $request->ans9,
+                'question10'      => $request->ans10,
+                'question11'      => $request->ans11,
+                'question12'      => $request->ans12,
+                'question13'      => $request->ans13,
+                'question14'      => $request->ans14,
+                'question15'      => $request->ans15,
+                'question16'      => $request->ans16,
+                'question17'      => $request->ans17,
+                'question18'      => $request->ans18,
+                'question19'      => $request->ans19,
+            ]);
+        }else {
+            DB::table('medical_form_question')->insert([
+                'customer_id'   =>  $user->id,
+                'question1'      => $request->ans1,
+                'question2'      => $request->ans2,
+                'question3'      => $request->ans3,
+                'question4'      => $request->ans4,
+                'question5'      => $request->ans5,
+                'question6'      => $request->ans6,
+                'question7'      => $request->ans7,
+                'question8'      => $request->ans8,
+                'question9'      => $request->ans9,
+                'question10'      => $request->ans10,
+                'question11'      => $request->ans11,
+                'question12'      => $request->ans12,
+                'question13'      => $request->ans13,
+                'question14'      => $request->ans14,
+                'question15'      => $request->ans15,
+                'question16'      => $request->ans16,
+                'question17'      => $request->ans17,
+                'question18'      => $request->ans18,
+                'question19'      => $request->ans19,
+            ]);
+        }
+        return 200;
     }
     
     
     public function ordersShow($reference)
     {
-        // print_r($reference);
-        // exit;
         return $order = $this->orderRepo->getOrderDetail('reference', $reference);
         // return view('front.user.order_detail', compact('order'));
     }
     
     
     public function calendar()
-    {
-       
+    {       
         return view('front.user.calendar');
     }
 
@@ -331,7 +377,7 @@ class AccountsController extends Controller
             'name' => $request->first_name . ' ' . $request->last_name,
             'phone' => $request->phone,
             'dob' => date('Y-m-d', strtotime($request->dob)),
-            'patient_id' => "ST".date('y-m-d').$state_code.$customer->id,
+            'patient_id' => "ST".date('ymd').$state_code.$customer->id,
         ]);
         $address = Address::where('customer_id', $user->id)->first();
         if(!$address){
@@ -350,6 +396,7 @@ class AccountsController extends Controller
                 'state_code' => $request->state_code,
                 'zip' => $request->zip,
                 'city' => $request->city,
+                'same_as_shipping' =>$request->same_as_shipping,
             ]);
         }
         return "success";
@@ -519,5 +566,25 @@ class AccountsController extends Controller
         event(new AddNotification($user->id, 1, 'You have updated card information.'));
 
         return $this->sendResponse(true,'Information updated');
+    }
+
+    public function AddCard(Request $request)
+    {
+        $user = $this->loggedUser();
+
+        $user->update([
+            'name_on_card' => $request->add_name_on_card,
+            'card_last_four' => $request->add_card_last_four,
+        ]);
+
+        event(new AddNotification($user->id, 1, 'You have updated card information.'));
+
+        return $this->sendResponse(true,'Information updated');
+    }
+    
+    public function dashboard(Request $request)
+    {       
+        return view('front.dashboard.patientDashboard');
+
     }
 }

@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Date of Birth<span class="text-danger">*</span></label>
-            <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled/>
+            <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : '' }}" class="form-control input-white" disabled/>
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Patient ID<span class="text-danger">*</span></label>
@@ -52,6 +52,14 @@
                 @endforeach
             </select>
         </div>
+
+        <!-- for updating design of select option-->
+        <!-- <div class="col-lg-4 col-sm-6 form-group select-option">
+            <label>State<span class="text-danger">*</span></label>
+            <select name="billing_state" id="billing_state" class="form-control selectpicker show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select State">
+            </select>
+        </div> -->
+
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Zip Code<span class="text-danger">*</span></label>
             <input type="text" class="form-control input-white" name="billing_zip" id="billing_zip" placeholder="000000" value="{{ $address ? $address->billing_zip : null }}" onkeypress='return restrictAlphabets(event)'>
@@ -62,7 +70,11 @@
         <div class="col-12 mb-2 form-inline">
             <h4 class="sub-title color-blue text-bold mb-2">Shipping Information</h4>
             <div class="custom-control custom-checkbox ml-sm-4 ">
+                @if($address->same_as_shipping == 1)
+                <input type="checkbox" class="custom-control-input" id="sameAsBilling" value="{{ $address ? $address->same_as_shipping : null }}" checked>
+                @else
                 <input type="checkbox" class="custom-control-input" id="sameAsBilling">
+                @endif
                 <label class="custom-control-label color-blue text-bold" for="sameAsBilling"><u>Same As Billing Information</u></label>
             </div>
         </div>
