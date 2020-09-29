@@ -35,12 +35,12 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/accounts';
-    // protected $redirectTo = '/medical_form';
+    // protected $redirectTo = '/medical_form'; // solving vendor issue in git
     
     protected function redirectTo()
     {
         $user_id = Auth::user()->id; 
-
+        
         $wordlist = Order::where('customer_id', '=', $user_id)->get();
         $wordCount = $wordlist->count();
 
@@ -61,7 +61,7 @@ class LoginController extends Controller
             {
                 return '/';
             }
-        }
+        }   
     }
 
     /**

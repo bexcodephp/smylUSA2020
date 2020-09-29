@@ -53,8 +53,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
+    {   
         $list = $this->employeeRepo->listEmployees('created_at', 'desc');       
         return view('admin.employees.list', [
             'employees' => $this->employeeRepo->paginateArrayResults($list->all())
@@ -159,17 +158,15 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($user_role)
-    {                
+    {   
         $role = $this->roleRepo->getUserBasedOnRole($user_role);
         $facilities = Facility::all();        
         //dd($role->users);
         //$employee = Employee::all();
-        //$facilities = Facility::whereIn('facility_id',$role)->get();  
+        //$facilities = Facility::whereIn('facility_id',$role)->get();
 
         return view('admin.employees.show', compact('role','facilities'));
     }
-
-    
     
     public function dentist_orders($dentist)
     {
@@ -207,6 +204,9 @@ class EmployeeController extends Controller
         $roles = $this->roleRepo->listRoles('created_at', 'desc');
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
         $facilities = Facility::where('is_active',1)->get(['facility_id','name','city','state','zipcode']);
+
+
+        
         return view(
             'admin.employees.edit',
             [

@@ -115,7 +115,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($user_role)
-    {                
+    {
         $role = $this->roleRepo->getUserBasedOnRole($user_role);
         $facilities = Facility::all();        
         //dd($role->users);

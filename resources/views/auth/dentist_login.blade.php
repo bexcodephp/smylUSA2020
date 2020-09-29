@@ -78,8 +78,12 @@
                         {{ csrf_field() }}
                         <div class="form-row">
                             <div class="form-group col-lg-6">
-                                <label class="text-color-dark" for="first_name">Full Name:</label>
-                                <input type="text" value="" class="form-control bg-light-5 border-0 rounded" autocomplete="off" name="name" id="first_name" required>
+                                <label class="text-color-dark" for="first_name">First Name</label>
+                                <input type="text" value="" class="form-control bg-light-5 border-0 rounded" autocomplete="off" name="fname" id="first_name" required>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="text-color-dark" for="first_name">Last Name</label>
+                                <input type="text" value="" class="form-control bg-light-5 border-0 rounded" autocomplete="off" name="lname" id="first_name" required>
                             </div>
                             <div class="form-group col-lg-6">
                                 <label class="text-color-dark" for="shopLoginRegisterEmail">EMAIL ADDRESS:</label>
