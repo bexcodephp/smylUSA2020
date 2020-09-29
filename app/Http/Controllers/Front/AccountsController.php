@@ -561,7 +561,6 @@ class AccountsController extends Controller
     public function updateCard(Request $request)
     {
         $user = $this->loggedUser();
-
         $user->update([
             'name_on_card' => $request->name_on_card,
             'card_last_four' => $request->card_last_four,

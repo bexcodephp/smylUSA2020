@@ -81,7 +81,7 @@
                                         <label>Password</label>
                                         <button type="button" class="btn btn-link p-0 float-right" id="change_pwd"><u>Change</u></button>
                                     </div>
-                                    <input type="password" class="form-control input-white" id="password" placeholder="Password" value="{{ auth()->user()->password }}">
+                                    <input type="password" class="form-control input-white" id="password" placeholder="********">
                                 </div>
                                 <div class="col-12 form-group">
                                     <div class="col p-0">
@@ -118,7 +118,7 @@
                                                     <label class="text-bold">XXXX XXXX XXXX <span>{{$cardformat}}</span></label>
                                                 </div>
                                                 <div class="col-12 acc-card-valid">
-                                                    <label class="text-uppercase">Valid Thru&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
+                                                    <label class="text-uppercase">Expiry&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
                                                 </div>
                                                 <!-- <div class="col-12 acc-card-name">
                                                     <label class="text-bold">{{$customer->name_on_card}}</label><img src="{{ asset('images/icons/card_elipse.png') }}" width="37" class="float-right" />
@@ -1011,7 +1011,12 @@
                 success: function(data) {
                     // console.log(data);
                     $('#card_detail_change_modal').modal("hide");
-                    alert("success");  
+                    // alert("success"); 
+                    swal(
+                      '',
+                      'Update Successfully',
+                      'success'
+                    ) 
                 },
                 error: function() {
                     
@@ -1064,7 +1069,12 @@
                 success: function(data) {
                     // console.log(data);
                     $('#card_detail_add_modal').modal("hide");
-                    alert("success");   
+                    // alert("success");  
+                    swal(
+                      '',
+                      'Added Successfully',
+                      'success'
+                    ) 
                 },
                 error: function() {
                     
