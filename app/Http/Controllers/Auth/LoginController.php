@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Shop\Admins\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Shop\Orders\Order;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -32,8 +35,35 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/accounts';
-    protected $redirectTo = '/medical_form';
+    // protected $redirectTo = '/medical_form';
     
+    protected function redirectTo()
+    {
+        $user_id = Auth::user()->id; 
+
+        $wordlist = Order::where('customer_id', '=', $user_id)->get();
+        $wordCount = $wordlist->count();
+
+        if($wordCount == 0)
+        {
+            return '/';
+        }
+        else
+        {
+            $last_order_id = Order::where('customer_id', '=', $user_id)->latest('id')->first()->id;
+            $product_id = DB::table('order_product')->where('order_id',$last_order_id)->first()->product_id;
+
+            if($product_id == 17 || $product_id == 20)
+            {
+                return '/medical_form';
+            }
+            else if($product_id == 16 || $product_id == 19)
+            {
+                return '/';
+            }
+        }
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -52,7 +82,7 @@ class LoginController extends Controller
     {
         return view('auth.pharma_login');
     }
-
+    
     public function dentistLoginFormShow()
     {
         $states=array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
@@ -74,7 +104,7 @@ class LoginController extends Controller
 
             return $this->sendLockoutResponse($request);
         }
-
+        
         $details = $request->only('email', 'password');
         $details['status'] = 1;
 
@@ -87,7 +117,6 @@ class LoginController extends Controller
         // user surpasses their maximum number of attempts they will get locked out.
 
         $this->incrementLoginAttempts($request);
-
         return $this->sendFailedLoginResponse($request);
     }
 

@@ -227,7 +227,7 @@ Route::namespace('Front')->group(function () {
             Route::post('employee/update-password', 'OperatorController@updatePassword')->name('employee.updatePassword');
             Route::post('case/submit', 'OperatorController@submitCase')->name('operator.submitCase');
         });
-
+        
         Route::group(['prefix' => 'vendor'], function () {
             Route::get('dashboard', 'VendorController@dashboard')->name('vendor.dashboard');
             Route::get('profile', 'VendorController@profile')->name('vendor.profile');

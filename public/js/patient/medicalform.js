@@ -27,12 +27,11 @@ $(document).ready(function () {
             $("input.zip").removeAttr("disabled");           
         }
     });
-
+    
     $('#step1_submit').on('click', function () {
         var formdata = new FormData($('#step_1')[0]);
         formdata.append('same_as_shipping',_flag_billing);
         formdata.append('is_form_completed',1);
-
         $.ajax({
             url: '/profile/update-step1',
             type: "POST",
@@ -49,7 +48,7 @@ $(document).ready(function () {
                     $('#step_2').addClass('active show');
 
                     $('#nav_step_1').addClass("disabled");
-                }                
+                }
             },
             error: function() {
                 
