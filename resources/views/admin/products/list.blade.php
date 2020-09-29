@@ -9,6 +9,9 @@
             <div class="box">
                 <div class="box-body">
                     <h2>Products</h2>
+                    <div class="box-tools pull-right mb-2">
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Add New</a>
+                    </div>
                     {{-- @include('layouts.search', ['route' => route('admin.products.index')]) --}}
                     @include('admin.shared.products')
                     {{ $products->links() }}
