@@ -32,7 +32,7 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/accounts';
-    protected $redirectTo = '/medical_form';
+    protected $redirectTo = '/medical_form'; // step 1 to 5
     
     /**
      * Create a new controller instance.
