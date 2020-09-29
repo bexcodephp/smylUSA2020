@@ -1,20 +1,19 @@
-/node_modules/
+/node_modules
 /public/hot
 /public/storage
-/public/img
-/public/fonts/vendor
-/public/css/app.css
-/public/js/app.js
 /storage/*.key
 /vendor
-/.idea
-/.vagrant
-composer.json
-composer.lock
+.env
+.env.backup
+.phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+<<<<<<< HEAD
+composer.json
+composer.lock
+=======
 .env
 .DS_Store
 /public/.DS_Store
@@ -29,9 +28,4 @@ storage/app/public/storage
 /nbproject/private/
 *.zip
 *.lock
-<<<<<<< HEAD
 *.sql
-=======
-*.sql
-
->>>>>>> develop

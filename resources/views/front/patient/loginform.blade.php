@@ -1,6 +1,11 @@
 @extends('layouts.front.main')
 @push('stylesheets')
+<<<<<<< HEAD
 <link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}" type="text/css">
+=======
+    <link rel="stylesheet" href="{{ asset('front/css/patient/loginform.css') }}"  type="text/css" >
+    <link rel="stylesheet" href="{{ asset('front/css/patient/patient-profile.css') }}" type="text/css">
+>>>>>>> develop
 @endpush
 @section('content')
 <style type="text/css">

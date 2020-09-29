@@ -73,14 +73,14 @@
                             <div class="row mt-3">
                                 <div class="col-md-6 form-group">
                                     <label>Email</label>
-                                    <input type="text" class="form-control input-gray" id="name_email" placeholder="Name">
+                                    <input type="text" class="form-control input-white" id="name_email" placeholder="Name" value="{{ auth()->user()->email }}">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <div class="col p-0">
                                         <label>Password</label>
                                         <button type="button" class="btn btn-link p-0 float-right" id="change_pwd"><u>Change</u></button>
                                     </div>
-                                    <input type="password" class="form-control input-gray" id="password" placeholder="Password">
+                                    <input type="password" class="form-control input-white" id="password" placeholder="********">
                                 </div>
                                 <div class="col-12 form-group">
                                     <div class="col p-0">
@@ -88,30 +88,40 @@
                                         <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_change"><u>Change</u></button>
                                         <button type="button" class="btn btn-link p-0 mx-3" id="btn_card_detail_add"><u>Add</u></button>
                                     </div>
-                                    <div class="row">
+                                   <!--  <div class="row">
                                         <div class="col-sm-auto mb-3">
                                             <input type="password" class="form-control input-gray" id="password" placeholder="Password">
                                         </div>
                                         <div class="col-sm-auto mb-3">
                                             <input type="password" class="form-control input-gray" id="password" placeholder="Password">
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- remove or add "hidden" class for show -->
                                     <div class="row" id="bank_card_details">
                                         <div class="col-auto bank-card-details mt-3">
+                                            <?php
+                                                $cardnumber = $customer->card_last_four;
+                                                if($cardnumber == ""){
+                                                    $cardformat = "";
+                                                }else {
+                                                    // $cardformat = 'XXXX-XXXX-XXXX-'.substr($cardnumber, -4);
+                                                    $cardformat = substr($cardnumber, -4);
+                                                }
+                                            ?>
+                                            <input type="text" class="form-control input-white" id="card_number" placeholder="Card Number" value="{{$cardformat }}" hidden>
                                             <div class="card px-0 py-3">
                                                 <div class="col-12 acc-card-chip">
                                                     <img src="{{ asset('images/icons/chip.png') }}" class="mb-2" width="30" />
                                                 </div>
                                                 <div class="col-12 acc-card-number">
-                                                    <label class="text-bold">XXXX XXXX XXXX <span>3456</span></label>
+                                                    <label class="text-bold">XXXX XXXX XXXX <span>{{$cardformat}}</span></label>
                                                 </div>
                                                 <div class="col-12 acc-card-valid">
-                                                    <label class="text-uppercase">Valid Thru&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
+                                                    <label class="text-uppercase">Expiry&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
                                                 </div>
-                                                <div class="col-12 acc-card-name">
-                                                    <label class="text-bold">Name Surname</label><img src="{{ asset('images/icons/card_elipse.png') }}" width="37" class="float-right" />
-                                                </div>
+                                                <!-- <div class="col-12 acc-card-name">
+                                                    <label class="text-bold">{{$customer->name_on_card}}</label><img src="{{ asset('images/icons/card_elipse.png') }}" width="37" class="float-right" />
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -250,9 +260,13 @@
                             <h2 class="card-title color-blue text-bold mb-0">Profile Picture</h2>
                             <div class="ml-sm-auto d-flex mt-md-0 mt-3">
                                 <div class="form-inline flex-md-wrap flex-nowrap">
-                                    <div><input type="text" class="form-control disp-file-name h-auto input-gray" id="file_name" placeholder=".jpeg, .png"></div>
+                                    <!-- <div><input type="text" class="form-control disp-file-name h-auto input-gray" id="file_name" placeholder=".jpeg, .png"></div> -->
                                     <div class="custom-file browse-file-btn ml-2">
+<<<<<<< HEAD
                                         <input type="file" class="custom-file-input" name="avatar" id="img_file_upid">
+=======
+                                        <input type="file" class="custom-file-input" name="avatar" id="img_file_upid" onchange="validateImage()"> 
+>>>>>>> develop
                                         <span id="mgs_ta"></span>
                                         <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                     </div>
@@ -326,52 +340,60 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-auto align-self-center">
-                        <h4 class="text-bold color-blue">Change Card Details</h4>
-                    </div>
-                    <div class="col align-self-center text-right">
-                        <button type="button" class="btn btn-primary">Update</button>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label class="text-bold">Name On Card</label>
-                                <input type="password" class="form-control input-white" id="old_pwd" placeholder="Old Password">
+                <form role="form" id="step_3_card">
+                    @csrf
+                    <div class="row">
+                        <div class="col-auto align-self-center">
+                            <h4 class="text-bold color-blue">Change Card Details</h4>
+                        </div>
+                        <div class="col align-self-center text-right">
+                            <button type="button" class="btn btn-primary" id="update_card">Update</button>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="text-bold">Name On Card</label>
+                                    <input type="text" class="form-control input-white" name="name_on_card" id="name_on_card" placeholder="Name On Card" value="{{ $customer ? $customer->name_on_card : null}}">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="text-bold">Card Number</label>
+                                    <?php
+                                        $cardnumber = $customer->card_last_four;
+                                        $cardformat = 'XXXX XXXX XXXX '.substr($cardnumber, -4);
+                                    ?>
+                                    <input type="text" class="form-control input-white" name="card_last_four" id="card_last_four" placeholder="Card Number" value="{{ $cardformat}}" >
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label class="text-bold">Card Number</label>
-                                <input type="password" class="form-control input-white" id="new_pwd" placeholder="New Password">
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-bold">Expiry</label>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                   <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
+                                   <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" onkeyup="formatString(event);">
+                                </div>
+                                <!-- <div class="col-md-6 form-group">
+                                    <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="Year">
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-bold">CVV</label>
+                                </div>
+                                <div class="col form-group">
+                                    <input type="text" class="form-control input-white" id="cvv" name="cvv" placeholder="Enter CVV" maxlength='4'>
+                                </div>
+                                <div class="col-sm col-auto form-group">
+                                    <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="text-bold">Expiry</label>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="text-bold">CVV</label>
-                            </div>
-                            <div class="col form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                            <div class="col-sm col-auto form-group">
-                                <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -382,52 +404,63 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-auto align-self-center">
-                        <h4 class="text-bold color-blue">Add New Card</h4>
-                    </div>
-                    <div class="col align-self-center text-right">
-                        <button type="button" class="btn btn-primary">Add</button>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label class="text-bold">Name On Card</label>
-                                <input type="password" class="form-control input-white" id="old_pwd" placeholder="Old Password">
+                <form role="form" id="step_3_card_add">
+                    @csrf
+                    <div class="row">
+                        <div class="col-auto align-self-center">
+                            <h4 class="text-bold color-blue">Add New Card</h4>
+                        </div>
+                        <div class="col align-self-center text-right">
+                            <button type="button" class="btn btn-primary" id="add_card">Add</button>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="text-bold">Name On Card</label>
+                                    <input type="text" class="form-control input-white" name="add_name_on_card" id="add_name_on_card" placeholder="Name On Card" value="{{ $customer ? $customer->name_on_card : null}}">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="text-bold">Card Number</label>
+                                    <?php
+                                        $cardnumber = $customer->card_last_four;
+                                        if($cardnumber == ""){
+                                            $cardformat = "";
+                                        }else {
+                                            $cardformat = 'XXXX XXXX XXXX '.substr($cardnumber, -4);
+                                        }
+                                    ?>
+                                    <input type="text" class="form-control input-white" name="add_card_last_four" id="add_card_last_four" placeholder="Card Number" value="{{ $cardformat}}" >
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label class="text-bold">Card Number</label>
-                                <input type="password" class="form-control input-white" id="new_pwd" placeholder="New Password">
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-bold">Expiry</label>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" onkeyup="formatString(event);">
+                                </div>
+                                <!-- <div class="col-md-6 form-group">
+                                    <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-bold">CVV</label>
+                                </div>
+                                <div class="col form-group">
+                                    <input type="text" class="form-control input-white" id="add_cvv" name="add_cvv" placeholder="Enter CVV" maxlength='4'>
+                                </div>
+                                <div class="col-sm col-auto form-group">
+                                    <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="text-bold">Expiry</label>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="text-bold">CVV</label>
-                            </div>
-                            <div class="col form-group">
-                                <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="New Password">
-                            </div>
-                            <div class="col-sm col-auto form-group">
-                                <img src="{{ asset('images/icons/icon_cvv.png') }}" class="icon-cvv" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -706,14 +739,25 @@
         $('#change_pwd').on('click', function() {
             $('#change_pwd_modal').modal('show')
         });
-        // change btn_card_detail_change modal
-        $('#btn_card_detail_change').on('click', function() {
-            $('#card_detail_change_modal').modal('show')
-        });
-        // ADD card detail  modal
-        $('#btn_card_detail_add').on('click', function() {
-            $('#card_detail_add_modal').modal('show')
-        });
+
+        var card_number = $("#card_number").val();
+        if(card_number == ""){
+            // change btn_card_detail_change modal
+            $('#btn_card_detail_change').hide();
+            $('#btn_card_detail_add').on('click', function () {
+                $('#btn_card_detail_add').show();
+                $('#btn_card_detail_change').hide();
+                $('#card_detail_add_modal').modal('show')
+            });
+        } else{
+            // ADD card detail  modal
+            $('#btn_card_detail_add').hide();
+            $('#btn_card_detail_change').on('click', function () {
+                $('#btn_card_detail_change').show();
+                $('#btn_card_detail_add').hide();
+                $('#card_detail_change_modal').modal('show')
+            });
+        }
 
         //billing info validation
         $('#billing_info_update').click(function() {
@@ -926,6 +970,168 @@
             return true;
         else
             return false;
+<<<<<<< HEAD
+=======
+    } 
+
+    $('#update_card').click(function() {
+        $(".error").hide();
+        var hasError = false;
+        var cardHolderName = $("#name_on_card").val();
+        var cardHolderNameRegex = /^[a-z ,.'-]+$/i;
+        var cardNumber = $("#card_last_four").val();
+        var cvvNumber = $("#cvv").val();
+        var cvvRegex = /^[0-9]{3,3}$/;
+
+            if (cardHolderName == "") {
+                $("#name_on_card").after('<span class="error">Please Enter card Name</span>');
+                hasError = true;
+            }else if (!cardHolderNameRegex.test(cardHolderName)) {
+                $("#name_on_card").after('<span class="error">Card Holder Name is Invalid</span>');
+                hasError = true;
+            }
+
+            if (cardNumber == "") {
+                $("#card_last_four").after('<span class="error">Card Number is Invalid</span>');
+                hasError = true;
+            }
+
+            // if (cvvNumber == "") {
+            //     $("#cvv").after('<span class="error">Enter CVV</span>');
+            //     hasError = true;
+            // } else if (!cvvNumber.test(cvvRegex)) {
+            //     $("#cvv").after('<span class="error">CVV is Invalid</span>');
+            //     hasError = true;
+            // }
+
+            if (hasError == true) {
+                return false;
+            }
+
+            var carddetail = new FormData($('#step_3_card')[0]);
+            $.ajax({
+                url: '/profile/card-info',
+                type: "POST",
+                data: carddetail,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // console.log(data);
+                    $('#card_detail_change_modal').modal("hide");
+                    // alert("success"); 
+                    swal(
+                      '',
+                      'Update Successfully',
+                      'success'
+                    ) 
+                },
+                error: function() {
+                    
+                }
+            });
+    });
+
+    $('#add_card').click(function() {
+        $(".error").hide();
+        var hasError = false;
+        var cardHolderName = $("#add_name_on_card").val();
+        var cardHolderNameRegex = /^[a-z ,.'-]+$/i;
+        var cardNumber = $("#add_card_last_four").val();
+        var cvvNumber = $("#cvv").val();
+        var cvvRegex = /^[0-9]{3,3}$/;
+
+            if (cardHolderName == "") {
+                $("#add_name_on_card").after('<span class="error">Please Enter card Name</span>');
+                hasError = true;
+            }else if (!cardHolderNameRegex.test(cardHolderName)) {
+                $("#add_name_on_card").after('<span class="error">Card Holder Name is Invalid</span>');
+                hasError = true;
+            }
+
+            if (cardNumber == "") {
+                $("#add_card_last_four").after('<span class="error">Card Number is Invalid</span>');
+                hasError = true;
+            }
+
+            // if (cvvNumber == "") {
+            //     $("#cvv").after('<span class="error">Enter CVV</span>');
+            //     hasError = true;
+            // } else if (!cvvNumber.test(cvvRegex)) {
+            //     $("#cvv").after('<span class="error">CVV is Invalid</span>');
+            //     hasError = true;
+            // }
+
+            if (hasError == true) {
+                return false;
+            }
+
+            var carddetail = new FormData($('#step_3_card_add')[0]);
+            $.ajax({
+                url: '/profile/card-add',
+                type: "POST",
+                data: carddetail,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    // console.log(data);
+                    $('#card_detail_add_modal').modal("hide");
+                    // alert("success");  
+                    swal(
+                      '',
+                      'Added Successfully',
+                      'success'
+                    ) 
+                },
+                error: function() {
+                    
+                }
+            });
+    });
+
+    function formatString(e) {
+      var inputChar = String.fromCharCode(event.keyCode);
+      var code = event.keyCode;
+      var allowedKeys = [8];
+      if (allowedKeys.indexOf(code) !== -1) {
+        return;
+      }
+
+      event.target.value = event.target.value.replace(
+        /^([1-9]\/|[2-9])$/g, '0$1/' // 3 > 03/
+      ).replace(
+        /^(0[1-9]|1[0-2])$/g, '$1/' // 11 > 11/
+      ).replace(
+        /^([0-1])([3-9])$/g, '0$1/$2' // 13 > 01/3
+      ).replace(
+        /^(0?[1-9]|1[0-2])([0-9]{2})$/g, '$1/$2' // 141 > 01/41
+      ).replace(
+        /^([0]+)\/|[0]+$/g, '0' // 0/ > 0 and 00 > 0
+      ).replace(
+        /[^\d\/]|^[\/]*$/g, '' // To allow only digits and `/`
+      ).replace(
+        /\/\//g, '/' // Prevent entering more than 1 `/`
+      );
+    }
+
+    function validateImage() {
+        var formData = new FormData();
+        var file = document.getElementById("img_file_upid").files[0];
+        formData.append("Filedata", file);
+        var t = file.type.split('/').pop().toLowerCase();
+        if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+            alert('Please select a valid image file');
+            document.getElementById("img_file_upid").value = '';
+            return false;
+        }
+        if (file.size > 1024000) {
+            alert('Max Upload size is 1MB only');
+            document.getElementById("img_file_upid").value = '';
+            return false;
+        }
+        return true;
+>>>>>>> develop
     }
 </script>
 @endpush
