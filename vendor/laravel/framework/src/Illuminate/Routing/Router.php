@@ -1180,7 +1180,7 @@ class Router implements RegistrarContract, BindingRegistrar
         $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
         $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
     }
-
+    
     /**
      * Register the typical email verification routes for an application.
      *
