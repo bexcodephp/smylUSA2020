@@ -199,13 +199,15 @@
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
-                <form class="row justify-content-center" action="{{ route('user.updateTeethImages') }}" method="POST" role="form" id="smilepictures" enctype="multipart/form-data">
+                <form class="row justify-content-center" id="smilepictures" enctype="multipart/form-data">
                     @csrf
+                    <p id="add_image" style="display:none;color:green">Add Successfully</p>
+                    <p id="edit_image" style="display:none;color:green">Updated Successfully</p>
                     <div class="col-12 align-self-center mb-3 text-center">
                         <input type="hidden" name="doc_id_name" id="doc_id_hid">
                         <h4 class="sub-title-1 color-blue text-bold" id="title_add_smile">Add New Smile Picture</h4>
                         <h4 class="sub-title-1 color-blue text-bold" id="title_edit_smile">Edit New Smile Picture</h4>
-                        <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_bite">Add New Bite Picture</h4>
+                       <!--  <h4 class="sub-title-1 color-blue text-bold hidden" id="title_add_bite">Add New Bite Picture</h4> -->
                     </div>
                     <div class="col-12 mb-4">
                         <div class="card h-100 card-2 mx-auto">
@@ -222,15 +224,15 @@
                             </div>
                             <div class="col-auto">
                                 <div class="custom-file browse-file-btn">
-                                    <input type="file" class="custom-file-input" name="image" id="teethpic">
+                                    <input type="file" class="custom-file-input" name="image" id="teethpic"  onchange="validateImage()">
                                     <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary" id="upload_pictures" name="submit" value="submit">Upload New Image</button>
-                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
+                        <button type="button" class="btn btn-primary" id="upload_new_pictures" name="submit" value="submit">Upload New Image</button>
+                        <button type="button" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
                     </div>
                 </form>
             </div>
@@ -314,7 +316,7 @@
             $('#title_add_smile').show();
             $('#title_edit_smile').hide();
             $('#title_add_bite').hide();
-            $('#upload_pictures').show();
+            $('#upload_new_pictures').show();
             $('#edit_pictures').hide();
             // $('#doc_src').attr();
             $('#doc_src').hide();
@@ -328,7 +330,7 @@
         $('#upload_new_pic_modal').modal('show');
         $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
             $('#title_edit_smile').show();
-            $('#upload_pictures').hide();
+            $('#upload_new_pictures').hide();
             $('#edit_pictures').show();
             $('#title_add_smile').hide();
             $('#title_add_bite').hide();
@@ -373,40 +375,105 @@
     }
 
     function deleteSmilePictures(opId){
-            _opId = opId;
-            const swalWithBootstrapButtons = swal.mixin({
-            confirmButtonClass: 'btn btn-info',
-            cancelButtonClass: 'btn btn-info',
-            buttonsStyling: true,
-        })
-    
-        swalWithBootstrapButtons({
-            title: '',
-            text: "Are you sure you want to Delete this smile pictures?",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-            reverseButtons: false
-        }).then((result) => {
-            if (result.value) {
-                var date = moment();
-                var newDate = date.format("YYYY-MM-DD hh:mm:ss");
-                console.log(newDate);
-                $.ajax({
-                    url: 'profile/delete-teeth-images/'+_opId,
-                    type: 'get',
-                    success: function(data){
-                      location.reload();
-                        // console.log(data);
-                    }
-                });
-            }
-            else if(result.dismiss === swal.DismissReason.cancel)
-                {
-                
+        _opId = opId;
+        const swalWithBootstrapButtons = swal.mixin({
+        confirmButtonClass: 'btn btn-info',
+        cancelButtonClass: 'btn btn-info',
+        buttonsStyling: true,
+    })
+
+    swalWithBootstrapButtons({
+        title: '',
+        text: "Are you sure you want to Delete this smile pictures?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        reverseButtons: false
+    }).then((result) => {
+        if (result.value) {
+            var date = moment();
+            var newDate = date.format("YYYY-MM-DD hh:mm:ss");
+            console.log(newDate);
+            $.ajax({
+                url: 'profile/delete-teeth-images/'+_opId,
+                type: 'get',
+                success: function(data){
+                  location.reload();
+                    // console.log(data);
                 }
-            })
+            });
         }
+        else if(result.dismiss === swal.DismissReason.cancel)
+            {
+            
+            }
+        })
+    }
+    function validateImage() {
+        var formData = new FormData();
+        var file = document.getElementById("teethpic").files[0];
+        formData.append("Filedata", file);
+        var t = file.type.split('/').pop().toLowerCase();
+        if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+            alert('Please select a valid image file');
+            document.getElementById("teethpic").value = '';
+            return false;
+        }
+        if (file.size > 1024000) {
+            alert('Max Upload size is 1MB only');
+            document.getElementById("teethpic").value = '';
+            return false;
+        }
+        return true;
+    }
+
+    $('#upload_new_pictures').on('click', function() {
+        var uploadimage = new FormData($('#smilepictures')[0]);
+        $.ajax({
+            url: '/profile/add-teethimages',
+            type: "POST",
+            data: uploadimage,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                $("#add_image").show();
+                setTimeout(function() {
+                    $("#add_image").hide();
+                }, 5000);
+                $("#upload_new_pic_modal").modal("hide");
+                // console.log(data);
+                // alert("Updated Successfully");
+            },
+            error: function() {
+
+            }
+        });
+    });
+
+    $('#edit_pictures').on('click', function() {
+        var uploadimage = new FormData($('#smilepictures')[0]);
+        $.ajax({
+            url: '/profile/edit-teethimages',
+            type: "POST",
+            data: uploadimage,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                $("#edit_image").show();
+                setTimeout(function() {
+                    $("#edit_image").hide();
+                }, 5000);
+                $("#upload_new_pic_modal").modal("hide");
+                // console.log(data);
+                // alert("Updated Successfully");
+            },
+            error: function() {
+
+            }
+        });
+    });
 </script>
 @endpush
