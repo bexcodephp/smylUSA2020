@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <div class="row">
-                            <div class="col">
+                            <div class="col hidden">
                                 <input type="text" class="form-control" id="input_upload_pictures_name" />
                             </div>
                             <div class="col-auto">

@@ -46,6 +46,8 @@ $(document).ready(function () {
                     $('#nav_step_2').addClass("active");
                     $('#step_1').removeClass('active show');
                     $('#step_2').addClass('active show');
+
+                    $('#nav_step_1').addClass("disabled");
                 }                
             },
             error: function() {
@@ -103,6 +105,18 @@ $(document).ready(function () {
         $('#step_4').removeClass('active show');
         $('#step_5').addClass('active show');
     });
+
+    // next redirection
+    
+
+    $('#step4_submit').on('click', function () {
+        $('#nav_step_4').removeClass("active");
+        $('#nav_step_5').addClass("active");
+
+        $('#step_4').removeClass('active show');
+        $('#step_5').addClass('active show');
+    });
+
     // finish btn redirection
     $('#step5_finish').on('click', function () {
         window.location.href = "/dashboard";

@@ -30,6 +30,7 @@ class ProductController extends Controller
 
     public function index()
     {
+        //echo "hi pp";exit;
         $products = Product::whereStatus(1)->orderBy('order_no', 'ASC')->get();
         $categories = Category::with(['products:category_id,product_id'])->get();
 
@@ -44,6 +45,7 @@ class ProductController extends Controller
         // echo "<pre>";
         // print_r($relatedProducts[0]);
         // exit();
+        //echo "hi pp";exit;
         return view('front.products.products', [
             'products' => $products,
             'categories' => $categories
@@ -93,7 +95,8 @@ class ProductController extends Controller
 
         // dd($images);
 
-        return view('front.products.product', compact(
+        // return view('front.products.product', compact(
+        return view('front.products.products_view', compact(
             'product',
             'images',
             'productAttributes',

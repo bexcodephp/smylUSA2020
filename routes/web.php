@@ -280,13 +280,13 @@ Route::namespace('Front')->group(function () {
         Route::post('profile/card-add', 'AccountsController@AddCard');
         Route::post('profile/add-teethimages', 'AccountsController@addTeethImages'); 
         Route::post('profile/edit-teethimages', 'AccountsController@editTeethImages');
+        // Route::post('profile/update-teeth-images', 'AccountsController@updateTeethImages')->name('user.updateTeethImages');
         Route::post('profile/update-profile-picture', 'AccountsController@updateProfilePicture')->name('user.updateProfilePicture');
         Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
         Route::get('profile/delete-profile-images/{id}', 'AccountsController@removeProfileImage');
         Route::post('update-password', 'AccountsController@updatePassword')->name('updatePassword');
     });
-
-
+    
     // Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("products", 'ProductController@index')->name('front.get.product_all');
     Route::get("product/{product}", 'ProductController@show')->name('front.get.product');
@@ -295,6 +295,7 @@ Route::namespace('Front')->group(function () {
 Route::get('/forgot-password', function () {
     return view('front.auth.forgotPassword');
 });
+Route::get('/customer/print-pdf', [ 'as' => 'customer.printpdf', 'uses' => 'CustomerController@printPDF']);
 
 Route::get('/candidate', function () {
     return view('front.users.u_ami_candidate');
