@@ -58,7 +58,7 @@
                                 </a>
                                 <div class="card-body text-center p-0">
                                     <div class="col-12 card-title">
-                                        <a  href="{{ route('', $product->slug) }}"><h5 class="m-0">{{ $product->name }}</h5></a>
+                                        <a  href="{{ route('front.get.product', $product->slug) }}"><h5 class="m-0">{{ $product->name }}</h5></a>
                                     </div>
                                     <div class="rp-price-rate d-flex flex-wrap py-3">
                                         <div class="col-6 text-left align-self-center">

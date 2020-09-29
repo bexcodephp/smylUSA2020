@@ -46,6 +46,8 @@ $(document).ready(function () {
                     $('#nav_step_2').addClass("active");
                     $('#step_1').removeClass('active show');
                     $('#step_2').addClass('active show');
+
+                    $('#nav_step_1').addClass("disabled");
                 }                
             },
             error: function() {
