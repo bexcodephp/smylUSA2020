@@ -94,10 +94,10 @@
                                         {{--  change content START  --}}
                                         <div class="popover-caption">
                                             <p>{!! $product->description !!}</p>
-                                            <div class="product-available py-2">
+                                            {{-- <div class="product-available py-2">
                                                 <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
                                                 <h5 class="color-blue mb-0">SKU:<span class="text-bold color-gray ml-2">{{ $product->sku }}</span></h5>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         {{--  change content END --}}
                                         {{--  left bottom arrow  --}}

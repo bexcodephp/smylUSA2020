@@ -95,7 +95,8 @@ class ProductController extends Controller
 
         // dd($images);
 
-        return view('front.products.product', compact(
+        // return view('front.products.product', compact(
+        return view('front.products.products_view', compact(
             'product',
             'images',
             'productAttributes',
