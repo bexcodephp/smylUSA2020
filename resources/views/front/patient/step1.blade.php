@@ -62,17 +62,18 @@
         <div class="col-12 mb-2 form-inline">
             <h4 class="sub-title color-blue text-bold mb-2">Shipping Information</h4>
             <div class="custom-control custom-checkbox ml-sm-4 ">
-                <input type="checkbox" class="custom-control-input" id="sameAsBilling" name="same_as_shipping">
+                <input type="checkbox" class="custom-control-input" id="sameAsBilling">
                 <label class="custom-control-label color-blue text-bold" for="sameAsBilling"><u>Same As Billing Information</u></label>
             </div>
         </div>
+        
         <div class="col-12 form-group ">
             <label>Address 1</label>
             <input type="text" name="address_1" class="form-control input-white address_1" id="address_1" placeholder="Type Your Address" value="{{ $address ? $address->address_1 : null}}" >
         </div>
         <div class="col-12 form-group">
             <label>Address 2</label>
-            <input type="text" id="address_2" class="form-control input-white address_2" name="address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}" required>
+            <input type="text" id="address_2" class="form-control input-white address_2" name="address_2" placeholder="Type Your Address" value="{{ $address ? $address->address_2 : null}}">
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>City</label>

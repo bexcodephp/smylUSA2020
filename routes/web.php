@@ -201,10 +201,9 @@ Route::namespace('Front')->group(function () {
         Route::get('bank-transfer', 'BankTransferController@index')->name('bank-transfer.index');
         Route::post('bank-transfer', 'BankTransferController@store')->name('bank-transfer.store');
     });
-
+    
     Route::group(['middleware' => ['usertype', 'web']], function () {
         Route::group(['prefix' => 'dentist'], function () {
-
             Route::get('profile', 'DentistController@profile')->name('dentist.profile');
             Route::get('new-case', 'DentistController@newCase')->name('dentist.new-case');
             Route::get('approved-case', 'DentistController@approvedCase')->name('dentist.approved-case');
@@ -214,7 +213,6 @@ Route::namespace('Front')->group(function () {
             Route::post('profile/employee/update-avatar', 'DentistController@updateAvatar')->name('dentist.updateAvatar');
             Route::post('profile/update-password', 'DentistController@updatePassword')->name('dentist.updatePassword');
         });
-
 
         Route::group(['prefix' => 'operator'], function () {
             Route::get('dashboard', 'OperatorController@dashboard')->name('operator.dashboard');
@@ -229,9 +227,6 @@ Route::namespace('Front')->group(function () {
             Route::post('employee/update-password', 'OperatorController@updatePassword')->name('employee.updatePassword');
             Route::post('case/submit', 'OperatorController@submitCase')->name('operator.submitCase');
         });
-
-
-
 
         Route::group(['prefix' => 'vendor'], function () {
             Route::get('dashboard', 'VendorController@dashboard')->name('vendor.dashboard');
@@ -248,9 +243,7 @@ Route::namespace('Front')->group(function () {
             Route::post('profile/employee/update-avatar', 'VendorController@updateAvatar')->name('vendor.updateAvatar');
             Route::post('profile/update-password', 'VendorController@updatePassword')->name('vendor.updatePassword');
         });
-
-
-
+        
         Route::namespace('Addresses')->group(function () {
             Route::resource('country.state', 'CountryStateController');
             Route::resource('state.city', 'StateCityController');

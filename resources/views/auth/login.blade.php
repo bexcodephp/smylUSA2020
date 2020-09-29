@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="col-12 text-left forgot-pwd">
-                                <a href="#" class="btn-link">Forgot Password?</a>
+                                <a href="{{ url('forgot-password') }}" class="btn-link">Forgot Password?</a>
                             </div>
                             <div class="col-12 text-left btn-signin mt-xl-4 my-3">
                                 <button type="submit" class="btn btn-primary btn-rounded btn-v-3 btn-h-3 font-weight-bold">SIGN IN</button>

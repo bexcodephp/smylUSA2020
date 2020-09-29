@@ -1,3 +1,5 @@
+var hasError = false;
+
 $(document).ready(function () {
     $('#sameAsBilling').on('click', function () {
         if($(this).prop("checked") == true){
@@ -236,9 +238,11 @@ $(document).ready(function () {
     } 
 
     //step 1 validation
-    $('#step_1').click(function() {
+   
+    function ValidateStep1()
+    {        
         $(".error").hide();
-        var hasError = false;
+        
         var first_name = $("#first_name").val();
         var last_name = $("#last_name").val();
         var phoneReg = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -254,12 +258,12 @@ $(document).ready(function () {
         var state = $("#state").val();
         var zip = $("#zip").val();
 
-        if (!first_name) {
+        if (first_name == "") {
             $("#first_name").after('<span class="error">First Name is required.</span>');
             hasError = true;
         }
 
-        if (!last_name) {
+        if (last_name == "") {
             $("#last_name").after('<span class="error">Last Name is required.</span>');
             hasError = true;
         }
@@ -272,48 +276,48 @@ $(document).ready(function () {
             hasError = true;
         }
 
-        if (!billing_address_1) {
+        if (billing_address_1 == "") {
             $("#billing_address_1").after('<span class="error">Billing address 1 is required.</span>');
             hasError = true;
         }
 
-        if (!billing_address_2) {
+        if (billing_address_2 == "") {
             $("#billing_address_2").after('<span class="error">Billing address 2 is required.</span>');
             hasError = true;
         }
 
-        if (!billing_city) {
+        if (billing_city == "") {
             $("#billing_city").after('<span class="error">Billing city is required.</span>');
             hasError = true;
         }
-        if (!billing_state) {
+        if (billing_state == "") {
             $("#billing_state").after('<span class="error">Billing state is required.</span>');
             hasError = true;
         }
-        if (!billing_zip) {
+        if (billing_zip == "") {
             $("#billing_zip").after('<span class="error">Billing zip code is required.</span>');
             hasError = true;
         }
 
-        if (!address_1) {
+        if (address_1 == "") {
             $("#address_1").after('<span class="error">Shipping address 1 is required.</span>');
             hasError = true;
         }
 
-        if (!address_2) {
+        if (address_2 == "") {
             $("#address_2").after('<span class="error">Shipping address 2 is required.</span>');
             hasError = true;
         }
 
-        if (!city) {
+        if (city == "") {
             $("#city").after('<span class="error">Shipping city is required.</span>');
             hasError = true;
         }
-        if (!state) {
+        if (state == "") {
             $("#state").after('<span class="error">Shipping state is required.</span>');
             hasError = true;
         }
-        if (!zip) {
+        if (zip == "") {
             $("#zip").after('<span class="error">Shipping zip code is required.</span>');
             hasError = true;
         }
@@ -321,7 +325,11 @@ $(document).ready(function () {
         if (hasError == true) {
             return false;
         }
-    });
+        else
+        {
+            return true;
+        }
+    }
 
     $("#step_1").valid(
         {
@@ -335,36 +343,43 @@ $(document).ready(function () {
         }
     });
     
-    
-
     $('#step1_submit').on('click', function () {
-        var formdata = new FormData($('#step_1')[0]);  
+        alert(ValidateStep1());
 
-        var address_1 = $("#address_1").val(); alert(address_1);
-          
-        if(!$("#step_1").valid()){
-            return false;
-        }
-        $.ajax({
-            url: '/profile/update-step1',
-            type: "POST",
-            data: formdata,
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data) {
-                console.log(data);
-                if(data=="success"){
-                    $('#nav_step_1').removeClass("active");
-                    $('#nav_step_2').addClass("active");
-                    $('#step_1').removeClass('active show');
-                    $('#step_2').addClass('active show');
-                }                
-            },
-            error: function() {
-                
+        if(ValidateStep1() == true)
+        {
+            var formdata = new FormData($('#step_1')[0]);  
+
+            var address_1 = $("#address_1").val(); 
+            
+            if(!$("#step_1").valid()){
+                return false;
             }
-        });
+            $.ajax({
+                url: '/profile/update-step1',
+                type: "POST",
+                data: formdata,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    console.log(data);
+                    if(data=="success"){
+                        $('#nav_step_1').removeClass("active");
+                        $('#nav_step_2').addClass("active");
+                        $('#step_1').removeClass('active show');
+                        $('#step_2').addClass('active show');
+                    }                
+                },
+                error: function() {
+                    
+                }
+            });
+
+        }
+        else{
+            alert("Enter all details");
+        }
     });
 
     // step 2 ajax update

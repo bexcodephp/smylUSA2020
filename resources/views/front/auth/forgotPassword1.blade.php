@@ -28,21 +28,20 @@
                 <div class="card sign-in-card">
                     <h4 class="color-blue">Sign in Password</h4>
                     <div class="signin-form mt-xxl-6">
-                        <form class="row" action="{{ route('password.request') }}" role="form" method="POST">
+                        <form class="row" action="{{ route('password/reset') }}" role="form" method="get">
                             {{ csrf_field() }}
+
                             {{--  
                                 NOTE: 
                                 Add Hiiden class for hide old password  
                             --}}
+
                             <!-- <div class="col-12 form-group hidden">
                                 <label>Old Password</label>
                                 <input type="password" class="form-control input-gray" name="old_password" id="password" placeholder="Old Password">
                             </div> -->
 
-                            <div class="col-12 form-group">
-                                <label>Email</label>
-                                <input id="email" type="email" class="form-control input-gray" name="email" value="" placeholder="Enter Email">
-                            </div>
+                            <input id="email" type="email" class="form-control bg-light border-0 rounded text-1" name="email" value="jayrjoshi8@gmail.com" required autofocus>
 
                             <div class="col-12 form-group">
                                 <label>New Password</label>
