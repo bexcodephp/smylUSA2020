@@ -1,0 +1,21 @@
+.emp-table thead th input {
+    max-width: 150px;
+    margin-left: 1px;
+}
+
+.emp-table tbody td.phone-no {
+    min-width: 130px;
+}
+
+.action-btn {
+    display: flex;
+}
+
+.action-btn .btn {
+    margin-right: 5px;
+    padding: 5px;
+}
+
+.action-btn .btn:focus {
+    box-shadow: none;
+}
