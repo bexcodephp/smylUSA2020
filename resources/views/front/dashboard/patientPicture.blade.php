@@ -39,8 +39,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2">
-                                        @foreach($teethImages as $image)
+                                    <div class="row row-cols-1 row-cols-xl-3 row-cols-md-2" id="teeth_img_cont">
+                                        <!-- @foreach($teethImages as $image)
                                             <div class="col mb-4">
                                                 <div class="card h-100 card-2 p-0">
                                                     <img class="card-img-top" src="{{ asset('storage/'.$image->image) }}" />
@@ -54,7 +54,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        @endforeach -->
                                     </div>
                                 </div>
                             </div>
@@ -443,6 +443,7 @@
                     $("#add_image").hide();
                 }, 5000);
                 $("#upload_new_pic_modal").modal("hide");
+                getPicturesImage();
                 // console.log(data);
                 // alert("Updated Successfully");
             },
@@ -467,6 +468,7 @@
                     $("#edit_image").hide();
                 }, 5000);
                 $("#upload_new_pic_modal").modal("hide");
+                getPicturesImage();
                 // console.log(data);
                 // alert("Updated Successfully");
             },
@@ -475,5 +477,38 @@
             }
         });
     });
+
+    getPicturesImage();
+    var description = "";
+
+    function getPicturesImage(){
+        $.ajax({
+            url: '/getpicturesimage',
+            type: "GET",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                var obj = Object();
+                obj = jQuery.parseJSON(data);
+                
+                $('#teeth_img_cont').html("");
+
+                for (var i=0;i<obj.length;i++)
+                {
+                    if(!obj[i].description){
+                        description == "";
+                    }else{
+                        description = obj[i].description;
+                    }
+
+                    $('#teeth_img_cont').append('<div class="col mb-4"> <div class="card h-100 card-2 p-0"> <img class="card-img-top" src="/storage/'+obj[i].image+'"/> <div class="card-body"> <p class="card-text">'+description+'</p></div><div class="card-footer p-0"> <button type="button" class="btn btn-link btn-edit" onclick=btnEditSmilePic("'+obj[i].image+'",'+obj[i].customer_image_id+',"'+description+'")>Edit</button> <input type="hidden" name="" id="customer_image" value="'+obj[i].customer_image_id+'" hidden> <button type="button" onclick="deleteSmilePictures('+obj[i].customer_image_id+')" data-token="{{csrf_token()}}" class="btn btn-link btn-delete">Delete</button> </div></div></div>')
+                }
+            },
+            error: function() {
+
+            }
+        });
+    }
 </script>
 @endpush
