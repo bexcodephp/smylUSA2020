@@ -6,7 +6,6 @@
 /public/css/app.css
 /public/js/app.js
 /storage/*.key
-/vendor
 /.idea
 /.vagrant
 composer.json
@@ -30,4 +29,4 @@ storage/app/public/storage
 *.zip
 *.lock
 *.sql
-
+/vendor
