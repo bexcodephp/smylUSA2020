@@ -90,14 +90,14 @@
                                         <button type="button" class="btn btn-link p-0 mx-3 hidden" id="btn_card_detail_add"><u>Add</u></button>
                                     </div>
                                     <!-- remove or add "hidden" class for show -->
-                                    <div class="row hidden" id="bank_card_details">
+                                    <div class="row" id="bank_card_details">
                                         <div class="col-auto bank-card-details mt-3">
                                             <div class="card px-0 py-3">
                                                 <div class="col-12 acc-card-chip">
                                                     <img src="{{ asset('images/icons/chip.png') }}" class="mb-2" width="30"/>
                                                 </div>
                                                 <div class="col-12 acc-card-number">
-                                                    <label class="text-bold">XXXX XXXX XXXX 3456</label>
+                                                    <label class="text-bold">XXXX XXXX XXXX <span>3456</span></label>
                                                 </div>
                                                 <div class="col-12 acc-card-valid">
                                                     <label class="text-uppercase">Valid Thru&nbsp;<span class="text-bold">01</span>&nbsp;/&nbsp;<span class="text-bold">80</span></label>
@@ -107,15 +107,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row hidden">
-                                        <div class="col-sm-auto mb-3">
-                                            <input type="text" class="form-control input-gray" id="" placeholder="">
-                                        </div>
-                                        <div class="col-sm-auto mb-3">
-                                            <input type="text" class="form-control input-gray" id="" placeholder="">
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>

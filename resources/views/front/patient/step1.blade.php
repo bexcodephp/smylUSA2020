@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Date of Birth<span class="text-danger">*</span></label>
-            <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : null }}" class="form-control input-white" disabled/>
+            <input type="text" name="dob" id="dob" value="{{ $customer->dob ? date('m/d/Y', strtotime($customer->dob)) : '' }}" class="form-control input-white" disabled/>
         </div>
         <div class="col-lg-4 col-sm-6 form-group">
             <label>Patient ID<span class="text-danger">*</span></label>

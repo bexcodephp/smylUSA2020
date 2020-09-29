@@ -75,11 +75,10 @@
                                                                                             } ?>">
                             <li class="nav-item">
                                 <div class="media">
+                                    <?php if (Auth::check()) { ?>                                                       
                                     <ul class="navbar-nav d-flex flex-column nav-profile-caption align-self-center">
                                         <li class="nav-item nav-user-name">
-                                            <a class="nav-link" href="{{ url('/profile') }}"><?php if (Auth::check()) {
-                                                                                echo Auth::user()->name;
-                                                                            } ?></a>
+                                                <?php  echo Auth::user()->name; ?>
                                         </li>
                                         <?php if (Auth::check()) {?>
                                         <li class="nav-item nav-sign-out">
@@ -87,14 +86,14 @@
                                         </li>
                                         <?php } ?>
                                     </ul>
-                                    <?php if (Auth::check()) { ?>
+                                    
                                     <div class="btn-group nav-profile-icon">
                                         <button type="button" class="btn dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <img src="{{ asset('storage/'. auth()->user()->avatar) }}" class="nav-profile-img" />
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <button class="dropdown-item" type="button">Profile</button>
-                                            <button class="dropdown-item" type="button">Dashboard</button>
+                                            <a class="dropdown-item" href="{{ url('/profile') }}">Profile</a>
+                                            <a class="dropdown-item" href="{{ url('/dashboard') }}">Dashboard</a>
                                         </div>
                                     </div>
                                     <?php } ?>
