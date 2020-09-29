@@ -32,29 +32,28 @@
             {{-- product slider --}}
             <div class="col-md-auto col-12">
                 <div class="products-slider" id="products_slider">
-                    {{-- slider content 1 --}}
-                    <div class="item" data-hash="1">
-                        <div class="d-flex products-img-view">
-                            <img src="{{asset('/images/products/product_2.png')}}" />
+                    @foreach($images as $image)
+                        <div class="item" data-hash="1">
+                            <div class="d-flex products-img-view">
+                                <img src="{{ asset('storage/'. $image->src) }}" />
+                            </div>
                         </div>
-                    </div>
-                    {{-- slider content 2 --}}
-                    <div class="item" data-hash="2">
-                        <div class="d-flex products-img-view">
-                            <img src="{{asset('/images/products/image_2_home_page_before_footer.jpg')}}" />
-                        </div>
-                    </div>
-                    {{-- slider content 3 --}}
+                        <!-- <div class="item" data-hash="2">
+                            <div class="d-flex products-img-view">
+                                <img src="{{asset('/images/products/image_2_home_page_before_footer.jpg')}}" />
+                            </div>
+                        </div> -->
+                    @endforeach
                 </div>
                 <div class="btn-group btn-group-justified products-slider-nav" id="products_slider_nav" role="group" aria-label="Justified button group">
-                    {{--  products slider thumbnail  --}}
+                    @foreach($images as $image)
                     <div class="item" data-slick-index="1">
-                        <img src="{{asset('/images/products/product_2.png')}}" />
+                        <img src="{{ asset('storage/'. $image->src) }}" />
                     </div>
-                    {{--  products slider thumbnail  --}}
-                    <div class="item" data-slick-index="2">
+                    @endforeach
+                   <!--  <div class="item" data-slick-index="2">
                         <img src="{{asset('/images/products/image_2_home_page_before_footer.jpg')}}" />
-                    </div>
+                    </div> -->
                 </div>
             </div>
             {{-- product slider details --}}
@@ -64,7 +63,7 @@
                     <div data-slick-index="1">
                         <div class="row">
                             <div class="col-12">
-                                <h5 class="text-bold">Retainers</h5>
+                                <h5 class="text-bold">{{ $product->name }}</h5>
                             </div>
                             {{-- rating --}}
                             <div class="col-12 text-left align-self-center">
@@ -87,34 +86,40 @@
                             </div>
                             {{-- price --}}
                             <div class="col-12 rp-price align-self-center mb-3">
-                                <h6 class="text-left m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
+                                <h6 class="text-left m-0 color-blue text-bold"><span class="mr-1">&#36;</span>{{ $product->sale_price }}</h6>
                             </div>
                             {{-- product description --}}
                             <div class="col-12 product-desc align-self-center mb-md-4 mb-3">
-                                <p>SmylUSA offers Retainer to help you maintain your alignment after your Clear Alignment treatment is over. Our Retainers are made with Zendura plastics which are widely considered the best available. We highly recommended our customers to use retainers once they finish their alignment treatment.</p>
+                                <p>{!! $product->description !!}</p>
                             </div>
                             <div class="col-12 mb-2">
                                 <div class="product-available  py-3">
-                                    <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">Available</span></h5>
-                                    <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">3232</span></h5>
+                                    <h5 class="color-blue">Availablity&nbsp;:<span class="text-bold color-gray ml-2">@if($product->quantity > 0) Available @else Out Of Stock @endif</span></h5>
+                                    <h5 class="color-blue mb-0">SKU&nbsp;:<span class="text-bold color-gray ml-2">{{ $product->sku }}</span></h5>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="product-add-cart d-flex">
-                                    <div class="input-group product-cart-select ">
-                                        <div class="input-group-prepend">
-                                            <button class="btn" type="button" id="button-addon1"><i class="fas fa-minus"></i></button>
+                            @if($product->quantity > 0)
+                            <form action="{{ route('cart.store') }}"  class="shop-cart d-flex align-items-center" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="product" value="{{ $product->id }}">
+                                <div class="col-12">
+                                    <div class="product-add-cart d-flex">
+                                        <div class="input-group product-cart-select ">
+                                            <div class="input-group-prepend">
+                                                <button class="btn" type="button" id="button-addon1"><i class="fas fa-minus"></i></button>
+                                            </div>
+                                            <input type="text" name="quantity" id="product-quantity" class="form-control" value="1" />
+                                            <div class="input-group-append">
+                                                <button class="btn" type="button" id="button-addon2"><i class="fas fa-plus"></i></button>
+                                            </div>
                                         </div>
-                                        <input type="text" class="form-control" value="1" />
-                                        <div class="input-group-append">
-                                            <button class="btn" type="button" id="button-addon2"><i class="fas fa-plus"></i></button>
+                                        <div class="mx-4">
+                                            <button type="submit" class="btn btn-primary">Add To Cart</button>
                                         </div>
-                                    </div>
-                                    <div class="mx-4">
-                                        <button type="button" class="btn btn-primary">Add To Cart</button>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -131,14 +136,15 @@
             </div>
             <div class="row" id="related_products">
                 {{--  content 1  --}}
+                @foreach($relatedProducts as $product)
                 <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
                     <div class="card product-card">
                         <div class="card-header p-0">
-                            <img src="{{asset('images/products/product_1.png')}}" class="card-img-top" alt="product">
+                            <img src="{{ asset('storage/'.$product->cover) }}" class="card-img-top" alt="product">
                         </div>
                         <div class="card-body text-center p-0">
                             <div class="col-12 card-title">
-                                <h5 class="m-0">Impression Kit</h5>
+                                <h5 class="m-0">{{ $product->name }}</h5>
                             </div>
                             <div class="rp-price-rate d-flex flex-wrap py-3">
                                 <div class="col-6 text-left align-self-center">
@@ -160,17 +166,23 @@
                                     </div> -->
                                 </div>
                                 <div class="col-6 rp-price align-self-center">
-                                    <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>XXX.XX</h6>
+                                    <h6 class="text-right m-0 color-blue text-bold"><span class="mr-1">&#36;</span>{{$product->price}}</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer p-0">
-                            <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
+                            <form action="{{ route('cart.store') }}" class="form-inline cartForm" method="post">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="product" value="{{ $product->id }}">
+                                <button type="submit" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+                @endforeach
                 {{--  content 2  --}}
-                <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
+                <!-- <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
                     <div class="card product-card">
                         <div class="card-header p-0">
                             <img src="{{asset('images/products/product_2.png')}}" class="card-img-top" alt="product">
@@ -207,9 +219,9 @@
                             <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 {{--  content 3  --}}
-                <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
+                <!-- <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
                     <div class="card product-card">
                         <div class="card-header p-0">
                             <img src="{{asset('images/products/generic_square_2.jpg')}}" class="card-img-top" alt="product">
@@ -246,9 +258,9 @@
                             <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 {{--  content 4  --}}
-                <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
+                <!-- <div class="col-lg-3 col-sm-6 col-12 mb-lg-0 mb-3 r-product">
                     <div class="card product-card">
                         <div class="card-header p-0">
                             <img src="{{asset('images/products/product_3.png')}}" class="card-img-top" alt="product">
@@ -285,7 +297,7 @@
                             <button type="button" class="btn btn-primary btn-add-cart text-bold">Add to Cart</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -295,6 +307,20 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+
+        $("#button-addon2").click(function(){
+            var proQty = parseInt($("#product-quantity").val());
+            proQty++;
+            $("#product-quantity").val(proQty);
+        });
+        $("#button-addon1").click(function(){
+
+            var proQty = parseInt($("#product-quantity").val());
+            if(proQty > 1) {
+                proQty--;
+                $("#product-quantity").val(proQty);
+            }
+        })
 
         var owl = $('.bannerslider');
         owl.owlCarousel({
