@@ -78,7 +78,9 @@
                                     <?php if (Auth::check()) { ?>                                                       
                                     <ul class="navbar-nav d-flex flex-column nav-profile-caption align-self-center">
                                         <li class="nav-item nav-user-name">
+                                            <span class="nav-link text-capitalize">
                                                 <?php  echo Auth::user()->name; ?>
+                                            </span>
                                         </li>
                                         <?php if (Auth::check()) {?>
                                         <li class="nav-item nav-sign-out">

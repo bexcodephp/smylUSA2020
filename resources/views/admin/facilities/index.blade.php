@@ -1,5 +1,10 @@
 @extends('layouts.admin.app')
+@push('stylesheets')
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css" rel="stylesheet" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/bootstrap-timepicker.min.css') }}">
+@endpush
 @section('content')
 <!-- <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/> -->
 <style>
@@ -9,68 +14,68 @@
         box-sizing: border-box;
     }
 </style>
-    <!-- Main content -->
-    <section class="content">
+<!-- Main content -->
+<section class="content">
     @include('layouts.errors-and-messages')
     <!-- Default box -->
-        @if($facilities)
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">All Facilities</h3>
+    @if($facilities)
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">All Facilities</h3>
 
-                    <div class="box-tools pull-right">
-                    <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Add New</a>
-                    </div>
-                </div>
-                
-                <div class="box-body">
-                    <table class="table table-striped table-bordered display">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-                                <th>City</th>
-                                <th>Status</th>
-                                <th class="com-md-auto" style="width: 250px;">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        
-                        @foreach ($facilities as $facility)
-                            <tr>
-                            <td>{{ $facility->name }}</td>
-                            <?php
-                                $number = $facility->phone;
-                                $formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "+1 ($1) $2 $3", $number);
-                            ?>
-                            <td>{{ $formatted_number }}</td>
-                            <td>{{ $facility->state . ", " . $facility->address }}</td>
-                            <td>{{ $facility->city }}</td>
-                            <td>{{ $facility->is_active == 1 ? "Active" : "Inactive" }}</td>
-                            <td>
-                                <form action="{{ route('admin.facilities.destroy', $facility) }}" method="post" class="form-horizontal">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="_method" value="delete">
-                                    <div class="btn-group">
-                                        <a href="{{ route('admin.facilities.edit', $facility) }}" class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('admin.facilities.profile', $facility) }}" class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
-                                        <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
-                                    </div>
-                                </form>
-                            </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.box-body -->
+            <div class="box-tools pull-right">
+                <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">Add New</a>
             </div>
-            <!-- /.box -->
-        @endif
+        </div>
 
-    </section>
-    <!-- /.content -->
+        <div class="box-body">
+            <table class="table table-striped table-bordered display">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Status</th>
+                        <th class="com-md-auto" style="width: 250px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach ($facilities as $facility)
+                    <tr>
+                        <td>{{ $facility->name }}</td>
+                        <?php
+                        $number = $facility->phone;
+                        $formatted_number = preg_replace("/^(\d{3})(\d{3})(\d{4})$/", "+1 ($1) $2 $3", $number);
+                        ?>
+                        <td>{{ $formatted_number }}</td>
+                        <td>{{ $facility->state . ", " . $facility->address }}</td>
+                        <td>{{ $facility->city }}</td>
+                        <td>{{ $facility->is_active == 1 ? "Active" : "Inactive" }}</td>
+                        <td>
+                            <form action="{{ route('admin.facilities.destroy', $facility) }}" method="post" class="form-horizontal">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="delete">
+                                <div class="btn-group">
+                                    <a href="{{ route('admin.facilities.edit', $facility) }}" class="btn mx-2 w-auto btn-edit"><i class="fa fa-edit"></i></a>
+                                    <a href="{{ route('admin.facilities.profile', $facility) }}" class="btn mx-2 w-auto btn-eye text-blue"><i class="fa fa-eye fa-lg"></i></a>
+                                    <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-link mx-2 w-auto btn-trash text-red"><i class="fa fa-trash fa-lg"></i></button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    @endif
+
+</section>
+<!-- /.content -->
 @endsection
 
 @section('js')
@@ -91,6 +96,4 @@
     //     ],
     //     'sorting' : []
     // });
-
-    
 </script>

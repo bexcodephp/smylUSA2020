@@ -1,4 +1,3 @@
-
 @extends('layouts.front.main')
 @push('stylesheets')
 <link rel="stylesheet" href="{{ asset('front/css/sidebar.css') }}" type="text/css">
@@ -44,7 +43,7 @@
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Moblie Number<span class="text-danger">*</span></label>
-                                    <input type="text" name="phone" id="phone" placeholder="Phone Number"  value="{{ $user ? $user->phone : null}}" class="form-control" onkeypress='return restrictAlphabets(event)'/>
+                                    <input type="text" name="phone" id="phone" placeholder="Phone Number" value="{{ $user ? $user->phone : null}}" class="form-control" onkeypress='return restrictAlphabets(event)' />
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
                                     <label>Date of Birth<span class="text-danger">*</span></label>
@@ -112,7 +111,7 @@
                                             <input type="text" class="form-control input-white" id="card_number" placeholder="Card Number" value="{{$cardformat }}" hidden>
                                             <div class="card px-0 py-3">
                                                 <div class="col-12 acc-card-chip">
-                                                    <img src="{{ asset('images/icons/chip.png') }}" class="mb-2" width="30"/>
+                                                    <img src="{{ asset('images/icons/chip.png') }}" class="mb-2" width="30" />
                                                 </div>
                                                 <div class="col-12 acc-card-number">
                                                     <label class="text-bold">XXXX XXXX XXXX <span>{{$cardformat}}</span></label>
@@ -125,7 +124,7 @@
                                                 </div> -->
                                             </div>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +137,7 @@
                     <div class="card-header" id="heading_bill_info">
                         <div class="mb-0 d-sm-flex align-items-center">
                             <h2 class="card-title color-blue text-bold mb-0">Billing Information</h2>
-                            <div class="ml-sm-auto d-flex mt-md-0 mt-3">                                
+                            <div class="ml-sm-auto d-flex mt-md-0 mt-3">
                                 <button type="button" class="btn btn-primary ml-auto" value="Update" id="billing_info_update">Update</button>
                                 <button class="btn btn-link px-2 ml-md-2 ml-auto btn-collapse collapsed" type="button" data-toggle="collapse" data-target="#bill_info" aria-expanded="false" aria-controls="bill_info">
                                     <i class="fas fa-angle " aria-hidden="true"></i>
@@ -212,9 +211,9 @@
                                     <label>State</label>
                                     <select id="state_code" name="state_code" class="selectpicker form-control show-tick" data-actions-box="true" data-style="btn-outline-primary" title="Select Option">
                                         <option selected value="">Select State</option>
-                                            @foreach($statesList as $key => $state)
-                                            <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
-                                            @endforeach
+                                        @foreach($statesList as $key => $state)
+                                        <option value="{{ $key }}" @if( $address && $address->state_code == $key) selected @endif>{{ $state }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-4 col-sm-6 form-group">
@@ -263,7 +262,11 @@
                                 <div class="form-inline flex-md-wrap flex-nowrap">
                                     <!-- <div><input type="text" class="form-control disp-file-name h-auto input-gray" id="file_name" placeholder=".jpeg, .png"></div> -->
                                     <div class="custom-file browse-file-btn ml-2">
+<<<<<<< HEAD
+                                        <input type="file" class="custom-file-input" name="avatar" id="img_file_upid">
+=======
                                         <input type="file" class="custom-file-input" name="avatar" id="img_file_upid" onchange="validateImage()"> 
+>>>>>>> develop
                                         <span id="mgs_ta"></span>
                                         <label class="custom-file-label" for="input_upload_pictures" aria-describedby="upload_pictures"></label>
                                     </div>
@@ -493,7 +496,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">Update Image</button>
+                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value="save">Update Image</button>
                     </div>
                 </form>
             </div>
@@ -522,61 +525,61 @@
                                 <td>{{$customer->last_name}}</td>
                             </tr>
                             <tr>
-                                <td>  Moblie Number</td>
+                                <td> Moblie Number</td>
                                 <td>{{$customer->phone}}</td>
                             </tr>
                             <tr>
-                                <td>  Date of Birth</td>
+                                <td> Date of Birth</td>
                                 <td>{{$customer->dob}}</td>
                             </tr>
                             <tr>
-                                <td>   Patient ID</td>
+                                <td> Patient ID</td>
                                 <td>{{$customer->patient_id}}</td>
                             </tr>
                         </table>
                         <span>Address</span>
                         <table class="table">
                             <tr>
-                                <td>  Address 1</td>
+                                <td> Address 1</td>
                                 <td>{{$address->address_1}}</td>
                             </tr>
                             <tr>
-                                <td>  Address 2</td>
+                                <td> Address 2</td>
                                 <td>{{$address->address_2}}</td>
                             </tr>
                             <tr>
-                                <td>  City</td>
+                                <td> City</td>
                                 <td>{{$address->city}}</td>
                             </tr>
                             <tr>
-                                <td>  State</td>
+                                <td> State</td>
                                 <td>{{$address->state_code}}</td>
                             </tr>
                             <tr>
-                                <td>  Zip Code</td>
+                                <td> Zip Code</td>
                                 <td>{{$address->zip}}</td>
                             </tr>
                         </table>
                         <span>Shipping Address</span>
                         <table class="table">
                             <tr>
-                                <td>  Address 1</td>
+                                <td> Address 1</td>
                                 <td>{{$address->billing_address_1}}</td>
                             </tr>
                             <tr>
-                                <td>  Address 2</td>
+                                <td> Address 2</td>
                                 <td>{{$address->billing_address_2}}</td>
                             </tr>
                             <tr>
-                                <td>  City</td>
+                                <td> City</td>
                                 <td>{{$address->billing_city}}</td>
                             </tr>
                             <tr>
-                                <td>  State</td>
+                                <td> State</td>
                                 <td>{{$address->billing_state}}</td>
                             </tr>
                             <tr>
-                                <td>  Zip Code</td>
+                                <td> Zip Code</td>
                                 <td>{{$address->billing_zip}}</td>
                             </tr>
                         </table>
@@ -584,84 +587,84 @@
                         @if(count((array)$answers) > 0)
                         <span>Questions</span>
                         <table class="table">
-                          <tr>
-                            <td>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blood cancers):</td>
-                            <td>{{$answers->question1}}</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              I have a branded retainer:
-                            </td>
-                            <td>{{$answers->question2}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have crowns:</td>
-                            <td>{{$answers->question3}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have primary (baby) teeth:</td>
-                            <td>{{$answers->question4}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have bridgework:</td>
-                            <td>{{$answers->question5}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blood cancers):</td>
-                            <td>{{$answers->question6}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have an impacted tooth:</td>
-                            <td>{{$answers->question7}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have an implant:</td>
-                            <td>{{$answers->question8}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have eneers:</td>
-                            <td>{{$answers->question9}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have a recent radiograph of my teeth:</td>
-                            <td>{{$answers->question10}}</td>
-                          </tr>
-                          <tr>
-                            <td>Do you feel pain in any of your teeth?</td>
-                            <td>{{$answers->question11}}</td>
-                          </tr>
-                          <tr>
-                            <td>Do you have any sores or lumps in or near your mouth?</td>
-                            <td>{{$answers->question12}}</td>
-                          </tr>
-                          <tr>
-                            <td>Do you currently have any head, neck or jaw injuries?</td>
-                            <td>{{$answers->question13}}</td>
-                          </tr>
-                          <tr>
-                            <td>Do you currently experience: jaw clicking, pain, difficulty opening and /or closing or difficulty chewing?</td>
-                            <td>{{$answers->question14}}</td>
-                          </tr>
-                          <tr>
-                            <td>Have you noticed any loosening of your teeth or do you have untreated periodontal disease?</td>
-                            <td>{{$answers->question15}}</td>
-                          </tr>
-                          <tr>
-                            <td>Do you have any known allergies to any dental materials?</td>
-                            <td>{{$answers->question16}}</td>
-                          </tr>
-                          <tr>
-                            <td>I have a history of IV bisphosphonate treatment:</td>
-                            <td>{{$answers->question17}}</td>
-                          </tr>
-                          <tr>
-                            <td>I am currently on acute corticosteroids or in immunosuppression,chemotherapy, or radiation:</td>
-                            <td>{{$answers->question18}}</td>
-                          </tr>
-                          <tr>
-                            <td>Chief Complaint:</td>
-                            <td>{{$answers->question19}}</td>
-                          </tr>  
+                            <tr>
+                                <td>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blood cancers):</td>
+                                <td>{{$answers->question1}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    I have a branded retainer:
+                                </td>
+                                <td>{{$answers->question2}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have crowns:</td>
+                                <td>{{$answers->question3}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have primary (baby) teeth:</td>
+                                <td>{{$answers->question4}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have bridgework:</td>
+                                <td>{{$answers->question5}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have Had a Bone Marrow transplant or treatment of hematological maligancies (blood cancers):</td>
+                                <td>{{$answers->question6}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have an impacted tooth:</td>
+                                <td>{{$answers->question7}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have an implant:</td>
+                                <td>{{$answers->question8}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have eneers:</td>
+                                <td>{{$answers->question9}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have a recent radiograph of my teeth:</td>
+                                <td>{{$answers->question10}}</td>
+                            </tr>
+                            <tr>
+                                <td>Do you feel pain in any of your teeth?</td>
+                                <td>{{$answers->question11}}</td>
+                            </tr>
+                            <tr>
+                                <td>Do you have any sores or lumps in or near your mouth?</td>
+                                <td>{{$answers->question12}}</td>
+                            </tr>
+                            <tr>
+                                <td>Do you currently have any head, neck or jaw injuries?</td>
+                                <td>{{$answers->question13}}</td>
+                            </tr>
+                            <tr>
+                                <td>Do you currently experience: jaw clicking, pain, difficulty opening and /or closing or difficulty chewing?</td>
+                                <td>{{$answers->question14}}</td>
+                            </tr>
+                            <tr>
+                                <td>Have you noticed any loosening of your teeth or do you have untreated periodontal disease?</td>
+                                <td>{{$answers->question15}}</td>
+                            </tr>
+                            <tr>
+                                <td>Do you have any known allergies to any dental materials?</td>
+                                <td>{{$answers->question16}}</td>
+                            </tr>
+                            <tr>
+                                <td>I have a history of IV bisphosphonate treatment:</td>
+                                <td>{{$answers->question17}}</td>
+                            </tr>
+                            <tr>
+                                <td>I am currently on acute corticosteroids or in immunosuppression,chemotherapy, or radiation:</td>
+                                <td>{{$answers->question18}}</td>
+                            </tr>
+                            <tr>
+                                <td>Chief Complaint:</td>
+                                <td>{{$answers->question19}}</td>
+                            </tr>
                         </table>
                         @endif
                         <!-- <div class="embed-responsive embed-responsive-16by9">
@@ -679,7 +682,7 @@
                     </div> -->
                 </form>
                 <a href="{{route('customer.printpdf')}}" target="_blank" class="btn btn-primary btn-edit">Print PDF</a>
-                    <!-- <button type="submit" class="btn btn-primary btn-edit" id="">Generate PDF</button> -->
+                <!-- <button type="submit" class="btn btn-primary btn-edit" id="">Generate PDF</button> -->
             </div>
         </div>
     </div>
@@ -715,7 +718,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value ="save">New Image Add</button>
+                        <button type="submit" class="btn btn-primary" id="edit_pictures" name="save" value="save">New Image Add</button>
                     </div>
                 </form>
             </div>
@@ -803,12 +806,14 @@
                 processData: false,
                 success: function(data) {
                     $("#mybilling").show();
-                    setTimeout(function() { $("#mybilling").hide(); }, 5000);
+                    setTimeout(function() {
+                        $("#mybilling").hide();
+                    }, 5000);
                     // console.log(data);
                     // alert("Billing Information update");
                 },
                 error: function() {
-                    
+
                 }
             });
         });
@@ -853,10 +858,12 @@
                 processData: false,
                 success: function(data) {
                     $("#myElem").show();
-                    setTimeout(function() { $("#myElem").hide(); }, 5000);
+                    setTimeout(function() {
+                        $("#myElem").hide();
+                    }, 5000);
                 },
                 error: function() {
-                    
+
                 }
             });
         });
@@ -867,20 +874,20 @@
         $('#view_document_modal').modal('show');
     }
 
-    function btnReplaceProfilePic(doc_name,doc_id) {
+    function btnReplaceProfilePic(doc_name, doc_id) {
         $('#upload_new_prof_pic_modal').modal('show');
         $("#doc_src").show();
-        $('#doc_src').attr('src', window.location.origin+'/storage/'+doc_name);
+        $('#doc_src').attr('src', window.location.origin + '/storage/' + doc_name);
     }
 
     function btnAddProfilePic() {
         $('#add_new_prof_pic_modal').modal('show');
         $("#doc_src").show();
-        $('#doc_src').attr('src',"images/icons/person_male.png");
-        }
+        $('#doc_src').attr('src', "images/icons/person_male.png");
+    }
 
     //Shipping Information update
-    $('#ship_info_update').on('click', function () {
+    $('#ship_info_update').on('click', function() {
         var shippingdetail = new FormData($('#shipping_info')[0]);
         $.ajax({
             url: '/profile/address-info',
@@ -891,18 +898,20 @@
             processData: false,
             success: function(data) {
                 $("#myshipping").show();
-                setTimeout(function() { $("#myshipping").hide(); }, 5000);
+                setTimeout(function() {
+                    $("#myshipping").hide();
+                }, 5000);
                 // console.log(data);
                 // alert("Shipping Information update");
             },
             error: function() {
-                
+
             }
         });
     });
 
     // profile Picture 
-    $('#img_file_upid').on('change',function(ev){
+    $('#img_file_upid').on('change', function(ev) {
         var image_detail = new FormData($('#update_profile')[0]);
         $.ajax({
             url: '/profile/update-avatar',
@@ -915,45 +924,42 @@
                 location.reload();
                 // alert("success");
             },
-            error: function() {     
-            }
+            error: function() {}
         });
     });
 
     //delete Profile Picture
-    function deleteProfilePictures(opId){
+    function deleteProfilePictures(opId) {
         _opId = opId;
         const swalWithBootstrapButtons = swal.mixin({
-        confirmButtonClass: 'btn btn-info',
-        cancelButtonClass: 'btn btn-info',
-        buttonsStyling: true,
-    })
-    
-    swalWithBootstrapButtons({
-        title: '',
-        text: "Are you sure you want to Delete this smile pictures?",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-        reverseButtons: false
-    }).then((result) => {
-        if (result.value) {
-            var date = moment();
-            var newDate = date.format("YYYY-MM-DD hh:mm:ss");
-            console.log(newDate);
-            $.ajax({
-                url: 'profile/delete-profile-images/'+_opId,
-                type: 'get',
-                success: function(data){
-                  location.reload();
-                    // console.log(data);
-                }
-            });
-        }
-        else if(result.dismiss === swal.DismissReason.cancel)
-            {
-            
+            confirmButtonClass: 'btn btn-info',
+            cancelButtonClass: 'btn btn-info',
+            buttonsStyling: true,
+        })
+
+        swalWithBootstrapButtons({
+            title: '',
+            text: "Are you sure you want to Delete this smile pictures?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.value) {
+                var date = moment();
+                var newDate = date.format("YYYY-MM-DD hh:mm:ss");
+                console.log(newDate);
+                $.ajax({
+                    url: 'profile/delete-profile-images/' + _opId,
+                    type: 'get',
+                    success: function(data) {
+                        location.reload();
+                        // console.log(data);
+                    }
+                });
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+
             }
         })
     }
@@ -964,6 +970,8 @@
             return true;
         else
             return false;
+<<<<<<< HEAD
+=======
     } 
 
     $('#update_card').click(function() {
@@ -1123,6 +1131,7 @@
             return false;
         }
         return true;
+>>>>>>> develop
     }
 </script>
 @endpush
