@@ -14,7 +14,7 @@
                 <label>Password</label>
                 <button type="button" class="btn btn-link p-0 float-right" id="change_pwd"><u>Change</u></button>
             </div>
-            <input type="password" class="form-control input-white" id="password" placeholder="Password" value="{{ auth()->user()->password }}">
+            <input type="password" class="form-control input-white" id="password" placeholder="********">
         </div>
         <div class="col-12 form-group">
             <div class="col p-0">
@@ -29,7 +29,7 @@
                         if($cardnumber == ""){
                             $cardformat = "";
                         }else {
-                            $cardformat = 'XXXX-XXXX-XXXX-'.substr($cardnumber, -4);
+                            $cardformat = 'XXXX XXXX XXXX '.substr($cardnumber, -4);
                         }
                     ?>
                     <input type="text" class="form-control input-white" id="card_number" placeholder="Card Number" value="{{$cardformat }}">
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                    <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
-                                   <input class="form-control input-white" maxlength='5' id="inputExpDate" placeholder="MM/YY" type="text" onkeyup="formatString(event);">
+                                   <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" value="{{ $customer->card_expiry}}" onkeyup="formatString(event);" >
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
                                     <input type="password" class="form-control input-white" id="re_new_pwd" placeholder="Year">
@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                    <!--  <input class="form-control input-white" id="inputExpDate" placeholder="MM / YY" maxlength='7'> -->
-                                    <input class="form-control input-white" maxlength='5' id="inputExpDate" placeholder="MM/YY" type="text" onkeyup="formatString(event);">
+                                    <input class="form-control input-white" maxlength='5' id="inputExpDate" name="inputExpDate" placeholder="MM/YY" type="text" value="{{ $customer->card_expiry}}" onkeyup="formatString(event);" >
                                 </div>
                                 <!-- <div class="col-md-6 form-group">
                                     <input type="year" class="form-control input-white" id="re_new_pwd" placeholder="Year">

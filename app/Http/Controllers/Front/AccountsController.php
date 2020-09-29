@@ -467,15 +467,7 @@ class AccountsController extends Controller
     public function removeTeethImage($image)
     {
         $teethImage = CustomerImage::find($image);
-
         $teethImage->delete();
-
-
-           //  $avatar = CustomerImage::findOrFail($image);
-
-           // if(Storage::delete($avatar->filename)) {
-           //    $avatar->delete();
-           // }
         return $this->sendResponse(true, 'Image removed');
     }
 
