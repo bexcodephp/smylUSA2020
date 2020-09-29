@@ -27,11 +27,11 @@ $(document).ready(function () {
             $("input.zip").removeAttr("disabled");           
         }
     });
-
+    
     $('#step1_submit').on('click', function () {
         var formdata = new FormData($('#step_1')[0]);
         formdata.append('same_as_shipping',_flag_billing);
-
+        formdata.append('is_form_completed',1);
         $.ajax({
             url: '/profile/update-step1',
             type: "POST",
@@ -48,7 +48,7 @@ $(document).ready(function () {
                     $('#step_2').addClass('active show');
 
                     $('#nav_step_1').addClass("disabled");
-                }                
+                }
             },
             error: function() {
                 
@@ -479,6 +479,7 @@ $(document).ready(function () {
     // step 2 ajax update
     $('#step2_submit').on('click', function () {
         var formdata = new FormData($('#step_2')[0]);
+        formdata.append('is_form_completed',2);
         $("#step_2").valid();        
         $.ajax({
             url: '/profile/update-step2',
@@ -538,6 +539,8 @@ $(document).ready(function () {
                     $("#add_image").hide();
                 }, 5000);
                 $("#upload_new_pic_modal").modal("hide");
+                getPicturesImage();
+                // getpicturesimage
                 // location.reload();
                 // console.log(data);
                 // alert("Updated Successfully");
@@ -565,6 +568,7 @@ $(document).ready(function () {
                     $("#edit_image").hide();
                 }, 5000);
                 $("#upload_new_pic_modal").modal("hide");
+                 getPicturesImage();
                 // console.log(data);
                 // alert("Updated Successfully");
             },
@@ -573,3 +577,60 @@ $(document).ready(function () {
             }
         });
     });
+    getPicturesImage();
+    var description = "";
+
+    function getPicturesImage(){
+        $.ajax({
+                url: '/getpicturesimage',
+                type: "GET",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    var obj = Object();
+                    obj = jQuery.parseJSON(data);
+                    
+                    $('#teeth_img_cont').html("");
+
+                    for (var i=0;i<obj.length;i++)
+                    {
+                        if(!obj[i].description){
+                            description == "";
+                        }else{
+                            description = obj[i].description;
+                        }
+
+                        $('#teeth_img_cont').append('<div class="col mb-4"> <div class="card h-100 card-2"> <img class="card-img-top" src="/storage/'+obj[i].image+'"/> <div class="card-body"> <p class="card-text">'+description+'</p></div><div class="card-footer p-0"> <button type="button" class="btn btn-link btn-edit" onclick=btnEditSmilePic("'+obj[i].image+'",'+obj[i].customer_image_id+',"'+description+'")>Edit</button> <input type="hidden" name="" id="customer_image" value="'+obj[i].customer_image_id+'" hidden> <button type="button" onclick="deleteSmilePictures('+obj[i].customer_image_id+')" data-token="{{csrf_token()}}" class="btn btn-link btn-delete">Delete</button> </div></div></div>')
+                    }
+                },
+                error: function() {
+
+                }
+            });
+    }
+
+    function formatString(e) {
+      var inputChar = String.fromCharCode(event.keyCode);
+      var code = event.keyCode;
+      var allowedKeys = [8];
+      if (allowedKeys.indexOf(code) !== -1) {
+        return;
+      }
+
+      event.target.value = event.target.value.replace(
+        /^([1-9]\/|[2-9])$/g, '0$1/' // 3 > 03/
+      ).replace(
+        /^(0[1-9]|1[0-2])$/g, '$1/' // 11 > 11/
+      ).replace(
+        /^([0-1])([3-9])$/g, '0$1/$2' // 13 > 01/3
+      ).replace(
+        /^(0?[1-9]|1[0-2])([0-9]{2})$/g, '$1/$2' // 141 > 01/41
+      ).replace(
+        /^([0]+)\/|[0]+$/g, '0' // 0/ > 0 and 00 > 0
+      ).replace(
+        /[^\d\/]|^[\/]*$/g, '' // To allow only digits and `/`
+      ).replace(
+        /\/\//g, '/' // Prevent entering more than 1 `/`
+      );
+    }

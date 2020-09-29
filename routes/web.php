@@ -227,7 +227,7 @@ Route::namespace('Front')->group(function () {
             Route::post('employee/update-password', 'OperatorController@updatePassword')->name('employee.updatePassword');
             Route::post('case/submit', 'OperatorController@submitCase')->name('operator.submitCase');
         });
-
+        
         Route::group(['prefix' => 'vendor'], function () {
             Route::get('dashboard', 'VendorController@dashboard')->name('vendor.dashboard');
             Route::get('profile', 'VendorController@profile')->name('vendor.profile');
@@ -278,6 +278,7 @@ Route::namespace('Front')->group(function () {
         Route::get('profile/delete-teeth-images/{id}', 'AccountsController@removeTeethImage');
         Route::get('profile/delete-profile-images/{id}', 'AccountsController@removeProfileImage');
         Route::post('update-password', 'AccountsController@updatePassword')->name('updatePassword');
+        Route::get('getpicturesimage', 'AccountsController@getPicturesImage');
     });
     
     // Route::get("products", 'ProductController@index')->name('front.get.product_all');

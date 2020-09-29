@@ -10,5 +10,22 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+<<<<<<< HEAD
 composer.json
 composer.lock
+=======
+.env
+.DS_Store
+/public/.DS_Store
+yarn.lock
+package-lock.json
+/build
+Envoy.blade.php
+/coverage
+storage/app/public/storage
+\.php_cs\.cache
+\*.zip
+/nbproject/private/
+*.zip
+*.lock
+*.sql
