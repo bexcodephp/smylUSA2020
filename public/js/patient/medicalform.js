@@ -155,7 +155,7 @@ $(document).ready(function () {
             $('#title_add_smile').show();
             $('#title_edit_smile').hide();
             $('#title_add_bite').hide();
-            $('#upload_pictures').show();
+            $('#upload_new_pictures').show();
             $('#edit_pictures').hide();
             // $('#doc_src').attr();
             $('#doc_src').hide();
@@ -169,7 +169,7 @@ $(document).ready(function () {
         $('#upload_new_pic_modal').modal('show');
         $('#upload_new_pic_modal').on('shown.bs.modal', function (e) {
             $('#title_edit_smile').show();
-            $('#upload_pictures').hide();
+            $('#upload_new_pictures').hide();
             $('#edit_pictures').show();
             $('#title_add_smile').hide();
             $('#title_add_bite').hide();
@@ -413,6 +413,7 @@ $(document).ready(function () {
                 processData: false,
                 success: function(data) {
                     // console.log(data);
+                    $('#card_detail_change_modal').modal("hide");
                     alert("success");  
                 },
                 error: function() {
@@ -465,6 +466,7 @@ $(document).ready(function () {
                 processData: false,
                 success: function(data) {
                     // console.log(data);
+                    $('#card_detail_add_modal').modal("hide");
                     alert("success");   
                 },
                 error: function() {
@@ -495,6 +497,79 @@ $(document).ready(function () {
             },
             error: function() {
                 
+            }
+        });
+    });
+
+    function validateImage() {
+        var formData = new FormData();
+        var file = document.getElementById("teethpic").files[0];
+        formData.append("Filedata", file);
+        var t = file.type.split('/').pop().toLowerCase();
+        if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+            alert('Please select a valid image file');
+            document.getElementById("teethpic").value = '';
+            return false;
+        }
+        if (file.size > 1024000) {
+            alert('Max Upload size is 1MB only');
+            document.getElementById("teethpic").value = '';
+            return false;
+        }
+        return true;
+    }
+
+    $('#upload_new_pictures').on('click', function() {
+    var imgname  =  $('input[type=file]').val();
+    var uploadimage = new FormData($('#smilepictures')[0]);
+    if(imgname == ""){
+        alert("Please select image");
+    } else{
+        $.ajax({
+            url: '/profile/add-teethimages',
+            type: "POST",
+            data: uploadimage,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                $("#add_image").show();
+                setTimeout(function() {
+                    $("#add_image").hide();
+                }, 5000);
+                $("#upload_new_pic_modal").modal("hide");
+                // location.reload();
+                // console.log(data);
+                // alert("Updated Successfully");
+            },
+            error: function() {
+
+            }
+        });
+
+    }
+    });
+
+    $('#edit_pictures').on('click', function() {
+        var uploadimage = new FormData($('#smilepictures')[0]);
+        $.ajax({
+            url: '/profile/edit-teethimages',
+            type: "POST",
+            data: uploadimage,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                $("#edit_image").show();
+                setTimeout(function() {
+                    $("#edit_image").hide();
+                }, 5000);
+                $("#upload_new_pic_modal").modal("hide");
+                // console.log(data);
+                // alert("Updated Successfully");
+            },
+            error: function() {
+
             }
         });
     });
