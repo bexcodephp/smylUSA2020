@@ -69,18 +69,20 @@ class UserRegisterController extends Controller
                 break;
         }
 
+        //dd($data);
+
         $employee = $this->employeeRepo->createEmployee($data);
         $employeeRepo = new EmployeeRepository($employee);
         $employeeRepo->syncRoles([$role]);
         return $employee;
     }
-
-
+    
     public function register(Request $request)
-    {    
+    {   
         $validator = Validator::make($request->input(), [
             'email' => 'required|email|unique:employees,email',
-            'name' => 'required',
+            'fname' => 'required',
+            'lname' => 'required',
             'user_type' => 'required |in:vendor,pharmacist,dentist',
             'phone' => 'required',
             'state' => 'required',

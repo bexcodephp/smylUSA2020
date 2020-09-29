@@ -158,7 +158,7 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($user_role)
-    {                
+    {
         $role = $this->roleRepo->getUserBasedOnRole($user_role);
         $facilities = Facility::all();        
         //dd($role->users);
@@ -201,11 +201,13 @@ class EmployeeController extends Controller
     public function edit(int $id)
     {
         //dd(Auth::guard('employee')->user()->id);
+        
         $back_url = redirect()->back()->getTargetUrl();
         $employee = $this->employeeRepo->findEmployeeById($id);
         $roles = $this->roleRepo->listRoles('created_at', 'desc');
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
         $facilities = Facility::where('is_active',1)->get(['facility_id','name','city','state','zipcode']);
+        
         return view(
             'admin.employees.edit',
             [

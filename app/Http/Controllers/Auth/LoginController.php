@@ -40,7 +40,7 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         $user_id = Auth::user()->id; 
-
+        
         $wordlist = Order::where('customer_id', '=', $user_id)->get();
         $wordCount = $wordlist->count();
 
@@ -61,7 +61,7 @@ class LoginController extends Controller
             {
                 return '/';
             }
-        }
+        }   
     }
 
     /**
