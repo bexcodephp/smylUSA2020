@@ -413,6 +413,7 @@ $(document).ready(function () {
                 processData: false,
                 success: function(data) {
                     // console.log(data);
+                    $('#card_detail_change_modal').modal("hide");
                     alert("success");  
                 },
                 error: function() {
@@ -465,6 +466,7 @@ $(document).ready(function () {
                 processData: false,
                 success: function(data) {
                     // console.log(data);
+                    $('#card_detail_add_modal').modal("hide");
                     alert("success");   
                 },
                 error: function() {
@@ -518,7 +520,11 @@ $(document).ready(function () {
     }
 
     $('#upload_new_pictures').on('click', function() {
-        var uploadimage = new FormData($('#smilepictures')[0]);
+    var imgname  =  $('input[type=file]').val();
+    var uploadimage = new FormData($('#smilepictures')[0]);
+    if(imgname == ""){
+        alert("Please select image");
+    } else{
         $.ajax({
             url: '/profile/add-teethimages',
             type: "POST",
@@ -532,6 +538,7 @@ $(document).ready(function () {
                     $("#add_image").hide();
                 }, 5000);
                 $("#upload_new_pic_modal").modal("hide");
+                // location.reload();
                 // console.log(data);
                 // alert("Updated Successfully");
             },
@@ -539,6 +546,8 @@ $(document).ready(function () {
 
             }
         });
+
+    }
     });
 
     $('#edit_pictures').on('click', function() {
