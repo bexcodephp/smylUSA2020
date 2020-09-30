@@ -119,9 +119,10 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
         return $this->sendFailedLoginResponse($request);
     }
-
+    
     public function userLogin(LoginRequest $request)
     {
+        dd($request);
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -129,18 +130,17 @@ class LoginController extends Controller
         // the IP address of the client making these requests into this application.
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
-
             return $this->sendLockoutResponse($request);
         }
 
         $details = $request->only('email', 'password');
-        // $detais['status'] = 1;
+        
+        //$detais['status'] = 1;
         //dd($details);
         //dd(auth()->guard('employee')->attempt($details));
         
         if (auth()->guard('employee')->attempt($details) == false) {
             $user = auth()->guard('employee')->user();
-           // dd($user);
 
             if($user->status == 0)
             {
@@ -149,9 +149,8 @@ class LoginController extends Controller
 
                 return redirect()->back()->with(['error' => 'Your account is not approved by admin.']);
             }
-
+            
             // event(new AddNotification($user->id, 2, 'Login Successful'));
-
             if($user->hasRole('dentist') && $request->user_type == 'dentist')
             {
                 Session::put('user_type', 'dentist');

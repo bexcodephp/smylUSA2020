@@ -129,7 +129,7 @@ Route::namespace('Auth')->group(function () {
         Route::post('login', 'LoginController@userLogin')->name('pharma_login');
         Route::post('register', 'UserRegisterController@register')->name('pharma_register');
     });
-
+    
     Route::group(['prefix' => 'dentist'], function () {
         Route::get('login', 'LoginController@dentistLoginFormShow');
         Route::post('login', 'LoginController@userLogin')->name('dentist_login');

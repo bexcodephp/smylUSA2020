@@ -22,6 +22,9 @@ Use Carbon\Carbon;
 
 use Config;
 
+session_start();
+
+
 class EmployeeController extends Controller
 {
     /**
@@ -54,7 +57,6 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        
         $list = $this->employeeRepo->listEmployees('created_at', 'desc');       
         return view('admin.employees.list', [
             'employees' => $this->employeeRepo->paginateArrayResults($list->all())
@@ -181,7 +183,6 @@ class EmployeeController extends Controller
         ->whereIn('order_id', $dentist->orders()->pluck('id')->toArray())
         ->get();
 
-//        return $voodoo;
         $doctors = Employee::all();
         $states = array("AL"=>"Alabama", "AK"=>"Alaska", "AZ"=>"Arizona", "AR"=>"Arkansas", "CA"=>"California", "CO"=>"Colorado", "CT"=>"Connecticut", "DE"=>"Delaware", "DC"=>"District of Columbia", "FL"=>"Florida", "GA"=>"Georgia", "HI"=>"Hawaii", "ID"=>"Idaho", "IL"=>"Illinois", "IN"=>"Indiana", "IA"=>"Iowa", "KS"=>"Kansas", "KY"=>"Kentucky", "LA"=>"Louisiana", "ME"=>"Maine", "MD"=>"Maryland", "MA"=>"Massachusetts", "MI"=>"Michigan", "MN"=>"Minnesota", "MS"=>"Mississippi", "MO"=>"Missouri", "MT"=>"Montana", "NE"=>"Nebraska", "NV"=>"Nevada", "NH"=>"New Hampshire", "NJ"=>"New Jersey", "NM"=>"New Mexico", "NY"=>"New York", "NC"=>"North Carolina", "ND"=>"North Dakota", "OH"=>"Ohio", "OK"=>"Oklahoma", "OR"=>"Oregon", "PA"=>"Pennsylvania", "RI"=>"Rhode Island", "SC"=>"South Carolina", "SD"=>"South Dakota", "TN"=>"Tennessee", "TX"=>"Texas", "UT"=>"Utah", "VT"=>"Vermont", "VA"=>"Virginia", "WA"=>"Washington", "WV"=>"West Virginia", "WI"=>"Wisconsin","WY"=>"Wyoming");
 
@@ -200,6 +201,9 @@ class EmployeeController extends Controller
      */
     public function edit(int $id)
     {
+        //$role_type = $_SESSION['request_url'];
+        //die;
+
         //dd(Auth::guard('employee')->user()->id);
         
         $back_url = redirect()->back()->getTargetUrl();
@@ -208,6 +212,8 @@ class EmployeeController extends Controller
         $isCurrentUser = $this->employeeRepo->isAuthUser($employee);
         $facilities = Facility::where('is_active',1)->get(['facility_id','name','city','state','zipcode']);
         
+        // dd($roles);
+
         return view(
             'admin.employees.edit',
             [
@@ -231,11 +237,14 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
+        //dd($request);
+
+
         $role_type = $request->role_type;
         if($role_type == "dentist"){
-            $role = Config::get('constants.dentist');    
+            $role = 4; //Config::get('constants.dentist');    
         } else if($role_type == "operator"){
-            $role = Config::get('constants.operator');
+            $role = 5; //Config::get('constants.operator');
         } else{}
         $request->request->add(['role' => $role]); 
         $request->merge([
@@ -253,8 +262,6 @@ class EmployeeController extends Controller
         $fileName = [];
 
         if ($request->hasFile('license_certificates')) {
-            
-
             $upload_path = "employee/operators/license_certificates";
             $upload_files = $request->file('license_certificates');
             $oldfiles = $employee->license_certificates; // existing files
@@ -266,7 +273,15 @@ class EmployeeController extends Controller
             $data['license_certificates'] = json_encode($data['filenames']);
 
             if(isset($data['license_certificates']) ){
-                $array_merge = array_merge(json_decode($oldfiles), json_decode($data['license_certificates']));
+                if(!empty($oldfiles))
+                {
+                    $array_merge = array_merge(json_decode($oldfiles), json_decode($data['license_certificates']));
+                }
+                else
+                {
+                    $array_merge = json_decode($data['license_certificates']);
+                }
+                
                 $data['license_certificates'] = json_encode($array_merge);
             }            
            

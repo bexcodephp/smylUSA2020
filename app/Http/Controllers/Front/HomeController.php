@@ -12,7 +12,7 @@ use App\Shop\Orders\Order;
 use App\Traits\GetWeekday;
 use App\Models\OrderHistory;
 use Illuminate\Http\Request;
-use  App\Shop\Products\Product;
+use App\Shop\Products\Product;
 use App\Events\AddNotification;
 use App\Mail\EmailVerification;
 use App\Shop\Addresses\Address;

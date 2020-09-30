@@ -1,6 +1,14 @@
 @extends('layouts.admin.app')
 
 @section('content')
+<?php
+    $url = $_SERVER['REQUEST_URI'];
+    $uri_parts = explode('/', $url);
+    $_SESSION['request_url'] = end($uri_parts);
+    //print_r($request_url);
+    //die;
+
+?>
 <!-- Main content -->
 <section class="content">
     @include('layouts.errors-and-messages')

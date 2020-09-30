@@ -41,7 +41,7 @@
                             {{ csrf_field() }}
                             <div class="col-12 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label>Email / User Name</label>
-                                <input type="text" class="form-control input-gray" name="email" placeholder="Email address">
+                                <input type="text" class="form-control input-gray" name="email" id="in_email" placeholder="Email address">
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
                             <div class="col-12 form-group {{ $errors->has('password') ? 'has-error' : '' }}">
@@ -59,7 +59,7 @@
                                 <a href="{{ url('forgot-password') }}" class="btn-link">Forgot Password?</a>
                             </div>
                             <div class="col-12 text-left btn-signin mt-xl-4 my-3">
-                                <button type="submit" class="btn btn-primary btn-rounded btn-v-3 btn-h-3 font-weight-bold">SIGN IN</button>
+                                <button type="submit" class="btn btn-primary btn-rounded btn-v-3 btn-h-3 font-weight-bold" onclick="lsRememberMe()">SIGN IN</button>
                             </div>
                         </form>
                     </div>
@@ -189,6 +189,33 @@
             }
         });
     });
+
+    ///////////
+    const rmCheck = document.getElementById("shopLoginSignInRemember"),
+    emailInput = document.getElementById("in_email");
+
+    if (localStorage.checkbox && localStorage.checkbox !== "") 
+    {
+        rmCheck.setAttribute("checked", "checked");
+        emailInput.value = localStorage.username;
+    } 
+    else 
+    {
+        rmCheck.removeAttribute("checked");
+        emailInput.value = "";
+    }
+
+    function lsRememberMe()
+    {
+        if (rmCheck.checked && emailInput.value !== "") {
+            localStorage.username = emailInput.value;
+            localStorage.checkbox = rmCheck.value;
+        } else {
+            localStorage.username = "";
+            localStorage.checkbox = "";
+        }
+    }
+    /////////////
 </script>
 
 @endpush

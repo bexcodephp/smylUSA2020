@@ -97,7 +97,7 @@
                                         <td>{{ $location->state }}</td>
                                         <td>{{ $location->zipcode }}</td>
                                     </tr>
-                            <?php 
+                                <?php 
                                     }
                                 } ?>
                             @endforeach                           
@@ -110,40 +110,44 @@
                         <span class="text-danger">{{ $errors->first('license_certificates') }}</span>
                     </div>
                     <div class="licence-wrapper">
-                        <?php                            
-                            $files =  $employee->license_certificates; 
-                            $files = json_decode($files); 
-                            $licence = 0;
+                        <?php         
+                            if(!empty($employee->license_certificates))
+                            {   
+                                $file_str =  $employee->license_certificates; 
+                                $files = array();
+                                $files = json_decode($file_str); 
+                                $licence = 0;
 
-                            foreach($files as $file){
-                                $licence++;
-                        ?>
+                                foreach($files as $file){
+                                    $licence++;
+                                ?>
                                 <div class="licence-div" id="licence_div_{{$licence}}">
+                                    <?php
+                                        $extension = pathinfo(storage_path('/employee/operators/license_certificates'.$file), PATHINFO_EXTENSION);
+                                        if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
+                                        //echo $file;
+                                    ?>                                    
+                                        <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
+                                            <img src="{{ url('storage/'.$file) }}" width="100">
+                                            <span class="licence-name">{{ "licence".$licence}}</span>
+                                        </a>
+                                        <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}','{{ $licence }}');" class="licence-del"><i class="fa fa-times"></i></a>
                                 <?php
-                                    $extension = pathinfo(storage_path('/employee/operators/license_certificates'.$file), PATHINFO_EXTENSION);
-                                    if($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg'){
-                                    //echo $file;
-                                ?>                                    
-                                    <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
-                                    	<img src="{{ url('storage/'.$file) }}" width="100">
-                                        <span class="licence-name">{{ "licence".$licence}}</span>
-                                    </a>
-                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}','{{ $licence }}');" class="licence-del"><i class="fa fa-times"></i></a>
-                            <?php
-                                    }else{
-                            ?>
-                                    <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
-                                    	<img src="{{ url('storage/'.$file) }}" width="100">
-                                        <!-- <img src="{{ asset('images/icon_pdf.png')}}"> -->
-                                        <span class="licence-name">{{ "licence".$licence}}</span>
-                                    </a>
-                                    <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}', '{{ $licence }}');" class="licence-del"><i class="fa fa-times"></i></a>
-                            <?php
-                                    }
-                                    ?>
-                                </div>
+                                        }else{
+                                ?>
+                                        <a onclick="viewCertificates('{{ $file }}','{{$extension}}')" class="licence-doc">
+                                            <img src="{{ url('storage/'.$file) }}" width="100">
+                                            <!-- <img src="{{ asset('images/icon_pdf.png')}}"> -->
+                                            <span class="licence-name">{{ "licence".$licence}}</span>
+                                        </a>
+                                        <a onclick="deleteCertificate('{{ $file }}','{{ $employee->id }}', '{{ $licence }}');" class="licence-del"><i class="fa fa-times"></i></a>
                                 <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <?php
 
+                                }
                             }
                         ?>
                     </div>
