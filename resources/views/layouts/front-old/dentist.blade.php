@@ -152,4 +152,4 @@
                 @yield('content')
 
         </div>
-        @include('layouts.front.footer_inner')
+        @include('layouts.front-old.footer_inner')

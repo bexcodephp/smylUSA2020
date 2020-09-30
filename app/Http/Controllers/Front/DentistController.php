@@ -22,12 +22,14 @@ class DentistController extends Controller
     public function newCase()
     {
         $user = $this->employee();
+        
         $voodoo = OrderTreatmentPlan::with(['order' => function($query) use($user){
             $query->with(['customer']);
         }])
         ->where('order_status', 'Doctor Approval')
         ->whereIn('order_id', $user->orders()->pluck('id')->toArray())
         ->get();
+
         return view('front.dentist.new-case', compact('voodoo'));
     }
 

@@ -1,4 +1,4 @@
-@extends('layouts.front.dentist')
+@extends('layouts.front-old.dentist')
 
 @section('css')
 <link href="{{ asset('user/assets/pages/css/profile.min.css') }}" rel="stylesheet" type="text/css" />
@@ -88,13 +88,15 @@
                                                     <div class="portlet-body">
                                                         <div class="tab-content">
                                                             <!-- PERSONAL INFO TAB -->
+    <?php //print_r($user); die; ?>
+
                                                             @include('layouts.errors-and-messages')
                                                             <div class="tab-pane active" id="tab_1_1">
                                                                 <form role="form" action="{{ route('dentist.personal_info') }}" method="POST">
                                                                     @csrf
                                                                     <div class="form-group">
                                                                         <label class="control-label">Full Name</label>
-                                                                        <input type="text" name="name" value="{{ $user->name }}" class="form-control" /> </div>
+                                                                        <input type="text" name="name" value="{{ $user->fname }} {{ $user->lname }}" class="form-control" /> </div>
                                                                     <div class="form-group">
                                                                         <label class="control-label">Mobile Number</label>
                                                                         <input type="text" placeholder="+1 646 580 DEMO (6284)" name="phone" value="{{ $user->phone }}"
@@ -108,26 +110,27 @@
                                                                     </div>
                                                                 </form>
                                                             </div>
+
                                                             {{-- <div class="tab-pane" id="tab_1_5">
-                                                                                                                        <form role="form" action="#">
-                                                                                                                            <div class="form-group">
-                                                                                                                                <label class="control-label">Name on Card</label>
-                                                                                                                                <input type="text" placeholder="John" class="form-control" /> </div>
-                                                                                                                            <div class="form-group">
-                                                                                                                                <label class="control-label">Card Number</label>
-                                                                                                                                <input type="number" placeholder="Card Number" class="form-control" /> </div>
-                                                                                                                            <div class="form-group">
-                                                                                                                                <label class="control-label">Expiration Date</label>
-                                                                                                                                <input type="text" placeholder="MM/YYYY" class="form-control" /> </div>
-                                                                                                                            <div class="form-group">
-                                                                                                                                <label class="control-label">CVC</label>
-                                                                                                                                <input type="number" placeholder="CVC(3 digit code at back of card)" class="form-control" /> </div>
-                                                                                                                            
-                                                                                                                            <div class="margiv-top-10">
-                                                                                                                                <button type="submit" class="btn green"> Save Changes </button>
-                                                                                                                            </div>
-                                                                                                                        </form>
-                                                                                                                    </div> --}}
+                                                                <form role="form" action="#">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name on Card</label>
+                                                                        <input type="text" placeholder="John" class="form-control" /> </div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card Number</label>
+                                                                        <input type="number" placeholder="Card Number" class="form-control" /> </div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Expiration Date</label>
+                                                                        <input type="text" placeholder="MM/YYYY" class="form-control" /> </div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">CVC</label>
+                                                                        <input type="number" placeholder="CVC(3 digit code at back of card)" class="form-control" /> </div>
+                                                                    
+                                                                    <div class="margiv-top-10">
+                                                                        <button type="submit" class="btn green"> Save Changes </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div> --}}
                                                             <!-- END PERSONAL INFO TAB -->
                                                             <!-- CHANGE AVATAR TAB -->
                                                             <div class="tab-pane" id="tab_1_2">

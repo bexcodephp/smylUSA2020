@@ -33,8 +33,8 @@
                     <div class="bg-primary rounded p-5">
                         <span class="top-sub-title text-color-light-2">ALREADY A MEMBER?</span>
                         <h2 class="text-color-light font-weight-bold text-4 mb-4">Sign In</h2>
-
-                        <form  id="shopLoginSignIn" role="form" method="POST" action="{{ route('login') }}">
+                        
+                        <form  id="shopLoginSignIn" role="form" method="POST" action="{{ route('dentist_login') }}">
                         {{ csrf_field() }}
                             <div class="form-row">
                                 <div class="form-group col mb-2">

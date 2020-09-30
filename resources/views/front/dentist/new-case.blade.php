@@ -1,5 +1,5 @@
 
-@extends('layouts.front.dentist')
+@extends('layouts.front-old.dentist')
 
 @section('css')
 <link href="{{ asset('user/assets/pages/css/profile.min.css') }}" rel="stylesheet" type="text/css" />
